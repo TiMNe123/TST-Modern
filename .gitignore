@@ -1,0 +1,22 @@
+# Gradle
+.gradle/
+build/
+out/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Minecraft run directory
+run/
+
+# Logs and crash reports
+*.log
+crash-reports/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
