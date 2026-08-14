@@ -1,0 +1,16 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "com.tstmodern.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "tstmodern.refmap.json",
+  "mixins": [],
+  "client": [
+    "client.MultiblockInfoSlotGuardMixin",
+    "client.ModularUIRecipeCategoryCacheAccess",
+    "client.MegaStoneBreakerJEICacheFixMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
