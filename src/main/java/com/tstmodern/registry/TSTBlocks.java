@@ -12,25 +12,15 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-/**
- * Blocks absent from standard GTCEu but required by the original TST structure or recipes.
- * The A-I names deliberately mirror the characters in TST_MegaStoneBreaker.shapeMain.
- */
+/** Blocks absent from standard GTCEu but still required by the ported structure or recipes. */
 public final class TSTBlocks {
     private static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, TSTModern.MOD_ID);
     private static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, TSTModern.MOD_ID);
 
-    public static final RegistryObject<Block> CASING_A = casing("mega_stone_breaker_casing_a");
-    public static final RegistryObject<Block> CASING_B = casing("mega_stone_breaker_casing_b");
     public static final RegistryObject<Block> CASING_C = casing("mega_stone_breaker_casing_c");
-    public static final RegistryObject<Block> CASING_D = casing("mega_stone_breaker_casing_d");
     public static final RegistryObject<Block> COSMIC_NEUTRONIUM_FRAME = casing("cosmic_neutronium_frame");
-    public static final RegistryObject<Block> CASING_F = casing("mega_stone_breaker_casing_f");
-    public static final RegistryObject<Block> CASING_G = casing("mega_stone_breaker_casing_g");
-    public static final RegistryObject<Block> CASING_H = casing("mega_stone_breaker_casing_h");
-    public static final RegistryObject<Block> PRESSURE_RESISTANT_WALL = casing("pressure_resistant_wall");
 
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_1 = compressedCobble(1);
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_2 = compressedCobble(2);

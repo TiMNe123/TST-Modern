@@ -1,12 +1,14 @@
 package com.tstmodern.data;
 
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
+import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
 import com.tstmodern.TSTModern;
 import com.tstmodern.registry.TSTBlocks;
 import com.tstmodern.registry.TSTMachines;
 import com.tstmodern.registry.TSTRecipeTypes;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -128,6 +130,23 @@ public final class TSTRecipes {
                 TSTBlocks.COMPRESSED_COBBLESTONE_7, provider);
         compressor("compressed_cobblestone_8", TSTBlocks.COMPRESSED_COBBLESTONE_7.get(),
                 TSTBlocks.COMPRESSED_COBBLESTONE_8, provider);
+
+        crafting("compressed_cobblestone_1", Blocks.COBBLESTONE,
+                TSTBlocks.COMPRESSED_COBBLESTONE_1, provider);
+        crafting("compressed_cobblestone_2", TSTBlocks.COMPRESSED_COBBLESTONE_1.get(),
+                TSTBlocks.COMPRESSED_COBBLESTONE_2, provider);
+        crafting("compressed_cobblestone_3", TSTBlocks.COMPRESSED_COBBLESTONE_2.get(),
+                TSTBlocks.COMPRESSED_COBBLESTONE_3, provider);
+        crafting("compressed_cobblestone_4", TSTBlocks.COMPRESSED_COBBLESTONE_3.get(),
+                TSTBlocks.COMPRESSED_COBBLESTONE_4, provider);
+        crafting("compressed_cobblestone_5", TSTBlocks.COMPRESSED_COBBLESTONE_4.get(),
+                TSTBlocks.COMPRESSED_COBBLESTONE_5, provider);
+        crafting("compressed_cobblestone_6", TSTBlocks.COMPRESSED_COBBLESTONE_5.get(),
+                TSTBlocks.COMPRESSED_COBBLESTONE_6, provider);
+        crafting("compressed_cobblestone_7", TSTBlocks.COMPRESSED_COBBLESTONE_6.get(),
+                TSTBlocks.COMPRESSED_COBBLESTONE_7, provider);
+        crafting("compressed_cobblestone_8", TSTBlocks.COMPRESSED_COBBLESTONE_7.get(),
+                TSTBlocks.COMPRESSED_COBBLESTONE_8, provider);
     }
 
     private static void compressor(String name, ItemLike input, Supplier<? extends ItemLike> output,
@@ -138,6 +157,13 @@ public final class TSTRecipes {
                 .duration(300)
                 .EUt(30)
                 .save(provider);
+    }
+
+    private static void crafting(String name, ItemLike input, Supplier<? extends ItemLike> output,
+                                 Consumer<FinishedRecipe> provider) {
+        VanillaRecipeHelper.addShapedRecipe(provider, false,
+                TSTModern.id("crafting/" + name), new ItemStack(output.get()),
+                "CCC", "CCC", "CCC", 'C', input.asItem());
     }
 
     private static void addControllerRecipe(Consumer<FinishedRecipe> provider) {
