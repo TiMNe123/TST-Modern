@@ -17,29 +17,52 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static com.gregtechceu.gtceu.api.GTValues.LV;
+import static com.gregtechceu.gtceu.api.GTValues.MV;
+import static com.gregtechceu.gtceu.api.GTValues.HV;
+import static com.gregtechceu.gtceu.api.GTValues.EV;
 import static com.gregtechceu.gtceu.api.GTValues.IV;
 import static com.gregtechceu.gtceu.api.GTValues.LuV;
 import static com.gregtechceu.gtceu.api.GTValues.VA;
 import static com.gregtechceu.gtceu.api.GTValues.ZPM;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.dust;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.ingot;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.pipeLargeFluid;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.plate;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_STAINLESS_CLEAN;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TUNGSTENSTEEL_ROBUST;
+import static com.gregtechceu.gtceu.common.data.GTItems.CONVEYOR_MODULE_ZPM;
+import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_PUMP_HV;
 import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_PUMP_ZPM;
 import static com.gregtechceu.gtceu.common.data.GTItems.ROBOT_ARM_ZPM;
+import static com.gregtechceu.gtceu.common.data.GTMachines.ELECTRIC_FURNACE;
+import static com.gregtechceu.gtceu.common.data.GTMachines.HULL;
+import static com.gregtechceu.gtceu.common.data.GTMachines.ROCK_CRUSHER;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.AnnealedCopper;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Calcium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.CalciumChloride;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Chlorine;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Copper;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Invar;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Iridium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Magnesium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.MagnesiumChloride;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.NaquadahAlloy;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Silicon;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.SolderingAlloy;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Titanium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Tungsten;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.UraniumRhodiumDinaquadide;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLY_LINE_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.COMPRESSOR_RECIPES;
-import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TUNGSTENSTEEL_ROBUST;
-import static com.gregtechceu.gtceu.common.data.GTMachines.HULL;
-import static com.gregtechceu.gtceu.common.data.GTMachines.ROCK_CRUSHER;
+import com.gregtechceu.gtceu.data.recipe.CustomTags;
 
-/** Exact processing recipes from TST's MegaStoneBreakerRecipePool (1.7.10). */
+/** Exact processing recipes and construction chains for ported TST multiblocks. */
 public final class TSTRecipes {
     private TSTRecipes() {}
+
 
     public static void addMegaStoneBreakerRecipes(Consumer<FinishedRecipe> provider) {
         basic(provider, "cobblestone", 1, Blocks.COBBLESTONE, 6, 20);
@@ -111,7 +134,109 @@ public final class TSTRecipes {
                 .save(provider);
 
         addControllerRecipe(provider);
+        addGiantVacuumDryingFurnaceControllerRecipe(provider);
+        addVacuumCasingRecipe(provider);
     }
+
+    public static void addGiantVacuumDryingFurnaceRecipes(Consumer<FinishedRecipe> provider) {
+        // === Chemical Dehydrator Recipes ===
+        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/calcium_chloride"))
+                .inputItems(dust, CalciumChloride, 1)
+                .outputItems(dust, Calcium, 1)
+                .outputFluids(Chlorine.getFluid(2000))
+                .EUt(VA[MV])
+                .duration(200)
+                .save(provider);
+
+        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/magnesium_chloride"))
+                .inputItems(dust, MagnesiumChloride, 1)
+                .outputItems(dust, Magnesium, 1)
+                .outputFluids(Chlorine.getFluid(2000))
+                .EUt(VA[MV])
+                .duration(200)
+                .save(provider);
+
+        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/clay_drying"))
+                .inputItems(Blocks.CLAY.asItem(), 1)
+                .outputItems(Blocks.TERRACOTTA.asItem(), 1)
+                .outputFluids(new FluidStack(Fluids.WATER, 1000))
+                .EUt(VA[LV])
+                .duration(100)
+                .save(provider);
+
+        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/sponge_drying"))
+                .inputItems(Blocks.WET_SPONGE.asItem(), 1)
+                .outputItems(Blocks.SPONGE.asItem(), 1)
+                .outputFluids(new FluidStack(Fluids.WATER, 1000))
+                .EUt(VA[LV])
+                .duration(40)
+                .save(provider);
+
+        // === Vacuum Furnace Recipes ===
+        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/annealed_copper"))
+                .inputItems(ingot, Copper, 1)
+                .outputItems(ingot, AnnealedCopper, 1)
+                .EUt(VA[MV])
+                .duration(100)
+                .save(provider);
+
+        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/silicon_annealing"))
+                .inputItems(ingot, Silicon, 1)
+                .outputItems(ingot, Silicon, 1)
+                .EUt(VA[HV])
+                .duration(160)
+                .save(provider);
+
+        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/titanium_sintering"))
+                .inputItems(dust, Titanium, 1)
+                .outputItems(ingot, Titanium, 1)
+                .EUt(VA[HV])
+                .duration(240)
+                .save(provider);
+
+        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/tungsten_sintering"))
+                .inputItems(dust, Tungsten, 1)
+                .outputItems(ingot, Tungsten, 1)
+                .EUt(VA[EV])
+                .duration(300)
+                .save(provider);
+    }
+
+    private static void addVacuumCasingRecipe(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/vacuum_casing"))
+                .inputItems(CASING_STAINLESS_CLEAN.asStack())
+                .inputItems(plate, Invar, 6)
+                .inputItems(ELECTRIC_PUMP_HV, 2)
+                .inputFluids(SolderingAlloy.getFluid(288))
+                .outputItems(TSTBlocks.VACUUM_CASING, 2)
+                .duration(200)
+                .EUt(VA[HV])
+                .save(provider);
+    }
+
+    private static void addGiantVacuumDryingFurnaceControllerRecipe(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/giant_vacuum_drying_furnace"))
+                .inputItems(HULL[ZPM], 2)
+                .inputItems(ELECTRIC_FURNACE[ZPM], 4)
+                .inputItems(ROBOT_ARM_ZPM, 16)
+                .inputItems(CONVEYOR_MODULE_ZPM, 16)
+                .inputItems(CustomTags.ZPM_CIRCUITS, 32)
+                .inputItems(pipeLargeFluid, Iridium, 16)
+                .inputItems(plate, NaquadahAlloy, 16)
+                .inputItems(plate, UraniumRhodiumDinaquadide, 16)
+                .inputItems(TSTBlocks.VACUUM_CASING.get().asItem(), 4)
+                .inputFluids(SolderingAlloy.getFluid(9_216))
+                .inputFluids(Iridium.getFluid(4_608))
+                .outputItems(TSTMachines.GIANT_VACUUM_DRYING_FURNACE)
+                .scannerResearch(b -> b
+                        .researchStack(ELECTRIC_FURNACE[ZPM].asStack())
+                        .duration(20 * 60)
+                        .EUt(VA[LuV]))
+                .duration(20 * 60)
+                .EUt(VA[ZPM])
+                .save(provider);
+    }
+
 
     private static void addCompressedCobblestoneRecipes(Consumer<FinishedRecipe> provider) {
         compressor("compressed_cobblestone_1", Blocks.COBBLESTONE,

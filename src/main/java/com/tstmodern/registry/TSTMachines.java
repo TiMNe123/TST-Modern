@@ -142,7 +142,7 @@ public final class TSTMachines {
                     .build())
             .workableCasingModel(
                     GTCEu.id("block/casings/gcym/large_scale_assembling_casing"),
-                    GTCEu.id("block/machines/rock_crusher"))
+                    TSTModern.id("block/multiblock/mega_stone_breaker"))
             .tooltips(
                     Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.0"),
                     Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.1"),
@@ -150,7 +150,235 @@ public final class TSTMachines {
                     Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.3"))
             .register();
 
+    public static final MultiblockMachineDefinition GIANT_VACUUM_DRYING_FURNACE = TSTModern.REGISTRATE
+
+            .multiblock("giant_vacuum_drying_furnace", com.tstmodern.machine.GiantVacuumDryingFurnaceMachine::new)
+            .langValue("Giant Vacuum Drying Furnace")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeTypes(TSTRecipeTypes.VACUUM_FURNACE, TSTRecipeTypes.CHEMICAL_DEHYDRATOR)
+            .recipeModifiers(com.tstmodern.machine.GiantVacuumDryingFurnaceMachine::recipeModifier,
+                    GTRecipeModifiers.OC_NON_PERFECT)
+            .appearanceBlock(GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING)
+            .pattern(definition -> FactoryBlockPattern.start(
+                    RelativeDirection.RIGHT,
+                    RelativeDirection.DOWN,
+                    RelativeDirection.BACK)
+                    // Aisle 0: DT front protrusion (symmetric with aisle 10)
+                    .aisle(
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "              HHHHHHH  ",
+                            "             VVVVVVVVV ")
+                    // Aisle 1: Controller + DT body + VP/MF start
+                    .aisle(
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "         EEE   I   I   ",
+                            "         EEE   I   I   ",
+                            "         EEE IIIIIIIII ",
+                            "         E~E H       H ",
+                            "         EEE H       H ",
+                            "         EEE H       H ",
+                            "VVVVVVVVVEEEVVVVVVVVVVV")
+                    // Aisle 2
+                    .aisle(
+                            "                       ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "              JJJAJJJ  ",
+                            "                       ",
+                            "               C   C   ",
+                            "              CCC CCC  ",
+                            " SSSSSSS      CCC CCC  ",
+                            " SAAAAAS EEE   C   C   ",
+                            " SAAAAAS EEE           ",
+                            " SAAAAAS EEE IJJJAJJJI ",
+                            " SAAAAAS EEE           ",
+                            " SAAAAAS EEE  FFFFFFF  ",
+                            " SSSSSSS EEEH         H",
+                            "VVVVVVVVVEEEVVVVVVVVVVV")
+                    // Aisle 3
+                    .aisle(
+                            "                VVV    ",
+                            "              IV   VI  ",
+                            "              I     I  ",
+                            "             IJJJAJJJI ",
+                            "             I C   C I ",
+                            "             IC C C CI ",
+                            "             IC C C CI ",
+                            " SSSSSSS     IC C C CI ",
+                            " S     S EEE IC C C CI ",
+                            " S     S EEE I C   C I ",
+                            " S     S EEE IJJJAJJJI ",
+                            " S     S EEE  FFFFFFF  ",
+                            " S     S EEE FGGGGGGGF ",
+                            " SSSSSSS EEEH FFFFFFF H",
+                            "VVVVVVVVVEEEVVVVVVVVVVV")
+                    // Aisle 4
+                    .aisle(
+                            "               VGGGV   ",
+                            "                 V     ",
+                            "                       ",
+                            "              JJJAJJJ  ",
+                            "                       ",
+                            "               C   C   ",
+                            "              CCC CCC  ",
+                            " SSSSSSS      CCC CCC  ",
+                            " S     S EEE   C   C   ",
+                            " S     S EEE           ",
+                            " S     S EEE IJJJAJJJI ",
+                            " S     S EEE     V     ",
+                            " S     S EEE  FFFFFFF  ",
+                            " SSSSSSS EEEH         H",
+                            "VVVVVVVVVEEEVVVVVVVVVVV")
+                    // Aisle 5 (center axis)
+                    .aisle(
+                            "               VGGGV   ",
+                            "                VGV    ",
+                            "                 G     ",
+                            "             AAAAGAAAA ",
+                            "                 G     ",
+                            "                 G     ",
+                            "                 G     ",
+                            " SSSSSSS         G     ",
+                            " S     S EEE     G     ",
+                            " S     S EEE     G     ",
+                            " S     S EEE AAAAGAAAA ",
+                            " S     S EEE    VGV    ",
+                            " S     S EEE           ",
+                            " SSSSSSS EEEH         H",
+                            "VVVVVVVVVEEEVVVVVVVVVVV")
+                    // Aisle 6
+                    .aisle(
+                            "               VGGGV   ",
+                            "                 V     ",
+                            "                       ",
+                            "              JJJAJJJ  ",
+                            "                       ",
+                            "               C   C   ",
+                            "              CCC CCC  ",
+                            " SSSSSSS      CCC CCC  ",
+                            " S     S EEE   C   C   ",
+                            " S     S EEE           ",
+                            " S     S EEE IJJJAJJJI ",
+                            " S     S EEE     V     ",
+                            " S     S EEE  FFFFFFF  ",
+                            " SSSSSSS EEEH         H",
+                            "VVVVVVVVVEEEVVVVVVVVVVV")
+                    // Aisle 7
+                    .aisle(
+                            "                VVV    ",
+                            "              IV   VI  ",
+                            "              I     I  ",
+                            "             IJJJAJJJI ",
+                            "             I C   C I ",
+                            "             IC C C CI ",
+                            "             IC C C CI ",
+                            " SSSSSSS     IC C C CI ",
+                            " SAAAAAS EEE IC C C CI ",
+                            " SAAAAAS EEE I C   C I ",
+                            " SAAAAAS EEE IJJJAJJJI ",
+                            " SAAAAAS EEE  FFFFFFF  ",
+                            " SAAAAAS EEE FGGGGGGGF ",
+                            " SSSSSSS EEEH FFFFFFF H",
+                            "VVVVVVVVVEEEVVVVVVVVVVV")
+                    // Aisle 8
+                    .aisle(
+                            "                       ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "              JJJAJJJ  ",
+                            "                       ",
+                            "               C   C   ",
+                            "              CCC CCC  ",
+                            " SSSSSSS      CCC CCC  ",
+                            " SAAAAAS EEE   C   C   ",
+                            " SAAAAAS EEE           ",
+                            " SAAAAAS EEE IJJJAJJJI ",
+                            " SAAAAAS EEE           ",
+                            " SAAAAAS EEE  FFFFFFF  ",
+                            " SSSSSSS EEE H       H ",
+                            "VVVVVVVVVEEEVVVVVVVVVVV")
+                    // Aisle 9
+                    .aisle(
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "               I   I   ",
+                            "         EEE   I   I   ",
+                            "         EEE   I   I   ",
+                            "         EEE IIIIIIIII ",
+                            "         EEE H       H ",
+                            "         EEE H       H ",
+                            "         EEE H       H ",
+                            "VVVVVVVVVEEEVVVVVVVVVVV")
+                    // Aisle 10: DT back protrusion (symmetric with aisle 0)
+                    .aisle(
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "                       ",
+                            "              HHHHHHH  ",
+                            "             VVVVVVVVV ")
+                    .where('~', Predicates.controller(blocks(definition.get())))
+                    .where('E', blocks(GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.autoAbilities(true, false, false))
+                            .or(Predicates.autoAbilities(false, false, true)))
+                    .where('S', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
+                    .where('A', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()).or(blocks(GTBlocks.CASING_LAMINATED_GLASS.get())))
+                    .where('G', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                    .where('V', blocks(GTBlocks.CASING_PTFE_INERT.get()))
+                    .where('I', blocks(TSTBlocks.CASING_C.get()))
+                    .where('F', blocks(GTBlocks.CASING_ALUMINIUM_FROSTPROOF.get()))
+                    .where('H', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                    .where('J', blocks(TSTBlocks.VACUUM_CASING.get()))
+                    .where('C', Predicates.heatingCoils())
+                    .where(' ', Predicates.any())
+                    .build())
+            .workableCasingModel(
+                    GTCEu.id("block/casings/gcym/large_scale_assembling_casing"),
+                    TSTModern.id("block/multiblock/giant_vacuum_drying_furnace"))
+            .tooltips(
+                    Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.0"),
+                    Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.1"),
+                    Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.2"),
+                    Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3"))
+            .register();
+
+
     private TSTMachines() {}
+
 
     public static void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
         // Static initialization registers the machine while GTCEu's machine registry is open.

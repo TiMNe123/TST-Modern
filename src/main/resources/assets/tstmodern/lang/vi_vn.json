@@ -14,5 +14,19 @@
   "tstmodern.machine.mega_stone_breaker.tooltip.0": "Cần một Maintenance Hatch khi hệ thống bảo trì GTCEu được bật",
   "tstmodern.machine.mega_stone_breaker.tooltip.1": "Hệ số đầu ra cơ bản: 4x",
   "tstmodern.machine.mega_stone_breaker.tooltip.2": "Có nước + lava: đầu ra 1024x; tiêu thụ 1000 mB mỗi loại mỗi giây",
-  "tstmodern.machine.mega_stone_breaker.tooltip.3": "Parallel tổng = parallel gốc TST + mức cài đặt của Parallel Control Hatch tùy chọn"
+  "tstmodern.machine.mega_stone_breaker.tooltip.3": "Parallel tổng = parallel gốc TST + mức cài đặt của Parallel Control Hatch tùy chọn",
+  "block.tstmodern.giant_vacuum_drying_furnace": "Lò Sấy Chân Không Khổng Lồ",
+  "block.tstmodern.vacuum_casing": "Vỏ Chân Không",
+  "tstmodern.vacuum_furnace": "Lò Nung Chân Không",
+  "tstmodern.chemical_dehydrator": "Máy Khử Nước Hóa Học",
+  "recipetype.tstmodern.vacuum_furnace": "Lò Nung Chân Không",
+  "recipetype.tstmodern.chemical_dehydrator": "Máy Khử Nước Hóa Học",
+  "gtceu.tstmodern.vacuum_furnace": "Lò Nung Chân Không",
+  "gtceu.tstmodern.chemical_dehydrator": "Máy Khử Nước Hóa Học",
+  "gtceu.vacuum_furnace": "Lò Nung Chân Không",
+  "gtceu.chemical_dehydrator": "Máy Khử Nước Hóa Học",
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.0": "Cần một Maintenance Hatch khi hệ thống bảo trì GTCEu được bật",
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.1": "Parallel cơ bản = Cấp Cuộn Nhiệt * Số Tầng * 32 (cộng Parallel Hatch)",
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.2": "Cấp điện áp giảm thời gian xuống 80%, Cấp cuộn nhiệt tăng tốc 50%",
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3": "Hỗ trợ 2 chế độ: Lò Nung Chân Không (Mode 0) & Khử Nước Hóa Học (Mode 1)"
 }

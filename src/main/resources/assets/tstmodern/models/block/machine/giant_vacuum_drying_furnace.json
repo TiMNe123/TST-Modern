@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "loader": "gtceu:machine",
-  "machine": "tstmodern:mega_stone_breaker",
+  "machine": "tstmodern:giant_vacuum_drying_furnace",
   "texture_overrides": {
     "all": "gtceu:block/casings/gcym/large_scale_assembling_casing"
   },
@@ -11,7 +11,7 @@
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
           "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
-          "overlay_front": "tstmodern:block/multiblock/mega_stone_breaker/overlay_front"
+          "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front"
         }
       }
     },
@@ -20,7 +20,7 @@
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
           "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
-          "overlay_front": "tstmodern:block/multiblock/mega_stone_breaker/overlay_front"
+          "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front"
         }
       }
     },
@@ -29,7 +29,7 @@
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
           "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
-          "overlay_front": "tstmodern:block/multiblock/mega_stone_breaker/overlay_front_active"
+          "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front_active"
         }
       }
     },
@@ -38,7 +38,7 @@
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
           "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
-          "overlay_front": "tstmodern:block/multiblock/mega_stone_breaker/overlay_front_active"
+          "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front_active"
         }
       }
     },
@@ -47,7 +47,7 @@
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
           "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
-          "overlay_front": "tstmodern:block/multiblock/mega_stone_breaker/overlay_front"
+          "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front"
         }
       }
     },
@@ -56,7 +56,7 @@
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
           "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
-          "overlay_front": "tstmodern:block/multiblock/mega_stone_breaker/overlay_front"
+          "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front"
         }
       }
     },
@@ -65,7 +65,7 @@
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
           "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
-          "overlay_front": "tstmodern:block/multiblock/mega_stone_breaker/overlay_front_active"
+          "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front_active"
         }
       }
     },
@@ -74,7 +74,7 @@
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
           "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
-          "overlay_front": "tstmodern:block/multiblock/mega_stone_breaker/overlay_front_active"
+          "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front_active"
         }
       }
     }

@@ -13,12 +13,22 @@ import net.minecraft.resources.ResourceLocation;
 /** Recipe map ported from TST's GTCMRecipe.MegaStoneBreakerRecipes. */
 public final class TSTRecipeTypes {
     public static GTRecipeType MEGA_STONE_BREAKER;
+    public static GTRecipeType VACUUM_FURNACE;
+    public static GTRecipeType CHEMICAL_DEHYDRATOR;
 
     private TSTRecipeTypes() {}
 
     public static void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
         MEGA_STONE_BREAKER = register(event, "mega_stone_breaker")
                 .setMaxIOSize(3, 1, 0, 0)
+                .setEUIO(IO.IN);
+
+        VACUUM_FURNACE = register(event, "vacuum_furnace")
+                .setMaxIOSize(3, 3, 2, 2)
+                .setEUIO(IO.IN);
+
+        CHEMICAL_DEHYDRATOR = register(event, "chemical_dehydrator")
+                .setMaxIOSize(2, 6, 2, 2)
                 .setEUIO(IO.IN);
     }
 

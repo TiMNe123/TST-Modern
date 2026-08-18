@@ -14,5 +14,19 @@
   "tstmodern.machine.mega_stone_breaker.tooltip.0": "Requires one Maintenance Hatch when GTCEu maintenance is enabled",
   "tstmodern.machine.mega_stone_breaker.tooltip.1": "Base output multiplier: 4x",
   "tstmodern.machine.mega_stone_breaker.tooltip.2": "With water + lava: 1024x output; consumes 1000 mB of each every second",
-  "tstmodern.machine.mega_stone_breaker.tooltip.3": "Total parallel = TST base parallel + optional Parallel Control Hatch setting"
+  "tstmodern.machine.mega_stone_breaker.tooltip.3": "Total parallel = TST base parallel + optional Parallel Control Hatch setting",
+  "block.tstmodern.giant_vacuum_drying_furnace": "Giant Vacuum Drying Furnace",
+  "block.tstmodern.vacuum_casing": "Vacuum Casing",
+  "tstmodern.vacuum_furnace": "Vacuum Furnace",
+  "tstmodern.chemical_dehydrator": "Chemical Dehydrator",
+  "recipetype.tstmodern.vacuum_furnace": "Vacuum Furnace",
+  "recipetype.tstmodern.chemical_dehydrator": "Chemical Dehydrator",
+  "gtceu.tstmodern.vacuum_furnace": "Vacuum Furnace",
+  "gtceu.tstmodern.chemical_dehydrator": "Chemical Dehydrator",
+  "gtceu.vacuum_furnace": "Vacuum Furnace",
+  "gtceu.chemical_dehydrator": "Chemical Dehydrator",
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.0": "Requires one Maintenance Hatch when GTCEu maintenance is enabled",
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.1": "Base parallel = Coil Tier * Piece * 32 (plus Parallel Hatch)",
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.2": "Voltage tier reduces time to 80%, Coil step increases speed by 50%",
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3": "Supports dual modes: Vacuum Furnace (Mode 0) & Chemical Dehydrator (Mode 1)"
 }

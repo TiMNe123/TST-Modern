@@ -21,6 +21,7 @@ public final class TSTBlocks {
 
     public static final RegistryObject<Block> CASING_C = casing("mega_stone_breaker_casing_c");
     public static final RegistryObject<Block> COSMIC_NEUTRONIUM_FRAME = casing("cosmic_neutronium_frame");
+    public static final RegistryObject<Block> VACUUM_CASING = casing("vacuum_casing");
 
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_1 = compressedCobble(1);
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_2 = compressedCobble(2);
