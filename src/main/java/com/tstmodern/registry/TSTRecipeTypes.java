@@ -16,6 +16,8 @@ public final class TSTRecipeTypes {
     public static GTRecipeType VACUUM_FURNACE;
     public static GTRecipeType CHEMICAL_DEHYDRATOR;
     public static GTRecipeType NETHER_INTERFACE;
+    public static GTRecipeType RAPID_HEAT_EXCHANGE;
+    public static GTRecipeType RAPID_COOLING;
 
     private TSTRecipeTypes() {}
 
@@ -34,6 +36,14 @@ public final class TSTRecipeTypes {
 
         NETHER_INTERFACE = register(event, "nether_interface")
                 .setMaxIOSize(1, 5, 1, 2)
+                .setEUIO(IO.IN);
+
+        RAPID_HEAT_EXCHANGE = register(event, "rapid_heat_exchange")
+                .setMaxIOSize(0, 0, 2, 2)
+                .setEUIO(IO.IN);
+
+        RAPID_COOLING = register(event, "rapid_cooling")
+                .setMaxIOSize(0, 0, 2, 2)
                 .setEUIO(IO.IN);
     }
 

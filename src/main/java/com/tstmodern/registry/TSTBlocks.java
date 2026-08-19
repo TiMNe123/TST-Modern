@@ -23,6 +23,10 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> COSMIC_NEUTRONIUM_FRAME = casing("cosmic_neutronium_frame");
     public static final RegistryObject<Block> VACUUM_CASING = casing("vacuum_casing");
     public static final RegistryObject<Block> MECHANICALLY_ENHANCED_OBSIDIAN = casing("mechanically_enhanced_obsidian");
+    public static final RegistryObject<Block> IRIDIUM_REINFORCED_NEUTRONIUM_CASING = casing(
+            "iridium_reinforced_neutronium_casing");
+    public static final RegistryObject<Block> BOROPHENE_NANOWIRE_CASING = casing("borophene_nanowire_casing");
+    public static final RegistryObject<Block> NEUTRONIUM_PIPE_CASING = casing("neutronium_pipe_casing");
 
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_1 = compressedCobble(1);
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_2 = compressedCobble(2);

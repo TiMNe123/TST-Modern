@@ -1,5 +1,6 @@
 package com.tstmodern.data;
 
+import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
 import com.tstmodern.TSTModern;
@@ -26,18 +27,22 @@ import static com.gregtechceu.gtceu.api.GTValues.IV;
 import static com.gregtechceu.gtceu.api.GTValues.LuV;
 import static com.gregtechceu.gtceu.api.GTValues.VA;
 import static com.gregtechceu.gtceu.api.GTValues.ZPM;
+import static com.gregtechceu.gtceu.api.GTValues.UV;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.dust;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.ingot;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.pipeLargeFluid;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.plate;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.plateDense;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_INVAR_HEATPROOF;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_STAINLESS_CLEAN;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TUNGSTENSTEEL_ROBUST;
 import static com.gregtechceu.gtceu.common.data.GTItems.CONVEYOR_MODULE_ZPM;
 import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_PUMP_HV;
 import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_PUMP_ZPM;
 import static com.gregtechceu.gtceu.common.data.GTItems.FIELD_GENERATOR_LuV;
+import static com.gregtechceu.gtceu.common.data.GTItems.FIELD_GENERATOR_ZPM;
 import static com.gregtechceu.gtceu.common.data.GTItems.ROBOT_ARM_ZPM;
 import static com.gregtechceu.gtceu.common.data.GTMachines.ELECTRIC_FURNACE;
 import static com.gregtechceu.gtceu.common.data.GTMachines.HULL;
@@ -58,6 +63,8 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.HSSE;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.HSSS;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Invar;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Iridium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Iron;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Nickel;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.LiquidNetherAir;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Lithium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.LithiumChloride;
@@ -84,6 +91,16 @@ import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLY_LINE_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.BLAST_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.COMPRESSOR_RECIPES;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Argon;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Carbon;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.DistilledWater;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Helium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Neutronium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Nitrogen;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Oxygen;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.SodiumPotassium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Steam;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TITANIUM_STABLE;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 
 /** Exact processing recipes and construction chains for ported TST multiblocks. */
@@ -165,6 +182,8 @@ public final class TSTRecipes {
         addVacuumCasingRecipe(provider);
         addNetherInterfaceControllerRecipe(provider);
         addMechanicallyEnhancedObsidianRecipe(provider);
+        addHyperThermalConvectorControllerRecipe(provider);
+        addHyperThermalConvectorCasingRecipes(provider);
     }
 
     public static void addNetherInterfaceRecipes(Consumer<FinishedRecipe> provider) {
@@ -481,4 +500,194 @@ public final class TSTRecipes {
     private static GTRecipeBuilder recipe(String name) {
         return TSTRecipeTypes.MEGA_STONE_BREAKER.recipeBuilder(TSTModern.id("mega_stone_breaker/" + name));
     }
+
+    private static void addHyperThermalConvectorControllerRecipe(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/hyper_thermal_convector"))
+                .inputItems(HULL[UV], 2)
+                .inputItems(ELECTRIC_PUMP_ZPM, 16)
+                .inputItems(FIELD_GENERATOR_ZPM, 8)
+                .inputItems(CustomTags.UV_CIRCUITS, 16)
+                .inputItems(pipeLargeFluid, Iridium, 16)
+                .inputItems(plate, Neutronium, 16)
+                .inputItems(plate, NaquadahAlloy, 16)
+                .inputItems(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get().asItem(), 4)
+                .inputFluids(SolderingAlloy.getFluid(9_216))
+                .inputFluids(Iridium.getFluid(4_608))
+                .inputFluids(new FluidStack(Fluids.WATER, 64_000))
+                .outputItems(TSTMachines.HYPER_THERMAL_CONVECTOR)
+                .stationResearch(b -> b
+                        .researchStack(HULL[UV].asStack())
+                        .CWUt(64, 128_000)
+                        .EUt(VA[UV]))
+                .duration(20 * 60)
+                .EUt(VA[UV])
+                .save(provider);
+    }
+
+    private static void addHyperThermalConvectorCasingRecipes(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/iridium_reinforced_neutronium_casing"))
+                .inputItems(CASING_TITANIUM_STABLE.asStack())
+                .inputItems(plate, Iridium, 6)
+                .inputItems(plate, Neutronium, 2)
+                .inputFluids(SolderingAlloy.getFluid(288))
+                .outputItems(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING, 2)
+                .duration(200)
+                .EUt(VA[UV])
+                .save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/borophene_nanowire_casing"))
+                .inputItems(CASING_INVAR_HEATPROOF.asStack())
+                .inputItems(plate, TungstenSteel, 4)
+                .inputItems(dust, Carbon, 4)
+                .inputFluids(SolderingAlloy.getFluid(288))
+                .outputItems(TSTBlocks.BOROPHENE_NANOWIRE_CASING, 2)
+                .duration(200)
+                .EUt(VA[UV])
+                .save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/neutronium_pipe_casing"))
+                .inputItems(CASING_POLYTETRAFLUOROETHYLENE_PIPE.asStack())
+                .inputItems(plate, Neutronium, 4)
+                .inputFluids(SolderingAlloy.getFluid(288))
+                .outputItems(TSTBlocks.NEUTRONIUM_PIPE_CASING, 2)
+                .duration(200)
+                .EUt(VA[UV])
+                .save(provider);
+    }
+
+    public static void addHyperThermalConvectorRecipes(Consumer<FinishedRecipe> provider) {
+        // === Rapid Heat Exchange Recipes (UV Tier) ===
+        // 1. Plasma Thermal Exchanges (Plasma + Water -> Cooled Gas/Molten Metal + High Steam)
+        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/helium_plasma"))
+                .inputFluids(Helium.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                .outputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
+                .outputFluids(Steam.getFluid(320_000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/nitrogen_plasma"))
+                .inputFluids(Nitrogen.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                .outputFluids(Nitrogen.getFluid(1000))
+                .outputFluids(Steam.getFluid(320_000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/oxygen_plasma"))
+                .inputFluids(Oxygen.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                .outputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
+                .outputFluids(Steam.getFluid(320_000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/argon_plasma"))
+                .inputFluids(Argon.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                .outputFluids(Argon.getFluid(1000))
+                .outputFluids(Steam.getFluid(320_000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/iron_plasma"))
+                .inputFluids(Iron.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                .outputFluids(Iron.getFluid(1000))
+                .outputFluids(Steam.getFluid(320_000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/nickel_plasma"))
+                .inputFluids(Nickel.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                .outputFluids(Nickel.getFluid(1000))
+                .outputFluids(Steam.getFluid(320_000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        // 2. High-throughput Lava Thermal Exchange
+        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/lava_cooling"))
+                .inputFluids(new FluidStack(Fluids.LAVA, 10_000))
+                .inputFluids(new FluidStack(Fluids.WATER, 10_000))
+                .outputFluids(Steam.getFluid(1_600_000))
+                .outputFluids(DistilledWater.getFluid(2000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        // === Rapid Cooling Recipes (UV Tier) ===
+        // 1. Gas Liquefaction (Gas -> Liquid)
+        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/helium_liquefaction"))
+                .inputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
+                .outputFluids(Helium.getFluid(FluidStorageKeys.LIQUID, 1000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/oxygen_liquefaction"))
+                .inputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
+                .outputFluids(Oxygen.getFluid(FluidStorageKeys.LIQUID, 1000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        // 2. Plasma Cooling (Plasma -> Gas/Molten)
+        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/helium_plasma"))
+                .inputFluids(Helium.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/nitrogen_plasma"))
+                .inputFluids(Nitrogen.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputFluids(Nitrogen.getFluid(1000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/oxygen_plasma"))
+                .inputFluids(Oxygen.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/argon_plasma"))
+                .inputFluids(Argon.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputFluids(Argon.getFluid(1000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/iron_plasma"))
+                .inputFluids(Iron.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputFluids(Iron.getFluid(1000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/nickel_plasma"))
+                .inputFluids(Nickel.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputFluids(Nickel.getFluid(1000))
+                .duration(20)
+                .EUt(VA[UV])
+                .save(provider);
+
+        // 3. Steam Condensation
+        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/steam_condensation"))
+                .inputFluids(Steam.getFluid(160_000))
+                .outputFluids(DistilledWater.getFluid(1000))
+                .duration(10)
+                .EUt(VA[UV])
+                .save(provider);
+    }
+
 }
