@@ -17,6 +17,13 @@ import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
  */
 public final class GiantVacuumDryingFurnaceMachine extends CoilWorkableElectricMultiblockMachine {
 
+    /**
+     * Number of tower segments in the structure. In TST 1.7.10 this was variable
+     * (modular multi-segment tower); this port uses a fixed single-segment layout.
+     * Extracted as a constant so a future multi-segment upgrade only needs one change.
+     */
+    private static final int BASE_SEGMENTS = 1;
+
     public GiantVacuumDryingFurnaceMachine(IMachineBlockEntity holder) {
         super(holder);
     }
@@ -27,8 +34,7 @@ public final class GiantVacuumDryingFurnaceMachine extends CoilWorkableElectricM
         }
 
         int coilTier = Math.max(1, furnace.getCoilType().getTier());
-        int piece = 1; // Standard tower segment
-        long baseParallel = (long) piece * coilTier * 32L;
+        long baseParallel = (long) BASE_SEGMENTS * coilTier * 32L;
         long hatchParallel = furnace.getParallelHatch()
                 .map(part -> (long) part.getCurrentParallel())
                 .orElse(0L);

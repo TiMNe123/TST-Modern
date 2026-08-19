@@ -31,6 +31,7 @@ public final class TSTModernGTAddon implements IGTAddon {
     public void addRecipes(Consumer<FinishedRecipe> provider) {
         TSTRecipes.addMegaStoneBreakerRecipes(provider);
         TSTRecipes.addGiantVacuumDryingFurnaceRecipes(provider);
+        TSTRecipes.addNetherInterfaceRecipes(provider);
         TSTRecipes.addConstructionRecipes(provider);
     }
 }

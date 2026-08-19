@@ -14,9 +14,12 @@ import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.common.data.GCYMBlocks;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.tstmodern.TSTModern;
+import com.tstmodern.machine.GiantVacuumDryingFurnaceMachine;
 import com.tstmodern.machine.MegaStoneBreakerMachine;
+import com.tstmodern.machine.NetherInterfaceMachine;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -152,11 +155,11 @@ public final class TSTMachines {
 
     public static final MultiblockMachineDefinition GIANT_VACUUM_DRYING_FURNACE = TSTModern.REGISTRATE
 
-            .multiblock("giant_vacuum_drying_furnace", com.tstmodern.machine.GiantVacuumDryingFurnaceMachine::new)
+            .multiblock("giant_vacuum_drying_furnace", GiantVacuumDryingFurnaceMachine::new)
             .langValue("Giant Vacuum Drying Furnace")
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeTypes(TSTRecipeTypes.VACUUM_FURNACE, TSTRecipeTypes.CHEMICAL_DEHYDRATOR)
-            .recipeModifiers(com.tstmodern.machine.GiantVacuumDryingFurnaceMachine::recipeModifier,
+            .recipeModifiers(GiantVacuumDryingFurnaceMachine::recipeModifier,
                     GTRecipeModifiers.OC_NON_PERFECT)
             .appearanceBlock(GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING)
             .pattern(definition -> FactoryBlockPattern.start(
@@ -376,11 +379,121 @@ public final class TSTMachines {
                     Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3"))
             .register();
 
+    public static final MultiblockMachineDefinition NETHER_INTERFACE = TSTModern.REGISTRATE
+            .multiblock("nether_interface", NetherInterfaceMachine::new)
+            .langValue("Nether Interface")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(TSTRecipeTypes.NETHER_INTERFACE)
+            .recipeModifiers(NetherInterfaceMachine::recipeModifier,
+                    GTRecipeModifiers.OC_NON_PERFECT)
+            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
+            .pattern(definition -> FactoryBlockPattern.start(
+                    RelativeDirection.RIGHT,
+                    RelativeDirection.DOWN,
+                    RelativeDirection.BACK)
+                    // === Aisle 0 (Z=0) ===
+                    .aisle(
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "               ",
+                            "      AAA      ",
+                            "      A~A      ",
+                            "      AAA      ")
+                    // === Aisle 1 (Z=1) ===
+                    .aisle(
+                            " AAAAAAAAAAAAA ",
+                            " A           A ",
+                            " BCCCCCCCCCCCB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BCCCCCCCCCCCB ",
+                            "AAAAAAAAAAAAAAA",
+                            "AAAAAAAAAAAAAAA")
+                    // === Aisle 2 (Z=2) ===
+                    .aisle(
+                            " AAAAAAAAAAAAA ",
+                            " CCCCCCCCCCCCC ",
+                            " CDDDDDDDDDDDC ",
+                            " CD         DC ",
+                            " CD         DC ",
+                            " CD         DC ",
+                            " CD         DC ",
+                            " CD         DC ",
+                            " CD         DC ",
+                            " CD         DC ",
+                            " CD         DC ",
+                            " CD         DC ",
+                            " CD         DC ",
+                            " CDDDDDDDDDDDC ",
+                            "ACCCCCCCCCCCCCA",
+                            "AAAAAAAAAAAAAAA")
+                    // === Aisle 3 (Z=3) ===
+                    .aisle(
+                            " AAAAAAAAAAAAA ",
+                            " A           A ",
+                            " BCCCCCCCCCCCB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BC         CB ",
+                            " BCCCCCCCCCCCB ",
+                            "AAAAAAAAAAAAAAA",
+                            "AAAAAAAAAAAAAAA")
+                    .where('~', Predicates.controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.CASING_STEEL_SOLID.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.autoAbilities(true, false, false))
+                            .or(Predicates.autoAbilities(false, false, true)))
+                    .where('B', Predicates.frames(GTMaterials.Obsidian))
+                    .where('C', blocks(TSTBlocks.MECHANICALLY_ENHANCED_OBSIDIAN.get()))
+                    .where('D', blocks(net.minecraft.world.level.block.Blocks.OBSIDIAN))
+                    .where(' ', Predicates.air())
+                    .build())
+            .workableCasingModel(
+                    GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
+                    TSTModern.id("block/multiblock/nether_interface"))
+            .tooltips(
+                    Component.translatable("tstmodern.machine.nether_interface.tooltip.0"),
+                    Component.translatable("tstmodern.machine.nether_interface.tooltip.1"),
+                    Component.translatable("tstmodern.machine.nether_interface.tooltip.2"),
+                    Component.translatable("tstmodern.machine.nether_interface.tooltip.3"),
+                    Component.translatable("tstmodern.machine.nether_interface.tooltip.4"))
+            .register();
+
 
     private TSTMachines() {}
 
 
+    /**
+     * Triggers static initialization of machine definitions when GTCEu opens its machine registry.
+     * The method body is intentionally empty: loading this class registers all static
+     * {@link MultiblockMachineDefinition} fields above.
+     */
     public static void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        // Static initialization registers the machine while GTCEu's machine registry is open.
+        // Intentionally empty — class loading registers all static MultiblockMachineDefinition fields.
     }
 }

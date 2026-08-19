@@ -4,6 +4,7 @@ import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.tstmodern.registry.TSTBlocks;
+import com.tstmodern.registry.TSTMaterials;
 import com.tstmodern.registry.TSTMachines;
 import com.tstmodern.registry.TSTRecipeTypes;
 
@@ -21,6 +22,7 @@ public final class TSTModern {
     public TSTModern() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         TSTBlocks.register(modBus);
+        modBus.addListener(TSTMaterials::registerMaterials);
 
         // GTCEu opens its recipe-type registry and posts this generic event before freezing it.
         modBus.addGenericListener(GTRecipeType.class, TSTRecipeTypes::registerRecipeTypes);

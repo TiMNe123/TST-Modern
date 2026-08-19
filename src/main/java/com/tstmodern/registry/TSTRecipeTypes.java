@@ -15,6 +15,7 @@ public final class TSTRecipeTypes {
     public static GTRecipeType MEGA_STONE_BREAKER;
     public static GTRecipeType VACUUM_FURNACE;
     public static GTRecipeType CHEMICAL_DEHYDRATOR;
+    public static GTRecipeType NETHER_INTERFACE;
 
     private TSTRecipeTypes() {}
 
@@ -30,8 +31,13 @@ public final class TSTRecipeTypes {
         CHEMICAL_DEHYDRATOR = register(event, "chemical_dehydrator")
                 .setMaxIOSize(2, 6, 2, 2)
                 .setEUIO(IO.IN);
+
+        NETHER_INTERFACE = register(event, "nether_interface")
+                .setMaxIOSize(1, 5, 1, 2)
+                .setEUIO(IO.IN);
     }
 
+    @SuppressWarnings("deprecation")
     private static GTRecipeType register(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event, String name) {
         GTRecipeType type = new GTRecipeType(TSTModern.id(name), GTRecipeTypes.MULTIBLOCK);
         com.gregtechceu.gtceu.api.registry.GTRegistries.register(BuiltInRegistries.RECIPE_TYPE,

@@ -28,5 +28,19 @@
   "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.0": "Requires one Maintenance Hatch when GTCEu maintenance is enabled",
   "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.1": "Base parallel = Coil Tier * Piece * 32 (plus Parallel Hatch)",
   "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.2": "Voltage tier reduces time to 80%, Coil step increases speed by 50%",
-  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3": "Supports dual modes: Vacuum Furnace (Mode 0) & Chemical Dehydrator (Mode 1)"
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3": "Supports dual modes: Vacuum Furnace (Mode 0) & Chemical Dehydrator (Mode 1)",
+  "block.tstmodern.nether_interface": "Nether Interface",
+  "block.tstmodern.mechanically_enhanced_obsidian": "Mechanically Enhanced Obsidian",
+  "tstmodern.nether_interface": "Nether Interface",
+  "recipetype.tstmodern.nether_interface": "Nether Interface",
+  "gtceu.tstmodern.nether_interface": "Nether Interface",
+  "gtceu.nether_interface": "Nether Interface",
+  "tstmodern.machine.nether_interface.tooltip.0": "Otherworld Teleporter",
+  "tstmodern.machine.nether_interface.tooltip.1": "The imprisoned souls of an ancient civilization now serve you.",
+  "tstmodern.machine.nether_interface.tooltip.2": "Build portals and transport the dirty but useful resources of Hell back to you.",
+  "tstmodern.machine.nether_interface.tooltip.3": "Base parallel: 64. Supports Parallel Control Hatch.",
+  "tstmodern.machine.nether_interface.tooltip.4": "Energy cost: (2 + parallel) * 7680 EU/t (IV tier).",
+  "tstmodern.machine.nether_interface.tooltip.5": "Requires one Maintenance Hatch when GTCEu maintenance is enabled",
+  "material.tstmodern.hellish_metal": "Hellish Metal",
+  "fluid.tstmodern.hellish_metal": "Molten Hellish Metal"
 }

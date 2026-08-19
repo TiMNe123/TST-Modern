@@ -28,5 +28,18 @@
   "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.0": "Cần một Maintenance Hatch khi hệ thống bảo trì GTCEu được bật",
   "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.1": "Parallel cơ bản = Cấp Cuộn Nhiệt * Số Tầng * 32 (cộng Parallel Hatch)",
   "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.2": "Cấp điện áp giảm thời gian xuống 80%, Cấp cuộn nhiệt tăng tốc 50%",
-  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3": "Hỗ trợ 2 chế độ: Lò Nung Chân Không (Mode 0) & Khử Nước Hóa Học (Mode 1)"
+  "tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3": "Hỗ trợ 2 chế độ: Lò Nung Chân Không (Mode 0) & Khử Nước Hóa Học (Mode 1)",
+  "block.tstmodern.nether_interface": "Giao Diện Địa Ngục (Nether Interface)",
+  "block.tstmodern.mechanically_enhanced_obsidian": "Hắc Diện Thạch Cường Hóa Cơ Khí",
+  "tstmodern.nether_interface": "Nether Interface",
+  "recipetype.tstmodern.nether_interface": "Nether Interface",
+  "gtceu.tstmodern.nether_interface": "Nether Interface",
+  "gtceu.nether_interface": "Nether Interface",
+  "tstmodern.machine.nether_interface.tooltip.0": "Cổng Dịch Chuyển Dị Giới",
+  "tstmodern.machine.nether_interface.tooltip.1": "Những linh hồn bị giam cầm của nền văn minh cổ đại nay phục vụ bạn.",
+  "tstmodern.machine.nether_interface.tooltip.2": "Xây dựng cổng không gian và vận chuyển nguồn tài nguyên quý giá từ Địa Ngục trở về.",
+  "tstmodern.machine.nether_interface.tooltip.3": "Máy tiêu thụ 2A IV để duy trì cổng, và 1A IV cho mỗi parallel.",
+  "tstmodern.machine.nether_interface.tooltip.4": "Cần một Maintenance Hatch khi hệ thống bảo trì GTCEu được bật",
+  "material.tstmodern.hellish_metal": "Kim Loại Địa Ngục",
+  "fluid.tstmodern.hellish_metal": "Kim Loại Địa Ngục Nóng Chảy"
 }
