@@ -87,6 +87,15 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.Tungsten;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.TungstenSteel;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Yttrium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.UraniumRhodiumDinaquadide;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.STEAM_TURBINE_FUELS;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.CENTRIFUGE_RECIPES;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.CRACKING_RECIPES;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.HeavyFuel;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Naphtha;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.LightFuel;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.SeverelySteamCrackedHeavyFuel;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.SeverelySteamCrackedNaphtha;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.SeverelySteamCrackedLightFuel;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLY_LINE_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.BLAST_RECIPES;
@@ -98,595 +107,684 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.Helium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Neutronium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Nitrogen;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Oxygen;
-import static com.gregtechceu.gtceu.common.data.GTMaterials.SodiumPotassium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Steam;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TITANIUM_STABLE;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 
-/** Exact processing recipes and construction chains for ported TST multiblocks. */
+/**
+ * Exact processing recipes and construction chains for ported TST multiblocks.
+ */
 public final class TSTRecipes {
-    private TSTRecipes() {}
+        private TSTRecipes() {
+        }
 
+        public static void addMegaStoneBreakerRecipes(Consumer<FinishedRecipe> provider) {
+                basic(provider, "cobblestone", 1, Blocks.COBBLESTONE, 6, 20);
+                basic(provider, "compressed_cobblestone_1", 2, TSTBlocks.COMPRESSED_COBBLESTONE_1, 24, 40);
+                basic(provider, "compressed_cobblestone_2", 3, TSTBlocks.COMPRESSED_COBBLESTONE_2, 96, 60);
+                basic(provider, "compressed_cobblestone_3", 4, TSTBlocks.COMPRESSED_COBBLESTONE_3, 384, 80);
+                basic(provider, "compressed_cobblestone_4", 5, TSTBlocks.COMPRESSED_COBBLESTONE_4, 1_536, 100);
+                basic(provider, "compressed_cobblestone_5", 6, TSTBlocks.COMPRESSED_COBBLESTONE_5, 6_144, 120);
+                basic(provider, "compressed_cobblestone_6", 7, TSTBlocks.COMPRESSED_COBBLESTONE_6, 12_288, 140);
+                basic(provider, "compressed_cobblestone_7", 8, TSTBlocks.COMPRESSED_COBBLESTONE_7, 24_576, 160);
+                basic(provider, "compressed_cobblestone_8", 9, TSTBlocks.COMPRESSED_COBBLESTONE_8, 98_304, 180);
+                basic(provider, "stone", 20, Blocks.STONE, 6, 20);
 
-    public static void addMegaStoneBreakerRecipes(Consumer<FinishedRecipe> provider) {
-        basic(provider, "cobblestone", 1, Blocks.COBBLESTONE, 6, 20);
-        basic(provider, "compressed_cobblestone_1", 2, TSTBlocks.COMPRESSED_COBBLESTONE_1, 24, 40);
-        basic(provider, "compressed_cobblestone_2", 3, TSTBlocks.COMPRESSED_COBBLESTONE_2, 96, 60);
-        basic(provider, "compressed_cobblestone_3", 4, TSTBlocks.COMPRESSED_COBBLESTONE_3, 384, 80);
-        basic(provider, "compressed_cobblestone_4", 5, TSTBlocks.COMPRESSED_COBBLESTONE_4, 1_536, 100);
-        basic(provider, "compressed_cobblestone_5", 6, TSTBlocks.COMPRESSED_COBBLESTONE_5, 6_144, 120);
-        basic(provider, "compressed_cobblestone_6", 7, TSTBlocks.COMPRESSED_COBBLESTONE_6, 12_288, 140);
-        basic(provider, "compressed_cobblestone_7", 8, TSTBlocks.COMPRESSED_COBBLESTONE_7, 24_576, 160);
-        basic(provider, "compressed_cobblestone_8", 9, TSTBlocks.COMPRESSED_COBBLESTONE_8, 98_304, 180);
-        basic(provider, "stone", 20, Blocks.STONE, 6, 20);
+                recipe("obsidian").circuitMeta(24)
+                                .inputItems(Items.REDSTONE)
+                                .outputItems(Blocks.OBSIDIAN.asItem())
+                                .EUt(6).duration(20).save(provider);
 
-        recipe("obsidian").circuitMeta(24)
-                .inputItems(Items.REDSTONE)
-                .outputItems(Blocks.OBSIDIAN.asItem())
-                .EUt(6).duration(20).save(provider);
+                recipe("netherrack").circuitMeta(21)
+                                .inputItems(Items.GLOWSTONE_DUST)
+                                .outputItems(Blocks.NETHERRACK.asItem())
+                                .EUt(6).duration(20).save(provider);
 
-        recipe("netherrack").circuitMeta(21)
-                .inputItems(Items.GLOWSTONE_DUST)
-                .outputItems(Blocks.NETHERRACK.asItem())
-                .EUt(6).duration(20).save(provider);
+                // TST used zero-sized Et Futurum stacks here; in GTCEu these are non-consumed
+                // catalysts.
+                recipe("basalt").circuitMeta(22)
+                                .notConsumable(Blocks.BLUE_ICE.asItem())
+                                .notConsumable(Blocks.SOUL_SAND.asItem())
+                                .outputItems(Blocks.BASALT.asItem())
+                                .EUt(6).duration(20).save(provider);
 
-        // TST used zero-sized Et Futurum stacks here; in GTCEu these are non-consumed catalysts.
-        recipe("basalt").circuitMeta(22)
-                .notConsumable(Blocks.BLUE_ICE.asItem())
-                .notConsumable(Blocks.SOUL_SAND.asItem())
-                .outputItems(Blocks.BASALT.asItem())
-                .EUt(6).duration(20).save(provider);
+                recipe("cobbled_deepslate").circuitMeta(23)
+                                .notConsumable(Blocks.MAGMA_BLOCK.asItem())
+                                .notConsumable(Blocks.SOUL_SAND.asItem())
+                                .outputItems(Blocks.COBBLED_DEEPSLATE.asItem())
+                                .EUt(6).duration(20).save(provider);
+        }
 
-        recipe("cobbled_deepslate").circuitMeta(23)
-                .notConsumable(Blocks.MAGMA_BLOCK.asItem())
-                .notConsumable(Blocks.SOUL_SAND.asItem())
-                .outputItems(Blocks.COBBLED_DEEPSLATE.asItem())
-                .EUt(6).duration(20).save(provider);
-    }
+        /**
+         * Construction chain for the TST-only structure blocks and controller.
+         *
+         * <p>
+         * The processing behaviour remains faithful to TST, while construction is
+         * rebalanced for the beginning of ZPM in a modern 1.20.1 modpack.
+         * </p>
+         */
+        public static void addConstructionRecipes(Consumer<FinishedRecipe> provider) {
+                addCompressedCobblestoneRecipes(provider);
 
-    /**
-     * Construction chain for the TST-only structure blocks and controller.
-     *
-     * <p>The processing behaviour remains faithful to TST, while construction is
-     * rebalanced for the beginning of ZPM in a modern 1.20.1 modpack.</p>
-     */
-    public static void addConstructionRecipes(Consumer<FinishedRecipe> provider) {
-        addCompressedCobblestoneRecipes(provider);
+                // GT5U Advanced Iridium Casing (sBlockCasings8:7) has no native GTCEu block.
+                // Iridium metal is established at IV, so keep this reusable casing
+                // available from the same progression stage.
+                ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/advanced_iridium_casing"))
+                                .inputItems(CASING_TUNGSTENSTEEL_ROBUST.asStack())
+                                .inputItems(plate, Iridium, 6)
+                                .inputFluids(SolderingAlloy.getFluid(144))
+                                .outputItems(TSTBlocks.CASING_C)
+                                .duration(400)
+                                .EUt(VA[IV])
+                                .save(provider);
 
-        // GT5U Advanced Iridium Casing (sBlockCasings8:7) has no native GTCEu block.
-        // Iridium metal is established at IV, so keep this reusable casing
-        // available from the same progression stage.
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/advanced_iridium_casing"))
-                .inputItems(CASING_TUNGSTENSTEEL_ROBUST.asStack())
-                .inputItems(plate, Iridium, 6)
-                .inputFluids(SolderingAlloy.getFluid(144))
-                .outputItems(TSTBlocks.CASING_C)
-                .duration(400)
-                .EUt(VA[IV])
-                .save(provider);
+                // Cosmic Neutronium is absent from GTCEu. Keep the dedicated TST frame block,
+                // but synthesize it from native ZPM materials so the 129-block structure does
+                // not depend on UV/UHV progression.
+                ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/cosmic_neutronium_frame"))
+                                .inputItems(frameGt, NaquadahAlloy)
+                                .inputItems(plate, NaquadahAlloy, 6)
+                                .inputFluids(SolderingAlloy.getFluid(576))
+                                .outputItems(TSTBlocks.COSMIC_NEUTRONIUM_FRAME, 2)
+                                .duration(400)
+                                .EUt(VA[ZPM])
+                                .save(provider);
 
-        // Cosmic Neutronium is absent from GTCEu. Keep the dedicated TST frame block,
-        // but synthesize it from native ZPM materials so the 129-block structure does
-        // not depend on UV/UHV progression.
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/cosmic_neutronium_frame"))
-                .inputItems(frameGt, NaquadahAlloy)
-                .inputItems(plate, NaquadahAlloy, 6)
-                .inputFluids(SolderingAlloy.getFluid(576))
-                .outputItems(TSTBlocks.COSMIC_NEUTRONIUM_FRAME, 2)
-                .duration(400)
-                .EUt(VA[ZPM])
-                .save(provider);
+                addControllerRecipe(provider);
+                addGiantVacuumDryingFurnaceControllerRecipe(provider);
+                addVacuumCasingRecipe(provider);
+                addNetherInterfaceControllerRecipe(provider);
+                addMechanicallyEnhancedObsidianRecipe(provider);
+                addHyperThermalConvectorControllerRecipe(provider);
+                addHyperThermalConvectorCasingRecipes(provider);
+        }
 
-        addControllerRecipe(provider);
-        addGiantVacuumDryingFurnaceControllerRecipe(provider);
-        addVacuumCasingRecipe(provider);
-        addNetherInterfaceControllerRecipe(provider);
-        addMechanicallyEnhancedObsidianRecipe(provider);
-        addHyperThermalConvectorControllerRecipe(provider);
-        addHyperThermalConvectorCasingRecipes(provider);
-    }
+        public static void addNetherInterfaceRecipes(Consumer<FinishedRecipe> provider) {
+                TSTRecipeTypes.NETHER_INTERFACE.recipeBuilder(TSTModern.id("nether_interface/dimensional_harvesting"))
+                                .inputFluids(new FluidStack(Fluids.LAVA, 16_000))
+                                .outputFluids(LiquidNetherAir.getFluid(16_000))
+                                .chancedOutput(TSTMaterials.HELLISH_METAL.getFluid(288), 3000, 0)
+                                .chancedOutput(new ItemStack(Items.ANCIENT_DEBRIS), 100, 0)
+                                .chancedOutput(new ItemStack(Items.NETHERITE_SCRAP, 4), 3000, 0)
+                                .chancedOutput(new ItemStack(Items.NETHERITE_INGOT, 1), 1000, 0)
+                                .chancedOutput(new ItemStack(Items.NETHER_STAR, 1), 50, 0)
+                                .chancedOutput(new ItemStack(Blocks.NETHERRACK, 16), 4900, 0)
+                                .EUt(VA[IV])
+                                .duration(1200)
+                                .save(provider);
 
-    public static void addNetherInterfaceRecipes(Consumer<FinishedRecipe> provider) {
-        TSTRecipeTypes.NETHER_INTERFACE.recipeBuilder(TSTModern.id("nether_interface/dimensional_harvesting"))
-                .inputFluids(new FluidStack(Fluids.LAVA, 16_000))
-                .outputFluids(LiquidNetherAir.getFluid(16_000))
-                .chancedOutput(TSTMaterials.HELLISH_METAL.getFluid(288), 3000, 0)
-                .chancedOutput(new ItemStack(Items.ANCIENT_DEBRIS), 100, 0)
-                .chancedOutput(new ItemStack(Items.NETHERITE_SCRAP, 4), 3000, 0)
-                .chancedOutput(new ItemStack(Items.NETHERITE_INGOT, 1), 1000, 0)
-                .chancedOutput(new ItemStack(Items.NETHER_STAR, 1), 50, 0)
-                .chancedOutput(new ItemStack(Blocks.NETHERRACK, 16), 4900, 0)
-                .EUt(VA[IV])
-                .duration(1200)
-                .save(provider);
+                // === Bootstrapping Hellish Metal before building Nether Interface ===
+                // Blast Furnace: Synthesize Hellish Metal from Nether essence & Lava
+                BLAST_RECIPES.recipeBuilder(TSTModern.id("blast/hellish_metal_synthesis"))
+                                .inputItems(dust, Netherrack, 4)
+                                .inputItems(new ItemStack(Items.NETHERITE_SCRAP, 1))
+                                .inputItems(dust, Blaze, 1)
+                                .inputFluids(new FluidStack(Fluids.LAVA, 1000))
+                                .outputItems(ingot, TSTMaterials.HELLISH_METAL, 1)
+                                .outputItems(dust, DarkAsh, 1)
+                                .blastFurnaceTemp(2800)
+                                .duration(400)
+                                .EUt(VA[EV])
+                                .save(provider);
+        }
 
-        // === Bootstrapping Hellish Metal before building Nether Interface ===
-        // Blast Furnace: Synthesize Hellish Metal from Nether essence & Lava
-        BLAST_RECIPES.recipeBuilder(TSTModern.id("blast/hellish_metal_synthesis"))
-                .inputItems(dust, Netherrack, 4)
-                .inputItems(new ItemStack(Items.NETHERITE_SCRAP, 1))
-                .inputItems(dust, Blaze, 1)
-                .inputFluids(new FluidStack(Fluids.LAVA, 1000))
-                .outputItems(ingot, TSTMaterials.HELLISH_METAL, 1)
-                .outputItems(dust, DarkAsh, 1)
-                .blastFurnaceTemp(2800)
-                .duration(400)
-                .EUt(VA[EV])
-                .save(provider);
-    }
+        public static void addGiantVacuumDryingFurnaceRecipes(Consumer<FinishedRecipe> provider) {
+                // === Chemical Dehydrator Recipes ===
+                TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/calcium_chloride"))
+                                .inputItems(dust, CalciumChloride, 1)
+                                .outputItems(dust, Calcium, 1)
+                                .outputFluids(Chlorine.getFluid(2000))
+                                .EUt(VA[MV])
+                                .duration(200)
+                                .save(provider);
 
-    public static void addGiantVacuumDryingFurnaceRecipes(Consumer<FinishedRecipe> provider) {
-        // === Chemical Dehydrator Recipes ===
-        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/calcium_chloride"))
-                .inputItems(dust, CalciumChloride, 1)
-                .outputItems(dust, Calcium, 1)
-                .outputFluids(Chlorine.getFluid(2000))
-                .EUt(VA[MV])
-                .duration(200)
-                .save(provider);
+                TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/magnesium_chloride"))
+                                .inputItems(dust, MagnesiumChloride, 1)
+                                .outputItems(dust, Magnesium, 1)
+                                .outputFluids(Chlorine.getFluid(2000))
+                                .EUt(VA[MV])
+                                .duration(200)
+                                .save(provider);
 
-        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/magnesium_chloride"))
-                .inputItems(dust, MagnesiumChloride, 1)
-                .outputItems(dust, Magnesium, 1)
-                .outputFluids(Chlorine.getFluid(2000))
-                .EUt(VA[MV])
-                .duration(200)
-                .save(provider);
+                TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/lithium_chloride"))
+                                .inputItems(dust, LithiumChloride, 1)
+                                .outputItems(dust, Lithium, 1)
+                                .outputFluids(Chlorine.getFluid(1000))
+                                .EUt(VA[HV])
+                                .duration(200)
+                                .save(provider);
 
-        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/lithium_chloride"))
-                .inputItems(dust, LithiumChloride, 1)
-                .outputItems(dust, Lithium, 1)
-                .outputFluids(Chlorine.getFluid(1000))
-                .EUt(VA[HV])
-                .duration(200)
-                .save(provider);
+                TSTRecipeTypes.CHEMICAL_DEHYDRATOR
+                                .recipeBuilder(TSTModern.id("chemical_dehydrator/bauxite_dehydration"))
+                                .inputItems(dust, Bauxite, 4)
+                                .outputItems(dust, Aluminium, 2)
+                                .chancedOutput(dust, Rutile, 1, 2500, 0)
+                                .outputFluids(new FluidStack(Fluids.WATER, 2000))
+                                .EUt(VA[HV])
+                                .duration(240)
+                                .save(provider);
 
-        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/bauxite_dehydration"))
-                .inputItems(dust, Bauxite, 4)
-                .outputItems(dust, Aluminium, 2)
-                .chancedOutput(dust, Rutile, 1, 2500, 0)
-                .outputFluids(new FluidStack(Fluids.WATER, 2000))
-                .EUt(VA[HV])
-                .duration(240)
-                .save(provider);
+                TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/rare_earth"))
+                                .inputItems(dust, RareEarth, 1)
+                                .chancedOutput(dust, Neodymium, 1, 4000, 0)
+                                .chancedOutput(dust, Yttrium, 1, 3000, 0)
+                                .chancedOutput(dust, Samarium, 1, 2000, 0)
+                                .chancedOutput(dust, Cerium, 1, 1000, 0)
+                                .outputFluids(new FluidStack(Fluids.WATER, 1000))
+                                .EUt(VA[IV])
+                                .duration(300)
+                                .save(provider);
 
-        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/rare_earth"))
-                .inputItems(dust, RareEarth, 1)
-                .chancedOutput(dust, Neodymium, 1, 4000, 0)
-                .chancedOutput(dust, Yttrium, 1, 3000, 0)
-                .chancedOutput(dust, Samarium, 1, 2000, 0)
-                .chancedOutput(dust, Cerium, 1, 1000, 0)
-                .outputFluids(new FluidStack(Fluids.WATER, 1000))
-                .EUt(VA[IV])
-                .duration(300)
-                .save(provider);
+                TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/clay_drying"))
+                                .inputItems(Blocks.CLAY.asItem(), 1)
+                                .outputItems(Blocks.TERRACOTTA.asItem(), 1)
+                                .outputFluids(new FluidStack(Fluids.WATER, 1000))
+                                .EUt(VA[LV])
+                                .duration(100)
+                                .save(provider);
 
-        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/clay_drying"))
-                .inputItems(Blocks.CLAY.asItem(), 1)
-                .outputItems(Blocks.TERRACOTTA.asItem(), 1)
-                .outputFluids(new FluidStack(Fluids.WATER, 1000))
-                .EUt(VA[LV])
-                .duration(100)
-                .save(provider);
+                TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/sponge_drying"))
+                                .inputItems(Blocks.WET_SPONGE.asItem(), 1)
+                                .outputItems(Blocks.SPONGE.asItem(), 1)
+                                .outputFluids(new FluidStack(Fluids.WATER, 1000))
+                                .EUt(VA[LV])
+                                .duration(40)
+                                .save(provider);
 
-        TSTRecipeTypes.CHEMICAL_DEHYDRATOR.recipeBuilder(TSTModern.id("chemical_dehydrator/sponge_drying"))
-                .inputItems(Blocks.WET_SPONGE.asItem(), 1)
-                .outputItems(Blocks.SPONGE.asItem(), 1)
-                .outputFluids(new FluidStack(Fluids.WATER, 1000))
-                .EUt(VA[LV])
-                .duration(40)
-                .save(provider);
+                // === Vacuum Furnace Recipes ===
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/annealed_copper"))
+                                .inputItems(ingot, Copper, 1)
+                                .outputItems(ingot, AnnealedCopper, 1)
+                                .EUt(VA[MV])
+                                .duration(100)
+                                .save(provider);
 
-        // === Vacuum Furnace Recipes ===
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/annealed_copper"))
-                .inputItems(ingot, Copper, 1)
-                .outputItems(ingot, AnnealedCopper, 1)
-                .EUt(VA[MV])
-                .duration(100)
-                .save(provider);
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/silicon_annealing"))
+                                .inputItems(dust, Silicon, 1)
+                                .outputItems(ingot, Silicon, 1)
+                                .EUt(VA[HV])
+                                .duration(160)
+                                .save(provider);
 
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/silicon_annealing"))
-                .inputItems(dust, Silicon, 1)
-                .outputItems(ingot, Silicon, 1)
-                .EUt(VA[HV])
-                .duration(160)
-                .save(provider);
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/titanium_sintering"))
+                                .inputItems(dust, Titanium, 1)
+                                .outputItems(ingot, Titanium, 1)
+                                .EUt(VA[HV])
+                                .duration(240)
+                                .save(provider);
 
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/titanium_sintering"))
-                .inputItems(dust, Titanium, 1)
-                .outputItems(ingot, Titanium, 1)
-                .EUt(VA[HV])
-                .duration(240)
-                .save(provider);
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/tungsten_sintering"))
+                                .inputItems(dust, Tungsten, 1)
+                                .outputItems(ingot, Tungsten, 1)
+                                .EUt(VA[EV])
+                                .duration(300)
+                                .save(provider);
 
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/tungsten_sintering"))
-                .inputItems(dust, Tungsten, 1)
-                .outputItems(ingot, Tungsten, 1)
-                .EUt(VA[EV])
-                .duration(300)
-                .save(provider);
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/naquadah"))
+                                .inputItems(dust, Naquadah, 1)
+                                .outputItems(ingot, Naquadah, 1)
+                                .EUt(VA[IV])
+                                .duration(400)
+                                .save(provider);
 
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/naquadah"))
-                .inputItems(dust, Naquadah, 1)
-                .outputItems(ingot, Naquadah, 1)
-                .EUt(VA[IV])
-                .duration(400)
-                .save(provider);
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/naquadah_alloy"))
+                                .inputItems(dust, NaquadahAlloy, 1)
+                                .outputItems(ingot, NaquadahAlloy, 1)
+                                .EUt(VA[LuV])
+                                .duration(500)
+                                .save(provider);
 
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/naquadah_alloy"))
-                .inputItems(dust, NaquadahAlloy, 1)
-                .outputItems(ingot, NaquadahAlloy, 1)
-                .EUt(VA[LuV])
-                .duration(500)
-                .save(provider);
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/trinium"))
+                                .inputItems(dust, Trinium, 1)
+                                .outputItems(ingot, Trinium, 1)
+                                .EUt(VA[LuV])
+                                .duration(450)
+                                .save(provider);
 
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/trinium"))
-                .inputItems(dust, Trinium, 1)
-                .outputItems(ingot, Trinium, 1)
-                .EUt(VA[LuV])
-                .duration(450)
-                .save(provider);
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/hssg"))
+                                .inputItems(dust, HSSG, 1)
+                                .outputItems(ingot, HSSG, 1)
+                                .EUt(VA[IV])
+                                .duration(360)
+                                .save(provider);
 
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/hssg"))
-                .inputItems(dust, HSSG, 1)
-                .outputItems(ingot, HSSG, 1)
-                .EUt(VA[IV])
-                .duration(360)
-                .save(provider);
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/hsse"))
+                                .inputItems(dust, HSSE, 1)
+                                .outputItems(ingot, HSSE, 1)
+                                .EUt(VA[IV])
+                                .duration(400)
+                                .save(provider);
 
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/hsse"))
-                .inputItems(dust, HSSE, 1)
-                .outputItems(ingot, HSSE, 1)
-                .EUt(VA[IV])
-                .duration(400)
-                .save(provider);
+                TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/hsss"))
+                                .inputItems(dust, HSSS, 1)
+                                .outputItems(ingot, HSSS, 1)
+                                .EUt(VA[LuV])
+                                .duration(440)
+                                .save(provider);
+        }
 
-        TSTRecipeTypes.VACUUM_FURNACE.recipeBuilder(TSTModern.id("vacuum_furnace/hsss"))
-                .inputItems(dust, HSSS, 1)
-                .outputItems(ingot, HSSS, 1)
-                .EUt(VA[LuV])
-                .duration(440)
-                .save(provider);
-    }
+        private static void addVacuumCasingRecipe(Consumer<FinishedRecipe> provider) {
+                ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/vacuum_casing"))
+                                .inputItems(CASING_STAINLESS_CLEAN.asStack())
+                                .inputItems(plate, Invar, 6)
+                                .inputItems(ELECTRIC_PUMP_HV, 2)
+                                .inputFluids(SolderingAlloy.getFluid(288))
+                                .outputItems(TSTBlocks.VACUUM_CASING, 2)
+                                .duration(200)
+                                .EUt(VA[HV])
+                                .save(provider);
+        }
 
-    private static void addVacuumCasingRecipe(Consumer<FinishedRecipe> provider) {
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/vacuum_casing"))
-                .inputItems(CASING_STAINLESS_CLEAN.asStack())
-                .inputItems(plate, Invar, 6)
-                .inputItems(ELECTRIC_PUMP_HV, 2)
-                .inputFluids(SolderingAlloy.getFluid(288))
-                .outputItems(TSTBlocks.VACUUM_CASING, 2)
-                .duration(200)
-                .EUt(VA[HV])
-                .save(provider);
-    }
+        private static void addGiantVacuumDryingFurnaceControllerRecipe(Consumer<FinishedRecipe> provider) {
+                ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/giant_vacuum_drying_furnace"))
+                                .inputItems(HULL[ZPM], 2)
+                                .inputItems(ELECTRIC_FURNACE[ZPM], 4)
+                                .inputItems(ROBOT_ARM_ZPM, 16)
+                                .inputItems(CONVEYOR_MODULE_ZPM, 16)
+                                .inputItems(CustomTags.ZPM_CIRCUITS, 32)
+                                .inputItems(pipeLargeFluid, Iridium, 16)
+                                .inputItems(plate, NaquadahAlloy, 16)
+                                .inputItems(plate, UraniumRhodiumDinaquadide, 16)
+                                .inputItems(TSTBlocks.VACUUM_CASING.get().asItem(), 4)
+                                .inputFluids(SolderingAlloy.getFluid(9_216))
+                                .inputFluids(Iridium.getFluid(4_608))
+                                .outputItems(TSTMachines.GIANT_VACUUM_DRYING_FURNACE)
+                                .scannerResearch(b -> b
+                                                .researchStack(ELECTRIC_FURNACE[ZPM].asStack())
+                                                .duration(20 * 60)
+                                                .EUt(VA[LuV]))
+                                .duration(20 * 60)
+                                .EUt(VA[ZPM])
+                                .save(provider);
+        }
 
-    private static void addGiantVacuumDryingFurnaceControllerRecipe(Consumer<FinishedRecipe> provider) {
-        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/giant_vacuum_drying_furnace"))
-                .inputItems(HULL[ZPM], 2)
-                .inputItems(ELECTRIC_FURNACE[ZPM], 4)
-                .inputItems(ROBOT_ARM_ZPM, 16)
-                .inputItems(CONVEYOR_MODULE_ZPM, 16)
-                .inputItems(CustomTags.ZPM_CIRCUITS, 32)
-                .inputItems(pipeLargeFluid, Iridium, 16)
-                .inputItems(plate, NaquadahAlloy, 16)
-                .inputItems(plate, UraniumRhodiumDinaquadide, 16)
-                .inputItems(TSTBlocks.VACUUM_CASING.get().asItem(), 4)
-                .inputFluids(SolderingAlloy.getFluid(9_216))
-                .inputFluids(Iridium.getFluid(4_608))
-                .outputItems(TSTMachines.GIANT_VACUUM_DRYING_FURNACE)
-                .scannerResearch(b -> b
-                        .researchStack(ELECTRIC_FURNACE[ZPM].asStack())
-                        .duration(20 * 60)
-                        .EUt(VA[LuV]))
-                .duration(20 * 60)
-                .EUt(VA[ZPM])
-                .save(provider);
-    }
+        private static void addNetherInterfaceControllerRecipe(Consumer<FinishedRecipe> provider) {
+                ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/nether_interface"))
+                                .inputItems(frameGt, Obsidian, 16)
+                                .inputItems(FIELD_GENERATOR_LuV, 4)
+                                .inputItems(CustomTags.ZPM_CIRCUITS, 16)
+                                .inputItems(plateDense, Netherite, 16)
+                                .inputFluids(TSTMaterials.HELLISH_METAL.getFluid(9_216))
+                                .outputItems(TSTMachines.NETHER_INTERFACE)
+                                .duration(20 * 360)
+                                .EUt(VA[LuV])
+                                .save(provider);
+        }
 
-    private static void addNetherInterfaceControllerRecipe(Consumer<FinishedRecipe> provider) {
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/nether_interface"))
-                .inputItems(frameGt, Obsidian, 16)
-                .inputItems(FIELD_GENERATOR_LuV, 4)
-                .inputItems(CustomTags.ZPM_CIRCUITS, 16)
-                .inputItems(plateDense, Netherite, 16)
-                .inputFluids(TSTMaterials.HELLISH_METAL.getFluid(9_216))
-                .outputItems(TSTMachines.NETHER_INTERFACE)
-                .duration(20 * 360)
-                .EUt(VA[LuV])
-                .save(provider);
-    }
+        private static void addMechanicallyEnhancedObsidianRecipe(Consumer<FinishedRecipe> provider) {
+                ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/mechanically_enhanced_obsidian"))
+                                .inputItems(Blocks.OBSIDIAN.asItem(), 1)
+                                .inputItems(plate, Netherite, 1)
+                                .inputItems(frameGt, TungstenSteel, 1)
+                                .inputFluids(TSTMaterials.HELLISH_METAL.getFluid(144))
+                                .outputItems(TSTBlocks.MECHANICALLY_ENHANCED_OBSIDIAN)
+                                .duration(200)
+                                .EUt(VA[LuV])
+                                .save(provider);
+        }
 
-    private static void addMechanicallyEnhancedObsidianRecipe(Consumer<FinishedRecipe> provider) {
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/mechanically_enhanced_obsidian"))
-                .inputItems(Blocks.OBSIDIAN.asItem(), 1)
-                .inputItems(plate, Netherite, 1)
-                .inputItems(frameGt, TungstenSteel, 1)
-                .inputFluids(TSTMaterials.HELLISH_METAL.getFluid(144))
-                .outputItems(TSTBlocks.MECHANICALLY_ENHANCED_OBSIDIAN)
-                .duration(200)
-                .EUt(VA[LuV])
-                .save(provider);
-    }
+        private static void addCompressedCobblestoneRecipes(Consumer<FinishedRecipe> provider) {
+                compressor("compressed_cobblestone_1", Blocks.COBBLESTONE,
+                                TSTBlocks.COMPRESSED_COBBLESTONE_1, provider);
+                compressor("compressed_cobblestone_2", TSTBlocks.COMPRESSED_COBBLESTONE_1.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_2, provider);
+                compressor("compressed_cobblestone_3", TSTBlocks.COMPRESSED_COBBLESTONE_2.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_3, provider);
+                compressor("compressed_cobblestone_4", TSTBlocks.COMPRESSED_COBBLESTONE_3.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_4, provider);
+                compressor("compressed_cobblestone_5", TSTBlocks.COMPRESSED_COBBLESTONE_4.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_5, provider);
+                compressor("compressed_cobblestone_6", TSTBlocks.COMPRESSED_COBBLESTONE_5.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_6, provider);
+                compressor("compressed_cobblestone_7", TSTBlocks.COMPRESSED_COBBLESTONE_6.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_7, provider);
+                compressor("compressed_cobblestone_8", TSTBlocks.COMPRESSED_COBBLESTONE_7.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_8, provider);
 
-    private static void addCompressedCobblestoneRecipes(Consumer<FinishedRecipe> provider) {
-        compressor("compressed_cobblestone_1", Blocks.COBBLESTONE,
-                TSTBlocks.COMPRESSED_COBBLESTONE_1, provider);
-        compressor("compressed_cobblestone_2", TSTBlocks.COMPRESSED_COBBLESTONE_1.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_2, provider);
-        compressor("compressed_cobblestone_3", TSTBlocks.COMPRESSED_COBBLESTONE_2.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_3, provider);
-        compressor("compressed_cobblestone_4", TSTBlocks.COMPRESSED_COBBLESTONE_3.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_4, provider);
-        compressor("compressed_cobblestone_5", TSTBlocks.COMPRESSED_COBBLESTONE_4.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_5, provider);
-        compressor("compressed_cobblestone_6", TSTBlocks.COMPRESSED_COBBLESTONE_5.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_6, provider);
-        compressor("compressed_cobblestone_7", TSTBlocks.COMPRESSED_COBBLESTONE_6.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_7, provider);
-        compressor("compressed_cobblestone_8", TSTBlocks.COMPRESSED_COBBLESTONE_7.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_8, provider);
+                crafting("compressed_cobblestone_1", Blocks.COBBLESTONE,
+                                TSTBlocks.COMPRESSED_COBBLESTONE_1, provider);
+                crafting("compressed_cobblestone_2", TSTBlocks.COMPRESSED_COBBLESTONE_1.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_2, provider);
+                crafting("compressed_cobblestone_3", TSTBlocks.COMPRESSED_COBBLESTONE_2.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_3, provider);
+                crafting("compressed_cobblestone_4", TSTBlocks.COMPRESSED_COBBLESTONE_3.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_4, provider);
+                crafting("compressed_cobblestone_5", TSTBlocks.COMPRESSED_COBBLESTONE_4.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_5, provider);
+                crafting("compressed_cobblestone_6", TSTBlocks.COMPRESSED_COBBLESTONE_5.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_6, provider);
+                crafting("compressed_cobblestone_7", TSTBlocks.COMPRESSED_COBBLESTONE_6.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_7, provider);
+                crafting("compressed_cobblestone_8", TSTBlocks.COMPRESSED_COBBLESTONE_7.get(),
+                                TSTBlocks.COMPRESSED_COBBLESTONE_8, provider);
+        }
 
-        crafting("compressed_cobblestone_1", Blocks.COBBLESTONE,
-                TSTBlocks.COMPRESSED_COBBLESTONE_1, provider);
-        crafting("compressed_cobblestone_2", TSTBlocks.COMPRESSED_COBBLESTONE_1.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_2, provider);
-        crafting("compressed_cobblestone_3", TSTBlocks.COMPRESSED_COBBLESTONE_2.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_3, provider);
-        crafting("compressed_cobblestone_4", TSTBlocks.COMPRESSED_COBBLESTONE_3.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_4, provider);
-        crafting("compressed_cobblestone_5", TSTBlocks.COMPRESSED_COBBLESTONE_4.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_5, provider);
-        crafting("compressed_cobblestone_6", TSTBlocks.COMPRESSED_COBBLESTONE_5.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_6, provider);
-        crafting("compressed_cobblestone_7", TSTBlocks.COMPRESSED_COBBLESTONE_6.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_7, provider);
-        crafting("compressed_cobblestone_8", TSTBlocks.COMPRESSED_COBBLESTONE_7.get(),
-                TSTBlocks.COMPRESSED_COBBLESTONE_8, provider);
-    }
+        private static void compressor(String name, ItemLike input, Supplier<? extends ItemLike> output,
+                        Consumer<FinishedRecipe> provider) {
+                COMPRESSOR_RECIPES.recipeBuilder(TSTModern.id("compressor/" + name))
+                                .inputItems(input.asItem(), 9)
+                                .outputItems(output)
+                                .duration(300)
+                                .EUt(30)
+                                .save(provider);
+        }
 
-    private static void compressor(String name, ItemLike input, Supplier<? extends ItemLike> output,
-                                   Consumer<FinishedRecipe> provider) {
-        COMPRESSOR_RECIPES.recipeBuilder(TSTModern.id("compressor/" + name))
-                .inputItems(input.asItem(), 9)
-                .outputItems(output)
-                .duration(300)
-                .EUt(30)
-                .save(provider);
-    }
+        private static void crafting(String name, ItemLike input, Supplier<? extends ItemLike> output,
+                        Consumer<FinishedRecipe> provider) {
+                VanillaRecipeHelper.addShapedRecipe(provider, false,
+                                TSTModern.id("crafting/" + name), new ItemStack(output.get()),
+                                "CCC", "CCC", "CCC", 'C', input.asItem());
+        }
 
-    private static void crafting(String name, ItemLike input, Supplier<? extends ItemLike> output,
-                                 Consumer<FinishedRecipe> provider) {
-        VanillaRecipeHelper.addShapedRecipe(provider, false,
-                TSTModern.id("crafting/" + name), new ItemStack(output.get()),
-                "CCC", "CCC", "CCC", 'C', input.asItem());
-    }
+        private static void addControllerRecipe(Consumer<FinishedRecipe> provider) {
+                ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/mega_stone_breaker"))
+                                .inputItems(HULL[ZPM], 2)
+                                .inputItems(ROCK_CRUSHER[ZPM], 4)
+                                .inputItems(ROBOT_ARM_ZPM, 16)
+                                .inputItems(ELECTRIC_PUMP_ZPM, 8)
+                                // Ultimet has no generated fluid-pipe item in GTCEu 7.4.0. Large
+                                // Iridium Fluid Pipe is the nearest real, progression-safe input.
+                                .inputItems(pipeLargeFluid, Iridium, 16)
+                                .inputItems(plate, NaquadahAlloy, 16)
+                                .inputItems(plate, UraniumRhodiumDinaquadide, 16)
+                                .inputItems(TSTBlocks.COMPRESSED_COBBLESTONE_4.get().asItem(), 4)
+                                .inputFluids(SolderingAlloy.getFluid(9_216))
+                                .inputFluids(new FluidStack(Fluids.LAVA, 64_000))
+                                .inputFluids(new FluidStack(Fluids.WATER, 64_000))
+                                .outputItems(TSTMachines.MEGA_STONE_BREAKER)
+                                .scannerResearch(b -> b
+                                                .researchStack(ROCK_CRUSHER[ZPM].asStack())
+                                                .duration(20 * 60)
+                                                .EUt(VA[LuV]))
+                                .duration(20 * 60)
+                                .EUt(VA[ZPM])
+                                .save(provider);
+        }
 
-    private static void addControllerRecipe(Consumer<FinishedRecipe> provider) {
-        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/mega_stone_breaker"))
-                .inputItems(HULL[ZPM], 2)
-                .inputItems(ROCK_CRUSHER[ZPM], 4)
-                .inputItems(ROBOT_ARM_ZPM, 16)
-                .inputItems(ELECTRIC_PUMP_ZPM, 8)
-                // Ultimet has no generated fluid-pipe item in GTCEu 7.4.0. Large
-                // Iridium Fluid Pipe is the nearest real, progression-safe input.
-                .inputItems(pipeLargeFluid, Iridium, 16)
-                .inputItems(plate, NaquadahAlloy, 16)
-                .inputItems(plate, UraniumRhodiumDinaquadide, 16)
-                .inputItems(TSTBlocks.COMPRESSED_COBBLESTONE_4.get().asItem(), 4)
-                .inputFluids(SolderingAlloy.getFluid(9_216))
-                .inputFluids(new FluidStack(Fluids.LAVA, 64_000))
-                .inputFluids(new FluidStack(Fluids.WATER, 64_000))
-                .outputItems(TSTMachines.MEGA_STONE_BREAKER)
-                .scannerResearch(b -> b
-                        .researchStack(ROCK_CRUSHER[ZPM].asStack())
-                        .duration(20 * 60)
-                        .EUt(VA[LuV]))
-                .duration(20 * 60)
-                .EUt(VA[ZPM])
-                .save(provider);
-    }
+        private static void basic(Consumer<FinishedRecipe> provider, String name, int circuit,
+                        ItemLike output, long eut, int duration) {
+                recipe(name).circuitMeta(circuit).outputItems(output.asItem()).EUt(eut).duration(duration)
+                                .save(provider);
+        }
 
-    private static void basic(Consumer<FinishedRecipe> provider, String name, int circuit,
-                              ItemLike output, long eut, int duration) {
-        recipe(name).circuitMeta(circuit).outputItems(output.asItem()).EUt(eut).duration(duration).save(provider);
-    }
+        private static void basic(Consumer<FinishedRecipe> provider, String name, int circuit,
+                        Supplier<? extends ItemLike> output, long eut, int duration) {
+                recipe(name).circuitMeta(circuit).outputItems(output).EUt(eut).duration(duration).save(provider);
+        }
 
-    private static void basic(Consumer<FinishedRecipe> provider, String name, int circuit,
-                              Supplier<? extends ItemLike> output, long eut, int duration) {
-        recipe(name).circuitMeta(circuit).outputItems(output).EUt(eut).duration(duration).save(provider);
-    }
+        private static GTRecipeBuilder recipe(String name) {
+                return TSTRecipeTypes.MEGA_STONE_BREAKER.recipeBuilder(TSTModern.id("mega_stone_breaker/" + name));
+        }
 
-    private static GTRecipeBuilder recipe(String name) {
-        return TSTRecipeTypes.MEGA_STONE_BREAKER.recipeBuilder(TSTModern.id("mega_stone_breaker/" + name));
-    }
+        private static void addHyperThermalConvectorControllerRecipe(Consumer<FinishedRecipe> provider) {
+                ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/hyper_thermal_convector"))
+                                .inputItems(HULL[UV], 2)
+                                .inputItems(ELECTRIC_PUMP_ZPM, 16)
+                                .inputItems(FIELD_GENERATOR_ZPM, 8)
+                                .inputItems(CustomTags.UV_CIRCUITS, 16)
+                                .inputItems(pipeLargeFluid, Iridium, 16)
+                                .inputItems(plate, Neutronium, 16)
+                                .inputItems(plate, NaquadahAlloy, 16)
+                                .inputItems(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get().asItem(), 4)
+                                .inputFluids(SolderingAlloy.getFluid(9_216))
+                                .inputFluids(Iridium.getFluid(4_608))
+                                .inputFluids(new FluidStack(Fluids.WATER, 64_000))
+                                .outputItems(TSTMachines.HYPER_THERMAL_CONVECTOR)
+                                .stationResearch(b -> b
+                                                .researchStack(HULL[UV].asStack())
+                                                .CWUt(64, 128_000)
+                                                .EUt(VA[UV]))
+                                .duration(20 * 60)
+                                .EUt(VA[UV])
+                                .save(provider);
+        }
 
-    private static void addHyperThermalConvectorControllerRecipe(Consumer<FinishedRecipe> provider) {
-        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/hyper_thermal_convector"))
-                .inputItems(HULL[UV], 2)
-                .inputItems(ELECTRIC_PUMP_ZPM, 16)
-                .inputItems(FIELD_GENERATOR_ZPM, 8)
-                .inputItems(CustomTags.UV_CIRCUITS, 16)
-                .inputItems(pipeLargeFluid, Iridium, 16)
-                .inputItems(plate, Neutronium, 16)
-                .inputItems(plate, NaquadahAlloy, 16)
-                .inputItems(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get().asItem(), 4)
-                .inputFluids(SolderingAlloy.getFluid(9_216))
-                .inputFluids(Iridium.getFluid(4_608))
-                .inputFluids(new FluidStack(Fluids.WATER, 64_000))
-                .outputItems(TSTMachines.HYPER_THERMAL_CONVECTOR)
-                .stationResearch(b -> b
-                        .researchStack(HULL[UV].asStack())
-                        .CWUt(64, 128_000)
-                        .EUt(VA[UV]))
-                .duration(20 * 60)
-                .EUt(VA[UV])
-                .save(provider);
-    }
+        private static void addHyperThermalConvectorCasingRecipes(Consumer<FinishedRecipe> provider) {
+                ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/iridium_reinforced_neutronium_casing"))
+                                .inputItems(CASING_TITANIUM_STABLE.asStack())
+                                .inputItems(plate, Iridium, 6)
+                                .inputItems(plate, Neutronium, 2)
+                                .inputFluids(SolderingAlloy.getFluid(288))
+                                .outputItems(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING, 2)
+                                .duration(200)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-    private static void addHyperThermalConvectorCasingRecipes(Consumer<FinishedRecipe> provider) {
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/iridium_reinforced_neutronium_casing"))
-                .inputItems(CASING_TITANIUM_STABLE.asStack())
-                .inputItems(plate, Iridium, 6)
-                .inputItems(plate, Neutronium, 2)
-                .inputFluids(SolderingAlloy.getFluid(288))
-                .outputItems(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING, 2)
-                .duration(200)
-                .EUt(VA[UV])
-                .save(provider);
+                ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/borophene_nanowire_casing"))
+                                .inputItems(CASING_INVAR_HEATPROOF.asStack())
+                                .inputItems(plate, TungstenSteel, 4)
+                                .inputItems(dust, Carbon, 4)
+                                .inputFluids(SolderingAlloy.getFluid(288))
+                                .outputItems(TSTBlocks.BOROPHENE_NANOWIRE_CASING, 2)
+                                .duration(200)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/borophene_nanowire_casing"))
-                .inputItems(CASING_INVAR_HEATPROOF.asStack())
-                .inputItems(plate, TungstenSteel, 4)
-                .inputItems(dust, Carbon, 4)
-                .inputFluids(SolderingAlloy.getFluid(288))
-                .outputItems(TSTBlocks.BOROPHENE_NANOWIRE_CASING, 2)
-                .duration(200)
-                .EUt(VA[UV])
-                .save(provider);
+                ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/neutronium_pipe_casing"))
+                                .inputItems(CASING_POLYTETRAFLUOROETHYLENE_PIPE.asStack())
+                                .inputItems(plate, Neutronium, 4)
+                                .inputFluids(SolderingAlloy.getFluid(288))
+                                .outputItems(TSTBlocks.NEUTRONIUM_PIPE_CASING, 2)
+                                .duration(200)
+                                .EUt(VA[UV])
+                                .save(provider);
+        }
 
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/neutronium_pipe_casing"))
-                .inputItems(CASING_POLYTETRAFLUOROETHYLENE_PIPE.asStack())
-                .inputItems(plate, Neutronium, 4)
-                .inputFluids(SolderingAlloy.getFluid(288))
-                .outputItems(TSTBlocks.NEUTRONIUM_PIPE_CASING, 2)
-                .duration(200)
-                .EUt(VA[UV])
-                .save(provider);
-    }
+        public static void addHyperThermalConvectorRecipes(Consumer<FinishedRecipe> provider) {
+                // === Rapid Heat Exchange Recipes (UV Tier) ===
+                // 1. Plasma Thermal Exchanges (Plasma + Water -> Cooled Gas/Molten Metal +
+                // Dense Supercritical Steam)
+                TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/helium_plasma"))
+                                .inputFluids(Helium.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                                .outputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
+                                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-    public static void addHyperThermalConvectorRecipes(Consumer<FinishedRecipe> provider) {
-        // === Rapid Heat Exchange Recipes (UV Tier) ===
-        // 1. Plasma Thermal Exchanges (Plasma + Water -> Cooled Gas/Molten Metal + High Steam)
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/helium_plasma"))
-                .inputFluids(Helium.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
-                .outputFluids(Steam.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/nitrogen_plasma"))
+                                .inputFluids(Nitrogen.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                                .outputFluids(Nitrogen.getFluid(1000))
+                                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/nitrogen_plasma"))
-                .inputFluids(Nitrogen.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Nitrogen.getFluid(1000))
-                .outputFluids(Steam.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/oxygen_plasma"))
+                                .inputFluids(Oxygen.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                                .outputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
+                                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/oxygen_plasma"))
-                .inputFluids(Oxygen.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
-                .outputFluids(Steam.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/argon_plasma"))
+                                .inputFluids(Argon.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                                .outputFluids(Argon.getFluid(1000))
+                                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/argon_plasma"))
-                .inputFluids(Argon.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Argon.getFluid(1000))
-                .outputFluids(Steam.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/iron_plasma"))
+                                .inputFluids(Iron.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                                .outputFluids(Iron.getFluid(1000))
+                                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/iron_plasma"))
-                .inputFluids(Iron.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Iron.getFluid(1000))
-                .outputFluids(Steam.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/nickel_plasma"))
+                                .inputFluids(Nickel.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .inputFluids(new FluidStack(Fluids.WATER, 2000))
+                                .outputFluids(Nickel.getFluid(1000))
+                                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/nickel_plasma"))
-                .inputFluids(Nickel.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Nickel.getFluid(1000))
-                .outputFluids(Steam.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                // 2. High-throughput Lava Thermal Exchange -> Dense Superheated Steam
+                TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/lava_cooling"))
+                                .inputFluids(new FluidStack(Fluids.LAVA, 10_000))
+                                .inputFluids(new FluidStack(Fluids.WATER, 10_000))
+                                .outputFluids(TSTMaterials.DENSE_SUPERHEATED_STEAM.getFluid(1_600_000))
+                                .outputFluids(DistilledWater.getFluid(2000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        // 2. High-throughput Lava Thermal Exchange
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/lava_cooling"))
-                .inputFluids(new FluidStack(Fluids.LAVA, 10_000))
-                .inputFluids(new FluidStack(Fluids.WATER, 10_000))
-                .outputFluids(Steam.getFluid(1_600_000))
-                .outputFluids(DistilledWater.getFluid(2000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                // === Rapid Cooling Recipes (UV Tier) ===
+                // 1. Gas Liquefaction (Gas -> Liquid)
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/helium_liquefaction"))
+                                .inputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
+                                .outputFluids(Helium.getFluid(FluidStorageKeys.LIQUID, 1000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        // === Rapid Cooling Recipes (UV Tier) ===
-        // 1. Gas Liquefaction (Gas -> Liquid)
-        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/helium_liquefaction"))
-                .inputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
-                .outputFluids(Helium.getFluid(FluidStorageKeys.LIQUID, 1000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/oxygen_liquefaction"))
+                                .inputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
+                                .outputFluids(Oxygen.getFluid(FluidStorageKeys.LIQUID, 1000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/oxygen_liquefaction"))
-                .inputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
-                .outputFluids(Oxygen.getFluid(FluidStorageKeys.LIQUID, 1000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                // 2. Plasma Cooling (Plasma -> Gas/Molten)
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/helium_plasma"))
+                                .inputFluids(Helium.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .outputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        // 2. Plasma Cooling (Plasma -> Gas/Molten)
-        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/helium_plasma"))
-                .inputFluids(Helium.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .outputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/nitrogen_plasma"))
+                                .inputFluids(Nitrogen.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .outputFluids(Nitrogen.getFluid(1000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/nitrogen_plasma"))
-                .inputFluids(Nitrogen.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .outputFluids(Nitrogen.getFluid(1000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/oxygen_plasma"))
+                                .inputFluids(Oxygen.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .outputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/oxygen_plasma"))
-                .inputFluids(Oxygen.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .outputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/argon_plasma"))
+                                .inputFluids(Argon.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .outputFluids(Argon.getFluid(1000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/argon_plasma"))
-                .inputFluids(Argon.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .outputFluids(Argon.getFluid(1000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/iron_plasma"))
+                                .inputFluids(Iron.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .outputFluids(Iron.getFluid(1000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/iron_plasma"))
-                .inputFluids(Iron.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .outputFluids(Iron.getFluid(1000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/nickel_plasma"))
+                                .inputFluids(Nickel.getFluid(FluidStorageKeys.PLASMA, 1000))
+                                .outputFluids(Nickel.getFluid(1000))
+                                .duration(20)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/nickel_plasma"))
-                .inputFluids(Nickel.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .outputFluids(Nickel.getFluid(1000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+                // 3. Steam Cascading Condensation (Supercritical -> Superheated -> Regular
+                // Steam -> Distilled Water)
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/supercritical_to_superheated"))
+                                .inputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(1000))
+                                .outputFluids(TSTMaterials.DENSE_SUPERHEATED_STEAM.getFluid(1000))
+                                .duration(10)
+                                .EUt(VA[UV])
+                                .save(provider);
 
-        // 3. Steam Condensation
-        TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/steam_condensation"))
-                .inputFluids(Steam.getFluid(160_000))
-                .outputFluids(DistilledWater.getFluid(1000))
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/superheated_to_steam"))
+                                .inputFluids(TSTMaterials.DENSE_SUPERHEATED_STEAM.getFluid(1000))
+                                .outputFluids(Steam.getFluid(1000))
+                                .duration(10)
+                                .EUt(VA[UV])
+                                .save(provider);
+
+                TSTRecipeTypes.RAPID_COOLING.recipeBuilder(TSTModern.id("rapid_cooling/steam_condensation"))
+                                .inputFluids(Steam.getFluid(160_000))
+                                .outputFluids(DistilledWater.getFluid(1000))
+                                .duration(10)
+                                .EUt(VA[UV])
+                                .save(provider);
+        }
+
+    public static void addDenseSteamUsageRecipes(Consumer<FinishedRecipe> provider) {
+        // === 1. Steam Turbine Fuels (Power Generation) ===
+        // Regular Steam gives 0.5 EU/mB (640 mB -> 320 EU).
+        // Dense Superheated Steam (573 K) gives 150 EU/mB (300x multiplier).
+        STEAM_TURBINE_FUELS.recipeBuilder(TSTModern.id("fuel/dense_superheated_steam"))
+                .inputFluids(TSTMaterials.DENSE_SUPERHEATED_STEAM.getFluid(2))
+                .outputFluids(DistilledWater.getFluid(1))
                 .duration(10)
-                .EUt(VA[UV])
+                .EUt(-300)
+                .save(provider);
+
+        // Dense Supercritical Steam (1073 K) gives 600 EU/mB (1200x multiplier).
+        STEAM_TURBINE_FUELS.recipeBuilder(TSTModern.id("fuel/dense_supercritical_steam"))
+                .inputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(1))
+                .outputFluids(DistilledWater.getFluid(1))
+                .duration(10)
+                .EUt(-600)
+                .save(provider);
+
+        // === 2. Centrifuge / Decompressor (De-densification into Regular Steam) ===
+        CENTRIFUGE_RECIPES.recipeBuilder(TSTModern.id("centrifuge/decompress_superheated_steam"))
+                .inputFluids(TSTMaterials.DENSE_SUPERHEATED_STEAM.getFluid(100))
+                .outputFluids(Steam.getFluid(30_000))
+                .duration(20)
+                .EUt(VA[MV])
+                .save(provider);
+
+        CENTRIFUGE_RECIPES.recipeBuilder(TSTModern.id("centrifuge/decompress_supercritical_steam"))
+                .inputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(100))
+                .outputFluids(Steam.getFluid(120_000))
+                .duration(20)
+                .EUt(VA[HV])
+                .save(provider);
+
+        CENTRIFUGE_RECIPES.recipeBuilder(TSTModern.id("centrifuge/supercritical_to_superheated"))
+                .inputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(100))
+                .outputFluids(TSTMaterials.DENSE_SUPERHEATED_STEAM.getFluid(400))
+                .duration(20)
+                .EUt(VA[HV])
+                .save(provider);
+
+        // === 3. High-Efficiency Supercritical Steam Cracking ===
+        CRACKING_RECIPES.recipeBuilder(TSTModern.id("cracking/supercritical_heavy_fuel"))
+                .inputFluids(HeavyFuel.getFluid(1000))
+                .inputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(100))
+                .outputFluids(SeverelySteamCrackedHeavyFuel.getFluid(1500))
+                .duration(80)
+                .EUt(VA[EV])
+                .save(provider);
+
+        CRACKING_RECIPES.recipeBuilder(TSTModern.id("cracking/supercritical_naphtha"))
+                .inputFluids(Naphtha.getFluid(1000))
+                .inputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(100))
+                .outputFluids(SeverelySteamCrackedNaphtha.getFluid(1500))
+                .duration(80)
+                .EUt(VA[EV])
+                .save(provider);
+
+        CRACKING_RECIPES.recipeBuilder(TSTModern.id("cracking/supercritical_light_fuel"))
+                .inputFluids(LightFuel.getFluid(1000))
+                .inputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(100))
+                .outputFluids(SeverelySteamCrackedLightFuel.getFluid(1500))
+                .duration(80)
+                .EUt(VA[EV])
                 .save(provider);
     }
 

@@ -11,6 +11,8 @@ import com.tstmodern.TSTModern;
 /** Custom materials and material flag extensions for Twist Space Technology Modern. */
 public final class TSTMaterials {
     public static Material HELLISH_METAL;
+    public static Material DENSE_SUPERHEATED_STEAM;
+    public static Material DENSE_SUPERCRITICAL_STEAM;
 
     private TSTMaterials() {}
 
@@ -36,6 +38,20 @@ public final class TSTMaterials {
                 .iconSet(MaterialIconSet.METALLIC)
                 .flags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_DENSE)
                 .blastTemp(2800)
+                .buildAndRegister();
+
+        // Dense Superheated Steam (573 K)
+        DENSE_SUPERHEATED_STEAM = new Material.Builder(TSTModern.id("dense_superheated_steam"))
+                .gas(new FluidBuilder().temperature(573))
+                .color(0xC4D6E8)
+                .iconSet(MaterialIconSet.DULL)
+                .buildAndRegister();
+
+        // Dense Supercritical Steam (1073 K)
+        DENSE_SUPERCRITICAL_STEAM = new Material.Builder(TSTModern.id("dense_supercritical_steam"))
+                .gas(new FluidBuilder().temperature(1073))
+                .color(0xE6F2FF)
+                .iconSet(MaterialIconSet.DULL)
                 .buildAndRegister();
     }
 }
