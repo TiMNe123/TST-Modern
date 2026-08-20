@@ -3,7 +3,7 @@
   "loader": "gtceu:machine",
   "machine": "tstmodern:hyper_thermal_convector",
   "texture_overrides": {
-    "all": "gtceu:block/casings/solid/machine_casing_stable_titanium"
+    "all": "tstmodern:block/casings/advanced_iridium_casing"
   },
   "variants": {
     "is_formed=false,recipe_logic_status=idle": {
@@ -46,7 +46,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtceu:block/casings/solid/machine_casing_stable_titanium",
+          "all": "tstmodern:block/casings/advanced_iridium_casing",
           "overlay_front": "tstmodern:block/multiblock/hyper_thermal_convector/overlay_front"
         }
       }
@@ -55,7 +55,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtceu:block/casings/solid/machine_casing_stable_titanium",
+          "all": "tstmodern:block/casings/advanced_iridium_casing",
           "overlay_front": "tstmodern:block/multiblock/hyper_thermal_convector/overlay_front"
         }
       }
@@ -64,7 +64,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtceu:block/casings/solid/machine_casing_stable_titanium",
+          "all": "tstmodern:block/casings/advanced_iridium_casing",
           "overlay_front": "tstmodern:block/multiblock/hyper_thermal_convector/overlay_front_active"
         }
       }
@@ -73,7 +73,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtceu:block/casings/solid/machine_casing_stable_titanium",
+          "all": "tstmodern:block/casings/advanced_iridium_casing",
           "overlay_front": "tstmodern:block/multiblock/hyper_thermal_convector/overlay_front_active"
         }
       }

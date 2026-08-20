@@ -3,7 +3,7 @@
   "loader": "gtceu:machine",
   "machine": "tstmodern:giant_vacuum_drying_furnace",
   "texture_overrides": {
-    "all": "gtceu:block/casings/gcym/large_scale_assembling_casing"
+    "all": "tstmodern:block/casings/neutronium_mining_casing"
   },
   "variants": {
     "is_formed=false,recipe_logic_status=idle": {
@@ -46,7 +46,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
+          "all": "tstmodern:block/casings/neutronium_mining_casing",
           "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front"
         }
       }
@@ -55,7 +55,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
+          "all": "tstmodern:block/casings/neutronium_mining_casing",
           "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front"
         }
       }
@@ -64,7 +64,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
+          "all": "tstmodern:block/casings/neutronium_mining_casing",
           "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front_active"
         }
       }
@@ -73,7 +73,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtceu:block/casings/gcym/large_scale_assembling_casing",
+          "all": "tstmodern:block/casings/neutronium_mining_casing",
           "overlay_front": "tstmodern:block/multiblock/giant_vacuum_drying_furnace/overlay_front_active"
         }
       }

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "tstmodern:block/casings/dyson_swarm_floor_top",
+    "side": "tstmodern:block/casings/dyson_swarm_floor_side",
+    "top": "tstmodern:block/casings/dyson_swarm_floor_top"
+  }
+}
+

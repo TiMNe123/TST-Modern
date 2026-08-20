@@ -22,6 +22,10 @@ Thumbs.db
 desktop.ini
 *.xlsx
 run-data/
-.agents/
+/.agents/
 /textures/
 PORTING_NOTES.md
+/texture_block_casing/
+/.codex*/
+/outputs/
+/src/test/

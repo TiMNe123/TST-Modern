@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tstmodern:block/casings/containment_field_casing"
+  }
+}
+

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "gtceu:block/casings/gcym/vibration_safe_casing"
+    "all": "tstmodern:block/casings/borophene_nanowire_casing"
   }
 }

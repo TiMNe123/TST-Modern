@@ -173,7 +173,7 @@ public final class TSTRecipes {
                                 .inputItems(CASING_TUNGSTENSTEEL_ROBUST.asStack())
                                 .inputItems(plate, Iridium, 6)
                                 .inputFluids(SolderingAlloy.getFluid(144))
-                                .outputItems(TSTBlocks.CASING_C)
+                                .outputItems(TSTBlocks.ADVANCED_IRIDIUM_CASING)
                                 .duration(400)
                                 .EUt(VA[IV])
                                 .save(provider);

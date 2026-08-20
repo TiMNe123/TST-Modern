@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "gtceu:block/casings/gcym/atomic_casing"
+    "all": "tstmodern:block/casings/iridium_reinforced_neutronium_casing"
   }
 }

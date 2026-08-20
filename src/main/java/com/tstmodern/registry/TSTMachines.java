@@ -12,7 +12,6 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
-import com.gregtechceu.gtceu.common.data.GCYMBlocks;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
@@ -37,7 +36,7 @@ public final class TSTMachines {
                         .recipeType(TSTRecipeTypes.MEGA_STONE_BREAKER)
                         .recipeModifiers(MegaStoneBreakerMachine::parallelAndOutputMultiplier,
                                         GTRecipeModifiers.OC_NON_PERFECT)
-                        .appearanceBlock(GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING)
+                        .appearanceBlock(TSTBlocks.STABLE_RED_STEEL_CASING)
                         // StructureLib/TST axes increase L->R, U->D and F->B. GTCEu's default
                         // pattern directions are the opposite, so declare all three explicitly.
                         .pattern(definition -> FactoryBlockPattern.start(
@@ -126,19 +125,19 @@ public final class TSTMachines {
                                                         "  GGGGG       GGGGG  ",
                                                         "  FFFFF       FFFFF  ")
                                         .where('~', Predicates.controller(blocks(definition.get())))
-                                        .where('A', blocks(GTBlocks.CASING_TITANIUM_STABLE.get()))
+                                        .where('A', blocks(TSTBlocks.BLACK_PLUTONIUM_ITEM_PIPE_CASING.get()))
                                         .where('B', blocks(GTBlocks.CASING_TUNGSTENSTEEL_PIPE.get()))
-                                        .where('C', blocks(TSTBlocks.CASING_C.get()))
-                                        .where('D', blocks(GTBlocks.MACHINE_CASING_ZPM.get()))
+                                        .where('C', blocks(TSTBlocks.ADVANCED_IRIDIUM_CASING.get()))
+                                        .where('D', blocks(TSTBlocks.VENT_T2_CASING.get()))
                                         .where('E', blocks(TSTBlocks.COSMIC_NEUTRONIUM_FRAME.get()))
                                         // Ability-part bases render with the machine's appearance casing while formed.
-                                        // Keep maintenance on F so its texture matches Large Scale Assembling Casing.
-                                        .where('F', blocks(GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING.get())
+                                        // Keep maintenance on the source Stable Red Steel casing.
+                                        .where('F', blocks(TSTBlocks.STABLE_RED_STEEL_CASING.get())
                                                         .or(Predicates.autoAbilities(true, false, false)))
-                                        .where('G', blocks(GCYMBlocks.CASING_STRESS_PROOF.get()))
-                                        .where('H', blocks(GTBlocks.FUSION_CASING.get()))
-                                        .where('I', blocks(GCYMBlocks.CASING_CORROSION_PROOF.get()))
-                                        .where('J', blocks(GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING.get())
+                                        .where('G', blocks(TSTBlocks.STABLE_TANTALLOY_61_CASING.get()))
+                                        .where('H', blocks(TSTBlocks.STABALOY_FIREBOX_CASING.get()))
+                                        .where('I', blocks(TSTBlocks.PRESSURE_RESISTANT_WALL.get()))
+                                        .where('J', blocks(TSTBlocks.STABLE_RED_STEEL_CASING.get())
                                                         // Derive item I/O and energy abilities from this machine's
                                                         // recipe type.
                                                         .or(Predicates.autoAbilities(definition.getRecipeTypes()))
@@ -149,7 +148,7 @@ public final class TSTMachines {
                                         .where(' ', Predicates.any())
                                         .build())
                         .workableCasingModel(
-                                        GTCEu.id("block/casings/gcym/large_scale_assembling_casing"),
+                                        TSTModern.id("block/casings/stable_red_steel_casing"),
                                         TSTModern.id("block/multiblock/mega_stone_breaker"))
                         .tooltips(
                                         Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.0"),
@@ -166,7 +165,7 @@ public final class TSTMachines {
                         .recipeTypes(TSTRecipeTypes.VACUUM_FURNACE, TSTRecipeTypes.CHEMICAL_DEHYDRATOR)
                         .recipeModifiers(GiantVacuumDryingFurnaceMachine::recipeModifier,
                                         GTRecipeModifiers.OC_NON_PERFECT)
-                        .appearanceBlock(GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING)
+                        .appearanceBlock(TSTBlocks.NEUTRONIUM_MINING_CASING)
                         .pattern(definition -> FactoryBlockPattern.start(
                                         RelativeDirection.RIGHT,
                                         RelativeDirection.DOWN,
@@ -359,16 +358,16 @@ public final class TSTMachines {
                                                         "              HHHHHHH  ",
                                                         "             VVVVVVVVV ")
                                         .where('~', Predicates.controller(blocks(definition.get())))
-                                        .where('E', blocks(GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING.get())
+                                        .where('E', blocks(TSTBlocks.NEUTRONIUM_MINING_CASING.get())
                                                         .or(Predicates.autoAbilities(definition.getRecipeTypes()))
                                                         .or(Predicates.autoAbilities(true, false, false))
                                                         .or(Predicates.autoAbilities(false, false, true)))
                                         .where('S', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
                                         .where('A', blocks(GTBlocks.CASING_TEMPERED_GLASS.get())
-                                                        .or(blocks(GTBlocks.CASING_LAMINATED_GLASS.get())))
+                                                        .or(blocks(GTBlocks.FUSION_GLASS.get())))
                                         .where('G', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
                                         .where('V', blocks(GTBlocks.CASING_PTFE_INERT.get()))
-                                        .where('I', blocks(TSTBlocks.CASING_C.get()))
+                                        .where('I', blocks(TSTBlocks.ADVANCED_IRIDIUM_CASING.get()))
                                         .where('F', blocks(GTBlocks.CASING_ALUMINIUM_FROSTPROOF.get()))
                                         .where('H', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
                                         .where('J', blocks(TSTBlocks.VACUUM_CASING.get()))
@@ -376,7 +375,7 @@ public final class TSTMachines {
                                         .where(' ', Predicates.any())
                                         .build())
                         .workableCasingModel(
-                                        GTCEu.id("block/casings/gcym/large_scale_assembling_casing"),
+                                        TSTModern.id("block/casings/neutronium_mining_casing"),
                                         TSTModern.id("block/multiblock/giant_vacuum_drying_furnace"))
                         .tooltips(
                                         Component.translatable(
@@ -501,7 +500,7 @@ public final class TSTMachines {
                         .recipeTypes(TSTRecipeTypes.RAPID_HEAT_EXCHANGE, TSTRecipeTypes.RAPID_COOLING)
                         .recipeModifiers(HyperThermalConvectorMachine::recipeModifier,
                                         GTRecipeModifiers.OC_NON_PERFECT)
-                        .appearanceBlock(GTBlocks.CASING_TITANIUM_STABLE)
+                        .appearanceBlock(TSTBlocks.ADVANCED_IRIDIUM_CASING)
                         .pattern(definition -> FactoryBlockPattern.start(
                                         RelativeDirection.RIGHT,
                                         RelativeDirection.DOWN,
@@ -747,28 +746,27 @@ public final class TSTMachines {
         "       MMMMMMM       ",
         "       MMMMMMM       ")
                                         .where('~', Predicates.controller(blocks(definition.get())))
-                                        .where('A', blocks(GTBlocks.CASING_INVAR_HEATPROOF.get()))
-                                        .where('B', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
-                                        .where('C', blocks(GTBlocks.CASING_INVAR_HEATPROOF.get()))
-                                        .where('D', blocks(GTBlocks.CASING_STEEL_SOLID.get()))
-                                        .where('E', blocks(GCYMBlocks.CASING_HIGH_TEMPERATURE_SMELTING.get()))
-                                        .where('F', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
-                                        .where('G', blocks(GTBlocks.CASING_TITANIUM_STABLE.get())
+                                        .where('A', blocks(TSTBlocks.HS188A_BLOCK.get()))
+                                        .where('B', blocks(TSTBlocks.QUANTUM_ALLOY_BLOCK.get()))
+                                        .where('C', blocks(TSTBlocks.EXTREME_DENSITY_CASING.get()))
+                                        .where('D', blocks(GTBlocks.CASING_ALUMINIUM_FROSTPROOF.get()))
+                                        .where('E', blocks(TSTBlocks.OSMIRIDIUM_MINING_CASING.get()))
+                                        .where('F', blocks(TSTBlocks.TANK_CASING_TIER_10.get()))
+                                        .where('G', blocks(TSTBlocks.ADVANCED_IRIDIUM_CASING.get())
                                                         .or(Predicates.autoAbilities(definition.getRecipeTypes()))
                                                         .or(Predicates.autoAbilities(true, false, false))
                                                         .or(Predicates.autoAbilities(false, false, true)))
-                                        .where('H', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
-                                        .where('I', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                                        .where('H', blocks(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get()))
+                                        .where('I', blocks(TSTBlocks.VENT_T2_CASING.get()))
                                         .where('J', Predicates.frames(GTMaterials.Iridium))
-                                        .where('K', blocks(TSTBlocks.COSMIC_NEUTRONIUM_FRAME.get())
-                                                        .or(Predicates.frames(GTMaterials.Neutronium)))
-                                        .where('L', blocks(GTBlocks.CASING_TITANIUM_STABLE.get()))
-                                        .where('M', blocks(GTBlocks.FIREBOX_TITANIUM.get()))
+                                        .where('K', blocks(TSTBlocks.COSMIC_NEUTRONIUM_FRAME.get()))
+                                        .where('L', blocks(TSTBlocks.PRESSURE_RESISTANT_WALL.get()))
+                                        .where('M', blocks(TSTBlocks.DYSON_SWARM_FLOOR.get()))
                                         .where('N', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get())
                                                         .or(Predicates.autoAbilities(definition.getRecipeTypes())))
                                         .where('O', blocks(TSTBlocks.BOROPHENE_NANOWIRE_CASING.get()))
                                         .where('P', blocks(TSTBlocks.NEUTRONIUM_PIPE_CASING.get()))
-                                        .where('Q', blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
+                                        .where('Q', blocks(TSTBlocks.CONTAINMENT_FIELD_CASING.get()))
                                         .where('R', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get())
                                                         .or(Predicates.autoAbilities(definition.getRecipeTypes())))
                                         .where('S', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get())
@@ -780,7 +778,7 @@ public final class TSTMachines {
                                         .where(' ', Predicates.air())
                                         .build())
                         .workableCasingModel(
-                                        GTCEu.id("block/casings/solid/machine_casing_stable_titanium"),
+                                        TSTModern.id("block/casings/advanced_iridium_casing"),
                                         TSTModern.id("block/multiblock/hyper_thermal_convector"))
                         .tooltips(
                                         Component.translatable("tstmodern.machine.hyper_thermal_convector.tooltip.0"),

@@ -1,1 +1,6 @@
-{"parent":"minecraft:block/cube_all","textures":{"all":"tstmodern:block/mechanically_enhanced_obsidian"}}
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tstmodern:block/casings/mechanically_enhanced_obsidian"
+  }
+}
