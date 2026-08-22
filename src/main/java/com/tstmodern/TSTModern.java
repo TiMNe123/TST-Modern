@@ -1,8 +1,10 @@
 package com.tstmodern;
 
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
+import com.gregtechceu.gtceu.api.recipe.chance.logic.ChanceLogic;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+import com.tstmodern.recipe.chance.TSTChanceLogics;
 import com.tstmodern.registry.TSTBlocks;
 import com.tstmodern.registry.TSTMaterials;
 import com.tstmodern.registry.machine.TSTMachineRegistry;
@@ -26,6 +28,7 @@ public final class TSTModern {
 
         // GTCEu opens its recipe-type registry and posts this generic event before freezing it.
         modBus.addGenericListener(GTRecipeType.class, TSTRecipeTypes::registerRecipeTypes);
+        modBus.addGenericListener(ChanceLogic.class, TSTChanceLogics::registerChanceLogics);
         modBus.addGenericListener(MachineDefinition.class, TSTMachineRegistry::registerMachines);
 
         REGISTRATE.registerRegistrate();
