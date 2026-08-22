@@ -13,6 +13,12 @@ class GiantVacuumDryingFurnaceLogicTest {
     }
 
     @Test
+    void saturatesSourceCoilTierAtIntegerMaximum() {
+        assertEquals(Integer.MAX_VALUE,
+                GiantVacuumDryingFurnaceLogic.sourceCoilTier(Integer.MAX_VALUE));
+    }
+
+    @Test
     void computesParallelAndDurationFromMachineTierOnly() {
         assertEquals(32, GiantVacuumDryingFurnaceLogic.parallelLimit(1, 0));
         assertEquals(144, GiantVacuumDryingFurnaceLogic.parallelLimit(4, 16));

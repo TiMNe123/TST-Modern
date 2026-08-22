@@ -6,7 +6,8 @@ public final class GiantVacuumDryingFurnaceLogic {
     private GiantVacuumDryingFurnaceLogic() {}
 
     public static int sourceCoilTier(int gtceuTier) {
-        return Math.max(1, gtceuTier + 1);
+        long sourceTier = Math.max(1L, (long) gtceuTier + 1L);
+        return (int) Math.min(Integer.MAX_VALUE, sourceTier);
     }
 
     public static int parallelLimit(int sourceCoilTier, int hatchParallel) {
