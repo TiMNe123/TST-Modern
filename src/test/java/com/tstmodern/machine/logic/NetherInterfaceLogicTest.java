@@ -6,13 +6,37 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.SimpleJavaFileObject;
+import javax.tools.ToolProvider;
+
 import org.junit.jupiter.api.Test;
+
+import com.sun.source.tree.BlockTree;
+import com.sun.source.tree.ClassTree;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.ExpressionStatementTree;
+import com.sun.source.tree.ExpressionTree;
+import com.sun.source.tree.IdentifierTree;
+import com.sun.source.tree.LiteralTree;
+import com.sun.source.tree.MemberSelectTree;
+import com.sun.source.tree.MethodInvocationTree;
+import com.sun.source.tree.MethodTree;
+import com.sun.source.tree.Tree;
+import com.sun.source.tree.VariableTree;
+import com.sun.source.util.JavacTask;
+import com.sun.source.util.SourcePositions;
+import com.sun.source.util.TreeScanner;
+import com.sun.source.util.Trees;
 
 class NetherInterfaceLogicTest {
 
@@ -92,10 +116,10 @@ class NetherInterfaceLogicTest {
 
     @Test
     void activeModifierMatchesExactPowerAndParallelContract() throws IOException {
-        String source = Files.readString(Path.of(
+        ParsedSource source = parse(Path.of(
                 "src/main/java/com/tstmodern/machine/NetherInterfaceMachine.java"));
-        String body = methodBody(source,
-                "public static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe)");
+        MethodTree modifier = methodNamed(source, "NetherInterfaceMachine", "recipeModifier");
+        String body = source.blockContents(modifier.getBody());
 
         assertEquals(normalizeWhitespace(EXPECTED_MODIFIER_BODY), normalizeWhitespace(body));
         assertEquals(2, occurrences(body, "return ModifierFunction.NULL;"));
@@ -105,12 +129,10 @@ class NetherInterfaceLogicTest {
 
     @Test
     void dimensionalHarvestingMatchesExactBuilderAndOutputCardinality() throws IOException {
-        String source = Files.readString(Path.of(
+        ParsedSource source = parse(Path.of(
                 "src/main/java/com/tstmodern/data/recipe/NetherInterfaceRecipes.java"));
-        String builder = statement(
-                source,
-                "TSTRecipeTypes.NETHER_INTERFACE.recipeBuilder(TSTModern.id(\"nether_interface/dimensional_harvesting\"))",
-                ".save(provider);");
+        MethodTree register = methodNamed(source, "NetherInterfaceRecipes", "register");
+        String builder = source.sourceOf(dimensionalHarvestingStatement(register));
 
         assertEquals(normalizeWhitespace(EXPECTED_DIMENSIONAL_HARVESTING_BUILDER),
                 normalizeWhitespace(builder));
@@ -126,16 +148,19 @@ class NetherInterfaceLogicTest {
 
     @Test
     void definitionUsesOnlyTheNetherModifier() throws IOException {
-        String source = Files.readString(Path.of(
+        ParsedSource source = parse(Path.of(
                 "src/main/java/com/tstmodern/registry/machine/NetherInterfaceDefinition.java"));
-        String modifiers = section(
-                source,
-                ".recipeType(TSTRecipeTypes.NETHER_INTERFACE)",
-                ".appearanceBlock(GTBlocks.CASING_STEEL_SOLID)");
+        VariableTree machine = fieldNamed(source, "NetherInterfaceDefinition", "MACHINE");
+        List<MethodInvocationTree> chain = invocationChain(machine.getInitializer());
+        int recipeType = invocationIndex(chain, "recipeType");
+        int recipeModifiers = invocationIndex(chain, "recipeModifiers");
+        String modifiers = source.invocationLink(chain.get(recipeType)) + "\n" +
+                source.invocationLink(chain.get(recipeModifiers));
 
         assertEquals(normalizeWhitespace(EXPECTED_DEFINITION_MODIFIERS), normalizeWhitespace(modifiers));
-        assertEquals(1, occurrences(source, ".recipeModifiers("));
-        assertEquals(0, occurrences(source, "GTRecipeModifiers"));
+        assertEquals(recipeType + 1, recipeModifiers);
+        assertEquals(1, invocationCount(machine.getInitializer(), "recipeModifiers"));
+        assertFalse(containsIdentifier(machine.getInitializer(), "GTRecipeModifiers"));
     }
 
     @Test
@@ -275,38 +300,189 @@ class NetherInterfaceLogicTest {
         assertEquals(List.of(16), scales);
     }
 
-    private static String methodBody(String source, String methodMarker) {
-        int method = source.indexOf(methodMarker);
-        assertTrue(method >= 0, "missing method marker: " + methodMarker);
-        int openingBrace = source.indexOf('{', method);
-        assertTrue(openingBrace >= 0, "missing opening brace for: " + methodMarker);
+    private record ParsedSource(String source, CompilationUnitTree unit, SourcePositions positions) {
 
-        int depth = 1;
-        for (int cursor = openingBrace + 1; cursor < source.length(); cursor++) {
-            char current = source.charAt(cursor);
-            if (current == '{') {
-                depth++;
-            } else if (current == '}' && --depth == 0) {
-                return source.substring(openingBrace + 1, cursor);
+        String sourceOf(Tree tree) {
+            long start = positions.getStartPosition(unit, tree);
+            long end = positions.getEndPosition(unit, tree);
+            assertTrue(start >= 0 && end >= start, "missing source positions for " + tree.getKind());
+            return source.substring((int) start, (int) end);
+        }
+
+        String blockContents(BlockTree block) {
+            String blockSource = sourceOf(block);
+            assertTrue(blockSource.startsWith("{") && blockSource.endsWith("}"));
+            return blockSource.substring(1, blockSource.length() - 1);
+        }
+
+        String invocationLink(MethodInvocationTree invocation) {
+            assertTrue(invocation.getMethodSelect() instanceof MemberSelectTree);
+            MemberSelectTree select = (MemberSelectTree) invocation.getMethodSelect();
+            long start = positions.getEndPosition(unit, select.getExpression());
+            long end = positions.getEndPosition(unit, invocation);
+            assertTrue(start >= 0 && end >= start, "missing invocation-link positions");
+            return source.substring((int) start, (int) end);
+        }
+    }
+
+    private static ParsedSource parse(Path path) throws IOException {
+        String source = Files.readString(path);
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        assertTrue(compiler != null, "tests require a JDK compiler");
+        JavaFileObject sourceFile = new SimpleJavaFileObject(URI.create("string:///" +
+                path.getFileName()), JavaFileObject.Kind.SOURCE) {
+
+            @Override
+            public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+                return source;
+            }
+        };
+        JavacTask task = (JavacTask) compiler.getTask(
+                null, null, null, List.of("-proc:none"), null, List.of(sourceFile));
+        CompilationUnitTree unit = task.parse().iterator().next();
+        return new ParsedSource(source, unit, Trees.instance(task).getSourcePositions());
+    }
+
+    private static ClassTree classNamed(ParsedSource source, String className) {
+        List<ClassTree> matches = source.unit().getTypeDecls().stream()
+                .filter(ClassTree.class::isInstance)
+                .map(ClassTree.class::cast)
+                .filter(type -> type.getSimpleName().contentEquals(className))
+                .toList();
+        assertEquals(1, matches.size(), "class declaration cardinality for " + className);
+        return matches.get(0);
+    }
+
+    private static MethodTree methodNamed(ParsedSource source, String className, String methodName) {
+        List<MethodTree> matches = classNamed(source, className).getMembers().stream()
+                .filter(MethodTree.class::isInstance)
+                .map(MethodTree.class::cast)
+                .filter(method -> method.getName().contentEquals(methodName))
+                .toList();
+        assertEquals(1, matches.size(), "method declaration cardinality for " + methodName);
+        return matches.get(0);
+    }
+
+    private static VariableTree fieldNamed(ParsedSource source, String className, String fieldName) {
+        List<VariableTree> matches = classNamed(source, className).getMembers().stream()
+                .filter(VariableTree.class::isInstance)
+                .map(VariableTree.class::cast)
+                .filter(field -> field.getName().contentEquals(fieldName))
+                .toList();
+        assertEquals(1, matches.size(), "field declaration cardinality for " + fieldName);
+        return matches.get(0);
+    }
+
+    private static ExpressionStatementTree dimensionalHarvestingStatement(MethodTree register) {
+        List<ExpressionStatementTree> matches = new ArrayList<>();
+        new TreeScanner<Void, Void>() {
+
+            @Override
+            public Void visitExpressionStatement(ExpressionStatementTree statement, Void unused) {
+                if (statement.getExpression() instanceof MethodInvocationTree invocation &&
+                        methodName(invocation).equals("save") &&
+                        containsRecipeBuilderId(invocation, "nether_interface/dimensional_harvesting")) {
+                    matches.add(statement);
+                }
+                return super.visitExpressionStatement(statement, unused);
+            }
+        }.scan(register.getBody(), null);
+        assertEquals(1, matches.size(), "dimensional harvesting statement cardinality");
+        return matches.get(0);
+    }
+
+    private static boolean containsRecipeBuilderId(Tree tree, String recipeId) {
+        boolean[] found = { false };
+        new TreeScanner<Void, Void>() {
+
+            @Override
+            public Void visitMethodInvocation(MethodInvocationTree invocation, Void unused) {
+                if (methodName(invocation).equals("recipeBuilder") &&
+                        containsStringLiteral(invocation, recipeId)) {
+                    found[0] = true;
+                }
+                return super.visitMethodInvocation(invocation, unused);
+            }
+        }.scan(tree, null);
+        return found[0];
+    }
+
+    private static boolean containsStringLiteral(Tree tree, String value) {
+        boolean[] found = { false };
+        new TreeScanner<Void, Void>() {
+
+            @Override
+            public Void visitLiteral(LiteralTree literal, Void unused) {
+                if (value.equals(literal.getValue())) {
+                    found[0] = true;
+                }
+                return super.visitLiteral(literal, unused);
+            }
+        }.scan(tree, null);
+        return found[0];
+    }
+
+    private static List<MethodInvocationTree> invocationChain(ExpressionTree initializer) {
+        List<MethodInvocationTree> reversed = new ArrayList<>();
+        ExpressionTree current = initializer;
+        while (current instanceof MethodInvocationTree invocation &&
+                invocation.getMethodSelect() instanceof MemberSelectTree select) {
+            reversed.add(invocation);
+            current = select.getExpression();
+        }
+        Collections.reverse(reversed);
+        return reversed;
+    }
+
+    private static int invocationIndex(List<MethodInvocationTree> chain, String name) {
+        List<Integer> matches = new ArrayList<>();
+        for (int index = 0; index < chain.size(); index++) {
+            if (methodName(chain.get(index)).equals(name)) {
+                matches.add(index);
             }
         }
-        throw new AssertionError("missing closing brace for: " + methodMarker);
+        assertEquals(1, matches.size(), "invocation cardinality for " + name);
+        return matches.get(0);
     }
 
-    private static String statement(String source, String startMarker, String endMarker) {
-        int start = source.indexOf(startMarker);
-        assertTrue(start >= 0, "missing statement start: " + startMarker);
-        int end = source.indexOf(endMarker, start);
-        assertTrue(end >= start, "missing statement end: " + endMarker);
-        return source.substring(start, end + endMarker.length());
+    private static int invocationCount(Tree tree, String name) {
+        AtomicInteger count = new AtomicInteger();
+        new TreeScanner<Void, Void>() {
+
+            @Override
+            public Void visitMethodInvocation(MethodInvocationTree invocation, Void unused) {
+                if (methodName(invocation).equals(name)) {
+                    count.incrementAndGet();
+                }
+                return super.visitMethodInvocation(invocation, unused);
+            }
+        }.scan(tree, null);
+        return count.get();
     }
 
-    private static String section(String source, String startMarker, String endMarker) {
-        int start = source.indexOf(startMarker);
-        assertTrue(start >= 0, "missing section start: " + startMarker);
-        int end = source.indexOf(endMarker, start);
-        assertTrue(end > start, "missing section end: " + endMarker);
-        return source.substring(start, end);
+    private static boolean containsIdentifier(Tree tree, String name) {
+        boolean[] found = { false };
+        new TreeScanner<Void, Void>() {
+
+            @Override
+            public Void visitIdentifier(IdentifierTree identifier, Void unused) {
+                if (identifier.getName().contentEquals(name)) {
+                    found[0] = true;
+                }
+                return super.visitIdentifier(identifier, unused);
+            }
+        }.scan(tree, null);
+        return found[0];
+    }
+
+    private static String methodName(MethodInvocationTree invocation) {
+        if (invocation.getMethodSelect() instanceof MemberSelectTree select) {
+            return select.getIdentifier().toString();
+        }
+        if (invocation.getMethodSelect() instanceof IdentifierTree identifier) {
+            return identifier.getName().toString();
+        }
+        throw new AssertionError("unsupported method select: " + invocation.getMethodSelect());
     }
 
     private static int occurrences(String source, String needle) {
