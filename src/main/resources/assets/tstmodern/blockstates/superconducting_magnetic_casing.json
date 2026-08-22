@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tstmodern:block/superconducting_magnetic_casing"
+    }
+  }
+}

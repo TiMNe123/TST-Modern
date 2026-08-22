@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tstmodern:block/casings/cultivation_soil_casing"
+  }
+}

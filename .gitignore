@@ -29,3 +29,5 @@ PORTING_NOTES.md
 /.codex*/
 /outputs/
 /src/test/
+/brain/
+/docs/

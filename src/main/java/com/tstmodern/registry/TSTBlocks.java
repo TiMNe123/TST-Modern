@@ -43,6 +43,19 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> BOROPHENE_NANOWIRE_CASING = casing("borophene_nanowire_casing");
     public static final RegistryObject<Block> NEUTRONIUM_PIPE_CASING = casing("neutronium_pipe_casing");
 
+    // Mega Tree Farm casings
+    public static final RegistryObject<Block> STERILE_CASING = casing("sterile_casing");
+    public static final RegistryObject<Block> ASEPTIC_GREENHOUSE_CASING = casing("aseptic_greenhouse_casing");
+    public static final RegistryObject<Block> ARCANE_TRANSLUCENT_CASING = casing("arcane_translucent_casing");
+    public static final RegistryObject<Block> AIR_CRYSTAL_CASING = casing("air_crystal_casing");
+    public static final RegistryObject<Block> WATER_CRYSTAL_CASING = casing("water_crystal_casing");
+    public static final RegistryObject<Block> EARTH_CRYSTAL_CASING = casing("earth_crystal_casing");
+    public static final RegistryObject<Block> CULTIVATION_SOIL_CASING = casing("cultivation_soil_casing");
+    public static final RegistryObject<Block> ADVANCED_RADIATION_PROOF_CASING = casing("advanced_radiation_proof_casing");
+    public static final RegistryObject<Block> REINFORCED_STONE_BRICK_CASING = casing("reinforced_stone_brick_casing");
+    public static final RegistryObject<Block> COMPOSITE_FARM_CASING = casing("composite_farm_casing");
+    public static final RegistryObject<Block> INTEGRAL_FRAMEWORK_UV_CASING = casing("integral_framework_uv_casing");
+
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_1 = compressedCobble(1);
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_2 = compressedCobble(2);
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_3 = compressedCobble(3);

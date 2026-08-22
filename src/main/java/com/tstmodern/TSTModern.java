@@ -5,7 +5,7 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.tstmodern.registry.TSTBlocks;
 import com.tstmodern.registry.TSTMaterials;
-import com.tstmodern.registry.TSTMachines;
+import com.tstmodern.registry.machine.TSTMachineRegistry;
 import com.tstmodern.registry.TSTRecipeTypes;
 
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +26,7 @@ public final class TSTModern {
 
         // GTCEu opens its recipe-type registry and posts this generic event before freezing it.
         modBus.addGenericListener(GTRecipeType.class, TSTRecipeTypes::registerRecipeTypes);
-        modBus.addGenericListener(MachineDefinition.class, TSTMachines::registerMachines);
+        modBus.addGenericListener(MachineDefinition.class, TSTMachineRegistry::registerMachines);
 
         REGISTRATE.registerRegistrate();
     }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tstmodern:block/composite_farm_casing"
+    }
+  }
+}

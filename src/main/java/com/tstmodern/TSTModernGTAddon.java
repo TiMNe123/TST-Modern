@@ -3,7 +3,11 @@ package com.tstmodern;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
-import com.tstmodern.data.TSTRecipes;
+import com.tstmodern.data.recipe.GiantVacuumDryingFurnaceRecipes;
+import com.tstmodern.data.recipe.HyperThermalConvectorRecipes;
+import com.tstmodern.data.recipe.MegaStoneBreakerRecipes;
+import com.tstmodern.data.recipe.MegaTreeFarmRecipes;
+import com.tstmodern.data.recipe.NetherInterfaceRecipes;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 
@@ -29,12 +33,11 @@ public final class TSTModernGTAddon implements IGTAddon {
 
     @Override
     public void addRecipes(Consumer<FinishedRecipe> provider) {
-        TSTRecipes.addMegaStoneBreakerRecipes(provider);
-        TSTRecipes.addGiantVacuumDryingFurnaceRecipes(provider);
-        TSTRecipes.addNetherInterfaceRecipes(provider);
-        TSTRecipes.addHyperThermalConvectorRecipes(provider);
-        TSTRecipes.addDenseSteamUsageRecipes(provider);
-        TSTRecipes.addConstructionRecipes(provider);
+        MegaStoneBreakerRecipes.register(provider);
+        GiantVacuumDryingFurnaceRecipes.register(provider);
+        NetherInterfaceRecipes.register(provider);
+        HyperThermalConvectorRecipes.register(provider);
+        MegaTreeFarmRecipes.register(provider);
     }
 }
 

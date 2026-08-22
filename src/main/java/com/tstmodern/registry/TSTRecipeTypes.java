@@ -10,7 +10,7 @@ import com.tstmodern.TSTModern;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 
-/** Recipe map ported from TST's GTCMRecipe.MegaStoneBreakerRecipes. */
+/** Recipe map definitions for ported TST multiblocks. */
 public final class TSTRecipeTypes {
     public static GTRecipeType MEGA_STONE_BREAKER;
     public static GTRecipeType VACUUM_FURNACE;
@@ -18,6 +18,8 @@ public final class TSTRecipeTypes {
     public static GTRecipeType NETHER_INTERFACE;
     public static GTRecipeType RAPID_HEAT_EXCHANGE;
     public static GTRecipeType RAPID_COOLING;
+    public static GTRecipeType TREE_GROWTH_SIMULATOR;
+    public static GTRecipeType AQUATIC_ZONE_SIMULATOR;
 
     private TSTRecipeTypes() {}
 
@@ -44,6 +46,14 @@ public final class TSTRecipeTypes {
 
         RAPID_COOLING = register(event, "rapid_cooling")
                 .setMaxIOSize(0, 0, 2, 2)
+                .setEUIO(IO.IN);
+
+        TREE_GROWTH_SIMULATOR = register(event, "tree_growth_simulator")
+                .setMaxIOSize(3, 6, 1, 0)
+                .setEUIO(IO.IN);
+
+        AQUATIC_ZONE_SIMULATOR = register(event, "aquatic_zone_simulator")
+                .setMaxIOSize(1, 9, 1, 0)
                 .setEUIO(IO.IN);
     }
 
