@@ -4,25 +4,18 @@ import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
-import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
+import com.tstmodern.machine.logic.GiantVacuumDryingFurnaceLogic;
 
 /**
  * Behavioural port of TST_GiantVacuumDryingFurnace.
  *
- * <p>Base parallel = piece * coilTier * 32.
- * Speed bonus: duration multiplied by (0.8 ^ voltageTierDelta) / (1 + 0.5 * (coilTier - 1)).</p>
+ * <p>Base parallel = one segment * source coil tier * 32.
+ * Duration multiplier = (0.8 ^ machine tier) / (source coil tier * 0.5).</p>
  */
 public final class GiantVacuumDryingFurnaceMachine extends CoilWorkableElectricMultiblockMachine {
-
-    /**
-     * Number of tower segments in the structure. In TST 1.7.10 this was variable
-     * (modular multi-segment tower); this port uses a fixed single-segment layout.
-     * Extracted as a constant so a future multi-segment upgrade only needs one change.
-     */
-    private static final int BASE_SEGMENTS = 1;
 
     public GiantVacuumDryingFurnaceMachine(IMachineBlockEntity holder) {
         super(holder);
@@ -33,23 +26,18 @@ public final class GiantVacuumDryingFurnaceMachine extends CoilWorkableElectricM
             return ModifierFunction.NULL;
         }
 
-        int coilTier = Math.max(1, furnace.getCoilType().getTier());
-        long baseParallel = (long) BASE_SEGMENTS * coilTier * 32L;
-        long hatchParallel = furnace.getParallelHatch()
-                .map(part -> (long) part.getCurrentParallel())
-                .orElse(0L);
-        int parallelLimit = (int) Math.min(Integer.MAX_VALUE, baseParallel + hatchParallel);
+        int coilTier = GiantVacuumDryingFurnaceLogic.sourceCoilTier(
+                furnace.getCoilType().getTier());
+        int parallelLimit = GiantVacuumDryingFurnaceLogic.parallelLimit(
+                coilTier,
+                furnace.getParallelHatch().map(h -> h.getCurrentParallel()).orElse(0));
         int parallel = ParallelLogic.getParallelAmount(machine, recipe, parallelLimit);
         if (parallel <= 0) {
             return ModifierFunction.NULL;
         }
 
-        int machineTier = furnace.getTier();
-        int recipeTier = RecipeHelper.getRecipeEUtTier(recipe);
-        int tierDelta = Math.max(0, machineTier - recipeTier);
-        double voltageSpeedReduction = Math.pow(0.8, tierDelta);
-        double coilSpeedBoost = 1.0 + (coilTier - 1) * 0.5;
-        double durationMultiplier = voltageSpeedReduction / coilSpeedBoost;
+        double durationMultiplier = GiantVacuumDryingFurnaceLogic.durationMultiplier(
+                furnace.getTier(), coilTier);
 
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(parallel))
