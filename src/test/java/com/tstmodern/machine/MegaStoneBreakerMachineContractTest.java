@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 final class MegaStoneBreakerMachineContractTest {
     @Test
     void probesOutputCapacityUsingTheFinalOutputBonus() throws IOException {
-        String source = Files.readString(Path.of("src/main/java/com/tstmodern/machine/MegaStoneBreakerMachine.java"));
+        String source = readMachineSource();
 
         int copiedRecipe = source.indexOf("GTRecipe outputProbe = recipe.copy();");
         int outputsReplaced = source.indexOf(
@@ -27,7 +27,7 @@ final class MegaStoneBreakerMachineContractTest {
 
     @Test
     void simulatesBothBoostDrainsBeforeSuccessfulWorkAndExecutesAfterward() throws IOException {
-        String source = Files.readString(Path.of("src/main/java/com/tstmodern/machine/MegaStoneBreakerMachine.java"));
+        String source = readMachineSource();
         String simulation = source.substring(
                 source.indexOf("private boolean canConsumeBoostFluids()"),
                 source.indexOf("private void executeBoostFluidDrain()"));
@@ -55,5 +55,10 @@ final class MegaStoneBreakerMachineContractTest {
         assertTrue(successfulWork > failedSimulationReturn, "successful GTCEu work follows simulation");
         assertTrue(execution > successfulWork, "boost drains execute only after successful work");
         assertTrue(counterIncrement > successfulWork, "the active tick counter advances only after successful work");
+    }
+
+    private static String readMachineSource() throws IOException {
+        return Files.readString(Path.of("src/main/java/com/tstmodern/machine/MegaStoneBreakerMachine.java"))
+                .replace("\r\n", "\n");
     }
 }
