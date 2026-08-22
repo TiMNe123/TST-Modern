@@ -14,6 +14,26 @@ public final class NetherInterfaceLogic {
 
     private NetherInterfaceLogic() {}
 
+    public static int powerParallel(long availableEUt, long ivEUt) {
+        if (ivEUt <= 0 || availableEUt < 3L * ivEUt) return 0;
+        return (int) Math.min(Integer.MAX_VALUE, availableEUt / ivEUt - 2L);
+    }
+
+    public static long saturatedMultiply(long left, long right) {
+        if (left <= 0 || right <= 0) {
+            return 0;
+        }
+        if (left > Long.MAX_VALUE / right) {
+            return Long.MAX_VALUE;
+        }
+        return left * right;
+    }
+
+    public static int parallelLimit(int baseParallel, int hatchParallel) {
+        long limit = Math.max(0L, baseParallel) + Math.max(0L, hatchParallel);
+        return (int) Math.min(Integer.MAX_VALUE, limit);
+    }
+
     public static int selectWeightedIndex(int roll, int[] weights) {
         int total = totalWeight(weights);
         if (roll < 0 || roll >= total) {

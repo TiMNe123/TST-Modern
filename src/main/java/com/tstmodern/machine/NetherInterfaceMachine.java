@@ -1,5 +1,8 @@
 package com.tstmodern.machine;
 
+import static com.gregtechceu.gtceu.api.GTValues.IV;
+import static com.gregtechceu.gtceu.api.GTValues.VA;
+
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
@@ -7,6 +10,7 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
+import com.tstmodern.machine.logic.NetherInterfaceLogic;
 
 /**
  * Behavioural port of TST_NetherInterface.
@@ -29,24 +33,22 @@ public final class NetherInterfaceMachine extends WorkableElectricMultiblockMach
             return ModifierFunction.NULL;
         }
 
-        long baseParallel = 64L;
-        long hatchParallel = netherInterface.getParallelHatch()
-                .map(part -> (long) part.getCurrentParallel())
-                .orElse(0L);
-        int parallelLimit = (int) Math.min(Integer.MAX_VALUE, baseParallel + hatchParallel);
-        int parallel = ParallelLogic.getParallelAmount(machine, recipe, parallelLimit);
+        int limit = NetherInterfaceLogic.parallelLimit(64,
+                netherInterface.getParallelHatch().map(h -> h.getCurrentParallel()).orElse(0));
+        int resourceParallel = ParallelLogic.getParallelAmountWithoutEU(machine, recipe, limit);
+        long availableEUt = NetherInterfaceLogic.saturatedMultiply(
+                netherInterface.getEnergyContainer().getInputVoltage(),
+                netherInterface.getEnergyContainer().getInputAmperage());
+        int powerParallel = NetherInterfaceLogic.powerParallel(availableEUt, VA[IV]);
+        int parallel = Math.min(resourceParallel, powerParallel);
         if (parallel <= 0) {
             return ModifierFunction.NULL;
         }
 
-        // Base recipe is 1 parallel at 7680 EU/t.
-        // Machine consumes 2A IV (15360) base + 1A IV (7680) per parallel -> total = 7680 * (2 + parallel).
-        double eutMultiplier = (double) (2 + parallel);
-
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(parallel))
                 .outputModifier(ContentModifier.multiplier(parallel))
-                .eutMultiplier(eutMultiplier)
+                .eutMultiplier((double) (parallel + 2))
                 .parallels(parallel)
                 .build();
     }

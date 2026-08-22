@@ -12,7 +12,7 @@ import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.plateDense;
 import static com.gregtechceu.gtceu.common.data.GTItems.FIELD_GENERATOR_LuV;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Blaze;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.DarkAsh;
-import static com.gregtechceu.gtceu.common.data.GTMaterials.LiquidNetherAir;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.DistilledWater;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Netherite;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Netherrack;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Obsidian;
@@ -22,6 +22,7 @@ import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.BLAST_RECIPES;
 
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.tstmodern.TSTModern;
+import com.tstmodern.recipe.chance.TSTChanceLogics;
 import com.tstmodern.registry.TSTBlocks;
 import com.tstmodern.registry.TSTMaterials;
 import com.tstmodern.registry.TSTRecipeTypes;
@@ -40,14 +41,16 @@ public final class NetherInterfaceRecipes {
 
     public static void register(Consumer<FinishedRecipe> provider) {
         TSTRecipeTypes.NETHER_INTERFACE.recipeBuilder(TSTModern.id("nether_interface/dimensional_harvesting"))
-                .inputFluids(new FluidStack(Fluids.LAVA, 16_000))
-                .outputFluids(LiquidNetherAir.getFluid(16_000))
-                .chancedOutput(TSTMaterials.HELLISH_METAL.getFluid(288), 3000, 0)
+                .inputFluids(DistilledWater.getFluid(16_000))
+                .outputFluids(TSTMaterials.POOR_NETHER_WASTE.getFluid(16_000))
                 .chancedOutput(new ItemStack(Items.ANCIENT_DEBRIS), 100, 0)
-                .chancedOutput(new ItemStack(Items.NETHERITE_SCRAP, 4), 3000, 0)
-                .chancedOutput(new ItemStack(Items.NETHERITE_INGOT, 1), 1000, 0)
-                .chancedOutput(new ItemStack(Items.NETHER_STAR, 1), 50, 0)
-                .chancedOutput(new ItemStack(Blocks.NETHERRACK, 16), 4900, 0)
+                .chancedOutput(new ItemStack(Blocks.NETHERRACK, 16), 4_900, 0)
+                .chancedOutput(new ItemStack(Items.NETHERITE_SCRAP, 4), 3_000, 0)
+                .chancedOutput(new ItemStack(Items.NETHERITE_INGOT), 1_000, 0)
+                .chancedOutput(new ItemStack(Items.NETHER_STAR), 1_000, 0)
+                .chancedOutput(TSTMaterials.HELLISH_METAL.getFluid(288), 3_000, 0)
+                .chancedItemOutputLogic(TSTChanceLogics.THREE_WEIGHTED_SCALED)
+                .chancedFluidOutputLogic(TSTChanceLogics.SINGLE_ROLL_SCALED)
                 .EUt(VA[IV])
                 .duration(1200)
                 .save(provider);

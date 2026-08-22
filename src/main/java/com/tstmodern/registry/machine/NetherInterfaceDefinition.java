@@ -10,7 +10,6 @@ import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
-import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.tstmodern.TSTModern;
 import com.tstmodern.machine.NetherInterfaceMachine;
 import com.tstmodern.registry.TSTBlocks;
@@ -23,8 +22,7 @@ public final class NetherInterfaceDefinition {
             .langValue("Nether Interface")
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(TSTRecipeTypes.NETHER_INTERFACE)
-            .recipeModifiers(NetherInterfaceMachine::recipeModifier,
-                    GTRecipeModifiers.OC_NON_PERFECT)
+            .recipeModifiers(NetherInterfaceMachine::recipeModifier)
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .pattern(definition -> FactoryBlockPattern.start(
                     RelativeDirection.RIGHT,
