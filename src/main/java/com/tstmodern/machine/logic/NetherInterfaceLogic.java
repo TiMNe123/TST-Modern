@@ -1,7 +1,11 @@
 package com.tstmodern.machine.logic;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.IntUnaryOperator;
+import java.util.function.ToIntFunction;
 
 /** Pure deterministic seams for Nether Interface package and fluid chance rolls. */
 public final class NetherInterfaceLogic {
@@ -36,6 +40,29 @@ public final class NetherInterfaceLogic {
         return selected;
     }
 
+    public static <T, R> List<R> selectAndScaleThreeWeighted(
+                                                              List<? extends T> entries,
+                                                              ToIntFunction<? super T> rawWeightExtractor,
+                                                              IntUnaryOperator boundedRoll,
+                                                              BiFunction<? super T, Integer, ? extends R> scaler,
+                                                              int times) {
+        Objects.requireNonNull(entries, "entries");
+        Objects.requireNonNull(rawWeightExtractor, "rawWeightExtractor");
+        Objects.requireNonNull(boundedRoll, "boundedRoll");
+        Objects.requireNonNull(scaler, "scaler");
+        if (entries.isEmpty()) {
+            throw new IllegalArgumentException("entries must not be empty");
+        }
+
+        int[] rawWeights = entries.stream().mapToInt(rawWeightExtractor).toArray();
+        int[] selectedIndexes = selectThreeWeighted(boundedRoll, rawWeights);
+        List<R> outputs = new ArrayList<>(PACKAGE_SELECTIONS_PER_CYCLE);
+        for (int selectedIndex : selectedIndexes) {
+            outputs.add(scaler.apply(entries.get(selectedIndex), times));
+        }
+        return List.copyOf(outputs);
+    }
+
     public static boolean rollOnce(IntUnaryOperator boundedRoll, int chance, int maxChance) {
         Objects.requireNonNull(boundedRoll, "boundedRoll");
         if (maxChance <= 0) {
@@ -50,6 +77,28 @@ public final class NetherInterfaceLogic {
             throw new IllegalArgumentException("bounded roll must be between 0 (inclusive) and maxChance (exclusive)");
         }
         return passesChance(roll, chance);
+    }
+
+    public static <T, R> List<R> rollAndScaleOnce(
+                                                   T entry,
+                                                   ToIntFunction<? super T> rawChanceExtractor,
+                                                   ToIntFunction<? super T> rawMaxChanceExtractor,
+                                                   IntUnaryOperator boundedRoll,
+                                                   BiFunction<? super T, Integer, ? extends R> scaler,
+                                                   int times) {
+        Objects.requireNonNull(entry, "entry");
+        Objects.requireNonNull(rawChanceExtractor, "rawChanceExtractor");
+        Objects.requireNonNull(rawMaxChanceExtractor, "rawMaxChanceExtractor");
+        Objects.requireNonNull(boundedRoll, "boundedRoll");
+        Objects.requireNonNull(scaler, "scaler");
+
+        int rawChance = rawChanceExtractor.applyAsInt(entry);
+        int rawMaxChance = rawMaxChanceExtractor.applyAsInt(entry);
+        if (!rollOnce(boundedRoll, rawChance, rawMaxChance)) {
+            return List.of();
+        }
+        R scaled = scaler.apply(entry, times);
+        return List.of(scaled);
     }
 
     public static boolean passesChance(int roll, int chance) {

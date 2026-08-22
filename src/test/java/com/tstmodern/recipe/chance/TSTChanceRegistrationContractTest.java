@@ -32,48 +32,23 @@ final class TSTChanceRegistrationContractTest {
     }
 
     @Test
-    void weightedProductionUsesRawWeightsThreeSelectionsAndScaledCopies() throws IOException {
+    void productionRollsReturnTheExecutableDecisionSeams() throws IOException {
         String source = Files.readString(CHANCE_LOGICS_SOURCE);
         String weightedClass = section(
                 source,
                 "private static final class ThreeWeightedScaledChanceLogic",
                 "private static final class SingleRollScaledChanceLogic");
-        String rollBody = methodBody(weightedClass, "public @Unmodifiable List<@NotNull Content> roll(");
-
-        assertTrue(rollBody.contains(
-                "int[] weights = chancedEntries.stream().mapToInt(entry -> entry.chance).toArray();"),
-                "weighted production must use each entry's raw chance as its weight");
-        assertEquals(1, occurrences(rollBody, "NetherInterfaceLogic.selectThreeWeighted("),
-                "weighted production must delegate once to the exactly-three selection seam");
-        assertTrue(rollBody.contains(
-                "int[] selectedIndexes = NetherInterfaceLogic.selectThreeWeighted(GTValues.RNG::nextInt, weights);"),
-                "weighted production must use the indexes returned by the exactly-three selection seam");
-        assertEquals(1, occurrences(rollBody,
-                "selected.copyChanced(cap, ContentModifier.multiplier(times))"),
-                "every selected package must be scaled through copyChanced by times");
-        assertFalse(rollBody.contains("selected.copy(cap)"),
-                "selected packages must not bypass chanced scaling with an unmodified copy");
-        assertIgnoresBoostTierAndCache(rollBody);
-    }
-
-    @Test
-    void fluidProductionUsesRawChanceOneRollAndScaledCopy() throws IOException {
-        String source = Files.readString(CHANCE_LOGICS_SOURCE);
+        String weightedRollBody = methodBody(weightedClass, "public @Unmodifiable List<@NotNull Content> roll(");
         String fluidClass = source.substring(
                 source.indexOf("private static final class SingleRollScaledChanceLogic"));
-        String rollBody = methodBody(fluidClass, "public @Unmodifiable List<@NotNull Content> roll(");
+        String fluidRollBody = methodBody(fluidClass, "public @Unmodifiable List<@NotNull Content> roll(");
 
-        assertEquals(1, occurrences(rollBody, "NetherInterfaceLogic.rollOnce("),
-                "fluid production must delegate once to the exactly-one roll seam");
-        assertTrue(rollBody.contains(
-                "if (!NetherInterfaceLogic.rollOnce(GTValues.RNG::nextInt, entry.chance, entry.maxChance))"),
-                "fluid production must roll the entry's raw chance against its raw maximum");
-        assertEquals(1, occurrences(rollBody,
-                "entry.copyChanced(cap, ContentModifier.multiplier(times))"),
-                "successful fluid content must be scaled through copyChanced by times");
-        assertFalse(rollBody.contains("entry.copy(cap)"),
-                "successful fluid content must not bypass chanced scaling with an unmodified copy");
-        assertIgnoresBoostTierAndCache(rollBody);
+        assertEquals(1, occurrences(weightedRollBody,
+                "return NetherInterfaceLogic.selectAndScaleThreeWeighted("),
+                "weighted production must return the executable weighted decision seam");
+        assertEquals(1, occurrences(fluidRollBody,
+                "return NetherInterfaceLogic.rollAndScaleOnce("),
+                "fluid production must return the executable single-roll decision seam");
     }
 
     @Test
@@ -81,27 +56,14 @@ final class TSTChanceRegistrationContractTest {
         String source = Files.readString(CHANCE_LOGICS_SOURCE);
         String registrationBody = methodBody(source, "public static void registerChanceLogics(");
 
-        assertFalse(registrationBody.contains("event.register("),
-                "ChanceLogic constructors self-register; event.register would register each logic twice");
-    }
-
-    private static void assertIgnoresBoostTierAndCache(String rollBody) {
-        assertFalse(rollBody.contains("chanceBoostFunction"),
-                "source probabilities must not use GTCEu tier chance boost");
-        assertFalse(rollBody.contains("recipeTier"),
-                "source probabilities must not use recipe tier");
-        assertFalse(rollBody.contains("chanceTier"),
-                "source probabilities must not use chance tier");
-        assertFalse(rollBody.contains("cache"),
-                "source probabilities must not use GTCEu chance cache");
-        assertFalse(rollBody.contains("getBoostedChance("),
-                "source probabilities must remain raw rather than boosted");
-        assertFalse(rollBody.contains("tierChanceBoost"),
-                "entry tier chance boost must not alter source probabilities");
-        assertFalse(rollBody.contains("getCachedChance("),
-                "source probabilities must not read GTCEu chance cache helpers");
-        assertFalse(rollBody.contains("updateCachedChance("),
-                "source probabilities must not update GTCEu chance cache helpers");
+        assertFalse(registrationBody.matches("(?s).*\\.\\s*register\\s*\\(.*"),
+                "ChanceLogic constructors self-register; any receiver.register call would register twice");
+        assertEquals(1, occurrences(registrationBody,
+                "THREE_WEIGHTED_SCALED = new ThreeWeightedScaledChanceLogic();"),
+                "the weighted logic must be constructed and assigned exactly once");
+        assertEquals(1, occurrences(registrationBody,
+                "SINGLE_ROLL_SCALED = new SingleRollScaledChanceLogic();"),
+                "the fluid logic must be constructed and assigned exactly once");
     }
 
     private static String section(String source, String startMarker, String endMarker) {

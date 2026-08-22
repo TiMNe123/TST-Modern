@@ -52,12 +52,12 @@ public final class TSTChanceLogics {
                 return Collections.emptyList();
             }
 
-            int[] weights = chancedEntries.stream().mapToInt(entry -> entry.chance).toArray();
-            int[] selectedIndexes = NetherInterfaceLogic.selectThreeWeighted(GTValues.RNG::nextInt, weights);
-            return java.util.Arrays.stream(selectedIndexes)
-                    .mapToObj(chancedEntries::get)
-                    .map(selected -> selected.copyChanced(cap, ContentModifier.multiplier(times)))
-                    .toList();
+            return NetherInterfaceLogic.selectAndScaleThreeWeighted(
+                    chancedEntries,
+                    entry -> entry.chance,
+                    GTValues.RNG::nextInt,
+                    (selected, scale) -> selected.copyChanced(cap, ContentModifier.multiplier(scale)),
+                    times);
         }
 
         @Override
@@ -86,10 +86,13 @@ public final class TSTChanceLogics {
             }
 
             Content entry = chancedEntries.get(0);
-            if (!NetherInterfaceLogic.rollOnce(GTValues.RNG::nextInt, entry.chance, entry.maxChance)) {
-                return Collections.emptyList();
-            }
-            return List.of(entry.copyChanced(cap, ContentModifier.multiplier(times)));
+            return NetherInterfaceLogic.rollAndScaleOnce(
+                    entry,
+                    selected -> selected.chance,
+                    selected -> selected.maxChance,
+                    GTValues.RNG::nextInt,
+                    (selected, scale) -> selected.copyChanced(cap, ContentModifier.multiplier(scale)),
+                    times);
         }
 
         @Override
