@@ -9,6 +9,7 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
+import com.tstmodern.machine.logic.MegaStoneBreakerLogic;
 
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
@@ -35,6 +36,9 @@ public final class MegaStoneBreakerMachine extends WorkableElectricMultiblockMac
     @DescSynced
     private boolean boosted;
 
+    @Persisted
+    private int activeBoostTicks;
+
     public MegaStoneBreakerMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
     }
@@ -53,19 +57,20 @@ public final class MegaStoneBreakerMachine extends WorkableElectricMultiblockMac
             return ModifierFunction.NULL;
         }
 
-        int tier = breaker.getTier();
-        int baseParallel = tier >= 29 ? Integer.MAX_VALUE : (int) Math.min(Integer.MAX_VALUE, 4L << tier);
-        int hatchParallel = breaker.getParallelHatch()
-                .map(hatch -> hatch.getCurrentParallel())
-                .orElse(0);
-        int parallelLimit = baseParallel == Integer.MAX_VALUE ? Integer.MAX_VALUE :
-                (int) Math.min(Integer.MAX_VALUE, (long) baseParallel + hatchParallel);
-        int parallel = ParallelLogic.getParallelAmount(machine, recipe, parallelLimit);
+        int parallelLimit = MegaStoneBreakerLogic.addParallel(
+                MegaStoneBreakerLogic.baseParallel(breaker.getTier()),
+                breaker.getParallelHatch().map(h -> h.getCurrentParallel()).orElse(0));
+        int outputBonus = MegaStoneBreakerLogic.outputBonus(breaker.hasBoostFluids());
+
+        GTRecipe outputProbe = recipe.copy();
+        outputProbe.outputs.clear();
+        outputProbe.outputs.putAll(ContentModifier.multiplier(outputBonus).applyContents(recipe.outputs));
+
+        int parallel = ParallelLogic.getParallelAmount(machine, outputProbe, parallelLimit);
         if (parallel <= 0) {
             return ModifierFunction.NULL;
         }
 
-        int outputBonus = breaker.hasBoostFluids() ? 1_024 : 4;
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(parallel))
                 .outputModifier(ContentModifier.multiplier((double) parallel * outputBonus))
@@ -82,17 +87,25 @@ public final class MegaStoneBreakerMachine extends WorkableElectricMultiblockMac
     @Override
     public boolean beforeWorking(GTRecipe recipe) {
         boosted = hasBoostFluids();
+        activeBoostTicks = 0;
         return super.beforeWorking(recipe);
     }
 
     @Override
     public boolean onWorking() {
+        boolean drainDue = boosted && MegaStoneBreakerLogic.shouldDrainBoost(activeBoostTicks);
+        if (drainDue && !canConsumeBoostFluids()) {
+            boosted = false;
+            return false;
+        }
         if (!super.onWorking()) {
             return false;
         }
-        if (boosted && getOffsetTimer() % 20L == 0L && !consumeBoostFluids()) {
-            boosted = false;
-            return false;
+        if (drainDue) {
+            executeBoostFluidDrain();
+        }
+        if (boosted) {
+            activeBoostTicks++;
         }
         return true;
     }
@@ -101,22 +114,26 @@ public final class MegaStoneBreakerMachine extends WorkableElectricMultiblockMac
     public void afterWorking() {
         super.afterWorking();
         boosted = false;
+        activeBoostTicks = 0;
     }
 
     private boolean hasBoostFluids() {
         return fluidAmount(Fluids.WATER) >= 1_000L && fluidAmount(Fluids.LAVA) >= 1_000L;
     }
 
-    private boolean consumeBoostFluids() {
+    private boolean canConsumeBoostFluids() {
         // Phase 1: Simulate both drains to verify availability without consuming anything.
         if (!drainAcrossInputs(Fluids.WATER, 1_000, IFluidHandler.FluidAction.SIMULATE)
                 || !drainAcrossInputs(Fluids.LAVA, 1_000, IFluidHandler.FluidAction.SIMULATE)) {
             return false;
         }
+        return true;
+    }
+
+    private void executeBoostFluidDrain() {
         // Phase 2: Both fluids confirmed available — execute the actual drain.
         drainAcrossInputs(Fluids.WATER, 1_000, IFluidHandler.FluidAction.EXECUTE);
         drainAcrossInputs(Fluids.LAVA, 1_000, IFluidHandler.FluidAction.EXECUTE);
-        return true;
     }
 
     private long fluidAmount(Fluid fluid) {
