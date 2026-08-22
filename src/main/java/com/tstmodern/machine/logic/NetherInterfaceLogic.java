@@ -34,6 +34,10 @@ public final class NetherInterfaceLogic {
         return (int) Math.min(Integer.MAX_VALUE, limit);
     }
 
+    public static double eutMultiplier(int parallel) {
+        return (double) parallel + 2.0;
+    }
+
     public static int selectWeightedIndex(int roll, int[] weights) {
         int total = totalWeight(weights);
         if (roll < 0 || roll >= total) {

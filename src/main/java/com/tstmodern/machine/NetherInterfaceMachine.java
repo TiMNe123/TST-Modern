@@ -48,7 +48,7 @@ public final class NetherInterfaceMachine extends WorkableElectricMultiblockMach
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(parallel))
                 .outputModifier(ContentModifier.multiplier(parallel))
-                .eutMultiplier((double) (parallel + 2))
+                .eutMultiplier(NetherInterfaceLogic.eutMultiplier(parallel))
                 .parallels(parallel)
                 .build();
     }

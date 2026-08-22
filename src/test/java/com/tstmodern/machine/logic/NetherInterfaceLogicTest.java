@@ -18,6 +18,53 @@ class NetherInterfaceLogicTest {
 
     private static final long IV_EUT = 7_680L;
 
+    private static final String EXPECTED_MODIFIER_BODY = """
+            if (!(machine instanceof NetherInterfaceMachine netherInterface)) {
+                return ModifierFunction.NULL;
+            }
+
+            int limit = NetherInterfaceLogic.parallelLimit(64,
+                    netherInterface.getParallelHatch().map(h -> h.getCurrentParallel()).orElse(0));
+            int resourceParallel = ParallelLogic.getParallelAmountWithoutEU(machine, recipe, limit);
+            long availableEUt = NetherInterfaceLogic.saturatedMultiply(
+                    netherInterface.getEnergyContainer().getInputVoltage(),
+                    netherInterface.getEnergyContainer().getInputAmperage());
+            int powerParallel = NetherInterfaceLogic.powerParallel(availableEUt, VA[IV]);
+            int parallel = Math.min(resourceParallel, powerParallel);
+            if (parallel <= 0) {
+                return ModifierFunction.NULL;
+            }
+
+            return ModifierFunction.builder()
+                    .inputModifier(ContentModifier.multiplier(parallel))
+                    .outputModifier(ContentModifier.multiplier(parallel))
+                    .eutMultiplier(NetherInterfaceLogic.eutMultiplier(parallel))
+                    .parallels(parallel)
+                    .build();
+            """;
+
+    private static final String EXPECTED_DIMENSIONAL_HARVESTING_BUILDER = """
+            TSTRecipeTypes.NETHER_INTERFACE.recipeBuilder(TSTModern.id("nether_interface/dimensional_harvesting"))
+                    .inputFluids(DistilledWater.getFluid(16_000))
+                    .outputFluids(TSTMaterials.POOR_NETHER_WASTE.getFluid(16_000))
+                    .chancedOutput(new ItemStack(Items.ANCIENT_DEBRIS), 100, 0)
+                    .chancedOutput(new ItemStack(Blocks.NETHERRACK, 16), 4_900, 0)
+                    .chancedOutput(new ItemStack(Items.NETHERITE_SCRAP, 4), 3_000, 0)
+                    .chancedOutput(new ItemStack(Items.NETHERITE_INGOT), 1_000, 0)
+                    .chancedOutput(new ItemStack(Items.NETHER_STAR), 1_000, 0)
+                    .chancedOutput(TSTMaterials.HELLISH_METAL.getFluid(288), 3_000, 0)
+                    .chancedItemOutputLogic(TSTChanceLogics.THREE_WEIGHTED_SCALED)
+                    .chancedFluidOutputLogic(TSTChanceLogics.SINGLE_ROLL_SCALED)
+                    .EUt(VA[IV])
+                    .duration(1200)
+                    .save(provider);
+            """;
+
+    private static final String EXPECTED_DEFINITION_MODIFIERS = """
+            .recipeType(TSTRecipeTypes.NETHER_INTERFACE)
+            .recipeModifiers(NetherInterfaceMachine::recipeModifier)
+            """;
+
     private record WeightedPackage(String name, int rawWeight) {}
 
     private record FluidEntry(String name, int rawChance, int rawMaxChance) {}
@@ -39,47 +86,56 @@ class NetherInterfaceLogicTest {
     }
 
     @Test
-    void activeModifierSeparatesResourceAndPowerParallel() throws IOException {
+    void widensParallelBeforeAddingReservedAmps() {
+        assertEquals(2_147_483_649.0, NetherInterfaceLogic.eutMultiplier(Integer.MAX_VALUE));
+    }
+
+    @Test
+    void activeModifierMatchesExactPowerAndParallelContract() throws IOException {
         String source = Files.readString(Path.of(
                 "src/main/java/com/tstmodern/machine/NetherInterfaceMachine.java"));
+        String body = methodBody(source,
+                "public static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe)");
 
-        assertTrue(source.contains("ParallelLogic.getParallelAmountWithoutEU(machine, recipe, limit)"));
-        assertTrue(source.contains("netherInterface.getEnergyContainer().getInputVoltage()"));
-        assertTrue(source.contains("netherInterface.getEnergyContainer().getInputAmperage()"));
-        assertTrue(source.contains("NetherInterfaceLogic.powerParallel(availableEUt, VA[IV])"));
-        assertTrue(source.contains("int parallel = Math.min(resourceParallel, powerParallel)"));
-        assertTrue(source.contains(".inputModifier(ContentModifier.multiplier(parallel))"));
-        assertTrue(source.contains(".outputModifier(ContentModifier.multiplier(parallel))"));
-        assertTrue(source.contains(".eutMultiplier((double) (parallel + 2))"));
-        assertTrue(source.contains(".parallels(parallel)"));
+        assertEquals(normalizeWhitespace(EXPECTED_MODIFIER_BODY), normalizeWhitespace(body));
+        assertEquals(2, occurrences(body, "return ModifierFunction.NULL;"));
+        assertEquals(1, occurrences(body, "return ModifierFunction.builder()"));
+        assertFalse(body.contains("(double) (parallel + 2)"));
     }
 
     @Test
-    void dimensionalHarvestingUsesNetherOutputsAndCustomChanceLogics() throws IOException {
+    void dimensionalHarvestingMatchesExactBuilderAndOutputCardinality() throws IOException {
         String source = Files.readString(Path.of(
                 "src/main/java/com/tstmodern/data/recipe/NetherInterfaceRecipes.java"));
+        String builder = statement(
+                source,
+                "TSTRecipeTypes.NETHER_INTERFACE.recipeBuilder(TSTModern.id(\"nether_interface/dimensional_harvesting\"))",
+                ".save(provider);");
 
-        assertTrue(source.contains(".inputFluids(DistilledWater.getFluid(16_000))"));
-        assertTrue(source.contains(".outputFluids(TSTMaterials.POOR_NETHER_WASTE.getFluid(16_000))"));
-        assertTrue(source.contains(".chancedOutput(new ItemStack(Items.ANCIENT_DEBRIS), 100, 0)"));
-        assertTrue(source.contains(".chancedOutput(new ItemStack(Blocks.NETHERRACK, 16), 4_900, 0)"));
-        assertTrue(source.contains(".chancedOutput(new ItemStack(Items.NETHERITE_SCRAP, 4), 3_000, 0)"));
-        assertTrue(source.contains(".chancedOutput(new ItemStack(Items.NETHERITE_INGOT), 1_000, 0)"));
-        assertTrue(source.contains(".chancedOutput(new ItemStack(Items.NETHER_STAR), 1_000, 0)"));
-        assertTrue(source.contains(".chancedOutput(TSTMaterials.HELLISH_METAL.getFluid(288), 3_000, 0)"));
-        assertTrue(source.contains(".chancedItemOutputLogic(TSTChanceLogics.THREE_WEIGHTED_SCALED)"));
-        assertTrue(source.contains(".chancedFluidOutputLogic(TSTChanceLogics.SINGLE_ROLL_SCALED)"));
-        assertFalse(source.contains("LiquidNetherAir"));
-        assertFalse(source.contains("Fluids.LAVA, 16_000"));
+        assertEquals(normalizeWhitespace(EXPECTED_DIMENSIONAL_HARVESTING_BUILDER),
+                normalizeWhitespace(builder));
+        assertEquals(1, occurrences(builder, ".inputFluids("));
+        assertEquals(1, occurrences(builder, ".outputFluids("));
+        assertEquals(6, occurrences(builder, ".chancedOutput("));
+        assertEquals(1, occurrences(builder, ".chancedItemOutputLogic("));
+        assertEquals(1, occurrences(builder, ".chancedFluidOutputLogic("));
+        assertEquals(0, occurrences(builder, ".outputItems("));
+        assertEquals(0, occurrences(builder, "LiquidNetherAir"));
+        assertEquals(0, occurrences(builder, "Fluids.LAVA"));
     }
 
     @Test
-    void definitionLeavesExactPowerEquationUnmodified() throws IOException {
+    void definitionUsesOnlyTheNetherModifier() throws IOException {
         String source = Files.readString(Path.of(
                 "src/main/java/com/tstmodern/registry/machine/NetherInterfaceDefinition.java"));
+        String modifiers = section(
+                source,
+                ".recipeType(TSTRecipeTypes.NETHER_INTERFACE)",
+                ".appearanceBlock(GTBlocks.CASING_STEEL_SOLID)");
 
-        assertTrue(source.contains(".recipeModifiers(NetherInterfaceMachine::recipeModifier)"));
-        assertFalse(source.contains("GTRecipeModifiers.OC_NON_PERFECT"));
+        assertEquals(normalizeWhitespace(EXPECTED_DEFINITION_MODIFIERS), normalizeWhitespace(modifiers));
+        assertEquals(1, occurrences(source, ".recipeModifiers("));
+        assertEquals(0, occurrences(source, "GTRecipeModifiers"));
     }
 
     @Test
@@ -217,5 +273,53 @@ class NetherInterfaceLogicTest {
         assertEquals(1, successRolls.get());
         assertEquals(1, failureRolls.get());
         assertEquals(List.of(16), scales);
+    }
+
+    private static String methodBody(String source, String methodMarker) {
+        int method = source.indexOf(methodMarker);
+        assertTrue(method >= 0, "missing method marker: " + methodMarker);
+        int openingBrace = source.indexOf('{', method);
+        assertTrue(openingBrace >= 0, "missing opening brace for: " + methodMarker);
+
+        int depth = 1;
+        for (int cursor = openingBrace + 1; cursor < source.length(); cursor++) {
+            char current = source.charAt(cursor);
+            if (current == '{') {
+                depth++;
+            } else if (current == '}' && --depth == 0) {
+                return source.substring(openingBrace + 1, cursor);
+            }
+        }
+        throw new AssertionError("missing closing brace for: " + methodMarker);
+    }
+
+    private static String statement(String source, String startMarker, String endMarker) {
+        int start = source.indexOf(startMarker);
+        assertTrue(start >= 0, "missing statement start: " + startMarker);
+        int end = source.indexOf(endMarker, start);
+        assertTrue(end >= start, "missing statement end: " + endMarker);
+        return source.substring(start, end + endMarker.length());
+    }
+
+    private static String section(String source, String startMarker, String endMarker) {
+        int start = source.indexOf(startMarker);
+        assertTrue(start >= 0, "missing section start: " + startMarker);
+        int end = source.indexOf(endMarker, start);
+        assertTrue(end > start, "missing section end: " + endMarker);
+        return source.substring(start, end);
+    }
+
+    private static int occurrences(String source, String needle) {
+        int count = 0;
+        int cursor = 0;
+        while ((cursor = source.indexOf(needle, cursor)) >= 0) {
+            count++;
+            cursor += needle.length();
+        }
+        return count;
+    }
+
+    private static String normalizeWhitespace(String source) {
+        return source.replaceAll("\\s+", " ").trim();
     }
 }
