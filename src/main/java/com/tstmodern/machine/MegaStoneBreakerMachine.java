@@ -123,11 +123,9 @@ public final class MegaStoneBreakerMachine extends WorkableElectricMultiblockMac
 
     private boolean canConsumeBoostFluids() {
         // Phase 1: Simulate both drains to verify availability without consuming anything.
-        if (!drainAcrossInputs(Fluids.WATER, 1_000, IFluidHandler.FluidAction.SIMULATE)
-                || !drainAcrossInputs(Fluids.LAVA, 1_000, IFluidHandler.FluidAction.SIMULATE)) {
-            return false;
-        }
-        return true;
+        boolean waterAvailable = drainAcrossInputs(Fluids.WATER, 1_000, IFluidHandler.FluidAction.SIMULATE);
+        boolean lavaAvailable = drainAcrossInputs(Fluids.LAVA, 1_000, IFluidHandler.FluidAction.SIMULATE);
+        return waterAvailable && lavaAvailable;
     }
 
     private void executeBoostFluidDrain() {
