@@ -4,6 +4,7 @@ import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
+import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
@@ -278,7 +279,6 @@ public final class HyperThermalConvectorDefinition {
                     .where('E', blocks(TSTBlocks.OSMIRIDIUM_MINING_CASING.get()))
                     .where('F', blocks(TSTBlocks.TANK_CASING_TIER_10.get()))
                     .where('G', blocks(TSTBlocks.ADVANCED_IRIDIUM_CASING.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
                             .or(Predicates.autoAbilities(true, false, false))
                             .or(Predicates.autoAbilities(false, false, true)))
                     .where('H', blocks(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get()))
@@ -287,19 +287,14 @@ public final class HyperThermalConvectorDefinition {
                     .where('K', Predicates.frames(GTMaterials.Neutronium))
                     .where('L', blocks(GCYMBlocks.CASING_STRESS_PROOF.get()))
                     .where('M', blocks(TSTBlocks.DYSON_SWARM_FLOOR.get()))
-                    .where('N', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                    .where('N', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get()))
                     .where('O', blocks(TSTBlocks.BOROPHENE_NANOWIRE_CASING.get()))
                     .where('P', blocks(TSTBlocks.NEUTRONIUM_PIPE_CASING.get()))
                     .where('Q', blocks(GTBlocks.FUSION_CASING.get()))
-                    .where('R', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
-                    .where('S', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
-                    .where('T', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
-                    .where('U', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                    .where('R', Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                    .where('S', Predicates.abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                    .where('T', Predicates.abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                    .where('U', Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
                     .where(' ', Predicates.air())
                     .build())
             .workableCasingModel(

@@ -121,69 +121,41 @@ public final class HyperThermalConvectorRecipes {
         // === Rapid Heat Exchange Recipes (UV Tier) ===
         // 1. Plasma Thermal Exchanges (Plasma + Water -> Cooled Gas/Molten Metal +
         // Dense Supercritical Steam)
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/helium_plasma"))
-                .inputFluids(Helium.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Helium.getFluid(FluidStorageKeys.GAS, 1000))
-                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+        addRapidHeatExchangePair(provider, "helium_plasma",
+                Helium.getFluid(FluidStorageKeys.PLASMA, 1000), 2000,
+                Helium.getFluid(FluidStorageKeys.GAS, 1000),
+                TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000));
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/nitrogen_plasma"))
-                .inputFluids(Nitrogen.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Nitrogen.getFluid(1000))
-                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+        addRapidHeatExchangePair(provider, "nitrogen_plasma",
+                Nitrogen.getFluid(FluidStorageKeys.PLASMA, 1000), 2000,
+                Nitrogen.getFluid(1000),
+                TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000));
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/oxygen_plasma"))
-                .inputFluids(Oxygen.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Oxygen.getFluid(FluidStorageKeys.GAS, 1000))
-                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+        addRapidHeatExchangePair(provider, "oxygen_plasma",
+                Oxygen.getFluid(FluidStorageKeys.PLASMA, 1000), 2000,
+                Oxygen.getFluid(FluidStorageKeys.GAS, 1000),
+                TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000));
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/argon_plasma"))
-                .inputFluids(Argon.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Argon.getFluid(1000))
-                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+        addRapidHeatExchangePair(provider, "argon_plasma",
+                Argon.getFluid(FluidStorageKeys.PLASMA, 1000), 2000,
+                Argon.getFluid(1000),
+                TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000));
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/iron_plasma"))
-                .inputFluids(Iron.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Iron.getFluid(1000))
-                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+        addRapidHeatExchangePair(provider, "iron_plasma",
+                Iron.getFluid(FluidStorageKeys.PLASMA, 1000), 2000,
+                Iron.getFluid(1000),
+                TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000));
 
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/nickel_plasma"))
-                .inputFluids(Nickel.getFluid(FluidStorageKeys.PLASMA, 1000))
-                .inputFluids(new FluidStack(Fluids.WATER, 2000))
-                .outputFluids(Nickel.getFluid(1000))
-                .outputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+        addRapidHeatExchangePair(provider, "nickel_plasma",
+                Nickel.getFluid(FluidStorageKeys.PLASMA, 1000), 2000,
+                Nickel.getFluid(1000),
+                TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(320_000));
 
         // 2. High-throughput Lava Thermal Exchange -> Dense Superheated Steam
-        TSTRecipeTypes.RAPID_HEAT_EXCHANGE.recipeBuilder(TSTModern.id("rapid_heat_exchange/lava_cooling"))
-                .inputFluids(new FluidStack(Fluids.LAVA, 10_000))
-                .inputFluids(new FluidStack(Fluids.WATER, 10_000))
-                .outputFluids(TSTMaterials.DENSE_SUPERHEATED_STEAM.getFluid(1_600_000))
-                .outputFluids(DistilledWater.getFluid(2000))
-                .duration(20)
-                .EUt(VA[UV])
-                .save(provider);
+        addRapidHeatExchangePair(provider, "lava_cooling",
+                new FluidStack(Fluids.LAVA, 10_000), 10_000,
+                TSTMaterials.DENSE_SUPERHEATED_STEAM.getFluid(1_600_000),
+                DistilledWater.getFluid(2000));
 
         // === Rapid Cooling Recipes (UV Tier) ===
         // 1. Gas Liquefaction (Gas -> Liquid)
@@ -266,6 +238,30 @@ public final class HyperThermalConvectorRecipes {
                 .duration(10)
                 .EUt(VA[UV])
                 .save(provider);
+    }
+
+    private static void addRapidHeatExchangePair(
+                                                  Consumer<FinishedRecipe> provider,
+                                                  String recipeName,
+                                                  FluidStack hotInput,
+                                                  int coolingAmount,
+                                                  FluidStack firstOutput,
+                                                  FluidStack secondOutput) {
+        for (boolean distilled : new boolean[] { false, true }) {
+            String suffix = distilled ? "_distilled_water" : "";
+            FluidStack coolingFluid = distilled ?
+                    DistilledWater.getFluid(coolingAmount) :
+                    new FluidStack(Fluids.WATER, coolingAmount);
+            TSTRecipeTypes.RAPID_HEAT_EXCHANGE
+                    .recipeBuilder(TSTModern.id("rapid_heat_exchange/" + recipeName + suffix))
+                    .inputFluids(hotInput.copy())
+                    .inputFluids(coolingFluid)
+                    .outputFluids(firstOutput.copy())
+                    .outputFluids(secondOutput.copy())
+                    .duration(20)
+                    .EUt(VA[UV])
+                    .save(provider);
+        }
     }
 
     private static void addDenseSteamUsageRecipes(Consumer<FinishedRecipe> provider) {
