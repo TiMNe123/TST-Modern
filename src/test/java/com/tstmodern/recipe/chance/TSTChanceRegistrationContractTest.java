@@ -32,7 +32,7 @@ final class TSTChanceRegistrationContractTest {
     }
 
     @Test
-    void productionRollsReturnTheExecutableDecisionSeams() throws IOException {
+    void productionRollBodiesMatchTheOnlyAllowedControlFlowAndArguments() throws IOException {
         String source = Files.readString(CHANCE_LOGICS_SOURCE);
         String weightedClass = section(
                 source,
@@ -43,12 +43,35 @@ final class TSTChanceRegistrationContractTest {
                 source.indexOf("private static final class SingleRollScaledChanceLogic"));
         String fluidRollBody = methodBody(fluidClass, "public @Unmodifiable List<@NotNull Content> roll(");
 
-        assertEquals(1, occurrences(weightedRollBody,
-                "return NetherInterfaceLogic.selectAndScaleThreeWeighted("),
-                "weighted production must return the executable weighted decision seam");
-        assertEquals(1, occurrences(fluidRollBody,
-                "return NetherInterfaceLogic.rollAndScaleOnce("),
-                "fluid production must return the executable single-roll decision seam");
+        String expectedWeightedBody = """
+                if (chancedEntries.isEmpty()) {
+                    return Collections.emptyList();
+                }
+                return NetherInterfaceLogic.selectAndScaleThreeWeighted(
+                        chancedEntries,
+                        entry -> entry.chance,
+                        GTValues.RNG::nextInt,
+                        (selected, scale) -> selected.copyChanced(cap, ContentModifier.multiplier(scale)),
+                        times);
+                """;
+        String expectedFluidBody = """
+                if (chancedEntries.isEmpty()) {
+                    return Collections.emptyList();
+                }
+                Content entry = chancedEntries.get(0);
+                return NetherInterfaceLogic.rollAndScaleOnce(
+                        entry,
+                        selected -> selected.chance,
+                        selected -> selected.maxChance,
+                        GTValues.RNG::nextInt,
+                        (selected, scale) -> selected.copyChanced(cap, ContentModifier.multiplier(scale)),
+                        times);
+                """;
+
+        assertEquals(normalizeWhitespace(expectedWeightedBody), normalizeWhitespace(weightedRollBody),
+                "weighted production must have only the empty guard and exact raw/scaled seam return");
+        assertEquals(normalizeWhitespace(expectedFluidBody), normalizeWhitespace(fluidRollBody),
+                "fluid production must have only the empty guard, first entry, and exact raw/scaled seam return");
     }
 
     @Test
@@ -100,5 +123,9 @@ final class TSTChanceRegistrationContractTest {
             cursor += needle.length();
         }
         return count;
+    }
+
+    private static String normalizeWhitespace(String source) {
+        return source.replaceAll("\\s+", " ").trim();
     }
 }
