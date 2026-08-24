@@ -4,6 +4,8 @@ import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.Objects;
+
 /**
  * Initializes every machine definition in a stable order during GTCEu's registry event.
  */
@@ -12,10 +14,10 @@ public final class TSTMachineRegistry {
 
     public static void registerMachines(
             GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        var megaStoneBreaker = MegaStoneBreakerDefinition.MACHINE;
-        var giantVacuumDryingFurnace = GiantVacuumDryingFurnaceDefinition.MACHINE;
-        var netherInterface = NetherInterfaceDefinition.MACHINE;
-        var hyperThermalConvector = HyperThermalConvectorDefinition.MACHINE;
-        var megaTreeFarm = MegaTreeFarmDefinition.MACHINE;
+        Objects.requireNonNull(MegaStoneBreakerDefinition.MACHINE);
+        Objects.requireNonNull(GiantVacuumDryingFurnaceDefinition.MACHINE);
+        Objects.requireNonNull(NetherInterfaceDefinition.MACHINE);
+        Objects.requireNonNull(HyperThermalConvectorDefinition.MACHINE);
+        Objects.requireNonNull(MegaTreeFarmDefinition.MACHINE);
     }
 }
