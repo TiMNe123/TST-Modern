@@ -1,7 +1,16 @@
 package com.tstmodern.registry.machine;
 
-import static com.gregtechceu.gtceu.api.pattern.Predicates.abilities;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
@@ -29,6 +38,9 @@ public final class DisassemblerDefinition {
             .recipeType(TSTRecipeTypes.DISASSEMBLER)
             .appearanceBlock(TSTBlocks.MOLECULAR_CASING)
             .pattern(definition -> {
+                Map<PartAbility, Collection<Block>> abilityBlocks = DisassemblerPartAbilityCandidates.knownPartAbilityBlocks();
+                Set<Block> closedIAbilityBlocks = DisassemblerPartAbilityCandidates
+                        .selectClosedIAbilityCandidates(abilityBlocks);
                 FactoryBlockPattern pattern = FactoryBlockPattern.start(
                         RelativeDirection.RIGHT,
                         RelativeDirection.DOWN,
@@ -49,9 +61,15 @@ public final class DisassemblerDefinition {
                         .where('G', blocks(TSTBlocks.MOLECULAR_CASING.get()))
                         .where('H', blocks(TSTBlocks.HOLLOW_CASING.get()))
                         .where('I', blocks(TSTBlocks.MOLECULAR_CASING.get())
-                                .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
-                                .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1))
-                                .or(abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1)))
+                                .or(DisassemblerPartAbilityCandidates.closedIAbility(
+                                        PartAbility.IMPORT_ITEMS, abilityBlocks, closedIAbilityBlocks)
+                                        .setMinGlobalLimited(1))
+                                .or(DisassemblerPartAbilityCandidates.closedIAbility(
+                                        PartAbility.EXPORT_ITEMS, abilityBlocks, closedIAbilityBlocks)
+                                        .setMinGlobalLimited(1))
+                                .or(DisassemblerPartAbilityCandidates.closedIAbility(
+                                        PartAbility.EXPORT_FLUIDS, abilityBlocks, closedIAbilityBlocks)
+                                        .setMinGlobalLimited(1)))
                         .where('J', Predicates.frames(GTMaterials.Neutronium))
                         .where(' ', Predicates.any())
                         .build();
@@ -68,4 +86,61 @@ public final class DisassemblerDefinition {
             .register();
 
     private DisassemblerDefinition() {}
+}
+
+/** Candidate seam kept separate so the closed-set behavior can run without Forge machine bootstrap. */
+final class DisassemblerPartAbilityCandidates {
+    private static final Set<PartAbility> I_ALLOWED_ABILITIES = Set.of(
+            PartAbility.IMPORT_ITEMS,
+            PartAbility.EXPORT_ITEMS,
+            PartAbility.EXPORT_FLUIDS);
+
+    private DisassemblerPartAbilityCandidates() {}
+
+    static com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate closedIAbility(PartAbility ability,
+                                                                                    Map<PartAbility, Collection<Block>> abilityBlocks,
+                                                                                    Set<Block> closedCandidates) {
+        Collection<Block> blocksForAbility = abilityBlocks.getOrDefault(ability, Set.of());
+        return blocks(blocksForAbility.stream()
+                .filter(closedCandidates::contains)
+                .toArray(Block[]::new));
+    }
+
+    /** Retains an allowed part only when no known PartAbility outside the I contract registered that block. */
+    static <T> Set<T> selectClosedIAbilityCandidates(Map<PartAbility, ? extends Collection<T>> abilityBlocks) {
+        Set<T> allowed = new LinkedHashSet<>();
+        Set<T> disallowed = new LinkedHashSet<>();
+        abilityBlocks.forEach((ability, candidateBlocks) -> {
+            if (I_ALLOWED_ABILITIES.contains(ability)) {
+                allowed.addAll(candidateBlocks);
+            } else {
+                disallowed.addAll(candidateBlocks);
+            }
+        });
+        allowed.removeAll(disallowed);
+        return Set.copyOf(allowed);
+    }
+
+    /**
+     * GTCEu 7.4 exposes each built-in ability as a public static field but no complete runtime registry.
+     * Scanning those fields catches every current GTCEu intersection, including both ME Pattern Buffers.
+     */
+    static Map<PartAbility, Collection<Block>> knownPartAbilityBlocks() {
+        return Arrays.stream(PartAbility.class.getFields())
+                .filter(field -> Modifier.isStatic(field.getModifiers()) && field.getType() == PartAbility.class)
+                .map(DisassemblerPartAbilityCandidates::partAbilityFromField)
+                .collect(Collectors.toMap(
+                        ability -> ability,
+                        PartAbility::getAllBlocks,
+                        (first, ignored) -> first,
+                        LinkedHashMap::new));
+    }
+
+    private static PartAbility partAbilityFromField(Field field) {
+        try {
+            return (PartAbility) field.get(null);
+        } catch (IllegalAccessException exception) {
+            throw new IllegalStateException("Unable to inspect GTCEu part abilities", exception);
+        }
+    }
 }
