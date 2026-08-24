@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.Block;
  * Formation-time casing-tier validation for the Large Disassembler.
  */
 public final class DisassemblerMachine extends WorkableMultiblockMachine {
+    private static final int REQUIRED_TIER_CASING_COUNT = 66;
     static final VoidingMode VOIDING_MODE = VoidingMode.VOID_ITEMS_FLUIDS;
 
     private int casingTier;
@@ -42,7 +43,8 @@ public final class DisassemblerMachine extends WorkableMultiblockMachine {
         casingTier = validation.tier();
         if (!validation.isValid()) {
             getMultiblockState().setError(new CasingTierMismatchError(
-                    validation.mismatchPosition(), validation.expectedBlock()));
+                    validation.mismatchPosition() == null ? getPos() : validation.mismatchPosition(),
+                    validation.expectedBlock()));
             onStructureInvalid();
         }
     }
@@ -69,6 +71,12 @@ public final class DisassemblerMachine extends WorkableMultiblockMachine {
         }
 
         CasingTier expected = casings.get(0);
+        if (casings.size() < REQUIRED_TIER_CASING_COUNT) {
+            return new CasingTierValidation(0, expected.position(), expected.block());
+        }
+        if (casings.size() > REQUIRED_TIER_CASING_COUNT) {
+            return new CasingTierValidation(0, casings.get(REQUIRED_TIER_CASING_COUNT).position(), expected.block());
+        }
         for (int index = 1; index < casings.size(); index++) {
             CasingTier casing = casings.get(index);
             if (casing.tier() != expected.tier()) {
