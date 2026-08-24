@@ -18,7 +18,6 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import java.util.concurrent.CompletableFuture;
 
 /** Forge entry point for the TST Modern port. */
 @Mod(TSTModern.MOD_ID)
@@ -46,8 +45,7 @@ public final class TSTModern {
 
     private static void addReloadListeners(AddReloadListenerEvent event) {
         event.addListener((stage, resources, preparationsProfiler, reloadProfiler, backgroundExecutor, gameExecutor) -> {
-            DisassemblerRecipeIndex.INSTANCE.invalidateFromReload();
-            return CompletableFuture.completedFuture(null);
+            return DisassemblerRecipeIndex.INSTANCE.invalidateAfterReload(stage, gameExecutor);
         });
     }
 }
