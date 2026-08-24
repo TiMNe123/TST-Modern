@@ -28,5 +28,9 @@
 
 ## Validation status
 
-- Audit complete.
-- Implementation and gameplay validation pending.
+- Recipe formula summary: seventeen approved Modern processing IDs locked by the catalog contract: seven `chemical_dehydrator/...` recipes and ten `vacuum_furnace/...` recipes.
+- Focused JUnit: `.\gradlew.bat test --tests com.tstmodern.data.recipe.PortRecipeCatalogContractTest` -> GREEN on August 24, 2026 (`4 tests`, `0 failures`, `BUILD SUCCESSFUL in 41s`). RED proof before GREEN: the same command failed intentionally while the temporary sentinel `vacuum_furnace/should_fail_red` was present, proving the contract catches count/ID drift.
+- Full build: `.\gradlew.bat clean test compileJava processResources build` -> `BUILD SUCCESSFUL` on August 24, 2026.
+- Catalog validator: `node C:/Users/mtien/IdeaProjects/TST-Modern/.agents/skills/port-tst-multiblock-gtceu/scripts/validate-casing-catalog.mjs` -> `Casing catalog valid: 25 machines, 408 entries.`
+- Deviation status: approved spec deviations unchanged; the single fixed segment, zero-based GTCEu coil conversion, `32 x coilTier` parallel scaling, and retained Modern recipe maps remain the validated contract.
+- Final status: build validated; gameplay validation pending

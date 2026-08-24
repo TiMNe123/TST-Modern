@@ -29,5 +29,9 @@
 
 ## Validation status
 
-- Audit complete.
-- Implementation and gameplay validation pending.
+- Recipe formula summary: fourteen processing recipes locked by the catalog contract: ten `basic(...)` registrations plus four direct `recipe("...")` registrations for `obsidian`, `netherrack`, `basalt`, and `cobbled_deepslate`.
+- Focused JUnit: `.\gradlew.bat test --tests com.tstmodern.data.recipe.PortRecipeCatalogContractTest` -> GREEN on August 24, 2026 (`4 tests`, `0 failures`, `BUILD SUCCESSFUL in 41s`).
+- Full build: `.\gradlew.bat clean test compileJava processResources build` -> `BUILD SUCCESSFUL` on August 24, 2026.
+- Catalog validator: `node C:/Users/mtien/IdeaProjects/TST-Modern/.agents/skills/port-tst-multiblock-gtceu/scripts/validate-casing-catalog.mjs` -> `Casing catalog valid: 25 machines, 408 entries.`
+- Deviation status: approved spec deviations unchanged; combined-fluid lookup for the fixed L/W positions remains the recorded Modern replacement for dedicated water/lava hatches.
+- Final status: build validated; gameplay validation pending

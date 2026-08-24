@@ -30,5 +30,9 @@
 
 ## Validation status
 
-- Audit complete.
-- Implementation and gameplay validation pending.
+- Recipe and ability summary: the catalog contract locks seven approved rapid heat-exchange pair registrations, the seven stable distilled-water variant IDs emitted by the helper, the 128/16 base parallel split, additive Parallel Hatch behavior, and fixed R/U imports with S/T exports without reopening the generic G/N bypass.
+- Focused JUnit: `.\gradlew.bat test --tests com.tstmodern.data.recipe.PortRecipeCatalogContractTest` -> GREEN on August 24, 2026 (`4 tests`, `0 failures`, `BUILD SUCCESSFUL in 41s`).
+- Full build: `.\gradlew.bat clean test compileJava processResources build` -> `BUILD SUCCESSFUL` on August 24, 2026.
+- Catalog validator: `node C:/Users/mtien/IdeaProjects/TST-Modern/.agents/skills/port-tst-multiblock-gtceu/scripts/validate-casing-catalog.mjs` -> `Casing catalog valid: 25 machines, 408 entries.`
+- Deviation status: approved spec deviations unchanged; the hand-authored Modern rapid heat-exchange catalog and seven distilled-water variants remain the approved substitute for the missing GoodGenerator dynamic source map.
+- Final status: build validated; gameplay validation pending

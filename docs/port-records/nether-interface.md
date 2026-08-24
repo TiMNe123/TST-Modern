@@ -31,5 +31,9 @@
 
 ## Validation status
 
-- Audit complete.
-- Implementation and gameplay validation pending.
+- Recipe and ability summary: the catalog contract locks exactly one `nether_interface/dimensional_harvesting` builder using `DistilledWater -> Poor Nether Waste`, exact three weighted package selections, one 30% Hellish Metal fluid roll, additive parallel hatch behavior, two-IV-amp reserve, and no post-cap overclock reintroduction.
+- Focused JUnit: `.\gradlew.bat test --tests com.tstmodern.data.recipe.PortRecipeCatalogContractTest` -> GREEN on August 24, 2026 (`4 tests`, `0 failures`, `BUILD SUCCESSFUL in 41s`).
+- Full build: `.\gradlew.bat clean test compileJava processResources build` -> `BUILD SUCCESSFUL` on August 24, 2026.
+- Catalog validator: `node C:/Users/mtien/IdeaProjects/TST-Modern/.agents/skills/port-tst-multiblock-gtceu/scripts/validate-casing-catalog.mjs` -> `Casing catalog valid: 25 machines, 408 entries.`
+- Deviation status: approved spec deviations unchanged; the exact three Modern package replacements and dedicated Poor Nether Waste fluid remain the recorded replacements for missing legacy dependencies.
+- Final status: build validated; gameplay validation pending
