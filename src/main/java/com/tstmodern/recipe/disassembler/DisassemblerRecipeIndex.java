@@ -55,7 +55,7 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
     private final List<DisassemblerRecipeSource> sources;
     private final DisassemblerRecipeAdapter adapter;
     private final DescriptorEnumerator enumerator;
-    private Set<ResourceLocation> ownedRepresentativeIds = Set.of();
+    private Set<GTRecipe> ownedRepresentativeInstances = Collections.newSetFromMap(new IdentityHashMap<>());
     private Snapshot snapshot = Snapshot.empty();
 
     DisassemblerRecipeIndex(List<DisassemblerRecipeSource> sources, DisassemblerRecipeAdapter adapter) {
@@ -122,18 +122,23 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
             List<RepresentativePlan> representatives = buildRepresentativePlansForCurrentGeneration();
             GTRecipeType type = TSTRecipeTypes.DISASSEMBLER;
             Set<GTRecipe> mainCategory = type.getCategoryMap().get(type.getCategory());
-            Set<ResourceLocation> replacementIds = new HashSet<>();
             List<GTRecipe> replacementRecipes = new ArrayList<>();
             for (RepresentativePlan representative : representatives) {
                 replacementRecipes.add(buildRecipe(representative.plan(), representative.id()));
-                replacementIds.add(representative.id());
             }
             if (mainCategory != null) {
-                replaceOwnedRepresentatives(mainCategory, ownedRepresentativeIds, replacementRecipes, recipe -> recipe.id);
+                ownedRepresentativeInstances = replaceOwnedInstances(mainCategory, ownedRepresentativeInstances,
+                        replacementRecipes, recipe -> recipe.id);
             } else {
                 replacementRecipes.forEach(type::addToMainCategory);
+                Set<GTRecipe> inserted = type.getCategoryMap().get(type.getCategory());
+                ownedRepresentativeInstances = identitySet();
+                if (inserted != null) {
+                    for (GTRecipe replacement : replacementRecipes) if (containsIdentity(inserted, replacement)) {
+                        ownedRepresentativeInstances.add(replacement);
+                    }
+                }
             }
-            ownedRepresentativeIds = Set.copyOf(replacementIds);
         }
     }
 
@@ -257,12 +262,34 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
         return items;
     }
 
-    static <T> void replaceOwnedRepresentatives(Collection<T> category, Set<ResourceLocation> ownedIds,
-                                                Collection<T> replacements, Function<T, ResourceLocation> id) {
-        if (category == null || id == null) return;
-        Set<ResourceLocation> owned = ownedIds == null ? Set.of() : ownedIds;
-        category.removeIf(recipe -> recipe != null && owned.contains(id.apply(recipe)));
-        if (replacements != null) category.addAll(replacements.stream().filter(Objects::nonNull).toList());
+    static <T> Set<T> replaceOwnedInstances(Collection<T> category, Set<T> ownedInstances,
+                                            Collection<T> replacements, Function<T, ResourceLocation> id) {
+        Set<T> owned = identitySet();
+        if (ownedInstances != null) owned.addAll(ownedInstances);
+        if (category == null || id == null) return identitySet();
+        category.removeIf(owned::contains);
+        Set<ResourceLocation> occupiedIds = new HashSet<>();
+        for (T entry : category) if (entry != null) occupiedIds.add(id.apply(entry));
+        Set<T> nextOwned = identitySet();
+        if (replacements != null) for (T replacement : replacements) {
+            if (replacement == null) continue;
+            ResourceLocation replacementId = id.apply(replacement);
+            if (occupiedIds.contains(replacementId)) continue;
+            if (category.add(replacement)) {
+                nextOwned.add(replacement);
+                occupiedIds.add(replacementId);
+            }
+        }
+        return nextOwned;
+    }
+
+    private static <T> Set<T> identitySet() {
+        return Collections.newSetFromMap(new IdentityHashMap<>());
+    }
+
+    private static <T> boolean containsIdentity(Collection<T> entries, T target) {
+        for (T entry : entries) if (entry == target) return true;
+        return false;
     }
 
     private GTRecipe buildRuntimeRecipe(RuntimeRecipePlan plan) {
