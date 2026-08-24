@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "tstmodern:block/casings/cultivation_soil_casing"
+    "top": "tstmodern:block/casings/cultivation_soil_casing_top",
+    "bottom": "tstmodern:block/casings/cultivation_soil_casing_bottom",
+    "side": "tstmodern:block/casings/cultivation_soil_casing_side"
   }
 }
