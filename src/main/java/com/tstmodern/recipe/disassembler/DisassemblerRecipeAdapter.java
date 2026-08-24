@@ -37,19 +37,15 @@ public final class DisassemblerRecipeAdapter {
         if (recipe == null) {
             return Optional.empty();
         }
-        try {
-            Optional<List<DecodedItemContent>> itemInputs = decodeItems(recipe.getInputContents(ItemRecipeCapability.CAP), true);
-            Optional<List<DecodedFluidContent>> fluidInputs = decodeFluids(recipe.getInputContents(FluidRecipeCapability.CAP), true);
-            Optional<List<DecodedItemContent>> itemOutputs = decodeItems(recipe.getOutputContents(ItemRecipeCapability.CAP), false);
-            List<Content> fluidOutputs = recipe.getOutputContents(FluidRecipeCapability.CAP);
-            if (itemInputs.isEmpty() || fluidInputs.isEmpty() || itemOutputs.isEmpty() || fluidOutputs == null) {
-                return Optional.empty();
-            }
-            return adapt(new DecodedRecipe(recipe.getId(), RecipeHelper.getRecipeEUtTier(recipe), itemInputs.get(), fluidInputs.get(),
-                    itemOutputs.get(), fluidOutputs.size()), sourcePriority, this::isBlacklisted);
-        } catch (ClassCastException | IllegalArgumentException | NullPointerException ignored) {
+        Optional<List<DecodedItemContent>> itemInputs = decodeItems(recipe.getInputContents(ItemRecipeCapability.CAP), true);
+        Optional<List<DecodedFluidContent>> fluidInputs = decodeFluids(recipe.getInputContents(FluidRecipeCapability.CAP), true);
+        Optional<List<DecodedItemContent>> itemOutputs = decodeItems(recipe.getOutputContents(ItemRecipeCapability.CAP), false);
+        List<Content> fluidOutputs = recipe.getOutputContents(FluidRecipeCapability.CAP);
+        if (itemInputs.isEmpty() || fluidInputs.isEmpty() || itemOutputs.isEmpty() || fluidOutputs == null) {
             return Optional.empty();
         }
+        return adapt(new DecodedRecipe(recipe.getId(), RecipeHelper.getRecipeEUtTier(recipe), itemInputs.get(), fluidInputs.get(),
+                itemOutputs.get(), fluidOutputs.size()), sourcePriority, this::isBlacklisted);
     }
 
     static Optional<DisassemblerRecipeDescriptor> adapt(DecodedRecipe recipe,
