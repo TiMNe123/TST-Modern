@@ -6,6 +6,7 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipeSerializer;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.tstmodern.TSTModern;
+import com.tstmodern.recipe.disassembler.DisassemblerRecipeIndex;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,7 @@ public final class TSTRecipeTypes {
     public static GTRecipeType RAPID_COOLING;
     public static GTRecipeType TREE_GROWTH_SIMULATOR;
     public static GTRecipeType AQUATIC_ZONE_SIMULATOR;
+    public static GTRecipeType DISASSEMBLER;
 
     private TSTRecipeTypes() {}
 
@@ -55,6 +57,24 @@ public final class TSTRecipeTypes {
         AQUATIC_ZONE_SIMULATOR = register(event, "aquatic_zone_simulator")
                 .setMaxIOSize(1, 9, 1, 0)
                 .setEUIO(IO.IN);
+
+        DISASSEMBLER = configureDisassembler(register(event, "disassembler"));
+    }
+
+    static GTRecipeType configureDisassembler(GTRecipeType type) {
+        return disassemblerConfiguration().apply(type);
+    }
+
+    static DisassemblerRecipeTypeConfiguration disassemblerConfiguration() {
+        return new DisassemblerRecipeTypeConfiguration(16, 16, 0, 4, DisassemblerRecipeIndex.INSTANCE);
+    }
+
+    record DisassemblerRecipeTypeConfiguration(int maxItemInputs, int maxItemOutputs, int maxFluidInputs,
+                                               int maxFluidOutputs, DisassemblerRecipeIndex customLogic) {
+        GTRecipeType apply(GTRecipeType type) {
+            return type.setMaxIOSize(maxItemInputs, maxItemOutputs, maxFluidInputs, maxFluidOutputs)
+                    .addCustomRecipeLogic(customLogic);
+        }
     }
 
     @SuppressWarnings("deprecation")
