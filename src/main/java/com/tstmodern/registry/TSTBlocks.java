@@ -12,6 +12,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
+
 /** Blocks absent from standard GTCEu but still required by the ported structure or recipes. */
 public final class TSTBlocks {
     private static final DeferredRegister<Block> BLOCKS =
@@ -56,6 +58,53 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> COMPOSITE_FARM_CASING = casing("composite_farm_casing");
     public static final RegistryObject<Block> INTEGRAL_FRAMEWORK_UV_CASING = casing("integral_framework_uv_casing");
 
+    // Disassembler casings
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_LV = casing(
+            "component_assembly_line_casing_lv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_MV = casing(
+            "component_assembly_line_casing_mv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_HV = casing(
+            "component_assembly_line_casing_hv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_EV = casing(
+            "component_assembly_line_casing_ev");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_IV = casing(
+            "component_assembly_line_casing_iv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_LUV = casing(
+            "component_assembly_line_casing_luv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_ZPM = casing(
+            "component_assembly_line_casing_zpm");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_UV = casing(
+            "component_assembly_line_casing_uv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_UHV = casing(
+            "component_assembly_line_casing_uhv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_UEV = casing(
+            "component_assembly_line_casing_uev");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_UIV = casing(
+            "component_assembly_line_casing_uiv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_UMV = casing(
+            "component_assembly_line_casing_umv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_UXV = casing(
+            "component_assembly_line_casing_uxv");
+    public static final RegistryObject<Block> COMPONENT_ASSEMBLY_LINE_CASING_MAX = casing(
+            "component_assembly_line_casing_max");
+    public static final List<RegistryObject<Block>> COMPONENT_ASSEMBLY_LINE_CASINGS = List.of(
+            COMPONENT_ASSEMBLY_LINE_CASING_LV,
+            COMPONENT_ASSEMBLY_LINE_CASING_MV,
+            COMPONENT_ASSEMBLY_LINE_CASING_HV,
+            COMPONENT_ASSEMBLY_LINE_CASING_EV,
+            COMPONENT_ASSEMBLY_LINE_CASING_IV,
+            COMPONENT_ASSEMBLY_LINE_CASING_LUV,
+            COMPONENT_ASSEMBLY_LINE_CASING_ZPM,
+            COMPONENT_ASSEMBLY_LINE_CASING_UV,
+            COMPONENT_ASSEMBLY_LINE_CASING_UHV,
+            COMPONENT_ASSEMBLY_LINE_CASING_UEV,
+            COMPONENT_ASSEMBLY_LINE_CASING_UIV,
+            COMPONENT_ASSEMBLY_LINE_CASING_UMV,
+            COMPONENT_ASSEMBLY_LINE_CASING_UXV,
+            COMPONENT_ASSEMBLY_LINE_CASING_MAX);
+    public static final RegistryObject<Block> MOLECULAR_CASING = casing("molecular_casing");
+    public static final RegistryObject<Block> HOLLOW_CASING = casing("hollow_casing");
+
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_1 = compressedCobble(1);
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_2 = compressedCobble(2);
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_3 = compressedCobble(3);
@@ -70,6 +119,25 @@ public final class TSTBlocks {
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
+    }
+
+    /** Returns the registered component assembly line casing for a 1-based LV-through-MAX tier. */
+    public static RegistryObject<Block> componentAssemblyLineCasing(int tier) {
+        if (tier < 1 || tier > COMPONENT_ASSEMBLY_LINE_CASINGS.size()) {
+            throw new IllegalArgumentException("Component assembly line tier must be between 1 and 14: " + tier);
+        }
+        return COMPONENT_ASSEMBLY_LINE_CASINGS.get(tier - 1);
+    }
+
+    /** Returns the 1-based LV-through-MAX component assembly line tier, or zero for a different block. */
+    public static int componentAssemblyLineTier(Block block) {
+        for (int index = 0; index < COMPONENT_ASSEMBLY_LINE_CASINGS.size(); index++) {
+            RegistryObject<Block> casing = COMPONENT_ASSEMBLY_LINE_CASINGS.get(index);
+            if (casing.isPresent() && casing.get() == block) {
+                return index + 1;
+            }
+        }
+        return 0;
     }
 
     private static RegistryObject<Block> casing(String name) {

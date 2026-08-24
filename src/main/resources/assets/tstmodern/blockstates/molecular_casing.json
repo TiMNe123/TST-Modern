@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tstmodern:block/casings/molecular_casing"
+    }
+  }
+}
