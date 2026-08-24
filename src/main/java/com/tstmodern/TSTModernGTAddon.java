@@ -17,6 +17,11 @@ import java.util.function.Consumer;
 @GTAddon
 public final class TSTModernGTAddon implements IGTAddon {
     @Override
+    public boolean requiresHighTier() {
+        return true;
+    }
+
+    @Override
     public GTRegistrate getRegistrate() {
         return TSTModern.REGISTRATE;
     }
