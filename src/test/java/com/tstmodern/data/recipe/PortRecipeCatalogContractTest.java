@@ -62,6 +62,25 @@ final class PortRecipeCatalogContractTest {
             "vacuum_furnace/hsse",
             "vacuum_furnace/hsss");
 
+    private static final List<String> EXPECTED_GIANT_ALL_RECIPE_IDS = List.of(
+            "chemical_dehydrator/calcium_chloride",
+            "chemical_dehydrator/magnesium_chloride",
+            "chemical_dehydrator/lithium_chloride",
+            "chemical_dehydrator/bauxite_dehydration",
+            "chemical_dehydrator/rare_earth",
+            "chemical_dehydrator/clay_drying",
+            "chemical_dehydrator/sponge_drying",
+            "vacuum_furnace/annealed_copper",
+            "vacuum_furnace/silicon_annealing",
+            "vacuum_furnace/titanium_sintering",
+            "vacuum_furnace/tungsten_sintering",
+            "vacuum_furnace/naquadah",
+            "vacuum_furnace/naquadah_alloy",
+            "vacuum_furnace/trinium",
+            "vacuum_furnace/hssg",
+            "vacuum_furnace/hsse",
+            "vacuum_furnace/hsss");
+
     private static final List<String> EXPECTED_HYPER_PAIR_NAMES = List.of(
             "helium_plasma",
             "nitrogen_plasma",
@@ -129,6 +148,7 @@ final class PortRecipeCatalogContractTest {
                 .filter(id -> id.startsWith("vacuum_furnace/"))
                 .toList();
 
+        assertEquals(EXPECTED_GIANT_ALL_RECIPE_IDS, recipeIds);
         assertEquals(EXPECTED_GIANT_DEHYDRATOR_IDS, dehydratorIds);
         assertEquals(EXPECTED_GIANT_VACUUM_IDS, vacuumIds);
     }
