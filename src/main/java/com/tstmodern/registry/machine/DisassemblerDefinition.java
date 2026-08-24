@@ -94,6 +94,10 @@ final class DisassemblerPartAbilityCandidates {
             PartAbility.IMPORT_ITEMS,
             PartAbility.EXPORT_ITEMS,
             PartAbility.EXPORT_FLUIDS);
+    private static final Set<PartAbility> I_COMPATIBLE_ABILITY_METADATA = Set.of(
+            PartAbility.EXPORT_FLUIDS_1X,
+            PartAbility.EXPORT_FLUIDS_4X,
+            PartAbility.EXPORT_FLUIDS_9X);
 
     private DisassemblerPartAbilityCandidates() {}
 
@@ -113,7 +117,7 @@ final class DisassemblerPartAbilityCandidates {
         abilityBlocks.forEach((ability, candidateBlocks) -> {
             if (I_ALLOWED_ABILITIES.contains(ability)) {
                 allowed.addAll(candidateBlocks);
-            } else {
+            } else if (!I_COMPATIBLE_ABILITY_METADATA.contains(ability)) {
                 disallowed.addAll(candidateBlocks);
             }
         });
