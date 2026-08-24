@@ -3,7 +3,6 @@ package com.tstmodern.recipe.disassembler;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.wireGtSingle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -35,20 +34,29 @@ public final class DisassemblerRecipeAdapter {
             new ResourceLocation("tstmodern", "disassembler_blacklist"));
 
     public Optional<DisassemblerRecipeDescriptor> adapt(GTRecipe recipe, int sourcePriority) {
-        Optional<List<DecodedItemContent>> itemInputs = decodeItems(recipe.getInputContents(ItemRecipeCapability.CAP));
-        Optional<List<DecodedFluidContent>> fluidInputs = decodeFluids(recipe.getInputContents(FluidRecipeCapability.CAP));
-        Optional<List<DecodedItemContent>> itemOutputs = decodeItems(recipe.getOutputContents(ItemRecipeCapability.CAP));
-        if (itemInputs.isEmpty() || fluidInputs.isEmpty() || itemOutputs.isEmpty()) {
+        if (recipe == null) {
             return Optional.empty();
         }
-        return adapt(new DecodedRecipe(recipe.getId(), RecipeHelper.getRecipeEUtTier(recipe), itemInputs.get(), fluidInputs.get(),
-                itemOutputs.get(), recipe.getOutputContents(FluidRecipeCapability.CAP).size()), sourcePriority, this::isBlacklisted);
+        try {
+            Optional<List<DecodedItemContent>> itemInputs = decodeItems(recipe.getInputContents(ItemRecipeCapability.CAP), true);
+            Optional<List<DecodedFluidContent>> fluidInputs = decodeFluids(recipe.getInputContents(FluidRecipeCapability.CAP), true);
+            Optional<List<DecodedItemContent>> itemOutputs = decodeItems(recipe.getOutputContents(ItemRecipeCapability.CAP), false);
+            List<Content> fluidOutputs = recipe.getOutputContents(FluidRecipeCapability.CAP);
+            if (itemInputs.isEmpty() || fluidInputs.isEmpty() || itemOutputs.isEmpty() || fluidOutputs == null) {
+                return Optional.empty();
+            }
+            return adapt(new DecodedRecipe(recipe.getId(), RecipeHelper.getRecipeEUtTier(recipe), itemInputs.get(), fluidInputs.get(),
+                    itemOutputs.get(), fluidOutputs.size()), sourcePriority, this::isBlacklisted);
+        } catch (ClassCastException | IllegalArgumentException | NullPointerException ignored) {
+            return Optional.empty();
+        }
     }
 
     static Optional<DisassemblerRecipeDescriptor> adapt(DecodedRecipe recipe,
                                                          int sourcePriority,
                                                          Predicate<Item> blacklist) {
-        if (recipe.itemOutputs().size() != 1 || recipe.fluidOutputCount() != 0) {
+        if (recipe == null || blacklist == null || recipe.itemOutputs() == null || recipe.itemInputs() == null
+                || recipe.fluidInputs() == null || recipe.itemOutputs().size() != 1 || recipe.fluidOutputCount() != 0) {
             return Optional.empty();
         }
         Optional<ItemAmount> output = itemAmount(recipe.itemOutputs().get(0));
@@ -69,10 +77,13 @@ public final class DisassemblerRecipeAdapter {
     }
 
     public boolean isBlacklisted(Item item) {
+        if (item == null) {
+            return true;
+        }
         if (item instanceof IGTTool) {
             return true;
         }
-        if (item instanceof TagPrefixItem prefixItem
+        if (item instanceof TagPrefixItem prefixItem && prefixItem.tagPrefix != null
                 && (("nanite".equals(prefixItem.tagPrefix.name) && prefixItem.material == GTMaterials.Carbon)
                         || prefixItem.tagPrefix == wireGtSingle)) {
             return true;
@@ -81,8 +92,14 @@ public final class DisassemblerRecipeAdapter {
     }
 
     private static Optional<List<DisassemblerRecipeDescriptor.ReturnedItem>> itemReturns(List<DecodedItemContent> contents) {
+        if (contents == null) {
+            return Optional.empty();
+        }
         List<DisassemblerRecipeDescriptor.ReturnedItem> returned = new ArrayList<>();
         for (DecodedItemContent content : contents) {
+            if (content == null) {
+                return Optional.empty();
+            }
             if (content.chance() == 0) {
                 continue;
             }
@@ -96,12 +113,19 @@ public final class DisassemblerRecipeAdapter {
     }
 
     private static Optional<List<DisassemblerRecipeDescriptor.ReturnedFluid>> fluidReturns(List<DecodedFluidContent> contents) {
+        if (contents == null) {
+            return Optional.empty();
+        }
         List<DisassemblerRecipeDescriptor.ReturnedFluid> returned = new ArrayList<>();
         for (DecodedFluidContent content : contents) {
+            if (content == null) {
+                return Optional.empty();
+            }
             if (content.chance() == 0) {
                 continue;
             }
-            if (content.alternatives().isEmpty() || content.amount() <= 0) {
+            if (content.alternatives() == null || content.alternatives().isEmpty() || content.alternatives().get(0) == null
+                    || content.amount() <= 0) {
                 return Optional.empty();
             }
             returned.add(new DisassemblerRecipeDescriptor.ReturnedFluid(content.alternatives().get(0), content.amount()));
@@ -110,28 +134,76 @@ public final class DisassemblerRecipeAdapter {
     }
 
     private static Optional<ItemAmount> itemAmount(DecodedItemContent content) {
-        if (content.alternatives().isEmpty() || content.amount() <= 0) {
+        if (content == null || content.alternatives() == null || content.alternatives().isEmpty()
+                || content.alternatives().get(0) == null || content.amount() <= 0) {
             return Optional.empty();
         }
         return Optional.of(new ItemAmount(content.alternatives().get(0), content.amount()));
     }
 
-    private static Optional<List<DecodedItemContent>> decodeItems(List<Content> contents) {
+    static Optional<List<DecodedItemContent>> decodeItems(List<Content> contents, boolean omitChanceZero) {
+        if (contents == null) {
+            return Optional.empty();
+        }
         List<DecodedItemContent> decoded = new ArrayList<>();
-        for (Content content : contents) {
-            Ingredient ingredient = ItemRecipeCapability.CAP.of(content.content);
-            int amount = ingredient instanceof SizedIngredient sized ? sized.getAmount() : 1;
-            decoded.add(new DecodedItemContent(Arrays.stream(ingredient.getItems()).map(ItemStack::getItem).toList(), amount, content.chance));
+        try {
+            for (Content content : contents) {
+                if (content == null) {
+                    return Optional.empty();
+                }
+                if (omitChanceZero && content.chance == 0) {
+                    continue;
+                }
+                Ingredient ingredient = ItemRecipeCapability.CAP.of(content.content);
+                if (ingredient == null || ingredient.getItems() == null) {
+                    return Optional.empty();
+                }
+                ItemStack[] stacks = ingredient.getItems();
+                List<Item> alternatives = new ArrayList<>(stacks.length);
+                for (ItemStack stack : stacks) {
+                    if (stack == null || stack.getItem() == null) {
+                        return Optional.empty();
+                    }
+                    alternatives.add(stack.getItem());
+                }
+                int amount = ingredient instanceof SizedIngredient sized ? sized.getAmount() : 1;
+                decoded.add(new DecodedItemContent(List.copyOf(alternatives), amount, content.chance));
+            }
+        } catch (ClassCastException | IllegalArgumentException | NullPointerException ignored) {
+            return Optional.empty();
         }
         return Optional.of(List.copyOf(decoded));
     }
 
-    private static Optional<List<DecodedFluidContent>> decodeFluids(List<Content> contents) {
+    static Optional<List<DecodedFluidContent>> decodeFluids(List<Content> contents, boolean omitChanceZero) {
+        if (contents == null) {
+            return Optional.empty();
+        }
         List<DecodedFluidContent> decoded = new ArrayList<>();
-        for (Content content : contents) {
-            FluidIngredient ingredient = FluidRecipeCapability.CAP.of(content.content);
-            decoded.add(new DecodedFluidContent(Arrays.stream(ingredient.getStacks()).map(FluidStack::getFluid).toList(),
-                    ingredient.getAmount(), content.chance));
+        try {
+            for (Content content : contents) {
+                if (content == null) {
+                    return Optional.empty();
+                }
+                if (omitChanceZero && content.chance == 0) {
+                    continue;
+                }
+                FluidIngredient ingredient = FluidRecipeCapability.CAP.of(content.content);
+                if (ingredient == null || ingredient.getStacks() == null) {
+                    return Optional.empty();
+                }
+                FluidStack[] stacks = ingredient.getStacks();
+                List<Fluid> alternatives = new ArrayList<>(stacks.length);
+                for (FluidStack stack : stacks) {
+                    if (stack == null || stack.getFluid() == null) {
+                        return Optional.empty();
+                    }
+                    alternatives.add(stack.getFluid());
+                }
+                decoded.add(new DecodedFluidContent(List.copyOf(alternatives), ingredient.getAmount(), content.chance));
+            }
+        } catch (ClassCastException | IllegalArgumentException | NullPointerException ignored) {
+            return Optional.empty();
         }
         return Optional.of(List.copyOf(decoded));
     }
