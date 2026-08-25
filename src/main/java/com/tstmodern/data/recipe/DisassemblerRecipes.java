@@ -347,7 +347,7 @@ public final class DisassemblerRecipes {
             case "darmstadtium" -> GTMaterials.Darmstadtium;
             case "naquadria" -> GTMaterials.Naquadria;
             case "osmiridium" -> GTMaterials.Osmiridium;
-            case "plutonium" -> GTMaterials.Plutonium239;
+            case "plutonium" -> GTMaterials.Plutonium241;
             case "lead" -> GTMaterials.Lead;
             case "uranium" -> GTMaterials.Uranium238;
             case "soldering_alloy" -> GTMaterials.SolderingAlloy;

@@ -1,30 +1,118 @@
 package com.tstmodern.machine;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.gui.fancy.IFancyConfigurator;
+import com.gregtechceu.gtceu.api.gui.fancy.IFancyUIProvider;
+import com.gregtechceu.gtceu.api.gui.fancy.TooltipsPanel;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
+import com.gregtechceu.gtceu.api.machine.feature.IFancyUIMachine;
 import com.gregtechceu.gtceu.api.machine.feature.IVoidable.VoidingMode;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IDisplayUIMachine;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
+import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.error.PatternError;
 import com.tstmodern.registry.TSTBlocks;
 
+import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
+import com.lowdragmc.lowdraglib.gui.widget.ComponentPanelWidget;
+import com.lowdragmc.lowdraglib.gui.widget.DraggableScrollableWidgetGroup;
+import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
+import com.lowdragmc.lowdraglib.gui.widget.Widget;
+import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
+import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
+import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
+import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 /**
- * Formation-time casing-tier validation for the Large Disassembler.
+ * Formation-time casing-tier validation and runtime state for the Large Disassembler.
  */
-public final class DisassemblerMachine extends WorkableMultiblockMachine {
+public final class DisassemblerMachine extends WorkableMultiblockMachine implements IDisplayUIMachine, IFancyUIMachine {
+    protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER =
+            new ManagedFieldHolder(DisassemblerMachine.class,
+                    WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
+
     private static final int REQUIRED_TIER_CASING_COUNT = 66;
     static final VoidingMode VOIDING_MODE = VoidingMode.VOID_ITEMS_FLUIDS;
 
+    @Persisted
+    @DescSynced
     private int casingTier;
 
     public DisassemblerMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
+    }
+
+    @Override
+    public ManagedFieldHolder getFieldHolder() {
+        return MANAGED_FIELD_HOLDER;
+    }
+
+    @Override
+    public void addDisplayText(List<Component> textList) {
+        IDisplayUIMachine.super.addDisplayText(textList);
+        MultiblockDisplayText.builder(textList, isFormed())
+                .setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeLogic)
+                .addCustom(builder -> {
+                    if (isFormed() && casingTier > 0) {
+                        String tierName = casingTier < GTValues.VN.length ? GTValues.VN[casingTier] : String.valueOf(casingTier);
+                        builder.add(Component.translatable("tstmodern.machine.disassembler.gui.casing_tier", tierName));
+                    }
+                })
+                .addOutputLines(recipeLogic.getLastRecipe());
+        getDefinition().getAdditionalDisplay().accept(this, textList);
+    }
+
+    @Override
+    public ModularUI createUI(Player player) {
+        return IFancyUIMachine.super.createUI(player);
+    }
+
+    @Override
+    public Widget createUIWidget() {
+        WidgetGroup group = new WidgetGroup(0, 0, 182, 117);
+        DraggableScrollableWidgetGroup screen = new DraggableScrollableWidgetGroup(4, 4, 174, 109);
+        screen.setBackground(getScreenTexture());
+        screen.addWidget(new LabelWidget(4, 5, self().getBlockState().getBlock().getName()));
+        screen.addWidget(new ComponentPanelWidget(4, 17, this::addDisplayText)
+                .setMaxWidthLimit(166)
+                .clickHandler(this::handleDisplayClick));
+        group.addWidget(screen);
+        return group;
+    }
+
+    @Override
+    public List<IFancyUIProvider> getSubTabs() {
+        return getParts().stream()
+                .filter(IFancyUIProvider.class::isInstance)
+                .map(IFancyUIProvider.class::cast)
+                .toList();
+    }
+
+    @Override
+    public void attachTooltips(TooltipsPanel tooltipsPanel) {
+        IFancyUIMachine.super.attachTooltips(tooltipsPanel);
+        for (IMultiPart part : getParts()) {
+            part.attachFancyTooltipsToController(this, tooltipsPanel);
+        }
+    }
+
+    @Override
+    public void attachConfigurators(com.gregtechceu.gtceu.api.gui.fancy.ConfiguratorPanel configuratorPanel) {
+        IFancyUIMachine.super.attachConfigurators(configuratorPanel);
+        configuratorPanel.attachConfigurators(new IFancyConfigurator[0]);
     }
 
     @Override
