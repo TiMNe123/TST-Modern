@@ -31,6 +31,12 @@ public final class TSTMaterials {
                 MaterialFlags.GENERATE_DENSE
         );
 
+        // Enable Bolts & Screws for Europium (used in Hollow Casing recipe)
+        GTMaterials.Europium.addFlags(
+                MaterialFlags.GENERATE_ROD,
+                MaterialFlags.GENERATE_BOLT_SCREW
+        );
+
         // Custom Hellish Metal
         HELLISH_METAL = new Material.Builder(TSTModern.id("hellish_metal"))
                 .ingot()
