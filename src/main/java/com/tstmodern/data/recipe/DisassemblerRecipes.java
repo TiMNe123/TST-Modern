@@ -112,7 +112,7 @@ public final class DisassemblerRecipes {
                             fluid("soldering_alloy", 147_456),
                             fluid("uu_matter", 128_000),
                             fluid("pcb_coolant", 768_000)),
-                    72_000, EutSpec.va(UEV), ResearchSpec.scanner(machine("assembler", "lv"), 576_000, LV)));
+                    72_000, EutSpec.va(UEV), ResearchSpec.station(machine("assembler", "uhv"), 72_000, UHV)));
 
     private DisassemblerRecipes() {}
 
