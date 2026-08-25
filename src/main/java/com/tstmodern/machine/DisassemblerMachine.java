@@ -85,7 +85,7 @@ public final class DisassemblerMachine extends WorkableMultiblockMachine impleme
         WidgetGroup group = new WidgetGroup(0, 0, 182, 117);
         DraggableScrollableWidgetGroup screen = new DraggableScrollableWidgetGroup(4, 4, 174, 109);
         screen.setBackground(getScreenTexture());
-        screen.addWidget(new LabelWidget(4, 5, self().getBlockState().getBlock().getDescriptionId()));
+        screen.addWidget(new LabelWidget(4, 5, self().getBlockState().getBlock().getName()));
         screen.addWidget(new ComponentPanelWidget(4, 17, this::addDisplayText)
                 .setMaxWidthLimit(166)
                 .clickHandler(this::handleDisplayClick));
