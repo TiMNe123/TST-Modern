@@ -135,6 +135,7 @@
   "tstmodern.machine.disassembler.tooltip.3": "Scans every input bus and consumes only complete source-output batches",
   "tstmodern.machine.disassembler.tooltip.4": "Insufficient output capacity voids only the overflow",
   "tstmodern.machine.disassembler.error.mixed_casing": "Structure requires 66 uniform Component Assembly Line Casings of the same tier",
+  "tstmodern.machine.disassembler.gui.casing_tier": "Casing Tier: %s",
   "recipetype.tstmodern.disassembler": "Large Disassembler",
   "gtceu.tstmodern.disassembler": "Large Disassembler",
   "gtceu.disassembler": "Large Disassembler",

@@ -67,7 +67,7 @@ public final class DisassemblerMachine extends WorkableMultiblockMachine impleme
                 .addProgressLine(recipeLogic)
                 .addCustom(builder -> {
                     if (isFormed() && casingTier > 0) {
-                        String tierName = casingTier <= GTValues.VN.length ? GTValues.VN[casingTier] : String.valueOf(casingTier);
+                        String tierName = casingTier < GTValues.VN.length ? GTValues.VN[casingTier] : String.valueOf(casingTier);
                         builder.add(Component.translatable("tstmodern.machine.disassembler.gui.casing_tier", tierName));
                     }
                 })

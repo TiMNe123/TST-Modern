@@ -134,6 +134,7 @@
   "tstmodern.machine.disassembler.tooltip.3": "Quét mọi bus đầu vào và chỉ tiêu thụ các lô đầu ra nguồn hoàn chỉnh",
   "tstmodern.machine.disassembler.tooltip.4": "Khi đầu ra không đủ chỗ, chỉ phần dư bị hủy",
   "tstmodern.machine.disassembler.error.mixed_casing": "Cấu trúc yêu cầu đúng 66 khối Vỏ Dây Chuyền Lắp Ráp Linh Kiện cùng một cấp độ",
+  "tstmodern.machine.disassembler.gui.casing_tier": "Cấp vỏ máy: %s",
   "recipetype.tstmodern.disassembler": "Máy Tháo Rã Cỡ Lớn",
   "gtceu.tstmodern.disassembler": "Máy Tháo Rã Cỡ Lớn",
   "gtceu.disassembler": "Máy Tháo Rã Cỡ Lớn",
