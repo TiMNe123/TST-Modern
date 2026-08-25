@@ -22,6 +22,7 @@ public final class TSTRecipeTypes {
     public static GTRecipeType TREE_GROWTH_SIMULATOR;
     public static GTRecipeType AQUATIC_ZONE_SIMULATOR;
     public static GTRecipeType DISASSEMBLER;
+    public static GTRecipeType MASS_FABRICATOR;
 
     private TSTRecipeTypes() {}
 
@@ -59,6 +60,12 @@ public final class TSTRecipeTypes {
                 .setEUIO(IO.IN);
 
         DISASSEMBLER = configureDisassembler(register(event, "disassembler"));
+
+        MASS_FABRICATOR = register(event, "mass_fabricator", GTRecipeTypes.ELECTRIC)
+                .setMaxIOSize(1, 0, 1, 1)
+                .setEUIO(IO.IN)
+                .setSlotOverlay(false, false, true, com.gregtechceu.gtceu.api.gui.GuiTextures.SOLIDIFIER_OVERLAY)
+                .setProgressBar(com.gregtechceu.gtceu.api.gui.GuiTextures.PROGRESS_BAR_MASS_FAB, com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT);
     }
 
     static GTRecipeType configureDisassembler(GTRecipeType type) {
@@ -79,7 +86,12 @@ public final class TSTRecipeTypes {
 
     @SuppressWarnings("deprecation")
     private static GTRecipeType register(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event, String name) {
-        GTRecipeType type = new GTRecipeType(TSTModern.id(name), GTRecipeTypes.MULTIBLOCK);
+        return register(event, name, GTRecipeTypes.MULTIBLOCK);
+    }
+
+    @SuppressWarnings("deprecation")
+    private static GTRecipeType register(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event, String name, String group) {
+        GTRecipeType type = new GTRecipeType(TSTModern.id(name), group);
         com.gregtechceu.gtceu.api.registry.GTRegistries.register(BuiltInRegistries.RECIPE_TYPE,
                 type.registryName, type);
         com.gregtechceu.gtceu.api.registry.GTRegistries.register(BuiltInRegistries.RECIPE_SERIALIZER,

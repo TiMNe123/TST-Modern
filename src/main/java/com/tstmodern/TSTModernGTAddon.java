@@ -7,6 +7,7 @@ import com.tstmodern.data.recipe.BigBroArrayRecipes;
 import com.tstmodern.data.recipe.DisassemblerRecipes;
 import com.tstmodern.data.recipe.GiantVacuumDryingFurnaceRecipes;
 import com.tstmodern.data.recipe.HyperThermalConvectorRecipes;
+import com.tstmodern.data.recipe.MassFabricatorRecipes;
 import com.tstmodern.data.recipe.MegaStoneBreakerRecipes;
 import com.tstmodern.data.recipe.MegaTreeFarmRecipes;
 import com.tstmodern.data.recipe.NetherInterfaceRecipes;
@@ -47,6 +48,7 @@ public final class TSTModernGTAddon implements IGTAddon {
         MegaTreeFarmRecipes.register(provider);
         DisassemblerRecipes.register(provider);
         BigBroArrayRecipes.register(provider);
+        MassFabricatorRecipes.register(provider);
     }
 }
 

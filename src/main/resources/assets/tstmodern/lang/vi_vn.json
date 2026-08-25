@@ -165,5 +165,16 @@
   "tstmodern.machine.big_bro_array.status.embedded": "Đã nạp: %d x %s (Tier %s)",
   "tstmodern.machine.big_bro_array.status.parallel": "Mức song song hiện tại: %s",
   "tstmodern.machine.big_bro_array.status.coil": "Cuộn nhiệt cấp %d: Giảm %d%% điện tiêu thụ",
-  "tstmodern.machine.big_bro_array.status.speed": "Vỏ Song Song MK%d: Tăng %d%% tốc độ xử lý"
+  "tstmodern.machine.big_bro_array.status.speed": "Vỏ Song Song MK%d: Tăng %d%% tốc độ xử lý",
+  "tstmodern.mass_fabricator": "Máy Tạo Vật Chất",
+  "gtceu.tstmodern.mass_fabricator": "Máy Tạo Vật Chất",
+  "recipetype.tstmodern.mass_fabricator": "Máy Tạo Vật Chất",
+  "gtceu.mass_fabricator": "Máy Tạo Vật Chất",
+  "gtceu.recipe_type.tstmodern.mass_fabricator": "Máy Tạo Vật Chất",
+  "block.tstmodern.uhv_mass_fabricator": "§4Máy Tạo Vật Chất Sử Thi§r",
+  "block.tstmodern.uev_mass_fabricator": "§aMáy Tạo Vật Chất Sử Thi II§r",
+  "block.tstmodern.uiv_mass_fabricator": "§2Máy Tạo Vật Chất Sử Thi III§r",
+  "block.tstmodern.uxv_mass_fabricator": "§eMáy Tạo Vật Chất Sử Thi IV§r",
+  "block.tstmodern.opv_mass_fabricator": "§9§lMáy Tạo Vật Chất Huyền Thoại§r",
+  "block.tstmodern.max_mass_fabricator": "§c§lMáy Tạo Vật Chất Huyền Thoại II§r"
 }

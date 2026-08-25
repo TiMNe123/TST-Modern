@@ -165,5 +165,16 @@
   "tstmodern.machine.big_bro_array.status.embedded": "Embedded: %d x %s (Tier %s)",
   "tstmodern.machine.big_bro_array.status.parallel": "Current Parallelism: %s",
   "tstmodern.machine.big_bro_array.status.coil": "Heating Coil Tier %d: -%d%% EU Consumption",
-  "tstmodern.machine.big_bro_array.status.speed": "Parallel Casing MK%d: +%d%% Processing Speed"
+  "tstmodern.machine.big_bro_array.status.speed": "Parallel Casing MK%d: +%d%% Processing Speed",
+  "tstmodern.mass_fabricator": "Mass Fabricator",
+  "gtceu.tstmodern.mass_fabricator": "Mass Fabricator",
+  "recipetype.tstmodern.mass_fabricator": "Mass Fabricator",
+  "gtceu.mass_fabricator": "Mass Fabricator",
+  "gtceu.recipe_type.tstmodern.mass_fabricator": "Mass Fabricator",
+  "block.tstmodern.uhv_mass_fabricator": "§4Epic Mass Fabricator§r",
+  "block.tstmodern.uev_mass_fabricator": "§aEpic Mass Fabricator II§r",
+  "block.tstmodern.uiv_mass_fabricator": "§2Epic Mass Fabricator III§r",
+  "block.tstmodern.uxv_mass_fabricator": "§eEpic Mass Fabricator IV§r",
+  "block.tstmodern.opv_mass_fabricator": "§9§lLegendary Mass Fabricator§r",
+  "block.tstmodern.max_mass_fabricator": "§c§lLegendary Mass Fabricator II§r"
 }
