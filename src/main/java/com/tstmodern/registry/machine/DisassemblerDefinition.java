@@ -23,7 +23,6 @@ import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.tstmodern.TSTModern;
 import com.tstmodern.machine.DisassemblerMachine;
-import com.tstmodern.machine.DisassemblerStructure;
 import com.tstmodern.registry.TSTBlocks;
 import com.tstmodern.registry.TSTRecipeTypes;
 import net.minecraft.network.chat.Component;

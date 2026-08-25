@@ -1,4 +1,4 @@
-package com.tstmodern.machine;
+package com.tstmodern.registry.machine;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
