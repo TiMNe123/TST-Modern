@@ -21,6 +21,7 @@ run/
 # Logs and crash reports
 *.log
 crash-reports/
+/logs/
 
 # Operating-system files
 .DS_Store
@@ -38,3 +39,4 @@ PORTING_NOTES.md
 /brain/
 /docs/
 /.worktrees/
+/.superpowers/
