@@ -144,7 +144,9 @@ public final class MegaStoneBreakerDefinition {
                     Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.0"),
                     Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.1"),
                     Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.2"),
-                    Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.3"))
+                    Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.3"),
+                    Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.4"),
+                    Component.translatable("tstmodern.machine.mega_stone_breaker.tooltip.5"))
             .register();
 
     private MegaStoneBreakerDefinition() {}

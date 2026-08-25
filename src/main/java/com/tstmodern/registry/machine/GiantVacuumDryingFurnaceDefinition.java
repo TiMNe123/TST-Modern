@@ -239,7 +239,10 @@ public final class GiantVacuumDryingFurnaceDefinition {
                     Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.0"),
                     Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.1"),
                     Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.2"),
-                    Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3"))
+                    Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.3"),
+                    Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.4"),
+                    Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.5"),
+                    Component.translatable("tstmodern.machine.giant_vacuum_drying_furnace.tooltip.6"))
             .register();
 
     private GiantVacuumDryingFurnaceDefinition() {}

@@ -305,7 +305,8 @@ public final class HyperThermalConvectorDefinition {
                     Component.translatable("tstmodern.machine.hyper_thermal_convector.tooltip.1"),
                     Component.translatable("tstmodern.machine.hyper_thermal_convector.tooltip.2"),
                     Component.translatable("tstmodern.machine.hyper_thermal_convector.tooltip.3"),
-                    Component.translatable("tstmodern.machine.hyper_thermal_convector.tooltip.4"))
+                    Component.translatable("tstmodern.machine.hyper_thermal_convector.tooltip.4"),
+                    Component.translatable("tstmodern.machine.hyper_thermal_convector.tooltip.5"))
             .register();
 
     private HyperThermalConvectorDefinition() {}
