@@ -3,6 +3,7 @@ package com.tstmodern;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+import com.tstmodern.data.recipe.BigBroArrayRecipes;
 import com.tstmodern.data.recipe.DisassemblerRecipes;
 import com.tstmodern.data.recipe.GiantVacuumDryingFurnaceRecipes;
 import com.tstmodern.data.recipe.HyperThermalConvectorRecipes;
@@ -45,6 +46,7 @@ public final class TSTModernGTAddon implements IGTAddon {
         HyperThermalConvectorRecipes.register(provider);
         MegaTreeFarmRecipes.register(provider);
         DisassemblerRecipes.register(provider);
+        BigBroArrayRecipes.register(provider);
     }
 }
 

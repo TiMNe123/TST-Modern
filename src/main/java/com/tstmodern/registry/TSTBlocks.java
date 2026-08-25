@@ -105,6 +105,19 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> MOLECULAR_CASING = casing("molecular_casing");
     public static final RegistryObject<Block> HOLLOW_CASING = casing("hollow_casing");
 
+    public static final RegistryObject<Block> PARALLEL_CASING_MK1 = casing("parallel_casing_mk1");
+    public static final RegistryObject<Block> PARALLEL_CASING_MK2 = casing("parallel_casing_mk2");
+    public static final RegistryObject<Block> PARALLEL_CASING_MK3 = casing("parallel_casing_mk3");
+    public static final RegistryObject<Block> PARALLEL_CASING_MK4 = casing("parallel_casing_mk4");
+    public static final RegistryObject<Block> PARALLEL_CASING_MK5 = casing("parallel_casing_mk5");
+
+    public static final List<RegistryObject<Block>> PARALLEL_CASINGS = List.of(
+            PARALLEL_CASING_MK1,
+            PARALLEL_CASING_MK2,
+            PARALLEL_CASING_MK3,
+            PARALLEL_CASING_MK4,
+            PARALLEL_CASING_MK5);
+
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_1 = compressedCobble(1);
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_2 = compressedCobble(2);
     public static final RegistryObject<Block> COMPRESSED_COBBLESTONE_3 = compressedCobble(3);
@@ -133,6 +146,17 @@ public final class TSTBlocks {
     public static int componentAssemblyLineTier(Block block) {
         for (int index = 0; index < COMPONENT_ASSEMBLY_LINE_CASINGS.size(); index++) {
             RegistryObject<Block> casing = COMPONENT_ASSEMBLY_LINE_CASINGS.get(index);
+            if (casing.isPresent() && casing.get() == block) {
+                return index + 1;
+            }
+        }
+        return 0;
+    }
+
+    /** Returns the 1-based MK1-through-MK5 parallel casing tier, or zero for a different block. */
+    public static int parallelCasingTier(Block block) {
+        for (int index = 0; index < PARALLEL_CASINGS.size(); index++) {
+            RegistryObject<Block> casing = PARALLEL_CASINGS.get(index);
             if (casing.isPresent() && casing.get() == block) {
                 return index + 1;
             }

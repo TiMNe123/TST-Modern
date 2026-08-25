@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tstmodern:block/casings/parallel/parallel_casing_mk1"
+    }
+  }
+}

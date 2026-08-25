@@ -20,5 +20,6 @@ public final class TSTMachineRegistry {
         Objects.requireNonNull(HyperThermalConvectorDefinition.MACHINE);
         Objects.requireNonNull(MegaTreeFarmDefinition.MACHINE);
         Objects.requireNonNull(DisassemblerDefinition.MACHINE);
+        Objects.requireNonNull(BigBroArrayDefinition.MACHINE);
     }
 }

@@ -146,5 +146,22 @@
   "recipetype.tstmodern.disassembler": "Máy Tháo Rã Cỡ Lớn",
   "gtceu.tstmodern.disassembler": "Máy Tháo Rã Cỡ Lớn",
   "gtceu.disassembler": "Máy Tháo Rã Cỡ Lớn",
-  "gtceu.jei.category.disassembler": "Máy Tháo Rã Cỡ Lớn"
+  "gtceu.jei.category.disassembler": "Máy Tháo Rã Cỡ Lớn",
+  "block.tstmodern.big_bro_array": "Đại Ca Trận Liệt (BigBroArray)",
+  "tstmodern.big_bro_array": "Đại Ca Trận Liệt (BigBroArray)",
+  "block.tstmodern.parallel_casing_mk1": "Vỏ Xử Lý Song Song MK1",
+  "block.tstmodern.parallel_casing_mk2": "Vỏ Xử Lý Song Song MK2",
+  "block.tstmodern.parallel_casing_mk3": "Vỏ Xử Lý Song Song MK3",
+  "block.tstmodern.parallel_casing_mk4": "Vỏ Xử Lý Song Song MK4",
+  "block.tstmodern.parallel_casing_mk5": "Vỏ Xử Lý Song Song MK5",
+  "tstmodern.machine.big_bro_array.tooltip.0": "§7Khối điều khiển Đại Ca Trận Liệt (MegaArray / BigBroArray)§r",
+  "tstmodern.machine.big_bro_array.tooltip.1": "§9Đây là MEGA! Đại ca đang theo dõi bạn.§r",
+  "tstmodern.machine.big_bro_array.tooltip.2": "§6Chức năng§7: Nạp máy đơn khối GT để chạy song song siêu cấp quy trình xử lý & phát điện",
+  "tstmodern.machine.big_bro_array.tooltip.3": "§bThao tác§7: Đặt máy vào Bus đầu vào và nhấn chuột phải bằng Tua-vít để nạp/nhả máy",
+  "tstmodern.machine.big_bro_array.tooltip.4": "§eĐộ song song§7: Cơ bản 64x -> Lên tới 5.242.880x+ với cấu trúc Addon và Vỏ Song Song",
+  "tstmodern.machine.big_bro_array.tooltip.5": "§bHiệu suất§7: Giảm 10% EU mỗi cấp Cuộn nhiệt | Tăng 50% tốc độ mỗi cấp Vỏ song song",
+  "tstmodern.machine.big_bro_array.tooltip.6": "§dTwist Space Technology - Phiên bản Hiện đại§r",
+  "tstmodern.machine.big_bro_array.status.no_machine": "Chưa nạp máy. Đặt máy vào Bus đầu vào và dùng Tua-vít.",
+  "tstmodern.machine.big_bro_array.status.embedded": "Đã nạp: %d x %s (Tier %s)",
+  "tstmodern.machine.big_bro_array.status.parallel": "Mức song song hiện tại: %s"
 }

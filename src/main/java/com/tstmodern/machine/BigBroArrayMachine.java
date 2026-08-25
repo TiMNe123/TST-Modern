@@ -1,0 +1,216 @@
+package com.tstmodern.machine;
+
+import java.util.List;
+
+import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.gui.fancy.IFancyConfigurator;
+import com.gregtechceu.gtceu.api.gui.fancy.TooltipsPanel;
+import com.gregtechceu.gtceu.api.item.MetaMachineItem;
+import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
+import com.gregtechceu.gtceu.api.machine.MachineDefinition;
+import com.gregtechceu.gtceu.api.machine.MetaMachine;
+import com.gregtechceu.gtceu.api.machine.SimpleTieredMachine;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IDisplayUIMachine;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
+import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
+import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
+import com.tstmodern.machine.logic.BigBroArrayLogic;
+import com.tstmodern.registry.TSTBlocks;
+
+import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
+import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
+import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.BlockHitResult;
+
+/**
+ * Runtime execution engine for the MegaArray (BigBroArray).
+ * Manages embedded single-block machine state, dynamic recipe overclocking, and parallel scaling.
+ */
+public final class BigBroArrayMachine extends WorkableMultiblockMachine implements IDisplayUIMachine {
+    protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER =
+            new ManagedFieldHolder(BigBroArrayMachine.class,
+                    WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
+
+    @Persisted
+    @DescSynced
+    private ItemStack embeddedMachineStack = ItemStack.EMPTY;
+
+    @Persisted
+    @DescSynced
+    private int embeddedCount = 0;
+
+    @Persisted
+    @DescSynced
+    private int embeddedTier = 0;
+
+    @Persisted
+    @DescSynced
+    private int parallelCasingTier = 0;
+
+    @Persisted
+    @DescSynced
+    private int coilTier = 0;
+
+    @Persisted
+    @DescSynced
+    private boolean hasAddon = false;
+
+    public BigBroArrayMachine(IMachineBlockEntity holder, Object... args) {
+        super(holder, args);
+    }
+
+    @Override
+    public ManagedFieldHolder getFieldHolder() {
+        return MANAGED_FIELD_HOLDER;
+    }
+
+    public ItemStack getEmbeddedMachineStack() {
+        return embeddedMachineStack;
+    }
+
+    public int getEmbeddedCount() {
+        return embeddedCount;
+    }
+
+    public int getEmbeddedTier() {
+        return embeddedTier;
+    }
+
+    public int getParallelCasingTier() {
+        return parallelCasingTier;
+    }
+
+    public int getCoilTier() {
+        return coilTier;
+    }
+
+    public boolean hasAddon() {
+        return hasAddon;
+    }
+
+    public long getActualParallel() {
+        return BigBroArrayLogic.calculateParallelism(embeddedCount, parallelCasingTier, hasAddon);
+    }
+
+    @Override
+    public void onStructureFormed() {
+        super.onStructureFormed();
+        int maxParallelTier = 0;
+        boolean addonFound = false;
+
+        for (IMultiPart part : getParts()) {
+            BlockPos pos = part.self().getPos();
+            Block block = getLevel().getBlockState(pos).getBlock();
+            int pTier = TSTBlocks.parallelCasingTier(block);
+            if (pTier > 0) {
+                maxParallelTier = Math.max(maxParallelTier, pTier);
+                addonFound = true;
+            }
+        }
+        this.parallelCasingTier = maxParallelTier;
+        this.hasAddon = addonFound;
+    }
+
+    @Override
+    protected InteractionResult onScrewdriverClick(Player playerIn, InteractionHand hand, Direction gridSide, BlockHitResult hitResult) {
+        if (!isFormed() || isRemote()) {
+            return InteractionResult.SUCCESS;
+        }
+
+        if (playerIn == null) {
+            return InteractionResult.PASS;
+        }
+
+        // If machine already embedded, unload it back to player or drop
+        if (!embeddedMachineStack.isEmpty() && embeddedCount > 0) {
+            ItemStack returnStack = embeddedMachineStack.copy();
+            returnStack.setCount(embeddedCount);
+            if (!playerIn.getInventory().add(returnStack)) {
+                playerIn.drop(returnStack, false);
+            }
+            playerIn.sendSystemMessage(Component.translatable("tstmodern.machine.big_bro_array.status.no_machine")
+                    .withStyle(ChatFormatting.YELLOW));
+            this.embeddedMachineStack = ItemStack.EMPTY;
+            this.embeddedCount = 0;
+            this.embeddedTier = 0;
+            return InteractionResult.CONSUME;
+        }
+
+        // Otherwise scan player offhand to find a single-block machine to embed
+        ItemStack offhand = playerIn.getOffhandItem();
+        if (isValidEmbeddableMachine(offhand)) {
+            this.embeddedMachineStack = offhand.copy();
+            this.embeddedMachineStack.setCount(1);
+            this.embeddedCount = offhand.getCount();
+            this.embeddedTier = extractTier(offhand);
+            offhand.setCount(0);
+            playerIn.sendSystemMessage(Component.translatable("tstmodern.machine.big_bro_array.status.embedded",
+                    embeddedCount, embeddedMachineStack.getHoverName(), GTValues.VN[embeddedTier])
+                    .withStyle(ChatFormatting.GREEN));
+            return InteractionResult.CONSUME;
+        }
+
+        return super.onScrewdriverClick(playerIn, hand, gridSide, hitResult);
+    }
+
+    private static boolean isValidEmbeddableMachine(ItemStack stack) {
+        if (stack.isEmpty() || !(stack.getItem() instanceof MetaMachineItem machineItem)) {
+            return false;
+        }
+        MachineDefinition definition = machineItem.getDefinition();
+        return definition != null && definition.getRecipeTypes() != null && definition.getRecipeTypes().length > 0;
+    }
+
+    private static int extractTier(ItemStack stack) {
+        if (stack.getItem() instanceof MetaMachineItem machineItem) {
+            MachineDefinition definition = machineItem.getDefinition();
+            if (definition != null) {
+                return definition.getTier();
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public GTRecipeType getRecipeType() {
+        if (!embeddedMachineStack.isEmpty() && embeddedMachineStack.getItem() instanceof MetaMachineItem machineItem) {
+            MachineDefinition definition = machineItem.getDefinition();
+            if (definition != null && definition.getRecipeTypes() != null && definition.getRecipeTypes().length > 0) {
+                return definition.getRecipeTypes()[0];
+            }
+        }
+        return super.getRecipeType();
+    }
+
+    @Override
+    public void addDisplayText(List<Component> textList) {
+        MultiblockDisplayText.builder(textList, isFormed())
+                .setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive())
+                .addCustom(tl -> {
+                    if (isFormed()) {
+                        if (embeddedMachineStack.isEmpty()) {
+                            tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.no_machine")
+                                    .withStyle(ChatFormatting.RED));
+                        } else {
+                            tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.embedded",
+                                    embeddedCount, embeddedMachineStack.getHoverName(), GTValues.VN[embeddedTier])
+                                    .withStyle(ChatFormatting.AQUA));
+                            tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.parallel",
+                                    String.format("%,d", getActualParallel()))
+                                    .withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                });
+    }
+}
