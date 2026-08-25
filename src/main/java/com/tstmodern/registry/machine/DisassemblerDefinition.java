@@ -82,7 +82,9 @@ public final class DisassemblerDefinition {
                     Component.translatable("tstmodern.machine.disassembler.tooltip.1"),
                     Component.translatable("tstmodern.machine.disassembler.tooltip.2"),
                     Component.translatable("tstmodern.machine.disassembler.tooltip.3"),
-                    Component.translatable("tstmodern.machine.disassembler.tooltip.4"))
+                    Component.translatable("tstmodern.machine.disassembler.tooltip.4"),
+                    Component.translatable("tstmodern.machine.disassembler.tooltip.5"),
+                    Component.translatable("tstmodern.machine.disassembler.tooltip.6"))
             .register();
 
     private DisassemblerDefinition() {}
