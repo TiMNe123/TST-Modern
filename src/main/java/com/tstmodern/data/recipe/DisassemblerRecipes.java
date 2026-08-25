@@ -112,7 +112,7 @@ public final class DisassemblerRecipes {
                             fluid("soldering_alloy", 147_456),
                             fluid("uu_matter", 128_000),
                             fluid("pcb_coolant", 768_000)),
-                    72_000, EutSpec.va(UEV), ResearchSpec.station(machine("assembler", "uhv"), 72_000, UHV)));
+                    72_000, EutSpec.va(UEV), ResearchSpec.station(machine("assembler", "uhv"), 72_000, UHV, 256, tool("data_orb"))));
 
     private DisassemblerRecipes() {}
 
@@ -243,11 +243,15 @@ public final class DisassemblerRecipes {
                     .duration(research.durationTicks())
                     .EUt(research.eut().value()));
         } else {
-            // One CWU consumed per tick makes total CWU equal the approved station-research duration.
-            builder.stationResearch(station -> station
-                    .researchStack(target)
-                    .CWUt(1, research.durationTicks())
-                    .EUt(research.eut().value()));
+            builder.stationResearch(station -> {
+                station.researchStack(target)
+                        .CWUt(research.cwuPerTick(), research.durationTicks())
+                        .EUt(research.eut().value());
+                if (research.dataStack() != null) {
+                    station.dataStack(resolveStack(research.dataStack(), 1));
+                }
+                return station;
+            });
         }
     }
 
@@ -304,6 +308,8 @@ public final class DisassemblerRecipes {
             case "component/field_generator/uhv" -> GTItems.FIELD_GENERATOR_UHV.asStack(count);
             case "component/electric_pump/uhv" -> GTItems.ELECTRIC_PUMP_UHV.asStack(count);
             case "component/conveyor_module/uhv" -> GTItems.CONVEYOR_MODULE_UHV.asStack(count);
+            case "tool/data_orb" -> GTItems.TOOL_DATA_ORB.asStack(count);
+            case "tool/data_stick" -> GTItems.TOOL_DATA_STICK.asStack(count);
             default -> throw new IllegalArgumentException("Unknown item reference: " + item.key());
         };
     }
@@ -419,6 +425,10 @@ public final class DisassemblerRecipes {
         return new ItemRef("circuit/" + tier);
     }
 
+    private static ItemRef tool(String name) {
+        return new ItemRef("tool/" + name);
+    }
+
     private static ItemInputSpec input(ItemRef item, int count) {
         List<Integer> chunks = new ArrayList<>();
         int remaining = count;
@@ -492,22 +502,26 @@ public final class DisassemblerRecipes {
         }
     }
 
-    record ResearchSpec(ResearchKind kind, ItemRef target, int durationTicks, EutSpec eut) {
-        private static final ResearchSpec NONE = new ResearchSpec(ResearchKind.NONE, null, 0, null);
+    record ResearchSpec(ResearchKind kind, ItemRef target, int durationTicks, EutSpec eut, int cwuPerTick, ItemRef dataStack) {
+        private static final ResearchSpec NONE = new ResearchSpec(ResearchKind.NONE, null, 0, null, 0, null);
 
         static ResearchSpec scanner(ItemRef target, int durationTicks, int eutTier) {
-            return new ResearchSpec(ResearchKind.SCANNER, target, durationTicks, EutSpec.va(eutTier));
+            return new ResearchSpec(ResearchKind.SCANNER, target, durationTicks, EutSpec.va(eutTier), 0, null);
         }
 
         static ResearchSpec station(ItemRef target, int durationTicks, int eutTier) {
-            return new ResearchSpec(ResearchKind.STATION, target, durationTicks, EutSpec.va(eutTier));
+            return new ResearchSpec(ResearchKind.STATION, target, durationTicks, EutSpec.va(eutTier), 1, null);
+        }
+
+        static ResearchSpec station(ItemRef target, int durationTicks, int eutTier, int cwuPerTick, ItemRef dataStack) {
+            return new ResearchSpec(ResearchKind.STATION, target, durationTicks, EutSpec.va(eutTier), cwuPerTick, dataStack);
         }
 
         String key() {
             if (kind == ResearchKind.NONE) {
                 return "none";
             }
-            return kind.name().toLowerCase() + ":" + target.key() + ":" + durationTicks + ":" + eut.key();
+            return kind.name().toLowerCase() + ":" + target.key() + ":" + durationTicks + ":" + eut.key() + ":" + cwuPerTick + ":" + (dataStack == null ? "default" : dataStack.key());
         }
     }
 
