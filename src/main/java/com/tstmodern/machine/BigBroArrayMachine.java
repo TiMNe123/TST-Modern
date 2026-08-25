@@ -5,6 +5,7 @@ import java.util.List;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.gui.fancy.IFancyConfigurator;
 import com.gregtechceu.gtceu.api.gui.fancy.TooltipsPanel;
+import com.gregtechceu.gtceu.api.block.ICoilType;
 import com.gregtechceu.gtceu.api.item.MetaMachineItem;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
@@ -14,7 +15,12 @@ import com.gregtechceu.gtceu.api.machine.feature.multiblock.IDisplayUIMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
+import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
+import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
+import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
+import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.tstmodern.machine.logic.BigBroArrayLogic;
 import com.tstmodern.registry.TSTBlocks;
 
@@ -34,7 +40,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 
 /**
- * Runtime execution engine for the MegaArray (BigBroArray).
+ * Runtime execution engine for the Mega Array (BigBroArray).
  * Manages embedded single-block machine state, dynamic recipe overclocking, and parallel scaling.
  */
 public final class BigBroArrayMachine extends WorkableMultiblockMachine implements IDisplayUIMachine {
@@ -109,17 +115,33 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         int maxParallelTier = 0;
         boolean addonFound = false;
 
-        for (IMultiPart part : getParts()) {
-            BlockPos pos = part.self().getPos();
-            Block block = getLevel().getBlockState(pos).getBlock();
-            int pTier = TSTBlocks.parallelCasingTier(block);
-            if (pTier > 0) {
-                maxParallelTier = Math.max(maxParallelTier, pTier);
-                addonFound = true;
+        var type = getMultiblockState().getMatchContext().get("CoilType");
+        if (type instanceof ICoilType coil) {
+            this.coilTier = coil.getTier();
+        } else {
+            this.coilTier = 0;
+        }
+
+        if (getMultiblockState() != null && getMultiblockState().getCache() != null) {
+            for (BlockPos pos : getMultiblockState().getCache()) {
+                Block block = getLevel().getBlockState(pos).getBlock();
+                int pTier = TSTBlocks.parallelCasingTier(block);
+                if (pTier > 0) {
+                    maxParallelTier = Math.max(maxParallelTier, pTier);
+                    addonFound = true;
+                }
             }
         }
         this.parallelCasingTier = maxParallelTier;
         this.hasAddon = addonFound;
+    }
+
+    @Override
+    public void onStructureInvalid() {
+        super.onStructureInvalid();
+        this.parallelCasingTier = 0;
+        this.coilTier = 0;
+        this.hasAddon = false;
     }
 
     @Override
@@ -209,8 +231,52 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                             tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.parallel",
                                     String.format("%,d", getActualParallel()))
                                     .withStyle(ChatFormatting.GOLD));
+                            int discountPercent = (int) Math.round((1.0 - BigBroArrayLogic.calculateEnergyDiscount(coilTier)) * 100);
+                            tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.coil",
+                                    coilTier, discountPercent)
+                                    .withStyle(ChatFormatting.GREEN));
+                            if (parallelCasingTier > 0) {
+                                int speedPercent = (int) Math.round((BigBroArrayLogic.calculateSpeedMultiplier(parallelCasingTier) - 1.0) * 100);
+                                tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.speed",
+                                        parallelCasingTier, speedPercent)
+                                        .withStyle(ChatFormatting.YELLOW));
+                            }
                         }
                     }
                 });
+    }
+
+    public static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe) {
+        if (!(machine instanceof BigBroArrayMachine arrayMachine)) {
+            return ModifierFunction.NULL;
+        }
+
+        if (arrayMachine.getEmbeddedMachineStack().isEmpty() || arrayMachine.getEmbeddedCount() <= 0) {
+            return ModifierFunction.NULL;
+        }
+
+        int recipeTier = RecipeHelper.getRecipeEUtTier(recipe);
+        if (recipeTier > arrayMachine.getEmbeddedTier()) {
+            return ModifierFunction.NULL;
+        }
+
+        int parallelLimit = (int) Math.min(Integer.MAX_VALUE, arrayMachine.getActualParallel());
+        int parallel = ParallelLogic.getParallelAmount(machine, recipe, parallelLimit);
+        if (parallel <= 0) {
+            return ModifierFunction.NULL;
+        }
+
+        double energyDiscount = BigBroArrayLogic.calculateEnergyDiscount(arrayMachine.getCoilTier());
+        double speedMultiplier = BigBroArrayLogic.calculateSpeedMultiplier(arrayMachine.getParallelCasingTier());
+        double durationMultiplier = 1.0 / speedMultiplier;
+        double eutMultiplier = parallel * energyDiscount;
+
+        return ModifierFunction.builder()
+                .inputModifier(ContentModifier.multiplier(parallel))
+                .outputModifier(ContentModifier.multiplier(parallel))
+                .eutMultiplier(eutMultiplier)
+                .durationMultiplier(durationMultiplier)
+                .parallels(parallel)
+                .build();
     }
 }
