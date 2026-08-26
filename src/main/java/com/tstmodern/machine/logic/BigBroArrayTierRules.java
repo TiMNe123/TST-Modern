@@ -103,9 +103,15 @@ public final class BigBroArrayTierRules {
         };
     }
 
+    /** Whether the formed frame channel currently permits this embedded machine tier to execute. */
+    public static boolean isEmbeddedTierEligible(int frameTier, int embeddedTier) {
+        int maximumTier = maxEmbeddedTier(frameTier);
+        return embeddedTier >= GTValues.ULV && maximumTier >= 0 && embeddedTier <= maximumTier;
+    }
+
     /** Stores the first valid tier for a channel and rejects every later mismatch. */
     public static boolean matchUniformTier(PatternMatchContext context, String key, int tier) {
-        if (tier < 0) return false;
+        if (context == null || tier < 0) return false;
         Integer firstTier = context.get(key);
         if (firstTier == null) {
             context.set(key, tier);
@@ -116,6 +122,7 @@ public final class BigBroArrayTierRules {
 
     /** Returns one validated core snapshot, or {@code null} when the context is incomplete or invalid. */
     public static CoreTiers validatedCoreTiers(PatternMatchContext context) {
+        if (context == null) return null;
         Integer frameTier = context.get(FRAME_TIER_CONTEXT);
         Integer glassTier = context.get(GLASS_TIER_CONTEXT);
         Integer machineCasingTier = context.get(MACHINE_CASING_TIER_CONTEXT);

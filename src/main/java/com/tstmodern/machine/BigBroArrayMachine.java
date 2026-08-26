@@ -212,7 +212,8 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         // Otherwise scan player offhand for a single-block machine unlocked by the frame tier.
         ItemStack offhand = playerIn.getOffhandItem();
         int candidateTier = extractTier(offhand);
-        if (isValidEmbeddableMachine(offhand) && candidateTier <= getMaxEmbeddedTier()) {
+        if (isValidEmbeddableMachine(offhand) &&
+                BigBroArrayTierRules.isEmbeddedTierEligible(getFrameTier(), candidateTier)) {
             this.embeddedMachineStack = offhand.copy();
             this.embeddedMachineStack.setCount(1);
             this.embeddedCount = offhand.getCount();
@@ -294,6 +295,11 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         }
 
         if (arrayMachine.getEmbeddedMachineStack().isEmpty() || arrayMachine.getEmbeddedCount() <= 0) {
+            return ModifierFunction.NULL;
+        }
+
+        if (!BigBroArrayTierRules.isEmbeddedTierEligible(
+                arrayMachine.getFrameTier(), arrayMachine.getEmbeddedTier())) {
             return ModifierFunction.NULL;
         }
 
