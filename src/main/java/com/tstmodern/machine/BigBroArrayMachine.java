@@ -106,7 +106,14 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     }
 
     public long getActualParallel() {
-        return BigBroArrayLogic.calculateParallelism(embeddedCount, parallelCasingTier, hasAddon);
+        return BigBroArrayLogic.calculateParallelism(embeddedCount, parallelCasingTier, getAddonCount());
+    }
+
+    /**
+     * Number of attached addon structures (0 for core-only builds).
+     */
+    public int getAddonCount() {
+        return hasAddon ? 1 : 0;
     }
 
     @Override
@@ -236,9 +243,9 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                                     coilTier, discountPercent)
                                     .withStyle(ChatFormatting.GREEN));
                             if (parallelCasingTier > 0) {
-                                int speedPercent = (int) Math.round((BigBroArrayLogic.calculateSpeedMultiplier(parallelCasingTier) - 1.0) * 100);
+                                double speedBoost = BigBroArrayLogic.calculateSpeedBoostDisplay(parallelCasingTier);
                                 tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.speed",
-                                        parallelCasingTier, speedPercent)
+                                        parallelCasingTier, String.format("%.2f", speedBoost))
                                         .withStyle(ChatFormatting.YELLOW));
                             }
                         }
@@ -267,8 +274,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         }
 
         double energyDiscount = BigBroArrayLogic.calculateEnergyDiscount(arrayMachine.getCoilTier());
-        double speedMultiplier = BigBroArrayLogic.calculateSpeedMultiplier(arrayMachine.getParallelCasingTier());
-        double durationMultiplier = 1.0 / speedMultiplier;
+        double durationMultiplier = BigBroArrayLogic.calculateDurationMultiplier(arrayMachine.getParallelCasingTier());
         double eutMultiplier = parallel * energyDiscount;
 
         return ModifierFunction.builder()

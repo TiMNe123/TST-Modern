@@ -27,6 +27,14 @@ public record DisassemblerRecipeDescriptor(
         returnedFluids = List.copyOf(Objects.requireNonNull(returnedFluids, "returnedFluids"));
     }
 
+    public DisassemblerRecipeDescriptor withSourcePriority(int replacementPriority) {
+        if (sourcePriority == replacementPriority) {
+            return this;
+        }
+        return new DisassemblerRecipeDescriptor(sourceId, replacementPriority, recipeTier, outputItem, outputAmount,
+                returnedItems, returnedFluids);
+    }
+
     public record ReturnedItem(Item item, int amount) {
         public ReturnedItem {
             item = Objects.requireNonNull(item, "item");

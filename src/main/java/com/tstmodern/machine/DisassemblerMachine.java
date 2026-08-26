@@ -41,7 +41,7 @@ public final class DisassemblerMachine extends WorkableMultiblockMachine impleme
                     WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
 
     private static final int REQUIRED_TIER_CASING_COUNT = 66;
-    static final VoidingMode VOIDING_MODE = VoidingMode.VOID_ITEMS_FLUIDS;
+    static final VoidingMode VOIDING_MODE = VoidingMode.VOID_NONE;
 
     @Persisted
     @DescSynced

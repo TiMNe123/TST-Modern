@@ -21,7 +21,6 @@ import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
-import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.tstmodern.machine.DisassemblerMachine;
 import com.tstmodern.registry.TSTRecipeTypes;
@@ -47,24 +46,22 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
             .comparingInt(DisassemblerRecipeDescriptor::sourcePriority)
             .thenComparing(descriptor -> descriptor.sourceId().toString());
 
-    public static final DisassemblerRecipeIndex INSTANCE = new DisassemblerRecipeIndex(List.of(
-            new DisassemblerRecipeSource("assembly_line", 0, () -> GTRecipeTypes.ASSEMBLY_LINE_RECIPES),
-            new DisassemblerRecipeSource("assembler", 1, () -> GTRecipeTypes.ASSEMBLER_RECIPES)),
-            new DisassemblerRecipeAdapter());
+    public static final DisassemblerRecipeIndex INSTANCE = new DisassemblerRecipeIndex(
+            DisassemblerRecipeSources.INSTANCE, new DisassemblerRecipeAdapter());
 
-    private final List<DisassemblerRecipeSource> sources;
+    private final DisassemblerRecipeSources sources;
     private final DisassemblerRecipeAdapter adapter;
     private final DescriptorEnumerator enumerator;
     private Set<GTRecipe> ownedRepresentativeInstances = Collections.newSetFromMap(new IdentityHashMap<>());
     private Snapshot snapshot = Snapshot.empty();
 
-    DisassemblerRecipeIndex(List<DisassemblerRecipeSource> sources, DisassemblerRecipeAdapter adapter) {
+    DisassemblerRecipeIndex(DisassemblerRecipeSources sources, DisassemblerRecipeAdapter adapter) {
         this(sources, adapter, DisassemblerRecipeIndex::enumerateSources);
     }
 
-    DisassemblerRecipeIndex(List<DisassemblerRecipeSource> sources, DisassemblerRecipeAdapter adapter,
+    DisassemblerRecipeIndex(DisassemblerRecipeSources sources, DisassemblerRecipeAdapter adapter,
                             DescriptorEnumerator enumerator) {
-        this.sources = sources == null ? List.of() : sources.stream().filter(Objects::nonNull).toList();
+        this.sources = Objects.requireNonNull(sources, "sources");
         this.adapter = Objects.requireNonNull(adapter, "adapter");
         this.enumerator = Objects.requireNonNull(enumerator, "enumerator");
     }
@@ -190,8 +187,13 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
                 acceptedInputs, casingTier, lookup);
         if (accepted.isEmpty()) return Optional.empty();
         DisassemblerRecipePolicy.AggregatePlan plan = accepted.get();
-        return Optional.of(new RuntimeRecipePlan(itemStacks(plan.consumedItems()), splitItemOutputs(plan.returnedItems()),
-                fluidOutputs(plan.returnedFluids()), plan.durationTicks()));
+        Optional<List<ItemStack>> returnedItems = splitItemOutputs(plan.returnedItems());
+        Optional<List<FluidStack>> returnedFluids = fluidOutputs(plan.returnedFluids());
+        if (returnedItems.isEmpty() || returnedFluids.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(new RuntimeRecipePlan(itemStacks(plan.consumedItems()), returnedItems.get(),
+                returnedFluids.get(), plan.durationTicks()));
     }
 
     synchronized Optional<RuntimeRecipePlan> buildRuntimePlanForCurrentGeneration(Map<Item, Long> available, int casingTier) {
@@ -215,11 +217,13 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
     }
 
     private synchronized Snapshot currentSnapshot() {
-        if (snapshot.enumerated()) {
+        DisassemblerRecipeSources.Snapshot sourceSnapshot = sources.snapshot();
+        if (snapshot.enumerated() && snapshot.sourceGeneration() == sourceSnapshot.generation()) {
             return snapshot;
         }
-        Collection<DisassemblerRecipeDescriptor> descriptors = enumerator.enumerate(sources, adapter);
-        snapshot = new Snapshot(selectWinners(descriptors == null ? List.of() : descriptors), Map.of(), true);
+        Collection<DisassemblerRecipeDescriptor> descriptors = enumerator.enumerate(sourceSnapshot.sources(), adapter);
+        snapshot = new Snapshot(selectWinners(descriptors == null ? List.of() : descriptors), Map.of(), true,
+                sourceSnapshot.generation());
         return snapshot;
     }
 
@@ -228,14 +232,7 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
         List<DisassemblerRecipeDescriptor> descriptors = new ArrayList<>();
         for (DisassemblerRecipeSource source : sources) {
             if (source == null) continue;
-            GTRecipeType type = source.recipeType().get();
-            if (type == null) {
-                continue;
-            }
-            for (GTRecipe recipe : visitAll(type.getCategories(), type::getRecipesInCategory)) {
-                Optional<DisassemblerRecipeDescriptor> descriptor = adapter.adapt(recipe, source.priority());
-                if (descriptor != null) descriptor.ifPresent(descriptors::add);
-            }
+            descriptors.addAll(source.enumerate(adapter));
         }
         return descriptors;
     }
@@ -318,31 +315,34 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
         return new ResourceLocation("tstmodern", "representative/disassembler/" + itemId.getNamespace() + "/" + itemId.getPath());
     }
 
-    private static List<ItemStack> splitItemOutputs(Map<Item, Integer> outputAmounts) {
+    private static Optional<List<ItemStack>> splitItemOutputs(Map<Item, Integer> outputAmounts) {
         List<ItemStack> stacks = new ArrayList<>();
         for (Map.Entry<Item, Integer> output : sortedItems(outputAmounts)) {
             int remaining = output.getValue();
             int maxStackSize = Math.max(1, output.getKey().getMaxStackSize());
-            while (remaining > 0 && stacks.size() < MAX_RUNTIME_ITEM_OUTPUTS) {
+            while (remaining > 0) {
+                if (stacks.size() >= MAX_RUNTIME_ITEM_OUTPUTS) {
+                    return Optional.empty();
+                }
                 int count = Math.min(remaining, maxStackSize);
                 stacks.add(new ItemStack(output.getKey(), count));
                 remaining -= count;
             }
-            if (stacks.size() == MAX_RUNTIME_ITEM_OUTPUTS) {
-                break;
-            }
         }
-        return List.copyOf(stacks);
+        return Optional.of(List.copyOf(stacks));
     }
 
-    private static List<FluidStack> fluidOutputs(Map<Fluid, Integer> outputAmounts) {
+    private static Optional<List<FluidStack>> fluidOutputs(Map<Fluid, Integer> outputAmounts) {
         List<FluidStack> fluids = new ArrayList<>(outputAmounts.size());
         for (Map.Entry<Fluid, Integer> output : sortedFluids(outputAmounts)) {
-            if (output.getKey() != Fluids.EMPTY && output.getValue() > 0 && fluids.size() < MAX_RUNTIME_FLUID_OUTPUTS) {
+            if (output.getKey() != Fluids.EMPTY && output.getValue() > 0) {
+                if (fluids.size() >= MAX_RUNTIME_FLUID_OUTPUTS) {
+                    return Optional.empty();
+                }
                 fluids.add(new FluidStack(output.getKey(), output.getValue()));
             }
         }
-        return List.copyOf(fluids);
+        return Optional.of(List.copyOf(fluids));
     }
 
     @FunctionalInterface
@@ -386,18 +386,19 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
     record RepresentativePlan(ResourceLocation id, RuntimeRecipePlan plan) {}
 
     private record Snapshot(Map<Item, DisassemblerRecipeDescriptor> descriptors,
-                            Map<Item, Optional<DisassemblerRecipeDescriptor>> lookups, boolean enumerated) {
+                            Map<Item, Optional<DisassemblerRecipeDescriptor>> lookups, boolean enumerated,
+                            long sourceGeneration) {
         private Snapshot {
             descriptors = Collections.unmodifiableMap(new IdentityHashMap<>(descriptors));
             lookups = Collections.unmodifiableMap(new IdentityHashMap<>(lookups));
         }
 
         static Snapshot empty() {
-            return new Snapshot(Map.of(), Map.of(), false);
+            return new Snapshot(Map.of(), Map.of(), false, -1L);
         }
 
         Snapshot withLookups(Map<Item, Optional<DisassemblerRecipeDescriptor>> replacements) {
-            return new Snapshot(descriptors, replacements, enumerated);
+            return new Snapshot(descriptors, replacements, enumerated, sourceGeneration);
         }
     }
 }
