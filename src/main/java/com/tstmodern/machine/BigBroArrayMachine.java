@@ -3,16 +3,12 @@ package com.tstmodern.machine;
 import java.util.List;
 
 import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.api.gui.fancy.IFancyConfigurator;
-import com.gregtechceu.gtceu.api.gui.fancy.TooltipsPanel;
 import com.gregtechceu.gtceu.api.block.ICoilType;
 import com.gregtechceu.gtceu.api.item.MetaMachineItem;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
-import com.gregtechceu.gtceu.api.machine.SimpleTieredMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IDisplayUIMachine;
-import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
@@ -22,7 +18,8 @@ import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.tstmodern.machine.logic.BigBroArrayLogic;
-import com.tstmodern.registry.TSTBlocks;
+import com.tstmodern.machine.logic.BigBroArrayTierRules;
+import com.tstmodern.machine.logic.BigBroArrayTierRules.CoreTiers;
 
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
@@ -36,7 +33,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 
 /**
@@ -72,6 +68,9 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     @DescSynced
     private boolean hasAddon = false;
 
+    /** One immutable snapshot published only after all core tier channels validate. */
+    private CoreTiers coreTiers;
+
     public BigBroArrayMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
     }
@@ -93,6 +92,26 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         return embeddedTier;
     }
 
+    public CoreTiers getCoreTiers() {
+        return coreTiers;
+    }
+
+    public int getFrameTier() {
+        return coreTiers == null ? 0 : coreTiers.frameTier();
+    }
+
+    public int getGlassTier() {
+        return coreTiers == null ? 0 : coreTiers.glassTier();
+    }
+
+    public int getMachineCasingTier() {
+        return coreTiers == null ? 0 : coreTiers.machineCasingTier();
+    }
+
+    public int getMaxEmbeddedTier() {
+        return BigBroArrayTierRules.maxEmbeddedTier(getFrameTier());
+    }
+
     public int getParallelCasingTier() {
         return parallelCasingTier;
     }
@@ -109,9 +128,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         return BigBroArrayLogic.calculateParallelism(embeddedCount, parallelCasingTier, getAddonCount());
     }
 
-    /**
-     * Number of attached addon structures (0 for core-only builds).
-     */
+    /** Number of attached addon structures (0 for core-only builds). */
     public int getAddonCount() {
         return hasAddon ? 1 : 0;
     }
@@ -119,40 +136,56 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        int maxParallelTier = 0;
-        boolean addonFound = false;
 
-        var type = getMultiblockState().getMatchContext().get("CoilType");
-        if (type instanceof ICoilType coil) {
-            this.coilTier = coil.getTier();
-        } else {
-            this.coilTier = 0;
+        var state = getMultiblockState();
+        CoreTiers validatedCoreTiers = state == null ? null :
+                BigBroArrayTierRules.validatedCoreTiers(state.getMatchContext());
+        if (validatedCoreTiers == null) {
+            clearStructureDerivedState();
+            return;
         }
 
-        if (getMultiblockState() != null && getMultiblockState().getCache() != null) {
-            for (BlockPos pos : getMultiblockState().getCache()) {
-                Block block = getLevel().getBlockState(pos).getBlock();
-                int pTier = TSTBlocks.parallelCasingTier(block);
-                if (pTier > 0) {
-                    maxParallelTier = Math.max(maxParallelTier, pTier);
-                    addonFound = true;
+        int formedCoilTier = 0;
+        Object coilType = state.getMatchContext().get("CoilType");
+        if (coilType instanceof ICoilType coil) {
+            formedCoilTier = coil.getTier();
+        }
+
+        int formedParallelTier = 0;
+        boolean formedAddon = false;
+        if (state.getCache() != null) {
+            for (BlockPos pos : state.getCache()) {
+                int candidateTier = BigBroArrayTierRules.parallelCasingTier(
+                        state.getWorld().getBlockState(pos).getBlock());
+                if (candidateTier > 0) {
+                    formedParallelTier = Math.max(formedParallelTier, candidateTier);
+                    formedAddon = true;
                 }
             }
         }
-        this.parallelCasingTier = maxParallelTier;
-        this.hasAddon = addonFound;
+
+        this.coilTier = formedCoilTier;
+        this.parallelCasingTier = formedParallelTier;
+        this.hasAddon = formedAddon;
+        this.coreTiers = validatedCoreTiers;
     }
 
     @Override
     public void onStructureInvalid() {
         super.onStructureInvalid();
+        clearStructureDerivedState();
+    }
+
+    private void clearStructureDerivedState() {
+        this.coreTiers = null;
         this.parallelCasingTier = 0;
         this.coilTier = 0;
         this.hasAddon = false;
     }
 
     @Override
-    protected InteractionResult onScrewdriverClick(Player playerIn, InteractionHand hand, Direction gridSide, BlockHitResult hitResult) {
+    protected InteractionResult onScrewdriverClick(Player playerIn, InteractionHand hand, Direction gridSide,
+                                                   BlockHitResult hitResult) {
         if (!isFormed() || isRemote()) {
             return InteractionResult.SUCCESS;
         }
@@ -161,7 +194,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
             return InteractionResult.PASS;
         }
 
-        // If machine already embedded, unload it back to player or drop
+        // If machine already embedded, unload it back to player or drop it.
         if (!embeddedMachineStack.isEmpty() && embeddedCount > 0) {
             ItemStack returnStack = embeddedMachineStack.copy();
             returnStack.setCount(embeddedCount);
@@ -176,13 +209,14 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
             return InteractionResult.CONSUME;
         }
 
-        // Otherwise scan player offhand to find a single-block machine to embed
+        // Otherwise scan player offhand for a single-block machine unlocked by the frame tier.
         ItemStack offhand = playerIn.getOffhandItem();
-        if (isValidEmbeddableMachine(offhand)) {
+        int candidateTier = extractTier(offhand);
+        if (isValidEmbeddableMachine(offhand) && candidateTier <= getMaxEmbeddedTier()) {
             this.embeddedMachineStack = offhand.copy();
             this.embeddedMachineStack.setCount(1);
             this.embeddedCount = offhand.getCount();
-            this.embeddedTier = extractTier(offhand);
+            this.embeddedTier = candidateTier;
             offhand.setCount(0);
             playerIn.sendSystemMessage(Component.translatable("tstmodern.machine.big_bro_array.status.embedded",
                     embeddedCount, embeddedMachineStack.getHoverName(), GTValues.VN[embeddedTier])
@@ -238,7 +272,8 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                             tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.parallel",
                                     String.format("%,d", getActualParallel()))
                                     .withStyle(ChatFormatting.GOLD));
-                            int discountPercent = (int) Math.round((1.0 - BigBroArrayLogic.calculateEnergyDiscount(coilTier)) * 100);
+                            int discountPercent = (int) Math.round(
+                                    (1.0 - BigBroArrayLogic.calculateEnergyDiscount(coilTier)) * 100);
                             tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.coil",
                                     coilTier, discountPercent)
                                     .withStyle(ChatFormatting.GREEN));
