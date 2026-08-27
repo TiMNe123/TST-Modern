@@ -53,7 +53,6 @@ final class DisassemblerSpecialRecipes {
                 List.of());
     }
 
-    @SuppressWarnings("deprecation")
     private static Item firstItem(net.minecraft.tags.TagKey<Item> tag) {
         return Arrays.stream(Ingredient.of(tag).getItems())
                 .filter(stack -> stack != null && !stack.isEmpty())
