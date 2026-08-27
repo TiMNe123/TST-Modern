@@ -393,7 +393,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                             if (parallelCasingTier > 0) {
                                 double speedBoost = BigBroArrayLogic.calculateSpeedBoostDisplay(parallelCasingTier);
                                 tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.speed",
-                                        parallelCasingTier, String.format("%.2f", speedBoost))
+                                        parallelCasingTier, (int) Math.round((speedBoost - 1.0) * 100))
                                         .withStyle(ChatFormatting.YELLOW));
                             }
                         }
