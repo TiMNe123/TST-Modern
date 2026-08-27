@@ -132,6 +132,9 @@ public final class BigBroArrayAddonMatcher {
             }
         }
 
+        if (frameTier < 0 || glassTier < 0 || parallelTier < 0 || coilTier < 0) {
+            return invalid(placement.index(), Failure.MISSING_BLOCK);
+        }
         return new AddonMatch(
                 placement.index(), true, frameTier, glassTier, parallelTier, coilTier, Failure.NONE);
     }

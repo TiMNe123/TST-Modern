@@ -14,6 +14,12 @@ public record BigBroArrayAddonState(
                                     int parallelTier,
                                     int coilTier,
                                     int validMask) {
+    /**
+     * Aggregates independently valid addon matches.
+     *
+     * @throws IllegalArgumentException when any supplied match has an index outside {@code 0..3}, or when two
+     *                                  supplied matches use the same placement index
+     */
     public static BigBroArrayAddonState aggregate(CoreTiers core, List<AddonMatch> matches) {
         Objects.requireNonNull(core, "core");
         Objects.requireNonNull(matches, "matches");
@@ -24,9 +30,21 @@ public record BigBroArrayAddonState(
         int parallelTier = 0;
         int coilTier = 0;
         int validMask = 0;
+        boolean[] suppliedIndices = new boolean[4];
 
         for (AddonMatch match : matches) {
-            if (match == null || !match.valid()) continue;
+            if (match == null) continue;
+
+            int index = match.index();
+            if (index < 0 || index >= suppliedIndices.length) {
+                throw new IllegalArgumentException("Addon placement index must be between 0 and 3: " + index);
+            }
+            if (suppliedIndices[index]) {
+                throw new IllegalArgumentException("Duplicate addon placement index: " + index);
+            }
+            suppliedIndices[index] = true;
+
+            if (!match.valid()) continue;
 
             frameTier = Math.min(frameTier, match.frameTier());
             glassTier = Math.min(glassTier, match.glassTier());
@@ -38,7 +56,7 @@ public record BigBroArrayAddonState(
                 coilTier = Math.min(coilTier, match.coilTier());
             }
             addonCount++;
-            validMask |= 1 << match.index();
+            validMask |= 1 << index;
         }
 
         return new BigBroArrayAddonState(
