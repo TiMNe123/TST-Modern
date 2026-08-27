@@ -33,6 +33,7 @@ import com.tstmodern.machine.logic.BigBroArrayLogic;
 import com.tstmodern.machine.logic.BigBroArrayMachineCatalog;
 import com.tstmodern.machine.logic.BigBroArrayMachineTransfer;
 import com.tstmodern.machine.logic.BigBroArrayMode;
+import com.tstmodern.machine.logic.BigBroArrayRecipeModifiers;
 import com.tstmodern.machine.logic.BigBroArrayTierRules;
 import com.tstmodern.machine.logic.BigBroArrayTierRules.CoreTiers;
 import com.tstmodern.registry.machine.BigBroArrayStructure;
@@ -205,6 +206,22 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
 
     public long getActualParallel() {
         return BigBroArrayLogic.calculateParallelism(embeddedCount, parallelCasingTier, addonCount);
+    }
+
+    public static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe) {
+        if (!(machine instanceof BigBroArrayMachine array)) {
+            return ModifierFunction.NULL;
+        }
+        return BigBroArrayRecipeModifiers.recipeModifier(
+                machine,
+                recipe,
+                array.embeddedCount,
+                array.embeddedTier,
+                array.embeddedMode,
+                array.parallelCasingTier,
+                array.addonCount,
+                array.coilTier
+        );
     }
 
     @Override
@@ -382,43 +399,5 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                         }
                     }
                 });
-    }
-
-    public static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe) {
-        if (!(machine instanceof BigBroArrayMachine arrayMachine)) {
-            return ModifierFunction.NULL;
-        }
-
-        if (arrayMachine.getEmbeddedMachineStack().isEmpty() || arrayMachine.getEmbeddedCount() <= 0) {
-            return ModifierFunction.NULL;
-        }
-
-        if (!BigBroArrayTierRules.isEmbeddedTierEligible(
-                arrayMachine.getFrameTier(), arrayMachine.getEmbeddedTier())) {
-            return ModifierFunction.NULL;
-        }
-
-        int recipeTier = RecipeHelper.getRecipeEUtTier(recipe);
-        if (recipeTier > arrayMachine.getEmbeddedTier()) {
-            return ModifierFunction.NULL;
-        }
-
-        int parallelLimit = (int) Math.min(Integer.MAX_VALUE, arrayMachine.getActualParallel());
-        int parallel = ParallelLogic.getParallelAmount(machine, recipe, parallelLimit);
-        if (parallel <= 0) {
-            return ModifierFunction.NULL;
-        }
-
-        double energyDiscount = BigBroArrayLogic.calculateEnergyDiscount(arrayMachine.getCoilTier());
-        double durationMultiplier = BigBroArrayLogic.calculateDurationMultiplier(arrayMachine.getParallelCasingTier());
-        double eutMultiplier = parallel * energyDiscount;
-
-        return ModifierFunction.builder()
-                .inputModifier(ContentModifier.multiplier(parallel))
-                .outputModifier(ContentModifier.multiplier(parallel))
-                .eutMultiplier(eutMultiplier)
-                .durationMultiplier(durationMultiplier)
-                .parallels(parallel)
-                .build();
     }
 }
