@@ -1,8 +1,10 @@
 package com.tstmodern.machine;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.gregtechceu.gtceu.api.GTValues;
+import com.tstmodern.machine.logic.BigBroArrayMachineCatalog;
 import com.gregtechceu.gtceu.api.item.MetaMachineItem;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
@@ -295,11 +297,9 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
 
     @Override
     public GTRecipeType getRecipeType() {
-        if (!embeddedMachineStack.isEmpty() && embeddedMachineStack.getItem() instanceof MetaMachineItem machineItem) {
-            MachineDefinition definition = machineItem.getDefinition();
-            if (definition != null && definition.getRecipeTypes() != null && definition.getRecipeTypes().length > 0) {
-                return definition.getRecipeTypes()[0];
-            }
+        Optional<BigBroArrayMachineCatalog.Entry> entry = BigBroArrayMachineCatalog.find(embeddedMachineStack);
+        if (entry.isPresent()) {
+            return entry.get().recipeType();
         }
         return super.getRecipeType();
     }
