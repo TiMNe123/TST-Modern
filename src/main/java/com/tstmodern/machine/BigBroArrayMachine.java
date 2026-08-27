@@ -1,32 +1,42 @@
 package com.tstmodern.machine;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.gregtechceu.gtceu.api.GTValues;
-import com.tstmodern.machine.logic.BigBroArrayMachineCatalog;
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.item.MetaMachineItem;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IDisplayUIMachine;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.machine.multiblock.part.MultiblockPartMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
+import com.gregtechceu.gtceu.api.registry.GTRegistries;
+import com.gregtechceu.gtceu.common.machine.multiblock.part.ItemBusPartMachine;
 import com.tstmodern.machine.logic.BigBroArrayAddonMatcher;
 import com.tstmodern.machine.logic.BigBroArrayAddonMatcher.BlockLookup;
 import com.tstmodern.machine.logic.BigBroArrayAddonScanner;
 import com.tstmodern.machine.logic.BigBroArrayAddonState;
+import com.tstmodern.machine.logic.BigBroArrayEmbeddedState;
 import com.tstmodern.machine.logic.BigBroArrayLogic;
+import com.tstmodern.machine.logic.BigBroArrayMachineCatalog;
+import com.tstmodern.machine.logic.BigBroArrayMachineTransfer;
+import com.tstmodern.machine.logic.BigBroArrayMode;
 import com.tstmodern.machine.logic.BigBroArrayTierRules;
 import com.tstmodern.machine.logic.BigBroArrayTierRules.CoreTiers;
 import com.tstmodern.registry.machine.BigBroArrayStructure;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
@@ -64,6 +74,10 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     @Persisted
     @DescSynced
     private int embeddedTier = 0;
+
+    @Persisted
+    @DescSynced
+    private BigBroArrayMode embeddedMode = BigBroArrayMode.PROCESSOR;
 
     @DescSynced
     private int addonCount = 0;
@@ -232,67 +246,101 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         }
     }
 
+    private List<IItemHandlerModifiable> getItemImportBuses() {
+        List<IItemHandlerModifiable> list = new ArrayList<>();
+        for (IMultiPart part : getParts()) {
+            if (part instanceof ItemBusPartMachine bus && bus.getInventory().getHandlerIO() == IO.IN) {
+                list.add(bus.getInventory());
+            }
+        }
+        return list;
+    }
+
+    private List<IItemHandlerModifiable> getItemExportBuses() {
+        List<IItemHandlerModifiable> list = new ArrayList<>();
+        for (IMultiPart part : getParts()) {
+            if (part instanceof ItemBusPartMachine bus && bus.getInventory().getHandlerIO() == IO.OUT) {
+                list.add(bus.getInventory());
+            }
+        }
+        return list;
+    }
+
     @Override
-    protected InteractionResult onScrewdriverClick(Player playerIn, InteractionHand hand, Direction gridSide,
-                                                   BlockHitResult hitResult) {
-        if (!isFormed() || isRemote()) {
+    protected InteractionResult onScrewdriverClick(
+            Player playerIn,
+            InteractionHand hand,
+            Direction gridSide,
+            BlockHitResult hitResult) {
+        if (getLevel() == null || getLevel().isClientSide) {
             return InteractionResult.SUCCESS;
         }
 
-        if (playerIn == null) {
+        if (!isFormed()) {
+            if (playerIn != null) {
+                playerIn.sendSystemMessage(Component.translatable("tstmodern.machine.big_bro_array.status.not_formed")
+                        .withStyle(ChatFormatting.RED));
+            }
             return InteractionResult.PASS;
         }
 
-        // If machine already embedded, unload it back to player or drop it.
         if (!embeddedMachineStack.isEmpty() && embeddedCount > 0) {
-            ItemStack returnStack = embeddedMachineStack.copy();
-            returnStack.setCount(embeddedCount);
-            if (!playerIn.getInventory().add(returnStack)) {
-                playerIn.drop(returnStack, false);
+            List<IItemHandlerModifiable> exportBuses = getItemExportBuses();
+            BigBroArrayEmbeddedState currentState = new BigBroArrayEmbeddedState(
+                    BigBroArrayEmbeddedState.CURRENT_VERSION,
+                    embeddedMachineStack.getItem() instanceof MetaMachineItem m ? m.getDefinition().getId() : null,
+                    embeddedMode,
+                    embeddedTier,
+                    embeddedCount,
+                    embeddedMachineStack.getTag() != null ? embeddedMachineStack.getTag().copy() : null
+            );
+
+            BigBroArrayMachineTransfer.UnloadResult unloadResult = BigBroArrayMachineTransfer.planAndExecuteUnload(
+                    currentState, exportBuses, embeddedMachineStack);
+
+            if (playerIn != null) {
+                playerIn.sendSystemMessage(Component.translatable(unloadResult.messageKey(), unloadResult.messageArgs())
+                        .withStyle(unloadResult.success() ? ChatFormatting.YELLOW : ChatFormatting.RED));
             }
-            playerIn.sendSystemMessage(Component.translatable("tstmodern.machine.big_bro_array.status.no_machine")
-                    .withStyle(ChatFormatting.YELLOW));
-            this.embeddedMachineStack = ItemStack.EMPTY;
-            this.embeddedCount = 0;
-            this.embeddedTier = 0;
-            return InteractionResult.CONSUME;
+
+            if (unloadResult.success()) {
+                this.embeddedMachineStack = ItemStack.EMPTY;
+                this.embeddedCount = 0;
+                this.embeddedTier = 0;
+                this.embeddedMode = BigBroArrayMode.PROCESSOR;
+                this.recipeLogic.resetRecipeLogic();
+                return InteractionResult.CONSUME;
+            }
+            return InteractionResult.FAIL;
         }
 
-        // Otherwise scan player offhand for a single-block machine unlocked by the frame tier.
-        ItemStack offhand = playerIn.getOffhandItem();
-        int candidateTier = extractTier(offhand);
-        if (isValidEmbeddableMachine(offhand) &&
-                BigBroArrayTierRules.isEmbeddedTierEligible(getFrameTier(), candidateTier)) {
-            this.embeddedMachineStack = offhand.copy();
-            this.embeddedMachineStack.setCount(1);
-            this.embeddedCount = offhand.getCount();
-            this.embeddedTier = candidateTier;
-            offhand.setCount(0);
-            playerIn.sendSystemMessage(Component.translatable("tstmodern.machine.big_bro_array.status.embedded",
-                    embeddedCount, embeddedMachineStack.getHoverName(), GTValues.VN[embeddedTier])
-                    .withStyle(ChatFormatting.GREEN));
-            return InteractionResult.CONSUME;
+        int maxAllowedTier = BigBroArrayTierRules.maxEmbeddedTier(getFrameTier());
+        List<IItemHandlerModifiable> importBuses = getItemImportBuses();
+        BigBroArrayMachineTransfer.LoadResult loadResult = BigBroArrayMachineTransfer.planAndExecuteLoad(
+                importBuses, maxAllowedTier);
+
+        if (playerIn != null) {
+            playerIn.sendSystemMessage(Component.translatable(loadResult.messageKey(), loadResult.messageArgs())
+                    .withStyle(loadResult.success() ? ChatFormatting.GREEN : ChatFormatting.RED));
         }
 
-        return super.onScrewdriverClick(playerIn, hand, gridSide, hitResult);
-    }
-
-    private static boolean isValidEmbeddableMachine(ItemStack stack) {
-        if (stack.isEmpty() || !(stack.getItem() instanceof MetaMachineItem machineItem)) {
-            return false;
-        }
-        MachineDefinition definition = machineItem.getDefinition();
-        return definition != null && definition.getRecipeTypes() != null && definition.getRecipeTypes().length > 0;
-    }
-
-    private static int extractTier(ItemStack stack) {
-        if (stack.getItem() instanceof MetaMachineItem machineItem) {
-            MachineDefinition definition = machineItem.getDefinition();
-            if (definition != null) {
-                return definition.getTier();
+        if (loadResult.success()) {
+            BigBroArrayEmbeddedState state = loadResult.state();
+            MachineDefinition def = GTRegistries.MACHINES.get(state.definitionId());
+            if (def != null) {
+                this.embeddedMachineStack = def.asStack();
+                if (state.itemTag() != null) {
+                    this.embeddedMachineStack.setTag(state.itemTag().copy());
+                }
+                this.embeddedCount = state.count();
+                this.embeddedTier = state.tier();
+                this.embeddedMode = state.mode() != null ? state.mode() : BigBroArrayMode.PROCESSOR;
+                this.recipeLogic.resetRecipeLogic();
+                return InteractionResult.CONSUME;
             }
         }
-        return 0;
+
+        return InteractionResult.FAIL;
     }
 
     @Override
