@@ -55,5 +55,96 @@ public final class BigBroArrayStructure {
             String[] layers = new String(input.readAllBytes(), StandardCharsets.UTF_8).split("\\f", -1); String[][] source = new String[layers.length][]; for (int index = 0; index < layers.length; index++) source[index] = layers[index].split("\\n", -1); return source;
         } catch (IOException exception) { throw new ExceptionInInitializerError(exception); }
     }
+    public static final int CORE_AISLE_ORIGIN = 5;
+    public static final int CORE_DOWN_ORIGIN = 5;
+    public static final int CORE_COLUMN_ORIGIN = 4;
+
+    public static List<String[][]> previewLayouts() {
+        List<String[][]> previews = new ArrayList<>(5);
+        previews.add(java.util.Arrays.stream(CORE_AISLES)
+                .map(String[]::clone)
+                .toArray(String[][]::new));
+        for (AddonPlacement placement : ADDON_PLACEMENTS) {
+            previews.add(coreWithAddon(placement));
+        }
+        return List.copyOf(previews);
+    }
+
+    public static String[][] coreWithAddon(AddonPlacement placement) {
+        int minAisle = -CORE_AISLE_ORIGIN;
+        int maxAisle = CORE_AISLES.length - 1 - CORE_AISLE_ORIGIN;
+        int minDown = -CORE_DOWN_ORIGIN;
+        int maxDown = CORE_AISLES[0].length - 1 - CORE_DOWN_ORIGIN;
+        int minColumn = -CORE_COLUMN_ORIGIN;
+        int maxColumn = CORE_AISLES[0][0].length() - 1 - CORE_COLUMN_ORIGIN;
+
+        for (RelativeCell cell : placement.cells()) {
+            minAisle = Math.min(minAisle, cell.right() - placement.offsetX());
+            maxAisle = Math.max(maxAisle, cell.right() - placement.offsetX());
+            minDown = Math.min(minDown, cell.down() - placement.offsetY());
+            maxDown = Math.max(maxDown, cell.down() - placement.offsetY());
+            minColumn = Math.min(minColumn, cell.back() - placement.offsetZ());
+            maxColumn = Math.max(maxColumn, cell.back() - placement.offsetZ());
+        }
+
+        char[][][] cells = new char[maxAisle - minAisle + 1][maxDown - minDown + 1]
+                [maxColumn - minColumn + 1];
+        for (char[][] aisle : cells) {
+            for (char[] row : aisle) {
+                java.util.Arrays.fill(row, ' ');
+            }
+        }
+
+        for (int aisle = 0; aisle < CORE_AISLES.length; aisle++) {
+            for (int down = 0; down < CORE_AISLES[aisle].length; down++) {
+                String row = CORE_AISLES[aisle][down];
+                for (int column = 0; column < row.length(); column++) {
+                    char symbol = row.charAt(column);
+                    if (symbol != ' ') {
+                        put(cells,
+                                aisle - CORE_AISLE_ORIGIN,
+                                down - CORE_DOWN_ORIGIN,
+                                column - CORE_COLUMN_ORIGIN,
+                                minAisle, minDown, minColumn, symbol);
+                    }
+                }
+            }
+        }
+        for (RelativeCell cell : placement.cells()) {
+            put(cells,
+                    cell.right() - placement.offsetX(),
+                    cell.down() - placement.offsetY(),
+                    cell.back() - placement.offsetZ(),
+                    minAisle, minDown, minColumn, cell.symbol());
+        }
+
+        String[][] layout = new String[cells.length][cells[0].length];
+        for (int aisle = 0; aisle < cells.length; aisle++) {
+            for (int down = 0; down < cells[aisle].length; down++) {
+                layout[aisle][down] = new String(cells[aisle][down]);
+            }
+        }
+        return layout;
+    }
+
+    private static void put(
+                            char[][][] cells,
+                            int aisle,
+                            int down,
+                            int column,
+                            int minAisle,
+                            int minDown,
+                            int minColumn,
+                            char symbol) {
+        int aisleIndex = aisle - minAisle;
+        int downIndex = down - minDown;
+        int columnIndex = column - minColumn;
+        if (cells[aisleIndex][downIndex][columnIndex] != ' ') {
+            throw new IllegalStateException("Big Bro Array preview cells overlap at " +
+                    aisle + "," + down + "," + column);
+        }
+        cells[aisleIndex][downIndex][columnIndex] = symbol;
+    }
+
     private BigBroArrayStructure() {}
 }

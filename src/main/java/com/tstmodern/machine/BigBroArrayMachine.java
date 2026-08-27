@@ -3,11 +3,11 @@ package com.tstmodern.machine;
 import java.util.List;
 
 import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.api.block.ICoilType;
 import com.gregtechceu.gtceu.api.item.MetaMachineItem;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
+import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IDisplayUIMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
@@ -17,9 +17,14 @@ import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
+import com.tstmodern.machine.logic.BigBroArrayAddonMatcher;
+import com.tstmodern.machine.logic.BigBroArrayAddonMatcher.BlockLookup;
+import com.tstmodern.machine.logic.BigBroArrayAddonScanner;
+import com.tstmodern.machine.logic.BigBroArrayAddonState;
 import com.tstmodern.machine.logic.BigBroArrayLogic;
 import com.tstmodern.machine.logic.BigBroArrayTierRules;
 import com.tstmodern.machine.logic.BigBroArrayTierRules.CoreTiers;
+import com.tstmodern.registry.machine.BigBroArrayStructure;
 
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
@@ -33,6 +38,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 /**
@@ -56,28 +63,76 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     @DescSynced
     private int embeddedTier = 0;
 
-    @Persisted
+    @DescSynced
+    private int addonCount = 0;
+
+    @DescSynced
+    private int addonValidMask = 0;
+
+    @DescSynced
+    private int addonFrameTier = 0;
+
+    @DescSynced
+    private int addonGlassTier = 0;
+
     @DescSynced
     private int parallelCasingTier = 0;
 
-    @Persisted
     @DescSynced
     private int coilTier = 0;
 
-    @Persisted
-    @DescSynced
-    private boolean hasAddon = false;
-
     /** One immutable snapshot published only after all core tier channels validate. */
     private CoreTiers coreTiers;
+    private final BigBroArrayAddonScanner addonScanner;
+    private TickableSubscription addonScanSubscription;
 
     public BigBroArrayMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
+        BlockLookup lookup = new BlockLookup() {
+            @Override
+            public boolean isLoaded(BlockPos pos) {
+                Level level = getLevel();
+                return level != null && level.isLoaded(pos);
+            }
+
+            @Override
+            public BlockState getLoadedState(BlockPos pos) {
+                Level level = getLevel();
+                return level != null && level.isLoaded(pos) ? level.getBlockState(pos) : null;
+            }
+        };
+        this.addonScanner = new BigBroArrayAddonScanner(
+                BigBroArrayStructure.ADDON_PLACEMENTS,
+                new BigBroArrayAddonMatcher(),
+                lookup,
+                this::getPos,
+                this::getFrontFacing,
+                this::getUpwardsFacing,
+                this::isFlipped,
+                this::getCoreTiers,
+                this::onAddonStateChanged);
     }
 
     @Override
     public ManagedFieldHolder getFieldHolder() {
         return MANAGED_FIELD_HOLDER;
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (addonScanSubscription == null) {
+            addonScanSubscription = subscribeServerTick(this::scanAddonTick);
+        }
+    }
+
+    @Override
+    public void onUnload() {
+        if (addonScanSubscription != null) {
+            unsubscribe(addonScanSubscription);
+        }
+        addonScanSubscription = null;
+        super.onUnload();
     }
 
     public ItemStack getEmbeddedMachineStack() {
@@ -97,11 +152,11 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     }
 
     public int getFrameTier() {
-        return coreTiers == null ? 0 : coreTiers.frameTier();
+        return coreTiers == null ? 0 : addonFrameTier;
     }
 
     public int getGlassTier() {
-        return coreTiers == null ? 0 : coreTiers.glassTier();
+        return coreTiers == null ? 0 : addonGlassTier;
     }
 
     public int getMachineCasingTier() {
@@ -121,16 +176,19 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     }
 
     public boolean hasAddon() {
-        return hasAddon;
+        return addonCount > 0;
+    }
+
+    public int getAddonCount() {
+        return addonCount;
+    }
+
+    public int getAddonValidMask() {
+        return addonValidMask;
     }
 
     public long getActualParallel() {
-        return BigBroArrayLogic.calculateParallelism(embeddedCount, parallelCasingTier, getAddonCount());
-    }
-
-    /** Number of attached addon structures (0 for core-only builds). */
-    public int getAddonCount() {
-        return hasAddon ? 1 : 0;
+        return BigBroArrayLogic.calculateParallelism(embeddedCount, parallelCasingTier, addonCount);
     }
 
     @Override
@@ -138,49 +196,38 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         super.onStructureFormed();
 
         var state = getMultiblockState();
-        CoreTiers validatedCoreTiers = state == null ? null :
+        this.coreTiers = state == null ? null :
                 BigBroArrayTierRules.validatedCoreTiers(state.getMatchContext());
-        if (validatedCoreTiers == null) {
-            clearStructureDerivedState();
+        if (coreTiers == null) {
+            addonScanner.clear();
             return;
         }
-
-        int formedCoilTier = 0;
-        Object coilType = state.getMatchContext().get("CoilType");
-        if (coilType instanceof ICoilType coil) {
-            formedCoilTier = coil.getTier();
-        }
-
-        int formedParallelTier = 0;
-        boolean formedAddon = false;
-        if (state.getCache() != null) {
-            for (BlockPos pos : state.getCache()) {
-                int candidateTier = BigBroArrayTierRules.parallelCasingTier(
-                        state.getWorld().getBlockState(pos).getBlock());
-                if (candidateTier > 0) {
-                    formedParallelTier = Math.max(formedParallelTier, candidateTier);
-                    formedAddon = true;
-                }
-            }
-        }
-
-        this.coilTier = formedCoilTier;
-        this.parallelCasingTier = formedParallelTier;
-        this.hasAddon = formedAddon;
-        this.coreTiers = validatedCoreTiers;
+        addonScanner.scanAllNow();
     }
 
     @Override
     public void onStructureInvalid() {
         super.onStructureInvalid();
-        clearStructureDerivedState();
+        this.coreTiers = null;
+        addonScanner.clear();
     }
 
-    private void clearStructureDerivedState() {
-        this.coreTiers = null;
-        this.parallelCasingTier = 0;
-        this.coilTier = 0;
-        this.hasAddon = false;
+    private void scanAddonTick() {
+        if (isFormed() && getOffsetTimer() % 5 == 0) {
+            addonScanner.scanNext();
+        }
+    }
+
+    private void onAddonStateChanged(BigBroArrayAddonState state) {
+        this.addonCount = state.addonCount();
+        this.addonValidMask = state.validMask();
+        this.addonFrameTier = state.frameTier();
+        this.addonGlassTier = state.glassTier();
+        this.parallelCasingTier = state.parallelTier();
+        this.coilTier = state.coilTier();
+        if (isFormed()) {
+            recipeLogic.resetRecipeLogic();
+        }
     }
 
     @Override

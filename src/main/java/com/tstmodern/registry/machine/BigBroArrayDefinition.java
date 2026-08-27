@@ -2,7 +2,9 @@ package com.tstmodern.registry.machine;
 
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.ToIntFunction;
 
 import com.gregtechceu.gtceu.GTCEu;
@@ -12,6 +14,7 @@ import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
+import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
@@ -23,15 +26,23 @@ import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.tstmodern.TSTModern;
 import com.tstmodern.machine.BigBroArrayMachine;
 import com.tstmodern.machine.logic.BigBroArrayTierRules;
+import com.tstmodern.registry.TSTBlocks;
+import com.tstmodern.registry.machine.BigBroArrayStructure.AddonPlacement;
+import com.tstmodern.registry.machine.BigBroArrayStructure.RelativeCell;
 
 import com.lowdragmc.lowdraglib.utils.BlockInfo;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
 
 /** Definition and structural predicates for the Mega Array. */
 public final class BigBroArrayDefinition {
+    private static final int CORE_AISLE_ORIGIN = 5;
+    private static final int CORE_DOWN_ORIGIN = 5;
+    private static final int CORE_COLUMN_ORIGIN = 4;
+
     public static final MultiblockMachineDefinition MACHINE = TSTModern.REGISTRATE
             .multiblock("big_bro_array", BigBroArrayMachine::new)
             .langValue("Mega Array")
@@ -109,10 +120,10 @@ public final class BigBroArrayDefinition {
                                         .setMinGlobalLimited(1)
                                         .setMaxGlobalLimited(4)
                                         .setPreviewCount(1)))
-                        .where('H', Predicates.heatingCoils())
                         .where(' ', Predicates.any())
                         .build();
             })
+            .shapeInfos(BigBroArrayDefinition::shapeInfos)
             .workableCasingModel(
                     GTCEu.id("block/casings/solid/machine_casing_robust_tungstensteel"),
                     TSTModern.id("block/multiblock/big_bro_array"))
@@ -127,6 +138,36 @@ public final class BigBroArrayDefinition {
             .register();
 
     private BigBroArrayDefinition() {}
+
+    private static List<MultiblockShapeInfo> shapeInfos(MultiblockMachineDefinition definition) {
+        return BigBroArrayStructure.previewLayouts().stream()
+                .map(layout -> shapeInfo(definition, layout))
+                .toList();
+    }
+
+    private static MultiblockShapeInfo shapeInfo(
+                                                 MultiblockMachineDefinition definition,
+                                                 String[][] layout) {
+        MultiblockShapeInfo.ShapeInfoBuilder builder = MultiblockShapeInfo.builder();
+        for (String[] aisle : layout) {
+            builder.aisle(aisle);
+        }
+        return builder
+                .where('~', definition, Direction.NORTH)
+                .where('A', GTBlocks.FUSION_GLASS.get())
+                .where('B', frame(GTMaterials.Tritanium))
+                .where('C', GTBlocks.MACHINE_CASING_MAX.get())
+                .where('D', GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get())
+                .where('E', GTBlocks.CASING_STAINLESS_CLEAN.get())
+                .where('F', GTBlocks.CASING_STAINLESS_CLEAN.get())
+                .where('G', TSTBlocks.PARALLEL_CASING_MK1.get())
+                .where('H', frame(GTMaterials.Tritanium))
+                .where('I', GTBlocks.COIL_CUPRONICKEL.get())
+                .where('J', GTBlocks.CASING_TUNGSTENSTEEL_GEARBOX.get())
+                .where('K', GTBlocks.FUSION_GLASS.get())
+                .where('L', GTBlocks.CASING_STAINLESS_CLEAN.get())
+                .build();
+    }
 
     private static TraceabilityPredicate uniformTierPredicate(
                                                               String contextKey,
