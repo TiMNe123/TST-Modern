@@ -2,7 +2,6 @@ package com.tstmodern.registry.machine;
 
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -27,8 +26,6 @@ import com.tstmodern.TSTModern;
 import com.tstmodern.machine.BigBroArrayMachine;
 import com.tstmodern.machine.logic.BigBroArrayTierRules;
 import com.tstmodern.registry.TSTBlocks;
-import com.tstmodern.registry.machine.BigBroArrayStructure.AddonPlacement;
-import com.tstmodern.registry.machine.BigBroArrayStructure.RelativeCell;
 
 import com.lowdragmc.lowdraglib.utils.BlockInfo;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -39,9 +36,6 @@ import net.minecraft.world.level.block.Block;
 
 /** Definition and structural predicates for the Mega Array. */
 public final class BigBroArrayDefinition {
-    private static final int CORE_AISLE_ORIGIN = 5;
-    private static final int CORE_DOWN_ORIGIN = 5;
-    private static final int CORE_COLUMN_ORIGIN = 4;
 
     public static final MultiblockMachineDefinition MACHINE = TSTModern.REGISTRATE
             .multiblock("big_bro_array", BigBroArrayMachine::new)
