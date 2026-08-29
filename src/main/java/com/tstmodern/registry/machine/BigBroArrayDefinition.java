@@ -20,7 +20,6 @@ import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterialBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
-import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.tstmodern.TSTModern;
 import com.tstmodern.machine.BigBroArrayMachine;
@@ -42,7 +41,7 @@ public final class BigBroArrayDefinition {
             .langValue("Mega Array")
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTRecipeTypes.DUMMY_RECIPES)
-            .recipeModifiers(BigBroArrayMachine::recipeModifier, GTRecipeModifiers.OC_NON_PERFECT)
+            .recipeModifiers(BigBroArrayMachine::recipeModifier)
             .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
             .pattern(definition -> {
                 FactoryBlockPattern pattern = FactoryBlockPattern.start(

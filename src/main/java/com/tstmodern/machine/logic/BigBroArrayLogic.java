@@ -31,8 +31,8 @@ public final class BigBroArrayLogic {
         }
         int multiplier = casingMultiplier(parallelCasingTier);
         if (parallelCasingTier >= 5) {
-            long infinity = Integer.MAX_VALUE << multiplier;
-            return (infinity / 5) * (1L + addonCount);
+            long infinity = shiftLeftSaturating((long) Integer.MAX_VALUE, multiplier);
+            return saturatingMultiply(infinity / 5L, 1L + addonCount);
         }
         long base = 64L << ((long) parallelCasingTier * 2 + (parallelCasingTier > 3 ? 6 : 0));
         return saturatingMultiply(base, 1L + addonCount);
@@ -43,7 +43,7 @@ public final class BigBroArrayLogic {
      * Returns the effective parallelism for an embedded machine stack.
      */
     public static long calculateParallelism(int machineCount, int parallelCasingTier, int addonCount) {
-        if (machineCount <= 0 || addonCount <= 0 && machineCount <= 0) {
+        if (machineCount <= 0) {
             return 0;
         }
         if (addonCount <= 0) {

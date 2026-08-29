@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
-import com.gregtechceu.gtceu.api.item.MetaMachineItem;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
@@ -31,17 +29,18 @@ import com.tstmodern.machine.logic.BigBroArrayMachineTransfer;
 import com.tstmodern.machine.logic.BigBroArrayMode;
 import com.tstmodern.machine.logic.BigBroArrayRecipeModifiers;
 import com.tstmodern.machine.logic.BigBroArrayTierRules;
+import com.tstmodern.machine.logic.OperationalStatus;
 import com.tstmodern.machine.logic.BigBroArrayTierRules.CoreTiers;
 import com.tstmodern.registry.machine.BigBroArrayStructure;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
-import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -60,21 +59,10 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
             new ManagedFieldHolder(BigBroArrayMachine.class,
                     WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
 
-    @Persisted
-    @DescSynced
+    // Replaced 4 independent fields with a single versioned state, custom persisted in NBT
+    private BigBroArrayEmbeddedState embeddedState = BigBroArrayEmbeddedState.EMPTY;
+    // Transient cache for UI and catalog queries, updated when embeddedState changes
     private ItemStack embeddedMachineStack = ItemStack.EMPTY;
-
-    @Persisted
-    @DescSynced
-    private int embeddedCount = 0;
-
-    @Persisted
-    @DescSynced
-    private int embeddedTier = 0;
-
-    @Persisted
-    @DescSynced
-    private BigBroArrayMode embeddedMode = BigBroArrayMode.PROCESSOR;
 
     @DescSynced
     private int addonCount = 0;
@@ -148,16 +136,55 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         super.onUnload();
     }
 
+    @Override
+    public void saveCustomPersistedData(CompoundTag tag, boolean forDrop) {
+        super.saveCustomPersistedData(tag, forDrop);
+        if (!embeddedState.isEmpty()) {
+            tag.put(BigBroArrayEmbeddedState.NBT_KEY, embeddedState.writeToNbt());
+        }
+    }
+
+    @Override
+    public void loadCustomPersistedData(CompoundTag tag) {
+        super.loadCustomPersistedData(tag);
+        if (tag.contains(BigBroArrayEmbeddedState.NBT_KEY)) {
+            this.embeddedState = BigBroArrayEmbeddedState.readFromNbt(tag.getCompound(BigBroArrayEmbeddedState.NBT_KEY));
+        } else {
+            this.embeddedState = BigBroArrayEmbeddedState.migrateFromLegacy(tag);
+        }
+        updateEmbeddedStackCache();
+    }
+
+    private void updateEmbeddedStackCache() {
+        if (embeddedState.isEmpty() || !embeddedState.isValid()) {
+            this.embeddedMachineStack = ItemStack.EMPTY;
+            return;
+        }
+        MachineDefinition def = GTRegistries.MACHINES.get(embeddedState.definitionId());
+        if (def != null) {
+            this.embeddedMachineStack = def.asStack();
+            if (embeddedState.itemTag() != null) {
+                this.embeddedMachineStack.setTag(embeddedState.itemTag().copy());
+            }
+        } else {
+            this.embeddedMachineStack = ItemStack.EMPTY;
+        }
+    }
+
     public ItemStack getEmbeddedMachineStack() {
         return embeddedMachineStack;
     }
 
     public int getEmbeddedCount() {
-        return embeddedCount;
+        return embeddedState.count();
     }
 
     public int getEmbeddedTier() {
-        return embeddedTier;
+        return embeddedState.tier();
+    }
+
+    public BigBroArrayMode getEmbeddedMode() {
+        return embeddedState.mode() != null ? embeddedState.mode() : BigBroArrayMode.PROCESSOR;
     }
 
     public CoreTiers getCoreTiers() {
@@ -201,19 +228,74 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     }
 
     public long getActualParallel() {
-        return BigBroArrayLogic.calculateParallelism(embeddedCount, parallelCasingTier, addonCount);
+        return BigBroArrayLogic.calculateParallelism(embeddedState.count(), parallelCasingTier, addonCount);
+    }
+
+    public boolean hasEnergyHatch(IO io) {
+        for (IMultiPart part : getParts()) {
+            if (part instanceof com.gregtechceu.gtceu.common.machine.multiblock.part.EnergyHatchPartMachine energyHatch) {
+                if (energyHatch.energyContainer.getHandlerIO() == io) return true;
+            } else if (part instanceof com.gregtechceu.gtceu.common.machine.multiblock.part.LaserHatchPartMachine) {
+                for (var handlerList : ((com.gregtechceu.gtceu.api.machine.multiblock.part.MultiblockPartMachine) part).getRecipeHandlers()) {
+                    if (handlerList.getHandlerIO() == io) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean hasInputEnergy() {
+        return hasEnergyHatch(IO.IN);
+    }
+
+    public boolean hasOutputEnergy() {
+        return hasEnergyHatch(IO.OUT);
+    }
+
+    public OperationalStatus getOperationalStatus() {
+        if (embeddedState.isEmpty()) {
+            return OperationalStatus.NO_MACHINE;
+        }
+
+        if (!embeddedState.isValid()) {
+            return OperationalStatus.STALE_ID;
+        }
+
+        int maxAllowedTier = BigBroArrayTierRules.maxEmbeddedTier(getFrameTier());
+        if (embeddedState.tier() > maxAllowedTier) {
+            return OperationalStatus.FRAME_TOO_LOW;
+        }
+
+        BigBroArrayMode mode = getEmbeddedMode();
+        if (mode == BigBroArrayMode.PROCESSOR) {
+            if (!hasInputEnergy()) {
+                return OperationalStatus.MISSING_INPUT_ENERGY;
+            }
+        } else if (mode == BigBroArrayMode.GENERATOR) {
+            if (!hasOutputEnergy()) {
+                return OperationalStatus.MISSING_OUTPUT_ENERGY;
+            }
+        }
+
+        return OperationalStatus.CAN_RUN;
     }
 
     public static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe) {
         if (!(machine instanceof BigBroArrayMachine array)) {
             return ModifierFunction.NULL;
         }
+
+        OperationalStatus status = array.getOperationalStatus();
+        if (!status.canRun()) {
+            return ModifierFunction.NULL;
+        }
+
         return BigBroArrayRecipeModifiers.recipeModifier(
                 machine,
                 recipe,
-                array.embeddedCount,
-                array.embeddedTier,
-                array.embeddedMode,
+                array.embeddedState.count(),
+                array.embeddedState.tier(),
+                array.getEmbeddedMode(),
                 array.parallelCasingTier,
                 array.addonCount,
                 array.coilTier
@@ -259,20 +341,10 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         }
     }
 
-    private List<IItemHandlerModifiable> getItemImportBuses() {
+    public List<IItemHandlerModifiable> getItemBuses(IO io) {
         List<IItemHandlerModifiable> list = new ArrayList<>();
         for (IMultiPart part : getParts()) {
-            if (part instanceof ItemBusPartMachine bus && bus.getInventory().getHandlerIO() == IO.IN) {
-                list.add(bus.getInventory());
-            }
-        }
-        return list;
-    }
-
-    private List<IItemHandlerModifiable> getItemExportBuses() {
-        List<IItemHandlerModifiable> list = new ArrayList<>();
-        for (IMultiPart part : getParts()) {
-            if (part instanceof ItemBusPartMachine bus && bus.getInventory().getHandlerIO() == IO.OUT) {
+            if (part instanceof ItemBusPartMachine bus && bus.getInventory().getHandlerIO() == io) {
                 list.add(bus.getInventory());
             }
         }
@@ -297,19 +369,11 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
             return InteractionResult.PASS;
         }
 
-        if (!embeddedMachineStack.isEmpty() && embeddedCount > 0) {
-            List<IItemHandlerModifiable> exportBuses = getItemExportBuses();
-            BigBroArrayEmbeddedState currentState = new BigBroArrayEmbeddedState(
-                    BigBroArrayEmbeddedState.CURRENT_VERSION,
-                    embeddedMachineStack.getItem() instanceof MetaMachineItem m ? m.getDefinition().getId() : null,
-                    embeddedMode,
-                    embeddedTier,
-                    embeddedCount,
-                    embeddedMachineStack.getTag() != null ? embeddedMachineStack.getTag().copy() : null
-            );
+        if (!embeddedState.isEmpty()) {
+            List<IItemHandlerModifiable> exportBuses = getItemBuses(IO.OUT);
 
             BigBroArrayMachineTransfer.UnloadResult unloadResult = BigBroArrayMachineTransfer.planAndExecuteUnload(
-                    currentState, exportBuses, embeddedMachineStack);
+                    embeddedState, exportBuses, embeddedMachineStack);
 
             if (playerIn != null) {
                 playerIn.sendSystemMessage(Component.translatable(unloadResult.messageKey(), unloadResult.messageArgs())
@@ -317,10 +381,8 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
             }
 
             if (unloadResult.success()) {
-                this.embeddedMachineStack = ItemStack.EMPTY;
-                this.embeddedCount = 0;
-                this.embeddedTier = 0;
-                this.embeddedMode = BigBroArrayMode.PROCESSOR;
+                this.embeddedState = BigBroArrayEmbeddedState.EMPTY;
+                updateEmbeddedStackCache();
                 this.recipeLogic.resetRecipeLogic();
                 return InteractionResult.CONSUME;
             }
@@ -328,7 +390,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         }
 
         int maxAllowedTier = BigBroArrayTierRules.maxEmbeddedTier(getFrameTier());
-        List<IItemHandlerModifiable> importBuses = getItemImportBuses();
+        List<IItemHandlerModifiable> importBuses = getItemBuses(IO.IN);
         BigBroArrayMachineTransfer.LoadResult loadResult = BigBroArrayMachineTransfer.planAndExecuteLoad(
                 importBuses, maxAllowedTier);
 
@@ -338,19 +400,10 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         }
 
         if (loadResult.success()) {
-            BigBroArrayEmbeddedState state = loadResult.state();
-            MachineDefinition def = GTRegistries.MACHINES.get(state.definitionId());
-            if (def != null) {
-                this.embeddedMachineStack = def.asStack();
-                if (state.itemTag() != null) {
-                    this.embeddedMachineStack.setTag(state.itemTag().copy());
-                }
-                this.embeddedCount = state.count();
-                this.embeddedTier = state.tier();
-                this.embeddedMode = state.mode() != null ? state.mode() : BigBroArrayMode.PROCESSOR;
-                this.recipeLogic.resetRecipeLogic();
-                return InteractionResult.CONSUME;
-            }
+            this.embeddedState = loadResult.state();
+            updateEmbeddedStackCache();
+            this.recipeLogic.resetRecipeLogic();
+            return InteractionResult.CONSUME;
         }
 
         return InteractionResult.FAIL;
@@ -358,9 +411,11 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
 
     @Override
     public GTRecipeType getRecipeType() {
-        Optional<BigBroArrayMachineCatalog.Entry> entry = BigBroArrayMachineCatalog.find(embeddedMachineStack);
-        if (entry.isPresent()) {
-            return entry.get().recipeType();
+        if (!embeddedState.isEmpty() && embeddedState.definitionId() != null) {
+            Optional<BigBroArrayMachineCatalog.Entry> entry = BigBroArrayMachineCatalog.find(embeddedState.definitionId());
+            if (entry.isPresent()) {
+                return entry.get().recipeType();
+            }
         }
         return super.getRecipeType();
     }
@@ -371,26 +426,55 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                 .setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive())
                 .addCustom(tl -> {
                     if (isFormed()) {
-                        if (embeddedMachineStack.isEmpty()) {
+                        if (embeddedState.isEmpty()) {
                             tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.no_machine")
-                                    .withStyle(ChatFormatting.RED));
+                                     .withStyle(ChatFormatting.RED));
                         } else {
+                            Component modeComponent = Component.translatable(
+                                    getEmbeddedMode() == BigBroArrayMode.PROCESSOR
+                                            ? "tstmodern.machine.big_bro_array.status.mode.processor"
+                                            : "tstmodern.machine.big_bro_array.status.mode.generator");
                             tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.embedded",
-                                    embeddedCount, embeddedMachineStack.getHoverName(), GTValues.VN[embeddedTier])
+                                    embeddedState.count(),
+                                    embeddedMachineStack.getHoverName(),
+                                    com.gregtechceu.gtceu.api.GTValues.VN[embeddedState.tier()],
+                                    modeComponent)
                                     .withStyle(ChatFormatting.AQUA));
+
+                            long actualParallel = getActualParallel();
+                            long maxParallel = BigBroArrayLogic.calculateMaxParallelism(addonCount, parallelCasingTier);
                             tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.parallel",
-                                    String.format("%,d", getActualParallel()))
+                                    String.format("%,d", actualParallel), String.format("%,d", maxParallel))
                                     .withStyle(ChatFormatting.GOLD));
-                            int discountPercent = (int) Math.round(
-                                    (1.0 - BigBroArrayLogic.calculateEnergyDiscount(coilTier)) * 100);
-                            tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.coil",
-                                    coilTier, discountPercent)
-                                    .withStyle(ChatFormatting.GREEN));
-                            if (parallelCasingTier > 0) {
-                                double speedBoost = BigBroArrayLogic.calculateSpeedBoostDisplay(parallelCasingTier);
-                                tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.speed",
-                                        parallelCasingTier, (int) Math.round((speedBoost - 1.0) * 100))
-                                        .withStyle(ChatFormatting.YELLOW));
+
+                            tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.addon_info",
+                                    addonCount, addonValidMask)
+                                    .withStyle(ChatFormatting.GRAY));
+
+                            tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.minima",
+                                    addonFrameTier, addonGlassTier)
+                                    .withStyle(ChatFormatting.GRAY));
+
+                            if (getEmbeddedMode() == BigBroArrayMode.PROCESSOR) {
+                                int discountPercent = (int) Math.round(
+                                        (1.0 - BigBroArrayLogic.calculateEnergyDiscount(coilTier)) * 100);
+                                tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.coil",
+                                        coilTier, discountPercent)
+                                        .withStyle(ChatFormatting.GREEN));
+                                if (parallelCasingTier > 0) {
+                                    double speedBoost = BigBroArrayLogic.calculateSpeedBoostDisplay(parallelCasingTier);
+                                    tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.speed",
+                                            parallelCasingTier, (int) Math.round((speedBoost - 1.0) * 100))
+                                            .withStyle(ChatFormatting.YELLOW));
+                                }
+                            } else {
+                                tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.generator_no_bonus")
+                                        .withStyle(ChatFormatting.GRAY));
+                            }
+
+                            OperationalStatus status = getOperationalStatus();
+                            if (!status.canRun()) {
+                                tl.add(Component.translatable(status.messageKey()).withStyle(ChatFormatting.RED));
                             }
                         }
                     }

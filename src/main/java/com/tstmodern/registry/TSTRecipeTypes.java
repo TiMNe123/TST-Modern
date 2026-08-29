@@ -84,7 +84,6 @@ public final class TSTRecipeTypes {
         }
     }
 
-    @SuppressWarnings("deprecation")
     private static GTRecipeType register(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event, String name) {
         return register(event, name, GTRecipeTypes.MULTIBLOCK);
     }

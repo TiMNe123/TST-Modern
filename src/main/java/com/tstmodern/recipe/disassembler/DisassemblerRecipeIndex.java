@@ -310,11 +310,13 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
         return recipe;
     }
 
+    @SuppressWarnings("deprecation")
     private static ResourceLocation representativeId(Item outputItem) {
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(outputItem);
         return new ResourceLocation("tstmodern", "representative/disassembler/" + itemId.getNamespace() + "/" + itemId.getPath());
     }
 
+    @SuppressWarnings("deprecation")
     private static Optional<List<ItemStack>> splitItemOutputs(Map<Item, Integer> outputAmounts) {
         List<ItemStack> stacks = new ArrayList<>();
         for (Map.Entry<Item, Integer> output : sortedItems(outputAmounts)) {
@@ -351,6 +353,7 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
                                                              DisassemblerRecipeAdapter adapter);
     }
 
+    @SuppressWarnings("deprecation")
     private static List<Map.Entry<Item, Integer>> sortedItems(Map<Item, Integer> amounts) {
         return amounts.entrySet().stream()
                 .filter(entry -> entry.getKey() != null && entry.getValue() != null && entry.getValue() > 0)
@@ -362,6 +365,7 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
         return sortedItems(amounts).stream().map(entry -> new ItemStack(entry.getKey(), entry.getValue())).toList();
     }
 
+    @SuppressWarnings("deprecation")
     private static List<Map.Entry<Fluid, Integer>> sortedFluids(Map<Fluid, Integer> amounts) {
         return amounts.entrySet().stream()
                 .filter(entry -> entry.getKey() != null && entry.getValue() != null && entry.getValue() > 0)
@@ -369,6 +373,7 @@ public final class DisassemblerRecipeIndex implements GTRecipeType.ICustomRecipe
                 .toList();
     }
 
+    @SuppressWarnings("deprecation")
     private static List<DisassemblerRecipeDescriptor> sortedDescriptors(Collection<DisassemblerRecipeDescriptor> descriptors) {
         return descriptors.stream().sorted(Comparator.comparing(descriptor ->
                 BuiltInRegistries.ITEM.getKey(descriptor.outputItem()).toString())).toList();

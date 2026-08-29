@@ -39,9 +39,16 @@ public final class BigBroArrayMachineCatalog {
         }
     }
 
-    private static final Map<ResourceLocation, Entry> CATALOG = buildCatalog();
+    private static Map<ResourceLocation, Entry> CATALOG = null;
 
     private BigBroArrayMachineCatalog() {}
+
+    private static Map<ResourceLocation, Entry> getCatalog() {
+        if (CATALOG == null) {
+            CATALOG = buildCatalog();
+        }
+        return CATALOG;
+    }
 
     public static Optional<Entry> find(ItemStack stack) {
         if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof MetaMachineItem machineItem)) {
@@ -55,64 +62,67 @@ public final class BigBroArrayMachineCatalog {
         if (id == null) {
             return Optional.empty();
         }
-        return Optional.ofNullable(CATALOG.get(id));
+        return Optional.ofNullable(getCatalog().get(id));
     }
 
     public static Map<ResourceLocation, Entry> allEntries() {
-        return CATALOG;
+        return getCatalog();
     }
+
+    public static final String GTCEU_NAMESPACE = "gtceu";
+    public static final String TST_NAMESPACE = "tstmodern";
 
     private static Map<ResourceLocation, Entry> buildCatalog() {
         Map<ResourceLocation, Entry> map = new HashMap<>();
 
-        // Standard electric tiers LV..OpV (and UHV..MAX where available)
+        // Standard electric tiers LV..OpV
         int[] allElectricTiers = new int[] {
                 GTValues.LV, GTValues.MV, GTValues.HV, GTValues.EV,
                 GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV,
                 GTValues.UHV, GTValues.UEV, GTValues.UIV, GTValues.UXV,
-                GTValues.OpV, GTValues.MAX
+                GTValues.OpV
         };
 
         // 27 Standard GTCEu native processor families
-        registerFamily(map, "gtceu", "macerator", () -> GTRecipeTypes.MACERATOR_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "ore_washer", () -> GTRecipeTypes.ORE_WASHER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "chemical_bath", () -> GTRecipeTypes.CHEMICAL_BATH_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "thermal_centrifuge", () -> GTRecipeTypes.THERMAL_CENTRIFUGE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "electric_furnace", () -> GTRecipeTypes.FURNACE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "arc_furnace", () -> GTRecipeTypes.ARC_FURNACE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "bender", () -> GTRecipeTypes.BENDER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "wiremill", () -> GTRecipeTypes.WIREMILL_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "lathe", () -> GTRecipeTypes.LATHE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "forge_hammer", () -> GTRecipeTypes.FORGE_HAMMER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "extruder", () -> GTRecipeTypes.EXTRUDER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "compressor", () -> GTRecipeTypes.COMPRESSOR_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "forming_press", () -> GTRecipeTypes.FORMING_PRESS_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "fluid_solidifier", () -> GTRecipeTypes.FLUID_SOLIDFICATION_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "extractor", () -> GTRecipeTypes.EXTRACTOR_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "laser_engraver", () -> GTRecipeTypes.LASER_ENGRAVER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "autoclave", () -> GTRecipeTypes.AUTOCLAVE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "mixer", () -> GTRecipeTypes.MIXER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "alloy_smelter", () -> GTRecipeTypes.ALLOY_SMELTER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "electrolyzer", () -> GTRecipeTypes.ELECTROLYZER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "sifter", () -> GTRecipeTypes.SIFTER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "chemical_reactor", () -> GTRecipeTypes.CHEMICAL_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "electromagnetic_separator", () -> GTRecipeTypes.ELECTROMAGNETIC_SEPARATOR_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "centrifuge", () -> GTRecipeTypes.CENTRIFUGE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "cutter", () -> GTRecipeTypes.CUTTER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "assembler", () -> GTRecipeTypes.ASSEMBLER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
-        registerFamily(map, "gtceu", "circuit_assembler", () -> GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "macerator", () -> GTRecipeTypes.MACERATOR_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "ore_washer", () -> GTRecipeTypes.ORE_WASHER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "chemical_bath", () -> GTRecipeTypes.CHEMICAL_BATH_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "thermal_centrifuge", () -> GTRecipeTypes.THERMAL_CENTRIFUGE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "electric_furnace", () -> GTRecipeTypes.FURNACE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "arc_furnace", () -> GTRecipeTypes.ARC_FURNACE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "bender", () -> GTRecipeTypes.BENDER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "wiremill", () -> GTRecipeTypes.WIREMILL_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "lathe", () -> GTRecipeTypes.LATHE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "forge_hammer", () -> GTRecipeTypes.FORGE_HAMMER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "extruder", () -> GTRecipeTypes.EXTRUDER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "compressor", () -> GTRecipeTypes.COMPRESSOR_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "forming_press", () -> GTRecipeTypes.FORMING_PRESS_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "fluid_solidifier", () -> GTRecipeTypes.FLUID_SOLIDFICATION_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "extractor", () -> GTRecipeTypes.EXTRACTOR_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "laser_engraver", () -> GTRecipeTypes.LASER_ENGRAVER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "autoclave", () -> GTRecipeTypes.AUTOCLAVE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "mixer", () -> GTRecipeTypes.MIXER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "alloy_smelter", () -> GTRecipeTypes.ALLOY_SMELTER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "electrolyzer", () -> GTRecipeTypes.ELECTROLYZER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "sifter", () -> GTRecipeTypes.SIFTER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "chemical_reactor", () -> GTRecipeTypes.CHEMICAL_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "electromagnetic_separator", () -> GTRecipeTypes.ELECTROMAGNETIC_SEPARATOR_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "centrifuge", () -> GTRecipeTypes.CENTRIFUGE_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "cutter", () -> GTRecipeTypes.CUTTER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "assembler", () -> GTRecipeTypes.ASSEMBLER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "circuit_assembler", () -> GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES, BigBroArrayMode.PROCESSOR, allElectricTiers);
 
         // TSTModern Mass Fabricator family (UHV..MAX)
         int[] massFabTiers = new int[] {
                 GTValues.UHV, GTValues.UEV, GTValues.UIV, GTValues.UXV, GTValues.OpV, GTValues.MAX
         };
-        registerFamily(map, "tstmodern", "mass_fabricator", () -> TSTRecipeTypes.MASS_FABRICATOR, BigBroArrayMode.PROCESSOR, massFabTiers);
+        registerFamily(map, TST_NAMESPACE, "mass_fabricator", () -> TSTRecipeTypes.MASS_FABRICATOR, BigBroArrayMode.PROCESSOR, massFabTiers);
 
         // 3 Supported Generator families (LV, MV, HV)
         int[] generatorTiers = new int[] { GTValues.LV, GTValues.MV, GTValues.HV };
-        registerFamily(map, "gtceu", "combustion", () -> GTRecipeTypes.COMBUSTION_GENERATOR_FUELS, BigBroArrayMode.GENERATOR, generatorTiers);
-        registerFamily(map, "gtceu", "steam_turbine", () -> GTRecipeTypes.STEAM_TURBINE_FUELS, BigBroArrayMode.GENERATOR, generatorTiers);
-        registerFamily(map, "gtceu", "gas_turbine", () -> GTRecipeTypes.GAS_TURBINE_FUELS, BigBroArrayMode.GENERATOR, generatorTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "combustion", () -> GTRecipeTypes.COMBUSTION_GENERATOR_FUELS, BigBroArrayMode.GENERATOR, generatorTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "steam_turbine", () -> GTRecipeTypes.STEAM_TURBINE_FUELS, BigBroArrayMode.GENERATOR, generatorTiers);
+        registerFamily(map, GTCEU_NAMESPACE, "gas_turbine", () -> GTRecipeTypes.GAS_TURBINE_FUELS, BigBroArrayMode.GENERATOR, generatorTiers);
 
         return Collections.unmodifiableMap(map);
     }
