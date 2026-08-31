@@ -25,6 +25,12 @@ public final class TSTMaterials {
                 MaterialFlags.GENERATE_FRAME
         );
 
+        // GTCEu 7.4 defines Trinium but does not generate its frame form. BigBroArray
+        // uses this approved Modern frame as the fourth (UV-unlock) source tier.
+        GTMaterials.Trinium.addFlags(
+                MaterialFlags.GENERATE_FRAME
+        );
+
         // Enable Plates and Dense Plates generation for Netherite (used in Nether Interface recipes)
         GTMaterials.Netherite.addFlags(
                 MaterialFlags.GENERATE_PLATE,

@@ -2,6 +2,11 @@
   "parent": "minecraft:block/block",
   "loader": "gtceu:machine",
   "machine": "tstmodern:big_bro_array",
+  "dynamic_renders": [
+    {
+      "type": "tstmodern:big_bro_array_parts"
+    }
+  ],
   "texture_overrides": {
     "all": "gtceu:block/casings/solid/machine_casing_robust_tungstensteel"
   },
