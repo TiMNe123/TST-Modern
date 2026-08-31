@@ -4,6 +4,7 @@ import com.gregtechceu.gtceu.api.item.MetaMachineItem;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -116,7 +117,19 @@ public final class BigBroArrayMachineTransfer {
             return new LoadResult(false, BigBroArrayEmbeddedState.EMPTY, "tstmodern.machine.big_bro_array.status.empty_bus");
         }
 
-        // 3. Take snapshots before commit
+        // 3. Simulate every extraction before touching inventory.
+        for (ExtractionStep step : steps) {
+            IItemHandlerModifiable bus = importBuses.get(step.busIndex());
+            ItemStack expected = bus.getStackInSlot(step.slotIndex()).copy();
+            expected.setCount(step.count());
+            ItemStack simulated = bus.extractItem(step.slotIndex(), step.count(), true);
+            if (!sameStackAndCount(expected, simulated)) {
+                return new LoadResult(false, BigBroArrayEmbeddedState.EMPTY,
+                        "tstmodern.machine.big_bro_array.status.transaction_mismatch");
+            }
+        }
+
+        // 4. Take snapshots before commit
         List<SlotSnapshot> snapshots = new ArrayList<>(steps.size());
         for (ExtractionStep step : steps) {
             IItemHandlerModifiable bus = importBuses.get(step.busIndex());
@@ -124,21 +137,30 @@ public final class BigBroArrayMachineTransfer {
                     bus.getStackInSlot(step.slotIndex()).copy()));
         }
 
-        // 4. Execute extractions
-        for (ExtractionStep step : steps) {
-            IItemHandlerModifiable bus = importBuses.get(step.busIndex());
-            bus.extractItem(step.slotIndex(), step.count(), false);
-        }
-
-        // 5. Verify post-commit state: all targeted slots should be empty or reduced
+        // 5. Execute and verify exact extracted item/count/NBT.
         boolean commitValid = true;
         for (int i = 0; i < steps.size(); i++) {
             ExtractionStep step = steps.get(i);
             SlotSnapshot snapshot = snapshots.get(i);
             IItemHandlerModifiable bus = importBuses.get(step.busIndex());
+            ItemStack expectedExtracted = snapshot.savedStack().copy();
+            expectedExtracted.setCount(step.count());
+            ItemStack extracted = bus.extractItem(step.slotIndex(), step.count(), false);
+            if (!sameStackAndCount(expectedExtracted, extracted)) {
+                commitValid = false;
+                break;
+            }
+        }
+
+        // 6. Verify the exact post-commit contents, not only the remaining count.
+        for (int i = 0; commitValid && i < steps.size(); i++) {
+            ExtractionStep step = steps.get(i);
+            SlotSnapshot snapshot = snapshots.get(i);
+            IItemHandlerModifiable bus = importBuses.get(step.busIndex());
             ItemStack postCommit = bus.getStackInSlot(step.slotIndex());
-            int expectedRemaining = snapshot.savedStack().getCount() - step.count();
-            if (postCommit.getCount() != Math.max(0, expectedRemaining)) {
+            ItemStack expectedRemaining = snapshot.savedStack().copy();
+            expectedRemaining.shrink(step.count());
+            if (!sameStackAndCount(expectedRemaining, postCommit)) {
                 commitValid = false;
                 break;
             }
@@ -163,7 +185,8 @@ public final class BigBroArrayMachineTransfer {
                 targetTag
         );
 
-        return new LoadResult(true, newState, "tstmodern.machine.big_bro_array.status.loaded", totalCount);
+        Component machineName = targetCatalogEntry.definition().asStack().getHoverName();
+        return new LoadResult(true, newState, "tstmodern.machine.big_bro_array.status.loaded", totalCount, machineName);
     }
 
     /**
@@ -182,8 +205,13 @@ public final class BigBroArrayMachineTransfer {
             return new UnloadResult(false, currentState, "tstmodern.machine.big_bro_array.status.no_export_bus");
         }
 
+        if (machineStackTemplate == null || machineStackTemplate.isEmpty()) {
+            return new UnloadResult(false, currentState,
+                    "tstmodern.machine.big_bro_array.status.empty_template");
+        }
+
         int remainingToInsert = currentState.count();
-        int maxStackSize = machineStackTemplate.isEmpty() ? 64 : machineStackTemplate.getMaxStackSize();
+        int maxStackSize = machineStackTemplate.getMaxStackSize();
 
         // 1. Simulate insertion across all export buses
         List<InsertionStep> steps = new ArrayList<>();
@@ -221,22 +249,52 @@ public final class BigBroArrayMachineTransfer {
                     bus.getStackInSlot(step.slotIndex()).copy()));
         }
 
-        // 3. Execute insertions
-        for (InsertionStep step : steps) {
+        // 3. Execute insertions and verify exact post-commit item/count/NBT.
+        boolean commitValid = true;
+        for (int i = 0; i < steps.size(); i++) {
+            InsertionStep step = steps.get(i);
+            SlotSnapshot snapshot = snapshots.get(i);
             IItemHandlerModifiable bus = exportBuses.get(step.busIndex());
             ItemStack remainder = bus.insertItem(step.slotIndex(), step.stack(), false);
             if (!remainder.isEmpty()) {
-                // Commit mismatch — rollback all
-                for (SlotSnapshot snapshot : snapshots) {
-                    IItemHandlerModifiable snapshotBus = exportBuses.get(snapshot.busIndex());
-                    snapshotBus.setStackInSlot(snapshot.slotIndex(), snapshot.savedStack());
-                }
-                return new UnloadResult(false, currentState,
-                        "tstmodern.machine.big_bro_array.status.transaction_mismatch", currentState.count());
+                commitValid = false;
+                break;
+            }
+
+            ItemStack expected = snapshot.savedStack().copy();
+            if (expected.isEmpty()) {
+                expected = step.stack().copy();
+            } else if (ItemStack.isSameItemSameTags(expected, step.stack())) {
+                expected.grow(step.stack().getCount());
+            } else {
+                commitValid = false;
+                break;
+            }
+            if (!sameStackAndCount(expected, bus.getStackInSlot(step.slotIndex()))) {
+                commitValid = false;
+                break;
             }
         }
 
+        if (!commitValid) {
+            for (SlotSnapshot snapshot : snapshots) {
+                IItemHandlerModifiable snapshotBus = exportBuses.get(snapshot.busIndex());
+                snapshotBus.setStackInSlot(snapshot.slotIndex(), snapshot.savedStack());
+            }
+            return new UnloadResult(false, currentState,
+                    "tstmodern.machine.big_bro_array.status.transaction_mismatch", currentState.count());
+        }
+
+        Component machineName = machineStackTemplate.getHoverName();
+
         return new UnloadResult(true, BigBroArrayEmbeddedState.EMPTY,
-                "tstmodern.machine.big_bro_array.status.unloaded", currentState.count());
+                "tstmodern.machine.big_bro_array.status.unloaded", currentState.count(), machineName);
+    }
+
+    private static boolean sameStackAndCount(ItemStack expected, ItemStack actual) {
+        if (expected.isEmpty() || actual.isEmpty()) {
+            return expected.isEmpty() && actual.isEmpty();
+        }
+        return expected.getCount() == actual.getCount() && ItemStack.isSameItemSameTags(expected, actual);
     }
 }

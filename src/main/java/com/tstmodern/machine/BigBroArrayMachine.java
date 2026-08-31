@@ -13,6 +13,7 @@ import com.gregtechceu.gtceu.api.machine.feature.multiblock.IDisplayUIMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.pattern.MultiblockWorldSavedData;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
@@ -42,6 +43,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -59,9 +62,17 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
             new ManagedFieldHolder(BigBroArrayMachine.class,
                     WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
 
-    // Replaced 4 independent fields with a single versioned state, custom persisted in NBT
+    // Single authoritative state. It is persisted only through the versioned custom compound below.
     private BigBroArrayEmbeddedState embeddedState = BigBroArrayEmbeddedState.EMPTY;
-    // Transient cache for UI and catalog queries, updated when embeddedState changes
+    @DescSynced
+    private String syncedEmbeddedDefinitionId = "";
+    @DescSynced
+    private int syncedEmbeddedCount = 0;
+    @DescSynced
+    private int syncedEmbeddedTier = 0;
+    @DescSynced
+    private int syncedEmbeddedMode = -1;
+    // Derived cache for UI and unloading; catalog membership is deliberately not required.
     private ItemStack embeddedMachineStack = ItemStack.EMPTY;
 
     @DescSynced
@@ -129,11 +140,22 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
 
     @Override
     public void onUnload() {
+        if (getLevel() instanceof ServerLevel serverLevel) {
+            MultiblockWorldSavedData.getOrCreate(serverLevel).removeAsyncLogic(this);
+        }
         if (addonScanSubscription != null) {
             unsubscribe(addonScanSubscription);
         }
         addonScanSubscription = null;
         super.onUnload();
+    }
+
+    @Override
+    public void asyncCheckPattern(long periodID) {
+        if (!(getLevel() instanceof ServerLevel)) {
+            return;
+        }
+        super.asyncCheckPattern(periodID);
     }
 
     @Override
@@ -147,16 +169,30 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     @Override
     public void loadCustomPersistedData(CompoundTag tag) {
         super.loadCustomPersistedData(tag);
+        BigBroArrayEmbeddedState restored;
         if (tag.contains(BigBroArrayEmbeddedState.NBT_KEY)) {
-            this.embeddedState = BigBroArrayEmbeddedState.readFromNbt(tag.getCompound(BigBroArrayEmbeddedState.NBT_KEY));
+            restored = BigBroArrayEmbeddedState.readFromNbt(tag.getCompound(BigBroArrayEmbeddedState.NBT_KEY));
         } else {
-            this.embeddedState = BigBroArrayEmbeddedState.migrateFromLegacy(tag);
+            restored = BigBroArrayEmbeddedState.migrateFromLegacy(tag);
         }
+        setEmbeddedState(restored);
+    }
+
+    private void setEmbeddedState(BigBroArrayEmbeddedState state) {
+        this.embeddedState = state == null ? BigBroArrayEmbeddedState.EMPTY : state;
+        this.syncedEmbeddedDefinitionId = embeddedState.definitionId() == null
+                ? "" : embeddedState.definitionId().toString();
+        this.syncedEmbeddedCount = embeddedState.count();
+        this.syncedEmbeddedTier = embeddedState.tier();
+        this.syncedEmbeddedMode = embeddedState.mode() == null ? -1 : embeddedState.mode().ordinal();
         updateEmbeddedStackCache();
+        if (getLevel() != null) {
+            recipeLogic.resetRecipeLogic();
+        }
     }
 
     private void updateEmbeddedStackCache() {
-        if (embeddedState.isEmpty() || !embeddedState.isValid()) {
+        if (embeddedState.isEmpty() || embeddedState.definitionId() == null) {
             this.embeddedMachineStack = ItemStack.EMPTY;
             return;
         }
@@ -172,19 +208,27 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     }
 
     public ItemStack getEmbeddedMachineStack() {
+        if (embeddedMachineStack.isEmpty() && !syncedEmbeddedDefinitionId.isEmpty()) {
+            ResourceLocation id = ResourceLocation.tryParse(syncedEmbeddedDefinitionId);
+            MachineDefinition definition = id == null ? null : GTRegistries.MACHINES.get(id);
+            if (definition != null) {
+                embeddedMachineStack = definition.asStack();
+            }
+        }
         return embeddedMachineStack;
     }
 
     public int getEmbeddedCount() {
-        return embeddedState.count();
+        return syncedEmbeddedCount;
     }
 
     public int getEmbeddedTier() {
-        return embeddedState.tier();
+        return syncedEmbeddedTier;
     }
 
     public BigBroArrayMode getEmbeddedMode() {
-        return embeddedState.mode() != null ? embeddedState.mode() : BigBroArrayMode.PROCESSOR;
+        return syncedEmbeddedMode == BigBroArrayMode.GENERATOR.ordinal()
+                ? BigBroArrayMode.GENERATOR : BigBroArrayMode.PROCESSOR;
     }
 
     public CoreTiers getCoreTiers() {
@@ -253,31 +297,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
     }
 
     public OperationalStatus getOperationalStatus() {
-        if (embeddedState.isEmpty()) {
-            return OperationalStatus.NO_MACHINE;
-        }
-
-        if (!embeddedState.isValid()) {
-            return OperationalStatus.STALE_ID;
-        }
-
-        int maxAllowedTier = BigBroArrayTierRules.maxEmbeddedTier(getFrameTier());
-        if (embeddedState.tier() > maxAllowedTier) {
-            return OperationalStatus.FRAME_TOO_LOW;
-        }
-
-        BigBroArrayMode mode = getEmbeddedMode();
-        if (mode == BigBroArrayMode.PROCESSOR) {
-            if (!hasInputEnergy()) {
-                return OperationalStatus.MISSING_INPUT_ENERGY;
-            }
-        } else if (mode == BigBroArrayMode.GENERATOR) {
-            if (!hasOutputEnergy()) {
-                return OperationalStatus.MISSING_OUTPUT_ENERGY;
-            }
-        }
-
-        return OperationalStatus.CAN_RUN;
+        return OperationalStatus.evaluate(embeddedState, getFrameTier(), hasInputEnergy(), hasOutputEnergy());
     }
 
     public static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe) {
@@ -345,7 +365,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         List<IItemHandlerModifiable> list = new ArrayList<>();
         for (IMultiPart part : getParts()) {
             if (part instanceof ItemBusPartMachine bus && bus.getInventory().getHandlerIO() == io) {
-                list.add(bus.getInventory());
+                list.add(bus.getInventory().storage);
             }
         }
         return list;
@@ -370,6 +390,14 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         }
 
         if (!embeddedState.isEmpty()) {
+            if (getEmbeddedMachineStack().isEmpty()) {
+                if (playerIn != null) {
+                    playerIn.sendSystemMessage(Component.translatable("tstmodern.machine.big_bro_array.status.stale_id")
+                            .withStyle(ChatFormatting.RED));
+                }
+                return InteractionResult.FAIL;
+            }
+
             List<IItemHandlerModifiable> exportBuses = getItemBuses(IO.OUT);
 
             BigBroArrayMachineTransfer.UnloadResult unloadResult = BigBroArrayMachineTransfer.planAndExecuteUnload(
@@ -381,9 +409,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
             }
 
             if (unloadResult.success()) {
-                this.embeddedState = BigBroArrayEmbeddedState.EMPTY;
-                updateEmbeddedStackCache();
-                this.recipeLogic.resetRecipeLogic();
+                setEmbeddedState(BigBroArrayEmbeddedState.EMPTY);
                 return InteractionResult.CONSUME;
             }
             return InteractionResult.FAIL;
@@ -400,9 +426,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
         }
 
         if (loadResult.success()) {
-            this.embeddedState = loadResult.state();
-            updateEmbeddedStackCache();
-            this.recipeLogic.resetRecipeLogic();
+            setEmbeddedState(loadResult.state());
             return InteractionResult.CONSUME;
         }
 
@@ -426,7 +450,7 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                 .setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive())
                 .addCustom(tl -> {
                     if (isFormed()) {
-                        if (embeddedState.isEmpty()) {
+                        if (syncedEmbeddedCount <= 0 || syncedEmbeddedDefinitionId.isEmpty()) {
                             tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.no_machine")
                                      .withStyle(ChatFormatting.RED));
                         } else {
@@ -435,9 +459,9 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                                             ? "tstmodern.machine.big_bro_array.status.mode.processor"
                                             : "tstmodern.machine.big_bro_array.status.mode.generator");
                             tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.embedded",
-                                    embeddedState.count(),
-                                    embeddedMachineStack.getHoverName(),
-                                    com.gregtechceu.gtceu.api.GTValues.VN[embeddedState.tier()],
+                                    syncedEmbeddedCount,
+                                    getEmbeddedMachineStack().getHoverName(),
+                                    com.gregtechceu.gtceu.api.GTValues.VN[syncedEmbeddedTier],
                                     modeComponent)
                                     .withStyle(ChatFormatting.AQUA));
 
@@ -451,8 +475,12 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                                     addonCount, addonValidMask)
                                     .withStyle(ChatFormatting.GRAY));
 
+                            tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.addon_directions",
+                                    addonPresence(0), addonPresence(1), addonPresence(2), addonPresence(3))
+                                    .withStyle(ChatFormatting.GRAY));
+
                             tl.add(Component.translatable("tstmodern.machine.big_bro_array.status.minima",
-                                    addonFrameTier, addonGlassTier)
+                                    addonFrameTier, addonGlassTier, parallelCasingTier, coilTier)
                                     .withStyle(ChatFormatting.GRAY));
 
                             if (getEmbeddedMode() == BigBroArrayMode.PROCESSOR) {
@@ -479,5 +507,12 @@ public final class BigBroArrayMachine extends WorkableMultiblockMachine implemen
                         }
                     }
                 });
+    }
+
+    private Component addonPresence(int placement) {
+        String key = (addonValidMask & (1 << placement)) != 0
+                ? "tstmodern.machine.big_bro_array.status.present"
+                : "tstmodern.machine.big_bro_array.status.absent";
+        return Component.translatable(key);
     }
 }

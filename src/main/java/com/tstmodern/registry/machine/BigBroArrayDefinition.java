@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.function.ToIntFunction;
 
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
@@ -20,7 +23,10 @@ import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterialBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.gregtechceu.gtceu.common.machine.multiblock.part.EnergyHatchPartMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.part.LaserHatchPartMachine;
 import com.tstmodern.TSTModern;
 import com.tstmodern.machine.BigBroArrayMachine;
 import com.tstmodern.machine.logic.BigBroArrayTierRules;
@@ -32,6 +38,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 /** Definition and structural predicates for the Mega Array. */
 public final class BigBroArrayDefinition {
@@ -43,6 +50,7 @@ public final class BigBroArrayDefinition {
             .recipeType(GTRecipeTypes.DUMMY_RECIPES)
             .recipeModifiers(BigBroArrayMachine::recipeModifier)
             .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
+            .partAppearance(BigBroArrayDefinition::partAppearance)
             .pattern(definition -> {
                 FactoryBlockPattern pattern = FactoryBlockPattern.start(
                         RelativeDirection.RIGHT,
@@ -85,21 +93,16 @@ public final class BigBroArrayDefinition {
                                 GTBlocks.MACHINE_CASING_OpV.get(),
                                 GTBlocks.MACHINE_CASING_MAX.get()))
                         .where('D', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get())
-                                .or(Predicates.abilities(PartAbility.MAINTENANCE)
-                                        .setExactLimit(1)
-                                        .setPreviewCount(1))
-                                .or(Predicates.abilities(PartAbility.MUFFLER)
-                                        .setExactLimit(1)
-                                        .setPreviewCount(1))
-                                .or(Predicates.abilities(PartAbility.IMPORT_ITEMS)
+                                .or(Predicates.autoAbilities(true, true, false))
+                                .or(Predicates.abilities(
+                                                PartAbility.IMPORT_ITEMS,
+                                                PartAbility.IMPORT_FLUIDS)
                                         .setMinGlobalLimited(1)
                                         .setPreviewCount(1))
-                                .or(Predicates.abilities(PartAbility.EXPORT_ITEMS)
+                                .or(Predicates.abilities(
+                                                PartAbility.EXPORT_ITEMS,
+                                                PartAbility.EXPORT_FLUIDS)
                                         .setMinGlobalLimited(1)
-                                        .setPreviewCount(1))
-                                .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS)
-                                        .setPreviewCount(1))
-                                .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS)
                                         .setPreviewCount(1)))
                         .where('E', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
                         .where('F', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get())
@@ -132,6 +135,16 @@ public final class BigBroArrayDefinition {
 
     private BigBroArrayDefinition() {}
 
+    private static BlockState partAppearance(
+                                             IMultiController ignoredController,
+                                             IMultiPart part,
+                                             Direction ignoredSide) {
+        if (part instanceof EnergyHatchPartMachine || part instanceof LaserHatchPartMachine) {
+            return GTBlocks.CASING_STAINLESS_CLEAN.get().defaultBlockState();
+        }
+        return GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get().defaultBlockState();
+    }
+
     private static List<MultiblockShapeInfo> shapeInfos(MultiblockMachineDefinition definition) {
         return BigBroArrayStructure.previewLayouts().stream()
                 .map(layout -> shapeInfo(definition, layout))
@@ -159,6 +172,14 @@ public final class BigBroArrayDefinition {
                 .where('J', GTBlocks.CASING_TUNGSTENSTEEL_GEARBOX.get())
                 .where('K', GTBlocks.FUSION_GLASS.get())
                 .where('L', GTBlocks.CASING_STAINLESS_CLEAN.get())
+                .where('M', GTMachines.MAINTENANCE_HATCH, Direction.NORTH)
+                .where('N', GTMachines.MUFFLER_HATCH[GTValues.IV], Direction.UP)
+                .where('O', GTMachines.ITEM_IMPORT_BUS[GTValues.IV], Direction.NORTH)
+                .where('P', GTMachines.ITEM_EXPORT_BUS[GTValues.IV], Direction.NORTH)
+                .where('Q', GTMachines.FLUID_IMPORT_HATCH[GTValues.IV], Direction.NORTH)
+                .where('R', GTMachines.FLUID_EXPORT_HATCH[GTValues.IV], Direction.NORTH)
+                .where('S', GTMachines.ENERGY_INPUT_HATCH[GTValues.IV], Direction.NORTH)
+                .where('T', GTMachines.ENERGY_OUTPUT_HATCH[GTValues.IV], Direction.NORTH)
                 .build();
     }
 

@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * Persisted state of embedded machines inside the Big Bro Array.
@@ -28,10 +29,9 @@ public record BigBroArrayEmbeddedState(
         return definitionId == null || count <= 0;
     }
 
-    /** Whether this state has a valid definition that exists in the catalog. */
+    /** Whether this state was resolved by the catalog when it was created or loaded. */
     public boolean isValid() {
-        if (isEmpty()) return false;
-        return BigBroArrayMachineCatalog.find(definitionId).isPresent();
+        return !isEmpty() && mode != null && tier >= 0;
     }
 
     public CompoundTag writeToNbt() {
@@ -57,6 +57,12 @@ public record BigBroArrayEmbeddedState(
      * preserving the data for potential future re-registration.
      */
     public static BigBroArrayEmbeddedState readFromNbt(CompoundTag tag) {
+        return readFromNbt(tag, BigBroArrayMachineCatalog::find);
+    }
+
+    static BigBroArrayEmbeddedState readFromNbt(
+            CompoundTag tag,
+            Function<ResourceLocation, Optional<BigBroArrayMachineCatalog.Entry>> resolver) {
         if (tag == null || tag.isEmpty()) {
             return EMPTY;
         }
@@ -73,40 +79,58 @@ public record BigBroArrayEmbeddedState(
         }
 
         // Resolve mode/tier from catalog — don't trust saved NBT values
-        return resolveFromCatalog(version, id, count, itemTag);
+        return resolveFromCatalog(version, id, count, itemTag, resolver);
     }
 
     /**
      * Migrate from legacy 4-key format used before versioned state was introduced.
-     * Legacy keys: embeddedMachineId, embeddedCount, embeddedTier, embeddedMode.
+     * Legacy keys: embeddedMachineStack, embeddedCount, embeddedTier, embeddedMode.
      */
     public static BigBroArrayEmbeddedState migrateFromLegacy(CompoundTag parentTag) {
         if (parentTag == null) return EMPTY;
 
-        // Try legacy key format
-        String idStr = parentTag.contains("embeddedMachineId") ? parentTag.getString("embeddedMachineId") : null;
-        int count = parentTag.getInt("embeddedCount");
+        ResourceLocation id = null;
+        CompoundTag itemTag = null;
 
-        if (idStr == null || idStr.isEmpty() || count <= 0) {
+        // Try serialized ItemStack first (standard LDLib / Forge MetaMachine ItemStack serialization)
+        if (parentTag.contains("embeddedMachineStack")) {
+            CompoundTag stackTag = parentTag.getCompound("embeddedMachineStack");
+            net.minecraft.world.item.ItemStack stack = net.minecraft.world.item.ItemStack.of(stackTag);
+            if (!stack.isEmpty() && stack.getItem() instanceof com.gregtechceu.gtceu.api.item.MetaMachineItem machineItem) {
+                com.gregtechceu.gtceu.api.machine.MachineDefinition def = machineItem.getDefinition();
+                if (def != null) {
+                    id = def.getId();
+                    if (stack.getTag() != null) {
+                        itemTag = stack.getTag().copy();
+                    }
+                }
+            }
+        }
+
+        int count = parentTag.getInt("embeddedCount");
+        if (id == null || count <= 0) {
             return EMPTY;
         }
 
-        ResourceLocation id = ResourceLocation.tryParse(idStr);
-        if (id == null) return EMPTY;
+        if (itemTag == null && parentTag.contains("embeddedItemTag")) {
+            itemTag = parentTag.getCompound("embeddedItemTag").copy();
+        }
 
-        CompoundTag itemTag = parentTag.contains("embeddedItemTag")
-                ? parentTag.getCompound("embeddedItemTag").copy() : null;
-
-        return resolveFromCatalog(CURRENT_VERSION, id, count, itemTag);
+        return resolveFromCatalog(CURRENT_VERSION, id, count, itemTag, BigBroArrayMachineCatalog::find);
     }
 
     /**
      * Resolve mode and tier from the catalog for the given definition ID.
-     * If the ID is not in the catalog, preserves the raw data with mode/tier from NBT fallback.
+     * If the ID is not in the catalog, preserves the raw ID/count/item data while marking
+     * mode and tier unresolved so stale state cannot become operational accidentally.
      */
     private static BigBroArrayEmbeddedState resolveFromCatalog(
-            int version, ResourceLocation id, int count, @Nullable CompoundTag itemTag) {
-        Optional<BigBroArrayMachineCatalog.Entry> catalogEntry = BigBroArrayMachineCatalog.find(id);
+            int version,
+            ResourceLocation id,
+            int count,
+            @Nullable CompoundTag itemTag,
+            Function<ResourceLocation, Optional<BigBroArrayMachineCatalog.Entry>> resolver) {
+        Optional<BigBroArrayMachineCatalog.Entry> catalogEntry = resolver.apply(id);
         if (catalogEntry.isPresent()) {
             BigBroArrayMachineCatalog.Entry entry = catalogEntry.get();
             return new BigBroArrayEmbeddedState(version, id, entry.mode(), entry.tier(), count, itemTag);
