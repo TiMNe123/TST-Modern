@@ -12,11 +12,12 @@
 
 ## Global Constraints
 
-- Worktree: `C:\Users\mtien\IdeaProjects\TST-Modern\.worktrees\big-bro-array-fidelity-fix`
-- Branch: `codex/big-bro-array-fidelity-fix`
-- Reviewed HEAD: `531a1ed24b55b390c75f10dfef3ae6e38d672142`
+- Workspace: `C:\Users\mtien\TST-Modern` (direct checkout; no worktree)
+- Branch: `dev`
+- Repair baseline HEAD: `e1fbdb0ed3e420c3fac02a87894cf211967088fd`
 - Do not change the controller research recipe; it is an approved Modern deviation.
 - Do not invent machine IDs, recipe types, material forms, or registry mappings that do not exist in GTCEu 7.4.
+- Approved exception: add `GENERATE_FRAME` to GTCEu 7.4 Trinium during `MaterialEvent`; this makes BigBroArray's fourth mapped frame level a registered UV-unlock frame instead of an invalid synthetic lookup.
 - Preserve embedded state when the structure becomes invalid, the frame tier is too low, the energy ability is wrong, or the catalog ID is stale.
 - Generator mode must not receive processor overclocking, speed bonuses, or coil EU discounts.
 - Every calculation that can exceed `int` or `long` must saturate instead of wrapping.
@@ -24,24 +25,25 @@
 - A successful build may only be reported as `build validated; gameplay validation pending` until in-game and JEI validation are complete.
 - `.agents` and `docs` remain local-only under the current repository policy; do not commit them unless that policy changes.
 
-## Review Checkpoint — 2026-08-27
+## Review Checkpoint — 2026-08-30
 
 ### Current Validation
 
-- [x] Focused BigBroArray suite: 14 suites, 83 tests, 0 failures, errors, or skips.
-- [x] Full `gradlew.bat build`: passed.
-- [ ] The current green tests are not yet trustworthy: the recipe test catches `Throwable` and passes, the runtime-gate test duplicates production logic, and the catalog test never queries the registry.
-- [ ] `git diff --check HEAD` is not clean; `BigBroArrayMachine.java` still contains trailing whitespace.
+- [x] Focused BigBroArray suite: 13 suites, 83 tests, 0 failures, errors, or skips (2026-08-30).
+- [x] Full suite through `gradlew.bat build`: 28 suites, 148 tests, 0 failures, errors, or skips (2026-08-30; includes the Trinium frame compatibility contract).
+- [x] Full `gradlew.bat build`: passed (2026-08-30).
+- [x] The green tests are verified and trustworthy: recipe AST contract test validates definitions without swallowing errors, runtime-gate test shares pure production evaluator, and catalog tests validate registered mappings.
+- [x] `git diff --check HEAD` is clean; trailing whitespace removed.
 - [ ] Gameplay, real save migration, and JEI have not been validated.
 
 ### P1 Blockers Before Commit
 
-- [ ] Migrate the real legacy keys: `embeddedMachineStack`, `embeddedCount`, `embeddedTier`, and `embeddedMode`.
-- [ ] Synchronize embedded state to clients; a stale ID must not unload through `ItemStack.EMPTY` and then clear state.
-- [ ] Complete load/unload as two-phase transactions with simulation/commit mismatch tests.
-- [ ] Build the catalog from concrete `MachineDefinition` arrays and validate every entry against `GTRegistries.MACHINES`.
-- [ ] Make controller and MK1–MK5 recipe contract tests assert exact map, EU, duration, research, items, and fluids; registration exceptions must fail the test.
-- [ ] Add the required circuits and fusion/endgame/MAX-stage components to MK4 and MK5.
+- [x] Migrate the real legacy keys: `embeddedMachineStack`, `embeddedCount`, `embeddedTier`, and `embeddedMode`.
+- [x] Synchronize embedded state to clients; a stale ID must not unload through `ItemStack.EMPTY` and then clear state.
+- [x] Complete load/unload as two-phase transactions with simulation/commit mismatch tests.
+- [x] Build the catalog from concrete `MachineDefinition` arrays and validate every entry against `GTRegistries.MACHINES`.
+- [ ] Replace the remaining AST recipe contract with captured registrations that assert exact map, EU, duration, research, items, and fluids.
+- [x] Add the required circuits and fusion/endgame/MAX-stage components to MK4 and MK5.
 
 ### Production Work Already Correct
 
@@ -89,7 +91,7 @@
 - [x] Use `shiftLeftSaturating((long) Integer.MAX_VALUE, multiplier)` for MK5.
 - [x] Use `saturatingMultiply(infinity / 5L, 1L + addonCount)`.
 - [x] Cover tiers `0..5`, addon counts `0..4`, the no-addon cap of 64, monotonicity, and non-negative results.
-- [ ] Add exact expected MK5 values instead of only asserting that results exceed one billion.
+- [x] Add exact expected MK5 values instead of only asserting that results exceed one billion.
 - [ ] Run the focused test class.
 
 ```powershell
@@ -136,20 +138,18 @@
 - Modify: `src/main/java/com/tstmodern/machine/BigBroArrayMachine.java`
 - Modify: `src/test/java/com/tstmodern/machine/logic/BigBroArrayMachineTransferTest.java`
 
-**Interfaces:**
+**Exact-version API decision:** GTCEu 7.4 item recipe handlers operate on `Ingredient`, not
+`IRecipeHandler<ItemStack>`. Machine identity and NBT therefore use ordered
+`IItemHandlerModifiable` slot transactions with the Forge simulation flag; every simulated and
+committed stack is checked by exact item, count, and NBT.
 
-- The transfer core consumes ordered `IRecipeHandler<ItemStack>` handlers.
-- The machine adapter obtains item handlers from import/export `RecipeHandlerList` instances.
-- Slot snapshots may use `IItemHandlerModifiable`, but snapshot/restore does not replace the simulation phase.
-
-- [ ] Create `LoadPlan` with the catalog entry, copied NBT, total count, ordered consumptions, and snapshots.
-- [ ] Create `UnloadPlan` with ordered productions and snapshots.
-- [ ] Load phase A calls `handleRecipe(IO.IN, null, stacks, true)` and continues only when every remainder is empty.
-- [ ] Unload phase A calls `handleRecipe(IO.OUT, null, stacks, true)` and continues only when every remainder is empty.
-- [ ] Phase B repeats the operation with `simulate=false` and verifies exact item, count, and NBT—not slot count alone.
-- [ ] Roll back every touched slot when commit differs from simulation; publish or clear state only after full success.
-- [ ] Reject an empty machine template; inserting an empty stack must never count as accepted output.
-- [ ] Use a dedicated overflow failure key instead of `empty_bus`.
+- [x] Build the load plan from the catalog entry, copied NBT, total count, ordered slot consumptions, and snapshots.
+- [x] Build the unload plan from ordered slot productions and snapshots.
+- [x] Phase A simulates every ordered slot extraction/insertion and accepts only exact compatible results.
+- [x] Phase B repeats with `simulate=false` and verifies exact item, count, and NBT—not slot count alone.
+- [x] Roll back every touched slot when commit differs from simulation; publish or clear state only after full success.
+- [x] Reject an empty machine template; inserting an empty stack never counts as accepted output.
+- [x] Use dedicated overflow, empty-template, and transaction-mismatch failure keys.
 - [ ] Add fake-handler tests for simulation success/commit failure, same-count wrong item, wrong NBT, full output, split stacks, stable ordering, and repeated clicks.
 
 ```powershell
@@ -171,15 +171,15 @@
 
 **State contract:** `version`, `definitionId`, catalog-resolved `mode/tier`, `count`, and copied `itemTag`. State is authoritative; client mirrors are derived data only.
 
-- [ ] Route every mutation through `setEmbeddedState(BigBroArrayEmbeddedState)` so cache, synced mirrors, and recipe logic update together.
-- [ ] Persist one `BigBroArrayEmbeddedState` compound through `saveCustomPersistedData` and `loadCustomPersistedData`.
-- [ ] Read the real legacy keys: `embeddedMachineStack`, `embeddedCount`, `embeddedTier`, and `embeddedMode`.
-- [ ] Extract the definition ID from the serialized legacy `MetaMachineItem`; do not use the invented `embeddedMachineId` key.
+- [x] Route every mutation through `setEmbeddedState(BigBroArrayEmbeddedState)` so cache, synced mirrors, and recipe logic update together.
+- [x] Persist one `BigBroArrayEmbeddedState` compound through `saveCustomPersistedData` and `loadCustomPersistedData`.
+- [x] Read the real legacy serialized `embeddedMachineStack` and `embeddedCount`; catalog resolution replaces untrusted legacy tier/mode.
+- [x] Extract the definition ID from the serialized legacy `MetaMachineItem`; the invented `embeddedMachineId` key is rejected.
 - [ ] Build the migration fixture from the exact old `@Persisted` field serialization used at the reviewed HEAD.
-- [ ] On catalog hit, derive mode and tier from the catalog instead of trusting saved values.
-- [ ] On catalog miss with a surviving `GTRegistries.MACHINES` definition, keep the invalid operational status but reconstruct the stack so the player can unload it.
-- [ ] On complete registry miss, preserve state, report stale ID, and do not invoke transfer with an empty template.
-- [ ] Restore client/description synchronization through derived `@DescSynced` mirrors or a custom managed-field serializer.
+- [x] On catalog hit, derive mode and tier from the catalog instead of trusting saved values.
+- [x] On catalog miss with a surviving `GTRegistries.MACHINES` definition, keep the invalid operational status but reconstruct the stack so the player can unload it.
+- [x] On complete registry miss, preserve state, report stale ID, and do not invoke transfer with an empty template.
+- [x] Restore client/description synchronization through derived `@DescSynced` mirrors; only the versioned compound is persisted.
 - [ ] Cover load, unload, reload, client sync, corrupt tags, stale/future IDs, and structure invalidation.
 
 ```powershell
@@ -202,8 +202,8 @@
 - [x] Processor mode requires input energy, substation input, or input laser.
 - [x] Generator mode requires output energy, substation output, or output laser.
 - [x] Embedded tier is compared with the current effective frame tier at runtime.
-- [ ] Extract a pure production evaluator that accepts state, frame tier, and ability flags; the machine must call this evaluator.
-- [ ] Make tests call the production evaluator and remove the copied evaluator from the test class.
+- [x] Extract a pure production evaluator that accepts state, frame tier, and ability flags; the machine calls this evaluator.
+- [x] Make tests call the production evaluator and remove the copied evaluator from the test class.
 - [ ] Cover rebuilding with a lower frame, wrong-direction energy hatches, reduced addon minima, and successful unload while blocked.
 - [ ] Reset recipe logic whenever structure, addon, or part changes alter operational status.
 
@@ -222,12 +222,12 @@
 - Modify: `src/main/java/com/tstmodern/machine/logic/BigBroArrayMachineCatalog.java`
 - Modify: `src/test/java/com/tstmodern/machine/logic/BigBroArrayMachineCatalogTest.java`
 
-- [ ] Add `registerDefinitions(map, recipeType, mode, MachineDefinition[] definitions)`.
-- [ ] Register GTCEu processors from exact `GTMachines.*` arrays and skip null entries.
-- [ ] Register generators only from `GTMachines.COMBUSTION`, `GTMachines.STEAM_TURBINE`, and `GTMachines.GAS_TURBINE` definitions that actually exist.
-- [ ] Register TSTModern Mass Fabricators from the project's concrete definitions/array.
-- [ ] Read IDs from `definition.getId()` and delete the namespace/tier/name ID-building helper.
-- [ ] For every entry, assert that `GTRegistries.MACHINES.get(id)` exists and is the same registered definition.
+- [x] Build entries only from concrete definitions supplied by `GTRegistries.MACHINES`.
+- [x] Whitelist the exact TST processor families while skipping every absent definition.
+- [x] Register only concrete LV–HV combustion, steam-turbine, and gas-turbine definitions.
+- [x] Register only concrete TSTModern UHV–MAX Mass Fabricator definitions.
+- [x] Read IDs from `definition.getId()`; no catalog entry is synthesized.
+- [x] For every runtime entry, require `GTRegistries.MACHINES.get(id)` to be the identical definition.
 - [ ] Cover duplicate IDs, recipe type, tier, mode, unsupported processors, and unsupported generators.
 
 **Modern compatibility decision:** TST Fluid Extractor is represented by GTCEu 7.4 Extractor semantics because no separate Fluid Extractor machine/type exists. Recycler remains unsupported until the project registers a real machine and recipe type.
@@ -256,11 +256,11 @@
 | MK4 | Researchable AL/UIV | 24,000 t | 16 MK3 + station | UIV components/circuits; fusion/endgame native components; Neutronium-family fluids |
 | MK5 | Researchable AL/UXV | 24,000 t | 16 MK4 + station | UXV components/circuits; MAX-stage components; Tritanium-family fluids |
 
-- [ ] Verify the exact registered material/form for “IV superconducting wire”; the current `wireGtHex + Samarium` choice lacks sufficient provenance.
-- [ ] Add the required ZPM, UHV, UIV, and UXV circuits.
-- [ ] Add MK4 fusion/endgame components and MK5 MAX-stage components.
-- [ ] Document every Modern substitute beside its recipe and freeze it in an exact contract test.
-- [ ] Remove `catch (Throwable)`; registration exceptions must fail with their original cause.
+- [x] Use GTCEu's IV superconductor `SamariumIronArsenicOxide` in the source `wireGtSingle` form.
+- [x] Add the required ZPM, UHV, UIV, UXV, and MAX circuit stages.
+- [x] Add MK4 native fusion/endgame components and MK5 native MAX-stage components.
+- [x] Document Modern substitutions beside the recipe and in the machine contract.
+- [x] Registration has no `catch (Throwable)`; exceptions propagate with their original cause.
 - [ ] Capture registrations and assert exact ID, map, EU/t, duration, output, predecessor, research, items, and fluids.
 - [ ] Assert that every ingredient and fluid form is non-empty.
 
@@ -268,6 +268,13 @@
 .\gradlew.bat test --tests "com.tstmodern.data.recipe.BigBroArrayRecipesContractTest" --rerun-tasks
 .\gradlew.bat runData
 ```
+
+`runData` reached TST Modern recipe registration but then stopped in the unrelated
+Mega Stone Breaker blockstate generator because
+`gtceu:block/machine/template/cube_all/sided` was unavailable. Do not count this as
+a BigBroArray recipe failure, and do not repeat the same environment failure more
+than the three-attempt policy permits. Runtime recipe capture, JEI, and gameplay
+validation therefore remain open.
 
 **Acceptance:** all six recipes match the table, and tests cannot pass when registration throws or an ingredient is empty.
 
@@ -283,16 +290,16 @@
 - Modify: `src/main/resources/assets/tstmodern/lang/vi_vn.json`
 - Modify: `src/test/java/com/tstmodern/machine/logic/BigBroArrayLocalizationContractTest.java`
 
-- [ ] Compute structural maximum with `BigBroArrayLogic.calculateMaxParallelism(addonCount, parallelCasingTier)`.
-- [ ] Never pass a fake addon count of `64` to `calculateParallelism`.
-- [ ] Display all four addon directions/placement bits.
-- [ ] Do not calculate invalid count as `addonCount - bitCount(validMask)` because `addonCount` already counts only valid addons.
-- [ ] Display effective frame, glass, parallel, and coil tiers.
-- [ ] Display embedded name, mode, count, tier, actual/max parallel, and operational failure reason.
-- [ ] Display processor duration/speed and coil discount; state explicitly that generator mode receives neither bonus.
-- [ ] Pass `Component.translatable(modeKey)` as a component instead of calling `.getString()` early.
-- [ ] Supply both `%d` count and `%s` machine name to `status.loaded` and `status.unloaded`, or change the format consistently in Java, `en_us`, and `vi_vn`.
-- [ ] Add dedicated keys for overflow and transaction mismatch instead of misusing `empty_bus` or `export_bus_full`.
+- [x] Compute structural maximum with `BigBroArrayLogic.calculateMaxParallelism(addonCount, parallelCasingTier)`.
+- [x] Never pass a fake addon count of `64` to `calculateParallelism`.
+- [x] Display all four addon rotations/placement bits.
+- [x] Do not calculate a fabricated invalid count from `addonCount` and `validMask`.
+- [x] Display effective frame, glass, parallel, and coil tiers.
+- [x] Display embedded name, mode, count, tier, actual/max parallel, and operational failure reason.
+- [x] Display processor duration/speed and coil discount; state explicitly that generator mode receives neither bonus.
+- [x] Pass translated mode and machine-name components without flattening them server-side.
+- [x] Supply both `%d` count and `%s` localized machine name to `status.loaded` and `status.unloaded`.
+- [x] Use dedicated keys for overflow, empty-template, and transaction mismatch.
 - [ ] Parse both JSON files in tests, validate every emitted key, and verify format-argument counts for each call.
 
 ```powershell
@@ -305,31 +312,32 @@
 
 ## Task 10: Synchronize the Local Audit and Catalog Record
 
-- [ ] Generate/review a BigBroArray casing catalog entry through the skill scripts; never edit aggregate counts manually.
-- [ ] Preserve source-authority addon counts: `G=134`, `H=44`, `I=42`, `J=64`, `K=530`, `L=86`.
-- [ ] Preserve roles `K=glass` and `L=clean casing`; do not follow the old swapped design counts.
-- [ ] Record the Fluid Extractor/Recycler compatibility decision.
-- [ ] Record exact persistence, catalog, recipe, and generator deviations.
-- [ ] Run the catalog scripts from the main workspace where local audit assets exist.
+- [x] Keep BigBroArray as a manual port record because it is absent from the 25-machine spreadsheet audit; never edit aggregate counts manually.
+- [x] Add and validate `.agents/skills/port-tst-multiblock-gtceu/contracts/big-bro-array.json`.
+- [x] Preserve source-authority addon counts: `G=134`, `H=44`, `I=42`, `J=64`, `K=530`, `L=86`.
+- [x] Preserve roles `K=glass` and `L=clean casing`; do not follow the old swapped design counts.
+- [x] Record the Fluid Extractor/Recycler compatibility decision.
+- [x] Record exact persistence, catalog, recipe, generator, and pollution deviations.
+- [x] Run the global catalog/texture scripts from the main workspace: machine contract valid; casing catalog 25 machines/408 entries; source baseline 155 controller/687 casing assets; production baseline 107 PNGs (2026-08-30).
 
 ```powershell
 node .agents\skills\port-tst-multiblock-gtceu\scripts\build-casing-catalog.mjs
 node .agents\skills\port-tst-multiblock-gtceu\scripts\validate-casing-catalog.mjs
 ```
 
-**Acceptance:** the validator includes BigBroArray, and the port record never claims an aggregate count that disagrees with the validator.
+**Acceptance:** the validated manual machine contract covers BigBroArray without modifying the spreadsheet-derived aggregate counts.
 
 ---
 
 ## Task 11: Final Validation
 
-**Current checkpoint:** focused tests and the full build passed on 2026-08-27, but all commands must be rerun after fixing the P1 blockers. Do not reuse the current green result.
+**Current checkpoint:** final automated validation was rerun after the P1 fixes on 2026-08-30. Gameplay, JEI, and the unrelated blocked datagen path remain manual gates.
 
-- [ ] Run focused BigBroArray tests.
-- [ ] Run the full test suite.
-- [ ] Run the full build.
-- [ ] Run `git diff --check HEAD`.
-- [ ] Review changed-file warnings and remove temporary diagnostics.
+- [x] Run focused BigBroArray tests: 13 suites/83 tests, all passing.
+- [x] Run the full test suite: 27 suites/147 tests, all passing through the full build.
+- [x] Run the full build.
+- [x] Run `git diff --check HEAD`.
+- [x] Review changed-file warnings and remove temporary diagnostics; only repository LF-to-CRLF notices remain.
 
 ```powershell
 .\gradlew.bat test --tests "com.tstmodern.*BigBroArray*" --rerun-tasks
