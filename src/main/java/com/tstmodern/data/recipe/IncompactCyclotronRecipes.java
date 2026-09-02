@@ -22,7 +22,6 @@ import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.PLASMA_GENERATOR_F
 
 import java.util.function.Consumer;
 
-import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialEntry;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
