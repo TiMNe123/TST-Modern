@@ -45,6 +45,12 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> BOROPHENE_NANOWIRE_CASING = casing("borophene_nanowire_casing");
     public static final RegistryObject<Block> NEUTRONIUM_PIPE_CASING = casing("neutronium_pipe_casing");
 
+    // Incompact Cyclotron casings
+    public static final RegistryObject<Block> QUANTUM_FRAME = casing("quantum_frame");
+    public static final RegistryObject<Block> COMPACT_CYCLOTRON_COIL = casing("compact_cyclotron_coil");
+    public static final RegistryObject<Block> DENSE_CYCLOTRON_OUTER_CASING = casing(
+            "dense_cyclotron_outer_casing");
+
     // Mega Tree Farm casings
     public static final RegistryObject<Block> STERILE_CASING = casing("sterile_casing");
     public static final RegistryObject<Block> ASEPTIC_GREENHOUSE_CASING = casing("aseptic_greenhouse_casing");

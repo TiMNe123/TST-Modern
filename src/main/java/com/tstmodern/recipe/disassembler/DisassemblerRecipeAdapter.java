@@ -72,6 +72,7 @@ public final class DisassemblerRecipeAdapter {
                 returnedFluids.get()));
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isBlacklisted(Item item) {
         if (item == null) {
             return true;

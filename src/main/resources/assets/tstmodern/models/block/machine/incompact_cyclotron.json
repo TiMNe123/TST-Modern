@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "gtceu:machine",
+  "machine": "tstmodern:incompact_cyclotron",
+  "dynamic_renders": [
+    { "type": "tstmodern:incompact_cyclotron_parts" }
+  ],
+  "texture_overrides": {
+    "all": "tstmodern:block/casings/dense_cyclotron_outer_casing"
+  },
+  "variants": {
+    "is_formed=false,recipe_logic_status=idle": {
+      "model": { "parent": "gtceu:block/machine/template/cube_all/sided", "textures": { "all": "tstmodern:block/casings/dense_cyclotron_outer_casing", "overlay_front": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front", "overlay_front_emissive": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_emissive" } }
+    },
+    "is_formed=false,recipe_logic_status=suspend": {
+      "model": { "parent": "gtceu:block/machine/template/cube_all/sided", "textures": { "all": "tstmodern:block/casings/dense_cyclotron_outer_casing", "overlay_front": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front", "overlay_front_emissive": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_emissive" } }
+    },
+    "is_formed=false,recipe_logic_status=waiting": {
+      "model": { "parent": "gtceu:block/machine/template/cube_all/sided", "textures": { "all": "tstmodern:block/casings/dense_cyclotron_outer_casing", "overlay_front": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active", "overlay_front_emissive": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active_emissive" } }
+    },
+    "is_formed=false,recipe_logic_status=working": {
+      "model": { "parent": "gtceu:block/machine/template/cube_all/sided", "textures": { "all": "tstmodern:block/casings/dense_cyclotron_outer_casing", "overlay_front": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active", "overlay_front_emissive": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active_emissive" } }
+    },
+    "is_formed=true,recipe_logic_status=idle": {
+      "model": { "parent": "gtceu:block/machine/template/cube_all/sided", "textures": { "all": "tstmodern:block/casings/dense_cyclotron_outer_casing", "overlay_front": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front", "overlay_front_emissive": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_emissive" } }
+    },
+    "is_formed=true,recipe_logic_status=suspend": {
+      "model": { "parent": "gtceu:block/machine/template/cube_all/sided", "textures": { "all": "tstmodern:block/casings/dense_cyclotron_outer_casing", "overlay_front": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front", "overlay_front_emissive": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_emissive" } }
+    },
+    "is_formed=true,recipe_logic_status=waiting": {
+      "model": { "parent": "gtceu:block/machine/template/cube_all/sided", "textures": { "all": "tstmodern:block/casings/dense_cyclotron_outer_casing", "overlay_front": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active", "overlay_front_emissive": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active_emissive" } }
+    },
+    "is_formed=true,recipe_logic_status=working": {
+      "model": { "parent": "gtceu:block/machine/template/cube_all/sided", "textures": { "all": "tstmodern:block/casings/dense_cyclotron_outer_casing", "overlay_front": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active", "overlay_front_emissive": "tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active_emissive" } }
+    }
+  }
+}

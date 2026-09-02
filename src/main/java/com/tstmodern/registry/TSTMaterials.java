@@ -4,7 +4,10 @@ import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.FluidProperty;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
+import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.tstmodern.TSTModern;
 
@@ -14,6 +17,8 @@ public final class TSTMaterials {
     public static Material POOR_NETHER_WASTE;
     public static Material DENSE_SUPERHEATED_STEAM;
     public static Material DENSE_SUPERCRITICAL_STEAM;
+    public static Material NEPTUNIUM_238;
+    public static Material PLUTONIUM_238;
 
     private TSTMaterials() {}
 
@@ -42,6 +47,30 @@ public final class TSTMaterials {
                 MaterialFlags.GENERATE_ROD,
                 MaterialFlags.GENERATE_BOLT_SCREW
         );
+
+        // Register Hydrogen Plasma for Incompact Cyclotron recipes
+        GTMaterials.Hydrogen.getProperty(PropertyKey.FLUID)
+                .enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
+
+        if (!GTMaterials.EnderPearl.hasProperty(PropertyKey.FLUID)) {
+            GTMaterials.EnderPearl.setProperty(
+                    PropertyKey.FLUID,
+                    new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder().temperature(300)));
+        }
+
+        NEPTUNIUM_238 = new Material.Builder(TSTModern.id("neptunium_238"))
+                .dust()
+                .color(0xAFF04B)
+                .iconSet(MaterialIconSet.RADIOACTIVE)
+                .radioactiveHazard(5.0f)
+                .buildAndRegister();
+
+        PLUTONIUM_238 = new Material.Builder(TSTModern.id("plutonium_238"))
+                .dust()
+                .color(0xC13D3D)
+                .iconSet(MaterialIconSet.RADIOACTIVE)
+                .radioactiveHazard(5.0f)
+                .buildAndRegister();
 
         // Custom Hellish Metal
         HELLISH_METAL = new Material.Builder(TSTModern.id("hellish_metal"))
