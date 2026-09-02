@@ -21,6 +21,7 @@ public final class TSTMachineRegistry {
         Objects.requireNonNull(MegaTreeFarmDefinition.MACHINE);
         Objects.requireNonNull(DisassemblerDefinition.MACHINE);
         Objects.requireNonNull(BigBroArrayDefinition.MACHINE);
+        Objects.requireNonNull(IncompactCyclotronDefinition.MACHINE);
         Objects.requireNonNull(MassFabricatorDefinition.MACHINES);
     }
 }

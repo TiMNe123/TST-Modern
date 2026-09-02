@@ -23,6 +23,7 @@ public final class TSTRecipeTypes {
     public static GTRecipeType AQUATIC_ZONE_SIMULATOR;
     public static GTRecipeType DISASSEMBLER;
     public static GTRecipeType MASS_FABRICATOR;
+    public static GTRecipeType CYCLOTRON_RECIPES;
 
     private TSTRecipeTypes() {}
 
@@ -66,6 +67,10 @@ public final class TSTRecipeTypes {
                 .setEUIO(IO.IN)
                 .setSlotOverlay(false, false, true, com.gregtechceu.gtceu.api.gui.GuiTextures.SOLIDIFIER_OVERLAY)
                 .setProgressBar(com.gregtechceu.gtceu.api.gui.GuiTextures.PROGRESS_BAR_MASS_FAB, com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT);
+
+        CYCLOTRON_RECIPES = register(event, "cyclotron")
+                .setMaxIOSize(9, 9, 1, 1)
+                .setEUIO(IO.IN);
     }
 
     static GTRecipeType configureDisassembler(GTRecipeType type) {
