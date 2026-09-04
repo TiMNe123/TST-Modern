@@ -64,7 +64,7 @@ public final class MassFabricatorRecipes {
         if (MassFabricatorDefinition.MACHINES[UEV] != null) {
             ASSEMBLER_RECIPES.recipeBuilder("uev_mass_fabricator")
                     .inputItems(GTMachines.HULL[UEV].asStack())
-                    .inputItems(GTItems.WETWARE_MAINFRAME_UHV.asStack(8))
+                    .inputItems(TSTCircuitTags.get(UEV), 8)
                     .inputItems(GTItems.FIELD_GENERATOR_UEV.asStack(2))
                     .inputItems(GTItems.ROBOT_ARM_UEV.asStack(2))
                     .inputItems(GTItems.ELECTRIC_PUMP_UEV.asStack(2))
@@ -79,7 +79,7 @@ public final class MassFabricatorRecipes {
         if (MassFabricatorDefinition.MACHINES[UIV] != null) {
             ASSEMBLER_RECIPES.recipeBuilder("uiv_mass_fabricator")
                     .inputItems(GTMachines.HULL[UIV].asStack())
-                    .inputItems(GTItems.WETWARE_MAINFRAME_UHV.asStack(16))
+                    .inputItems(TSTCircuitTags.get(UIV), 16)
                     .inputItems(GTItems.FIELD_GENERATOR_UIV.asStack(2))
                     .inputItems(GTItems.ROBOT_ARM_UIV.asStack(2))
                     .inputItems(GTItems.ELECTRIC_PUMP_UIV.asStack(2))
@@ -94,7 +94,7 @@ public final class MassFabricatorRecipes {
         if (MassFabricatorDefinition.MACHINES[UXV] != null) {
             ASSEMBLER_RECIPES.recipeBuilder("uxv_mass_fabricator")
                     .inputItems(GTMachines.HULL[UXV].asStack())
-                    .inputItems(GTItems.WETWARE_MAINFRAME_UHV.asStack(32))
+                    .inputItems(TSTCircuitTags.get(UXV), 32)
                     .inputItems(GTItems.FIELD_GENERATOR_UXV.asStack(2))
                     .inputItems(GTItems.ROBOT_ARM_UXV.asStack(2))
                     .inputItems(GTItems.ELECTRIC_PUMP_UXV.asStack(2))
@@ -109,7 +109,7 @@ public final class MassFabricatorRecipes {
         if (MassFabricatorDefinition.MACHINES[OpV] != null) {
             ASSEMBLER_RECIPES.recipeBuilder("opv_mass_fabricator")
                     .inputItems(GTMachines.HULL[OpV].asStack())
-                    .inputItems(GTItems.WETWARE_MAINFRAME_UHV.asStack(64))
+                    .inputItems(TSTCircuitTags.get(OpV), 64)
                     .inputItems(GTItems.FIELD_GENERATOR_OpV.asStack(2))
                     .inputItems(GTItems.ROBOT_ARM_OpV.asStack(2))
                     .inputItems(GTItems.ELECTRIC_PUMP_OpV.asStack(2))
@@ -124,7 +124,7 @@ public final class MassFabricatorRecipes {
         if (MassFabricatorDefinition.MACHINES[MAX] != null) {
             ASSEMBLER_RECIPES.recipeBuilder("max_mass_fabricator")
                     .inputItems(GTMachines.HULL[MAX].asStack())
-                    .inputItems(GTItems.WETWARE_MAINFRAME_UHV.asStack(64))
+                    .inputItems(TSTCircuitTags.get(MAX), 64)
                     .inputItems(GTItems.FIELD_GENERATOR_OpV.asStack(4))
                     .inputItems(GTItems.ROBOT_ARM_OpV.asStack(4))
                     .inputItems(GTItems.ELECTRIC_PUMP_OpV.asStack(4))

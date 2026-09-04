@@ -226,7 +226,7 @@ public final class IncompactCyclotronRecipes {
                 .inputItems(GTItems.QUANTUM_EYE.asStack(4))
                 .inputItems(GTItems.FIELD_GENERATOR_UHV.asStack(16))
                 .inputItems(GTItems.ENERGY_CLUSTER.asStack(32))
-                .inputItems(CustomTags.UHV_CIRCUITS, 16)
+                .inputItems(TSTCircuitTags.get(UEV), 16)
                 .inputItems(plateDense, GTMaterials.NaquadahAlloy, 16)
                 .inputItems(gear, GTMaterials.NaquadahAlloy, 16)
                 .inputItems(screw, GTMaterials.NaquadahAlloy, 64)

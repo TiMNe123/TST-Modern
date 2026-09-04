@@ -376,6 +376,11 @@ public final class DisassemblerRecipes {
             case "zpm" -> CustomTags.ZPM_CIRCUITS;
             case "uv" -> CustomTags.UV_CIRCUITS;
             case "uhv" -> CustomTags.UHV_CIRCUITS;
+            case "uev" -> TSTCircuitTags.get(UEV);
+            case "uiv" -> TSTCircuitTags.get(UIV);
+            case "uxv" -> TSTCircuitTags.get(UXV);
+            case "opv" -> TSTCircuitTags.get(OpV);
+            case "max" -> TSTCircuitTags.get(MAX);
             default -> throw new IllegalArgumentException("Unknown circuit tier: " + tier);
         };
     }

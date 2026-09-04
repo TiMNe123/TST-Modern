@@ -1,5 +1,8 @@
 package com.tstmodern.data.recipe;
 
+import static com.gregtechceu.gtceu.api.GTValues.MAX;
+import static com.gregtechceu.gtceu.api.GTValues.UIV;
+import static com.gregtechceu.gtceu.api.GTValues.UXV;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.plateDense;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.wireGtSingle;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
@@ -111,7 +114,7 @@ public final class BigBroArrayRecipes {
                 .inputItems(GTItems.SENSOR_UIV.asStack(8))
                 .inputItems(GTItems.EMITTER_UIV.asStack(8))
                 .inputItems(GTItems.ROBOT_ARM_UIV.asStack(8))
-                .inputItems(CustomTags.UIV_CIRCUITS, 8)
+                .inputItems(TSTCircuitTags.get(UIV), 8)
                 // GTCEu 7.4 has no UIV superconductor; use its highest registered UHV wire.
                 .inputItems(wireGtSingle, GTMaterials.RutheniumTriniumAmericiumNeutronate, 64)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(11520))
@@ -140,8 +143,8 @@ public final class BigBroArrayRecipes {
                 .inputItems(GTItems.ROBOT_ARM_UXV.asStack(16))
                 .inputItems(GTItems.ELECTRIC_PISTON_UXV.asStack(16))
                 .inputItems(GTItems.ELECTRIC_PUMP_UXV.asStack(16))
-                .inputItems(CustomTags.UXV_CIRCUITS, 8)
-                .inputItems(CustomTags.MAX_CIRCUITS, 4)
+                .inputItems(TSTCircuitTags.get(UXV), 8)
+                .inputItems(TSTCircuitTags.get(MAX), 4)
                 .inputItems(plateDense, GTMaterials.Tritanium, 16)
                 // GTCEu 7.4 has no UMV wire; retain the highest registered native superconductor.
                 .inputItems(wireGtSingle, GTMaterials.RutheniumTriniumAmericiumNeutronate, 8)
