@@ -9,6 +9,7 @@ import static com.gregtechceu.gtceu.api.GTValues.MV;
 import static com.gregtechceu.gtceu.api.GTValues.VA;
 import static com.gregtechceu.gtceu.api.GTValues.ZPM;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.dust;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.ingot;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.pipeLargeFluid;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.plate;
@@ -37,6 +38,7 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.Magnesium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.MagnesiumChloride;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Naquadah;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.NaquadahAlloy;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Neutronium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Neodymium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.RareEarth;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Rutile;
@@ -69,6 +71,7 @@ public final class GiantVacuumDryingFurnaceRecipes {
     public static void register(Consumer<FinishedRecipe> provider) {
         addGiantVacuumDryingFurnaceRecipes(provider);
         addVacuumCasingRecipe(provider);
+        addNeutroniumMiningCasingRecipe(provider);
         addGiantVacuumDryingFurnaceControllerRecipe(provider);
     }
 
@@ -216,6 +219,18 @@ public final class GiantVacuumDryingFurnaceRecipes {
                 .outputItems(TSTBlocks.VACUUM_CASING, 2)
                 .duration(200)
                 .EUt(VA[HV])
+                .save(provider);
+    }
+
+    private static void addNeutroniumMiningCasingRecipe(Consumer<FinishedRecipe> provider) {
+        // GT5U AssemblerRecipes: 6 Neutronium plates + 1 frame, 50 ticks.
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/neutronium_mining_casing"))
+                .inputItems(plate, Neutronium, 6)
+                .inputItems(frameGt, Neutronium)
+                .circuitMeta(1)
+                .outputItems(TSTBlocks.NEUTRONIUM_MINING_CASING)
+                .duration(50)
+                .EUt(VA[LV] / 2)
                 .save(provider);
     }
 

@@ -2,21 +2,30 @@ package com.tstmodern.data.recipe;
 
 import static com.gregtechceu.gtceu.api.GTValues.EV;
 import static com.gregtechceu.gtceu.api.GTValues.HV;
+import static com.gregtechceu.gtceu.api.GTValues.IV;
+import static com.gregtechceu.gtceu.api.GTValues.LV;
 import static com.gregtechceu.gtceu.api.GTValues.MV;
 import static com.gregtechceu.gtceu.api.GTValues.UV;
 import static com.gregtechceu.gtceu.api.GTValues.VA;
+import static com.gregtechceu.gtceu.api.GTValues.ZPM;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.dust;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.pipeLargeFluid;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.plate;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.plateDense;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_INVAR_HEATPROOF;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TITANIUM_STABLE;
 import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_PUMP_ZPM;
+import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_PUMP_UV;
 import static com.gregtechceu.gtceu.common.data.GTItems.FIELD_GENERATOR_ZPM;
 import static com.gregtechceu.gtceu.common.data.GTMachines.HULL;
+import static com.gregtechceu.gtceu.common.data.GTMachines.QUANTUM_TANK;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Americium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Argon;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Carbon;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.DistilledWater;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Darmstadtium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Helium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.HeavyFuel;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Iridium;
@@ -28,12 +37,16 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.Neutronium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Nickel;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Nitrogen;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Oxygen;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Osmiridium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.RhodiumPlatedPalladium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.RutheniumTriniumAmericiumNeutronate;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.SeverelySteamCrackedHeavyFuel;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.SeverelySteamCrackedLightFuel;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.SeverelySteamCrackedNaphtha;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.SolderingAlloy;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Steam;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.TungstenSteel;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.HSSS;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLY_LINE_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.CENTRIFUGE_RECIPES;
@@ -42,12 +55,15 @@ import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.STEAM_TURBINE_FUEL
 
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
+import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTItems;
 import com.tstmodern.TSTModern;
 import com.tstmodern.registry.TSTBlocks;
 import com.tstmodern.registry.TSTMaterials;
 import com.tstmodern.registry.TSTRecipeTypes;
 import com.tstmodern.registry.machine.HyperThermalConvectorDefinition;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -79,6 +95,8 @@ public final class HyperThermalConvectorRecipes {
                 .outputItems(HyperThermalConvectorDefinition.MACHINE)
                 .stationResearch(b -> b
                         .researchStack(HULL[UV].asStack())
+                        .researchId("hyper_thermal_convector")
+                        .dataStack(GTItems.TOOL_DATA_MODULE.asStack())
                         .CWUt(64, 128_000)
                         .EUt(VA[UV]))
                 .duration(20 * 60)
@@ -87,32 +105,138 @@ public final class HyperThermalConvectorRecipes {
     }
 
     private static void addHyperThermalConvectorCasingRecipes(Consumer<FinishedRecipe> provider) {
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/iridium_reinforced_neutronium_casing"))
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/iridium_reinforced_neutronium_casing"))
                 .inputItems(CASING_TITANIUM_STABLE.asStack())
                 .inputItems(plate, Iridium, 6)
                 .inputItems(plate, Neutronium, 2)
                 .inputFluids(SolderingAlloy.getFluid(288))
                 .outputItems(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING, 2)
+                .stationResearch(b -> b
+                        .researchStack(CASING_TITANIUM_STABLE.asStack())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 72_000)
+                        .EUt(VA[ZPM]))
                 .duration(200)
                 .EUt(VA[UV])
                 .save(provider);
 
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/borophene_nanowire_casing"))
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/borophene_nanowire_casing"))
                 .inputItems(CASING_INVAR_HEATPROOF.asStack())
                 .inputItems(plate, TungstenSteel, 4)
                 .inputItems(dust, Carbon, 4)
                 .inputFluids(SolderingAlloy.getFluid(288))
                 .outputItems(TSTBlocks.BOROPHENE_NANOWIRE_CASING, 2)
+                .stationResearch(b -> b
+                        .researchStack(CASING_INVAR_HEATPROOF.asStack())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 72_000)
+                        .EUt(VA[ZPM]))
                 .duration(200)
                 .EUt(VA[UV])
                 .save(provider);
 
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/neutronium_pipe_casing"))
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/neutronium_pipe_casing"))
                 .inputItems(CASING_POLYTETRAFLUOROETHYLENE_PIPE.asStack())
                 .inputItems(plate, Neutronium, 4)
                 .inputFluids(SolderingAlloy.getFluid(288))
                 .outputItems(TSTBlocks.NEUTRONIUM_PIPE_CASING, 2)
+                .stationResearch(b -> b
+                        .researchStack(CASING_POLYTETRAFLUOROETHYLENE_PIPE.asStack())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 72_000)
+                        .EUt(VA[ZPM]))
                 .duration(200)
+                .EUt(VA[UV])
+                .save(provider);
+
+        // HS188-A is a large GT++ alloy family. HSSS and Rhodium-Plated
+        // Palladium preserve its high-temperature superalloy role in GTCEu.
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/hs188a_block"))
+                .inputItems(CASING_TITANIUM_STABLE.asStack())
+                .inputItems(plate, HSSS, 8)
+                .inputItems(plate, RhodiumPlatedPalladium, 4)
+                .inputItems(plate, TungstenSteel, 4)
+                .inputFluids(SolderingAlloy.getFluid(576))
+                .outputItems(TSTBlocks.HS188A_BLOCK)
+                .stationResearch(b -> b
+                        .researchStack(CASING_TITANIUM_STABLE.asStack())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 144_000)
+                        .EUt(VA[ZPM]))
+                .duration(600)
+                .EUt(VA[UV])
+                .save(provider);
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/quantum_alloy_block"))
+                .inputItems(GTBlocks.FUSION_CASING_MK2.asStack())
+                .inputItems(plateDense, RutheniumTriniumAmericiumNeutronate, 2)
+                .inputItems(plate, Americium, 8)
+                .inputItems(FIELD_GENERATOR_ZPM, 4)
+                .inputFluids(NaquadahAlloy.getFluid(2_304))
+                .outputItems(TSTBlocks.QUANTUM_ALLOY_BLOCK)
+                .stationResearch(b -> b
+                        .researchStack(GTBlocks.FUSION_CASING_MK2.asStack())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(48, 144_000)
+                        .EUt(VA[UV]))
+                .duration(800)
+                .EUt(VA[UV])
+                .save(provider);
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/extreme_density_casing"))
+                .inputItems(GTBlocks.FUSION_CASING_MK2.asStack())
+                .inputItems(plateDense, Darmstadtium, 4)
+                .inputItems(plate, Neutronium, 8)
+                .inputItems(FIELD_GENERATOR_ZPM, 4)
+                .inputFluids(NaquadahAlloy.getFluid(4_608))
+                .outputItems(TSTBlocks.EXTREME_DENSITY_CASING)
+                .stationResearch(b -> b
+                        .researchStack(GTBlocks.FUSION_CASING_MK2.asStack())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(48, 144_000)
+                        .EUt(VA[UV]))
+                .duration(800)
+                .EUt(VA[UV])
+                .save(provider);
+
+        // Exact GT5U mining-casing material recipe.
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/osmiridium_mining_casing"))
+                .inputItems(plate, Osmiridium, 6)
+                .inputItems(frameGt, Osmiridium)
+                .outputItems(TSTBlocks.OSMIRIDIUM_MINING_CASING)
+                .duration(50)
+                .EUt(VA[LV] / 2)
+                .save(provider);
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/tank_casing_tier_10"))
+                .inputItems(QUANTUM_TANK[IV])
+                .inputItems(plate, Neutronium, 8)
+                .inputItems(ELECTRIC_PUMP_UV, 4)
+                .inputItems(FIELD_GENERATOR_ZPM, 2)
+                .inputFluids(SolderingAlloy.getFluid(1_152))
+                .outputItems(TSTBlocks.TANK_CASING_TIER_10)
+                .stationResearch(b -> b
+                        .researchStack(QUANTUM_TANK[IV].asStack())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(48, 144_000)
+                        .EUt(VA[UV]))
+                .duration(800)
+                .EUt(VA[UV])
+                .save(provider);
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/dyson_swarm_floor"))
+                .inputItems(Items.STONE_BRICKS, 16)
+                .inputItems(frameGt, NaquadahAlloy)
+                .inputItems(plate, Neutronium, 4)
+                .inputItems(plate, HSSS, 4)
+                .inputFluids(com.gregtechceu.gtceu.common.data.GTMaterials.Concrete.getFluid(9_216))
+                .outputItems(TSTBlocks.DYSON_SWARM_FLOOR, 4)
+                .stationResearch(b -> b
+                        .researchStack(Items.STONE_BRICKS.getDefaultInstance())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 72_000)
+                        .EUt(VA[ZPM]))
+                .duration(600)
                 .EUt(VA[UV])
                 .save(provider);
     }

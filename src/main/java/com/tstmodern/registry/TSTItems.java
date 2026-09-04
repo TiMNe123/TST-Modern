@@ -19,6 +19,11 @@ public final class TSTItems {
     public static final RegistryObject<Item> UNKNOWN_PARTICLE = item("unknown_particle");
     public static final RegistryObject<Item> SPECIAL_LASER_LENS = item("special_laser_lens");
     public static final RegistryObject<Item> STRANGE_DUST = item("strange_dust");
+    public static final RegistryObject<Item> TESSERACT = item("tesseract");
+    public static final RegistryObject<Item> ENERGISED_TESSERACT = item("energised_tesseract");
+    public static final RegistryObject<Item> NEUTRON_ACTIVATOR_COMPONENT = item("neutron_activator_component");
+    public static final RegistryObject<Item> HIGH_COMPUTATION_STATION_T5 = item("high_computation_station_t5");
+
 
     private TSTItems() {}
 

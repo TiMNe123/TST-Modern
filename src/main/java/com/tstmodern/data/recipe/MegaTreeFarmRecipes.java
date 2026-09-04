@@ -41,7 +41,9 @@ import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.wireGtQuadruple;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.pipeTinyFluid;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.pipeNormalFluid;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.pipeHugeFluid;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.rodLong;
 import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_PISTON_UV;
+import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_MOTOR_UV;
 import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_PUMP_UV;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TUNGSTENSTEEL_ROBUST;
 import static com.gregtechceu.gtceu.common.data.GTItems.CONVEYOR_MODULE_ZPM;
@@ -130,6 +132,11 @@ public final class MegaTreeFarmRecipes {
                 .inputFluids(DistilledWater.getFluid(8000))
                 .inputFluids(GTMaterials.Helium.getFluid(FluidStorageKeys.LIQUID, 64000))
                 .outputItems(TSTBlocks.ASEPTIC_GREENHOUSE_CASING, 1)
+                .stationResearch(b -> b
+                        .researchStack(TSTBlocks.STERILE_CASING.get().asItem().getDefaultInstance())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 72_000)
+                        .EUt(VA[ZPM]))
                 .duration(600)
                 .EUt(VA[UV])
                 .save(provider);
@@ -146,7 +153,7 @@ public final class MegaTreeFarmRecipes {
                 .save(provider);
 
         // I: Integral Framework UV Casing (UV, 200t)
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/integral_framework_uv_casing"))
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/integral_framework_uv_casing"))
                 .inputItems(HULL[UV].asStack())
                 .inputItems(plate, GTMaterials.HSSS, 4)
                 .inputItems(gear, GTMaterials.Titanium, 2)
@@ -154,6 +161,11 @@ public final class MegaTreeFarmRecipes {
                 .inputItems(CustomTags.UV_CIRCUITS, 2)
                 .inputFluids(NaquadahAlloy.getFluid(576))
                 .outputItems(TSTBlocks.INTEGRAL_FRAMEWORK_UV_CASING, 1)
+                .stationResearch(b -> b
+                        .researchStack(HULL[UV].asStack())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 72_000)
+                        .EUt(VA[ZPM]))
                 .duration(200)
                 .EUt(VA[UV])
                 .save(provider);
@@ -178,6 +190,11 @@ public final class MegaTreeFarmRecipes {
                 .inputFluids(SolderingAlloy.getFluid(864))
                 .inputFluids(NaquadahAlloy.getFluid(144))
                 .outputItems(TSTBlocks.COMPOSITE_FARM_CASING, 1)
+                .stationResearch(b -> b
+                        .researchStack(TSTBlocks.REINFORCED_STONE_BRICK_CASING.get().asItem().getDefaultInstance())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 144_000)
+                        .EUt(VA[ZPM]))
                 .duration(600)
                 .EUt(VA[UV])
                 .save(provider);
@@ -205,32 +222,47 @@ public final class MegaTreeFarmRecipes {
                 .save(provider);
 
         // K: Air Crystal Casing
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/air_crystal_casing"))
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/air_crystal_casing"))
                 .inputItems(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get().asItem())
                 .inputItems(dust, NetherQuartz, 4)
                 .inputFluids(LiquidNetherAir.getFluid(1000))
                 .outputItems(TSTBlocks.AIR_CRYSTAL_CASING, 2)
+                .stationResearch(b -> b
+                        .researchStack(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get().asItem().getDefaultInstance())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(16, 36_000)
+                        .EUt(VA[ZPM]))
                 .duration(200)
                 .EUt(VA[ZPM])
                 .save(provider);
 
         // L: Water Crystal Casing
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/water_crystal_casing"))
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/water_crystal_casing"))
                 .inputItems(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get().asItem())
                 .inputItems(dust, NetherQuartz, 4)
                 .inputFluids(DistilledWater.getFluid(1000))
                 .outputItems(TSTBlocks.WATER_CRYSTAL_CASING, 2)
+                .stationResearch(b -> b
+                        .researchStack(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get().asItem().getDefaultInstance())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(16, 36_000)
+                        .EUt(VA[ZPM]))
                 .duration(200)
                 .EUt(VA[ZPM])
                 .save(provider);
 
         // M: Earth Crystal Casing
-        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/earth_crystal_casing"))
+        ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/earth_crystal_casing"))
                 .inputItems(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get().asItem())
                 .inputItems(dust, NetherQuartz, 4)
                 .inputItems(GTItems.FERTILIZER.asStack(4))
                 .inputFluids(SolderingAlloy.getFluid(288))
                 .outputItems(TSTBlocks.EARTH_CRYSTAL_CASING, 2)
+                .stationResearch(b -> b
+                        .researchStack(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get().asItem().getDefaultInstance())
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(16, 36_000)
+                        .EUt(VA[ZPM]))
                 .duration(200)
                 .EUt(VA[ZPM])
                 .save(provider);
@@ -244,6 +276,18 @@ public final class MegaTreeFarmRecipes {
                 .outputItems(TSTBlocks.CULTIVATION_SOIL_CASING, 2)
                 .duration(200)
                 .EUt(VA[EV])
+                .save(provider);
+
+        // GT5U Casing Vent T2: exact native-material port.
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/vent_t2_casing"))
+                .inputItems(frameGt, GTMaterials.Iridium)
+                .inputItems(ELECTRIC_MOTOR_UV)
+                .inputItems(com.gregtechceu.gtceu.api.data.tag.TagPrefix.rotor, GTMaterials.Iridium)
+                .inputItems(GTItems.ITEM_FILTER.asStack(8))
+                .inputItems(rodLong, GTMaterials.Iridium, 8)
+                .outputItems(TSTBlocks.VENT_T2_CASING)
+                .duration(600)
+                .EUt(VA[LuV])
                 .save(provider);
     }
 

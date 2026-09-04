@@ -1,6 +1,8 @@
 package com.tstmodern.data.recipe;
 
 import static com.gregtechceu.gtceu.api.GTValues.IV;
+import static com.gregtechceu.gtceu.api.GTValues.HV;
+import static com.gregtechceu.gtceu.api.GTValues.LV;
 import static com.gregtechceu.gtceu.api.GTValues.LuV;
 import static com.gregtechceu.gtceu.api.GTValues.VA;
 import static com.gregtechceu.gtceu.api.GTValues.ZPM;
@@ -8,19 +10,30 @@ import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.pipeLargeFluid;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.plate;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TUNGSTENSTEEL_ROBUST;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TITANIUM_GEARBOX;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TUNGSTENSTEEL_PIPE;
 import static com.gregtechceu.gtceu.common.data.GTItems.ELECTRIC_PUMP_ZPM;
 import static com.gregtechceu.gtceu.common.data.GTItems.ROBOT_ARM_ZPM;
 import static com.gregtechceu.gtceu.common.data.GTMachines.HULL;
 import static com.gregtechceu.gtceu.common.data.GTMachines.ROCK_CRUSHER;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Iridium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.BlackSteel;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.MaragingSteel300;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.NaquadahAlloy;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Plutonium241;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.RedSteel;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.SolderingAlloy;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.StainlessSteel;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Titanium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Uranium238;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.UraniumRhodiumDinaquadide;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLY_LINE_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.COMPRESSOR_RECIPES;
 
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
+import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.tstmodern.TSTModern;
 import com.tstmodern.registry.TSTBlocks;
@@ -44,6 +57,7 @@ public final class MegaStoneBreakerRecipes {
         addMegaStoneBreakerRecipes(provider);
         addCompressedCobblestoneRecipes(provider);
         addAdvancedIridiumCasingRecipe(provider);
+        addStructureCasingRecipes(provider);
         addCosmicNeutroniumFrameRecipe(provider);
         addControllerRecipe(provider);
     }
@@ -132,6 +146,54 @@ public final class MegaStoneBreakerRecipes {
                 .outputItems(TSTBlocks.ADVANCED_IRIDIUM_CASING)
                 .duration(400)
                 .EUt(VA[IV])
+                .save(provider);
+    }
+
+    private static void addStructureCasingRecipes(Consumer<FinishedRecipe> provider) {
+        // GT5 Black Plutonium is space-mined and absent from standalone GTCEu.
+        // Plutonium-241 plus a Naquadah Alloy frame keeps the same late-game gate.
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/black_plutonium_item_pipe_casing"))
+                .inputItems(CASING_TUNGSTENSTEEL_PIPE.asStack())
+                .inputItems(plate, Plutonium241, 4)
+                .inputItems(frameGt, NaquadahAlloy)
+                .circuitMeta(12)
+                .outputItems(TSTBlocks.BLACK_PLUTONIUM_ITEM_PIPE_CASING)
+                .duration(100)
+                .EUt(VA[LV])
+                .save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/stable_red_steel_casing"))
+                .inputItems(plate, RedSteel, 6)
+                .inputItems(frameGt, BlackSteel)
+                .circuitMeta(1)
+                .outputItems(TSTBlocks.STABLE_RED_STEEL_CASING)
+                .duration(50)
+                .EUt(VA[LV] / 2)
+                .save(provider);
+
+        // Registry id is retained for world compatibility; the TST source block is
+        // GT++ Thermal Containment Casing. GTCEu has Maraging Steel 300, not 350.
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/stable_tantalloy_61_casing"))
+                .inputItems(plate, MaragingSteel300, 5)
+                .inputItems(plate, StainlessSteel)
+                .inputItems(CustomTags.HV_CIRCUITS, 2)
+                .inputItems(GTBlocks.MACHINE_CASING_HV.asStack())
+                .outputItems(TSTBlocks.STABLE_TANTALLOY_61_CASING, 2)
+                .duration(100)
+                .EUt(VA[HV])
+                .save(provider);
+
+        // Staballoy is 90% U-238 and 10% Titanium in GT++; use those native
+        // components directly instead of introducing a one-use material family.
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/stabaloy_firebox_casing"))
+                .inputItems(plate, Uranium238, 6)
+                .inputItems(frameGt, Uranium238, 2)
+                .inputItems(CASING_TITANIUM_GEARBOX.asStack())
+                .inputFluids(Titanium.getFluid(144))
+                .circuitMeta(1)
+                .outputItems(TSTBlocks.STABALOY_FIREBOX_CASING)
+                .duration(50)
+                .EUt(VA[LV] / 2)
                 .save(provider);
     }
 

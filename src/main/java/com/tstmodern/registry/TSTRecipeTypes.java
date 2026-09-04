@@ -24,6 +24,7 @@ public final class TSTRecipeTypes {
     public static GTRecipeType DISASSEMBLER;
     public static GTRecipeType MASS_FABRICATOR;
     public static GTRecipeType CYCLOTRON_RECIPES;
+    public static GTRecipeType NEUTRON_ACTIVATOR;
 
     private TSTRecipeTypes() {}
 
@@ -69,6 +70,10 @@ public final class TSTRecipeTypes {
                 .setProgressBar(com.gregtechceu.gtceu.api.gui.GuiTextures.PROGRESS_BAR_MASS_FAB, com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT);
 
         CYCLOTRON_RECIPES = register(event, "cyclotron")
+                .setMaxIOSize(9, 9, 1, 1)
+                .setEUIO(IO.IN);
+
+        NEUTRON_ACTIVATOR = register(event, "neutron_activator")
                 .setMaxIOSize(9, 9, 1, 1)
                 .setEUIO(IO.IN);
     }

@@ -51,6 +51,11 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> DENSE_CYCLOTRON_OUTER_CASING = casing(
             "dense_cyclotron_outer_casing");
 
+    // Large Neutron Oscillator casings
+    public static final RegistryObject<Block> HIGH_POWER_CASING = casing("high_power_casing");
+    public static final RegistryObject<Block> SPEEDING_PIPE_CASING = casing("speeding_pipe_casing");
+    public static final RegistryObject<Block> COMPACT_FUSION_COIL_T3 = casing("compact_fusion_coil_t3");
+
     // Mega Tree Farm casings
     public static final RegistryObject<Block> STERILE_CASING = casing("sterile_casing");
     public static final RegistryObject<Block> ASEPTIC_GREENHOUSE_CASING = casing("aseptic_greenhouse_casing");

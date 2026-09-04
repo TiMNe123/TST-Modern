@@ -22,6 +22,7 @@ public final class TSTMachineRegistry {
         Objects.requireNonNull(DisassemblerDefinition.MACHINE);
         Objects.requireNonNull(BigBroArrayDefinition.MACHINE);
         Objects.requireNonNull(IncompactCyclotronDefinition.MACHINE);
+        Objects.requireNonNull(LargeNeutronOscillatorDefinition.LARGE_NEUTRON_OSCILLATOR);
         Objects.requireNonNull(MassFabricatorDefinition.MACHINES);
     }
 }

@@ -37,6 +37,9 @@ public final class TSTClient {
         DynamicRenderManager.register(
                 TSTModern.id("incompact_cyclotron_parts"),
                 IncompactCyclotronPartRender.TYPE);
+        DynamicRenderManager.register(
+                TSTModern.id("large_neutron_oscillator_parts"),
+                com.tstmodern.client.renderer.LargeNeutronOscillatorPartRender.TYPE);
     }
 
     private static void addNeptuniumDecayTooltip(ItemTooltipEvent event) {

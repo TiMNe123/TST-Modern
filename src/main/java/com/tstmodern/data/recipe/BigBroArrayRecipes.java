@@ -73,9 +73,10 @@ public final class BigBroArrayRecipes {
                 .outputItems(new ItemStack(TSTBlocks.PARALLEL_CASING_MK2.get()))
                 .duration(12000)
                 .EUt(100000)
-                .scannerResearch(b -> b
+                .stationResearch(b -> b
                         .researchStack(new ItemStack(TSTBlocks.PARALLEL_CASING_MK1.get()))
-                        .duration(288000)
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 288000)
                         .EUt(32))
                 .save(provider);
 
@@ -94,9 +95,10 @@ public final class BigBroArrayRecipes {
                 .outputItems(new ItemStack(TSTBlocks.PARALLEL_CASING_MK3.get()))
                 .duration(24000)
                 .EUt(2000000)
-                .scannerResearch(b -> b
+                .stationResearch(b -> b
                         .researchStack(new ItemStack(TSTBlocks.PARALLEL_CASING_MK2.get()))
-                        .duration(576000)
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .CWUt(32, 576000)
                         .EUt(32))
                 .save(provider);
 
