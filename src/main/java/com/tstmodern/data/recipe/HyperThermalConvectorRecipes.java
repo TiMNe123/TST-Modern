@@ -113,6 +113,7 @@ public final class HyperThermalConvectorRecipes {
                 .outputItems(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING, 2)
                 .stationResearch(b -> b
                         .researchStack(CASING_TITANIUM_STABLE.asStack())
+                        .researchId("iridium_reinforced_neutronium_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 72_000)
                         .EUt(VA[ZPM]))
@@ -128,6 +129,7 @@ public final class HyperThermalConvectorRecipes {
                 .outputItems(TSTBlocks.BOROPHENE_NANOWIRE_CASING, 2)
                 .stationResearch(b -> b
                         .researchStack(CASING_INVAR_HEATPROOF.asStack())
+                        .researchId("borophene_nanowire_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 72_000)
                         .EUt(VA[ZPM]))
@@ -142,6 +144,7 @@ public final class HyperThermalConvectorRecipes {
                 .outputItems(TSTBlocks.NEUTRONIUM_PIPE_CASING, 2)
                 .stationResearch(b -> b
                         .researchStack(CASING_POLYTETRAFLUOROETHYLENE_PIPE.asStack())
+                        .researchId("neutronium_pipe_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 72_000)
                         .EUt(VA[ZPM]))
@@ -159,7 +162,8 @@ public final class HyperThermalConvectorRecipes {
                 .inputFluids(SolderingAlloy.getFluid(576))
                 .outputItems(TSTBlocks.HS188A_BLOCK)
                 .stationResearch(b -> b
-                        .researchStack(CASING_TITANIUM_STABLE.asStack())
+                        .researchStack(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get().asItem().getDefaultInstance())
+                        .researchId("hs188a_block")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 144_000)
                         .EUt(VA[ZPM]))
@@ -175,7 +179,8 @@ public final class HyperThermalConvectorRecipes {
                 .inputFluids(NaquadahAlloy.getFluid(2_304))
                 .outputItems(TSTBlocks.QUANTUM_ALLOY_BLOCK)
                 .stationResearch(b -> b
-                        .researchStack(GTBlocks.FUSION_CASING_MK2.asStack())
+                        .researchStack(TSTBlocks.HS188A_BLOCK.get().asItem().getDefaultInstance())
+                        .researchId("quantum_alloy_block")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(48, 144_000)
                         .EUt(VA[UV]))
@@ -192,6 +197,7 @@ public final class HyperThermalConvectorRecipes {
                 .outputItems(TSTBlocks.EXTREME_DENSITY_CASING)
                 .stationResearch(b -> b
                         .researchStack(GTBlocks.FUSION_CASING_MK2.asStack())
+                        .researchId("extreme_density_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(48, 144_000)
                         .EUt(VA[UV]))
@@ -217,6 +223,7 @@ public final class HyperThermalConvectorRecipes {
                 .outputItems(TSTBlocks.TANK_CASING_TIER_10)
                 .stationResearch(b -> b
                         .researchStack(QUANTUM_TANK[IV].asStack())
+                        .researchId("tank_casing_tier_10")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(48, 144_000)
                         .EUt(VA[UV]))
@@ -233,6 +240,7 @@ public final class HyperThermalConvectorRecipes {
                 .outputItems(TSTBlocks.DYSON_SWARM_FLOOR, 4)
                 .stationResearch(b -> b
                         .researchStack(Items.STONE_BRICKS.getDefaultInstance())
+                        .researchId("dyson_swarm_floor")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 72_000)
                         .EUt(VA[ZPM]))
@@ -416,6 +424,7 @@ public final class HyperThermalConvectorRecipes {
                 .save(provider);
 
         CENTRIFUGE_RECIPES.recipeBuilder(TSTModern.id("centrifuge/decompress_supercritical_steam"))
+                .circuitMeta(1)
                 .inputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(100))
                 .outputFluids(Steam.getFluid(120_000))
                 .duration(20)
@@ -423,6 +432,7 @@ public final class HyperThermalConvectorRecipes {
                 .save(provider);
 
         CENTRIFUGE_RECIPES.recipeBuilder(TSTModern.id("centrifuge/supercritical_to_superheated"))
+                .circuitMeta(2)
                 .inputFluids(TSTMaterials.DENSE_SUPERCRITICAL_STEAM.getFluid(100))
                 .outputFluids(TSTMaterials.DENSE_SUPERHEATED_STEAM.getFluid(400))
                 .duration(20)

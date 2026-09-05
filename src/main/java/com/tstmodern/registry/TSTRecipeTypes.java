@@ -38,7 +38,7 @@ public final class TSTRecipeTypes {
                 .setEUIO(IO.IN);
 
         CHEMICAL_DEHYDRATOR = register(event, "chemical_dehydrator")
-                .setMaxIOSize(2, 6, 2, 2)
+                .setMaxIOSize(2, 7, 2, 2)
                 .setEUIO(IO.IN);
 
         NETHER_INTERFACE = register(event, "nether_interface")

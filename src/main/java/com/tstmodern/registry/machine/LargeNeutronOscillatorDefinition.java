@@ -10,6 +10,7 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
+import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
@@ -35,6 +36,22 @@ public final class LargeNeutronOscillatorDefinition {
             .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
             .partAppearance(LargeNeutronOscillatorDefinition::partAppearance)
             .pattern(definition -> {
+                TraceabilityPredicate parallelHatch = Predicates.abilities(PartAbility.PARALLEL_HATCH)
+                        .setExactLimit(1)
+                        .setPreviewCount(1);
+                TraceabilityPredicate energyInputs = Predicates.abilities(
+                        PartAbility.INPUT_ENERGY,
+                        PartAbility.SUBSTATION_INPUT_ENERGY,
+                        PartAbility.INPUT_LASER)
+                        .setMinGlobalLimited(1)
+                        .setMaxGlobalLimited(2)
+                        .setPreviewCount(1);
+                TraceabilityPredicate recipeIo = Predicates.abilities(PartAbility.IMPORT_ITEMS)
+                        .setMinGlobalLimited(1)
+                        .setPreviewCount(1)
+                        .or(Predicates.abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                        .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                        .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1));
                 FactoryBlockPattern pattern = FactoryBlockPattern.start(
                         RelativeDirection.RIGHT,
                         RelativeDirection.DOWN,
@@ -46,19 +63,13 @@ public final class LargeNeutronOscillatorDefinition {
                         .where('~', Predicates.controller(blocks(definition.get())))
                         // A: Modular Hatch / Parallel Hatch or Stainless Clean Casing (max 1 parallel hatch)
                         .where('A', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get())
-                                .or(Predicates.abilities(PartAbility.PARALLEL_HATCH).setExactLimit(1)))
-                        // B: Energy Hatch or Advanced Iridium Casing (at least 1 energy hatch)
+                                .or(parallelHatch))
+                        // B: Energy Hatch or Advanced Iridium Casing (1-2 energy inputs globally)
                         .where('B', blocks(TSTBlocks.ADVANCED_IRIDIUM_CASING.get())
-                                .or(Predicates.abilities(
-                                        PartAbility.INPUT_ENERGY,
-                                        PartAbility.SUBSTATION_INPUT_ENERGY,
-                                        PartAbility.INPUT_LASER).setMinGlobalLimited(1)))
+                                .or(energyInputs))
                         // C: Input/Output Bus & Hatch or Radiant Naquadah Alloy Casing (at least 1 each)
                         .where('C', blocks(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get())
-                                .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
-                                .or(Predicates.abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1))
-                                .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
-                                .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1)))
+                                .or(recipeIo))
                         // D: High Power Casing (sBlockCasingsTT:0)
                         .where('D', blocks(TSTBlocks.HIGH_POWER_CASING.get()))
                         // E: Speeding Pipe Casing (Loaders.speedingPipe:0)

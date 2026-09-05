@@ -39,7 +39,6 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> TANK_CASING_TIER_10 = casing("tank_casing_tier_10");
     public static final RegistryObject<Block> RADIANT_NAQUADAH_ALLOY_CASING = casing("radiant_naquadah_alloy_casing");
     public static final RegistryObject<Block> DYSON_SWARM_FLOOR = casing("dyson_swarm_floor");
-    public static final RegistryObject<Block> CONTAINMENT_FIELD_CASING = casing("containment_field_casing");
     public static final RegistryObject<Block> IRIDIUM_REINFORCED_NEUTRONIUM_CASING = casing(
             "iridium_reinforced_neutronium_casing");
     public static final RegistryObject<Block> BOROPHENE_NANOWIRE_CASING = casing("borophene_nanowire_casing");

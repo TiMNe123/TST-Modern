@@ -9,7 +9,6 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
-import com.gregtechceu.gtceu.common.data.GCYMBlocks;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
@@ -127,7 +126,7 @@ public final class MegaStoneBreakerDefinition {
                             .or(Predicates.autoAbilities(true, false, false)))
                     .where('G', blocks(TSTBlocks.STABLE_TANTALLOY_61_CASING.get()))
                     .where('H', blocks(TSTBlocks.STABALOY_FIREBOX_CASING.get()))
-                    .where('I', blocks(GCYMBlocks.CASING_STRESS_PROOF.get()))
+                    .where('I', blocks(TSTBlocks.PRESSURE_RESISTANT_WALL.get()))
                     .where('J', blocks(TSTBlocks.STABLE_RED_STEEL_CASING.get())
                             // Derive item I/O and energy abilities from this machine's recipe type.
                             .or(Predicates.autoAbilities(definition.getRecipeTypes()))

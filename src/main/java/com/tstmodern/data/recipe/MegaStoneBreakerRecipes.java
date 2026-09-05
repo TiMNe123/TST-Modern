@@ -17,9 +17,11 @@ import static com.gregtechceu.gtceu.common.data.GTItems.ROBOT_ARM_ZPM;
 import static com.gregtechceu.gtceu.common.data.GTMachines.HULL;
 import static com.gregtechceu.gtceu.common.data.GTMachines.ROCK_CRUSHER;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Iridium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.IncoloyMA956;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.BlackSteel;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.MaragingSteel300;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.NaquadahAlloy;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.NiobiumTitanium;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Plutonium241;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.RedSteel;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.SolderingAlloy;
@@ -187,13 +189,25 @@ public final class MegaStoneBreakerRecipes {
         // components directly instead of introducing a one-use material family.
         ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/stabaloy_firebox_casing"))
                 .inputItems(plate, Uranium238, 6)
-                .inputItems(frameGt, Uranium238, 2)
+                .inputItems(frameGt, Titanium, 2)
                 .inputItems(CASING_TITANIUM_GEARBOX.asStack())
                 .inputFluids(Titanium.getFluid(144))
                 .circuitMeta(1)
                 .outputItems(TSTBlocks.STABALOY_FIREBOX_CASING)
                 .duration(50)
                 .EUt(VA[LV] / 2)
+                .save(provider);
+
+        // GoodGenerator Pressure Resistant Wall, mapped to the closest native
+        // GTCEu grades for Incoloy 903 and Maraging Steel 350.
+        ASSEMBLER_RECIPES.recipeBuilder(TSTModern.id("assembler/pressure_resistant_wall"))
+                .inputItems(plate, IncoloyMA956, 4)
+                .inputItems(plate, MaragingSteel300, 4)
+                .inputItems(frameGt, NiobiumTitanium)
+                .circuitMeta(8)
+                .outputItems(TSTBlocks.PRESSURE_RESISTANT_WALL)
+                .duration(20 * 50)
+                .EUt(VA[HV])
                 .save(provider);
     }
 

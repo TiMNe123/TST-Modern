@@ -90,6 +90,7 @@ public final class MegaTreeFarmRecipes {
                 .outputItems(MegaTreeFarmDefinition.MACHINE)
                 .stationResearch(b -> b
                         .researchStack(HULL[UHV].asStack())
+                        .researchId("mega_tree_farm")
                         .CWUt(64, 128_000)
                         .EUt(VA[UHV]))
                 .duration(20 * 60)
@@ -134,6 +135,7 @@ public final class MegaTreeFarmRecipes {
                 .outputItems(TSTBlocks.ASEPTIC_GREENHOUSE_CASING, 1)
                 .stationResearch(b -> b
                         .researchStack(TSTBlocks.STERILE_CASING.get().asItem().getDefaultInstance())
+                        .researchId("aseptic_greenhouse_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 72_000)
                         .EUt(VA[ZPM]))
@@ -163,6 +165,7 @@ public final class MegaTreeFarmRecipes {
                 .outputItems(TSTBlocks.INTEGRAL_FRAMEWORK_UV_CASING, 1)
                 .stationResearch(b -> b
                         .researchStack(HULL[UV].asStack())
+                        .researchId("integral_framework_uv_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 72_000)
                         .EUt(VA[ZPM]))
@@ -174,7 +177,7 @@ public final class MegaTreeFarmRecipes {
         ASSEMBLY_LINE_RECIPES.recipeBuilder(TSTModern.id("assembly_line/composite_farm_casing"))
                 .inputItems(TSTBlocks.REINFORCED_STONE_BRICK_CASING.get().asItem(), 1)
                 .inputItems(pipeHugeFluid, GTMaterials.Polybenzimidazole, 4)
-                .inputItems(pipeNormalFluid, NaquadahAlloy, 4)
+                .inputItems(pipeNormalFluid, GTMaterials.Polybenzimidazole, 4)
                 .inputItems(TSTBlocks.VENT_T2_CASING.get().asItem(), 1)
                 .inputItems(plateDense, GTMaterials.Gold, 4)
                 .inputItems(plateDense, GTMaterials.Bronze, 4)
@@ -192,6 +195,7 @@ public final class MegaTreeFarmRecipes {
                 .outputItems(TSTBlocks.COMPOSITE_FARM_CASING, 1)
                 .stationResearch(b -> b
                         .researchStack(TSTBlocks.REINFORCED_STONE_BRICK_CASING.get().asItem().getDefaultInstance())
+                        .researchId("composite_farm_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 144_000)
                         .EUt(VA[ZPM]))
@@ -229,6 +233,7 @@ public final class MegaTreeFarmRecipes {
                 .outputItems(TSTBlocks.AIR_CRYSTAL_CASING, 2)
                 .stationResearch(b -> b
                         .researchStack(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get().asItem().getDefaultInstance())
+                        .researchId("air_crystal_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(16, 36_000)
                         .EUt(VA[ZPM]))
@@ -243,7 +248,8 @@ public final class MegaTreeFarmRecipes {
                 .inputFluids(DistilledWater.getFluid(1000))
                 .outputItems(TSTBlocks.WATER_CRYSTAL_CASING, 2)
                 .stationResearch(b -> b
-                        .researchStack(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get().asItem().getDefaultInstance())
+                        .researchStack(TSTBlocks.AIR_CRYSTAL_CASING.get().asItem().getDefaultInstance())
+                        .researchId("water_crystal_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(16, 36_000)
                         .EUt(VA[ZPM]))
@@ -259,7 +265,8 @@ public final class MegaTreeFarmRecipes {
                 .inputFluids(SolderingAlloy.getFluid(288))
                 .outputItems(TSTBlocks.EARTH_CRYSTAL_CASING, 2)
                 .stationResearch(b -> b
-                        .researchStack(TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING.get().asItem().getDefaultInstance())
+                        .researchStack(TSTBlocks.WATER_CRYSTAL_CASING.get().asItem().getDefaultInstance())
+                        .researchId("earth_crystal_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(16, 36_000)
                         .EUt(VA[ZPM]))

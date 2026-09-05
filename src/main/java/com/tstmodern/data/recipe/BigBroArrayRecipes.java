@@ -75,6 +75,7 @@ public final class BigBroArrayRecipes {
                 .EUt(100000)
                 .stationResearch(b -> b
                         .researchStack(new ItemStack(TSTBlocks.PARALLEL_CASING_MK1.get()))
+                        .researchId("parallel_casing_mk2")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 288000)
                         .EUt(32))
@@ -97,6 +98,7 @@ public final class BigBroArrayRecipes {
                 .EUt(2000000)
                 .stationResearch(b -> b
                         .researchStack(new ItemStack(TSTBlocks.PARALLEL_CASING_MK2.get()))
+                        .researchId("parallel_casing_mk3")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 576000)
                         .EUt(32))
@@ -126,6 +128,8 @@ public final class BigBroArrayRecipes {
                 .EUt(8000000)
                 .stationResearch(b -> b
                         .researchStack(new ItemStack(TSTBlocks.PARALLEL_CASING_MK3.get()))
+                        .researchId("parallel_casing_mk4")
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(64, 4800)
                         .EUt(8000000))
                 .save(provider);
@@ -157,6 +161,8 @@ public final class BigBroArrayRecipes {
                 .EUt(32000000)
                 .stationResearch(b -> b
                         .researchStack(new ItemStack(TSTBlocks.PARALLEL_CASING_MK4.get()))
+                        .researchId("parallel_casing_mk5")
+                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(128, 9600)
                         .EUt(32000000))
                 .save(provider);

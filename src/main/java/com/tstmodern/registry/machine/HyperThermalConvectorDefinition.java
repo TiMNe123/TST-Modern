@@ -8,7 +8,6 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
-import com.gregtechceu.gtceu.common.data.GCYMBlocks;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
@@ -285,7 +284,7 @@ public final class HyperThermalConvectorDefinition {
                     .where('I', blocks(GTBlocks.FILTER_CASING.get()))
                     .where('J', Predicates.frames(GTMaterials.Iridium))
                     .where('K', Predicates.frames(GTMaterials.Neutronium))
-                    .where('L', blocks(GCYMBlocks.CASING_STRESS_PROOF.get()))
+                    .where('L', blocks(TSTBlocks.PRESSURE_RESISTANT_WALL.get()))
                     .where('M', blocks(TSTBlocks.DYSON_SWARM_FLOOR.get()))
                     .where('N', blocks(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get()))
                     .where('O', blocks(TSTBlocks.BOROPHENE_NANOWIRE_CASING.get()))

@@ -5,6 +5,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.DustProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.FluidProperty;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.api.fluids.FluidState;
@@ -20,6 +21,9 @@ public final class TSTMaterials {
     public static Material DENSE_SUPERCRITICAL_STEAM;
     public static Material NEPTUNIUM_238;
     public static Material PLUTONIUM_238;
+    public static Material FLUORCAPHITE;
+    public static Material SAMARSKITE_Y;
+    public static Material TITANITE;
 
     // Large Neutron Oscillator dependency closure (GoodGenerator/GT++ authority).
     public static Material BLACK_TITANIUM_PREMIX;
@@ -72,6 +76,29 @@ public final class TSTMaterials {
                 MaterialFlags.GENERATE_FRAME
         );
 
+        // Recipe forms used by the approved TST casing ports but omitted by
+        // GTCEu's default material generation.
+        GTMaterials.Palladium.addFlags(MaterialFlags.GENERATE_FRAME);
+        GTMaterials.SterlingSilver.addFlags(MaterialFlags.GENERATE_FRAME);
+        GTMaterials.NiobiumTitanium.addFlags(MaterialFlags.GENERATE_FRAME);
+        GTMaterials.RutheniumTriniumAmericiumNeutronate.addFlags(
+                MaterialFlags.GENERATE_PLATE,
+                MaterialFlags.GENERATE_DENSE);
+        GTMaterials.Gold.addFlags(MaterialFlags.GENERATE_DENSE);
+        GTMaterials.Bronze.addFlags(MaterialFlags.GENERATE_DENSE);
+        GTMaterials.Lapis.addFlags(MaterialFlags.GENERATE_DENSE);
+        GTMaterials.Tin.addFlags(MaterialFlags.GENERATE_DENSE);
+        GTMaterials.Tritanium.addFlags(MaterialFlags.GENERATE_DENSE);
+        GTMaterials.Iridium.addFlags(MaterialFlags.GENERATE_ROTOR);
+
+        if (!GTMaterials.Erbium.hasProperty(PropertyKey.DUST)) {
+            GTMaterials.Erbium.setProperty(PropertyKey.DUST, new DustProperty());
+        }
+
+        GTMaterials.TungstenCarbide.addFlags(
+                MaterialFlags.GENERATE_ROTOR
+        );
+
         // Enable Plates and Dense Plates generation for Netherite (used in Nether Interface recipes)
         GTMaterials.Netherite.addFlags(
                 MaterialFlags.GENERATE_PLATE,
@@ -120,6 +147,11 @@ public final class TSTMaterials {
                 .iconSet(MaterialIconSet.RADIOACTIVE)
                 .radioactiveHazard(5.0f)
                 .buildAndRegister();
+
+        // GT++ ores recovered from Radioactive Mineral Mix (Strange Dust).
+        FLUORCAPHITE = dust("fluorcaphite", 0xFFFF1E, MaterialIconSet.FINE);
+        SAMARSKITE_Y = dust("samarskite_y", 0x41A3A4, MaterialIconSet.SHINY);
+        TITANITE = dust("titanite", 0xB8C669, MaterialIconSet.METALLIC);
 
         BLACK_TITANIUM_PREMIX = dust("black_titanium_premix", 0x292934, MaterialIconSet.METALLIC);
         BLACK_TITANIUM = new Material.Builder(TSTModern.id("black_titanium"))

@@ -52,13 +52,18 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.UraniumRhodiumDinaqu
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Yttrium;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLY_LINE_RECIPES;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ELECTROLYZER_RECIPES;
 
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.tstmodern.TSTModern;
 import com.tstmodern.registry.TSTBlocks;
+import com.tstmodern.registry.TSTItems;
+import com.tstmodern.registry.TSTMaterials;
 import com.tstmodern.registry.TSTRecipeTypes;
 import com.tstmodern.registry.machine.GiantVacuumDryingFurnaceDefinition;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
@@ -136,6 +141,62 @@ public final class GiantVacuumDryingFurnaceRecipes {
                 .outputFluids(new FluidStack(Fluids.WATER, 1000))
                 .EUt(VA[LV])
                 .duration(40)
+                .save(provider);
+
+        // GT++ RecipeGenOre: Radioactive Mineral Mix contains 61 material units.
+        // Modern folds Thorium-232 into GTCEu Thorium and emits Radon as a fluid.
+        TSTRecipeTypes.CHEMICAL_DEHYDRATOR
+                .recipeBuilder(TSTModern.id("chemical_dehydrator/strange_dust_separation"))
+                .inputItems(new ItemStack(TSTItems.STRANGE_DUST.get(), 61))
+                .outputItems(dust, GTMaterials.Radium, 1)
+                .outputItems(dust, GTMaterials.Uranium235, 1)
+                .outputItems(dust, GTMaterials.Uranium238, 10)
+                .outputItems(dust, GTMaterials.Thorium, 29)
+                .outputItems(dust, TSTMaterials.FLUORCAPHITE, 6)
+                .outputItems(dust, TSTMaterials.SAMARSKITE_Y, 8)
+                .outputItems(dust, TSTMaterials.TITANITE, 4)
+                .outputFluids(GTMaterials.Radon.getFluid(2_000))
+                .EUt(VA[HV])
+                .duration(180_708)
+                .save(provider);
+
+        // GT++ Fluorcaphite: (Ca,Sr,Ce,Na)5(PO4)3F. Strontium oxide is
+        // flattened to native Strontium plus its Oxygen in Modern.
+        TSTRecipeTypes.CHEMICAL_DEHYDRATOR
+                .recipeBuilder(TSTModern.id("chemical_dehydrator/fluorcaphite_decomposition"))
+                .inputItems(dust, TSTMaterials.FLUORCAPHITE, 41)
+                .outputItems(dust, GTMaterials.Calcium, 5)
+                .outputItems(dust, GTMaterials.Strontium, 5)
+                .outputItems(dust, GTMaterials.Cerium, 5)
+                .outputItems(dust, GTMaterials.Sodium, 5)
+                .outputItems(dust, GTMaterials.Phosphorus, 3)
+                .outputFluids(GTMaterials.Oxygen.getFluid(17_000))
+                .outputFluids(GTMaterials.Fluorine.getFluid(6_000))
+                .EUt(VA[HV])
+                .duration(7_736)
+                .save(provider);
+
+        ELECTROLYZER_RECIPES.recipeBuilder(TSTModern.id("electrolyzer/samarskite_y_decomposition"))
+                .inputItems(dust, TSTMaterials.SAMARSKITE_Y, 22)
+                .outputItems(dust, GTMaterials.Yttrium, 2)
+                .outputItems(dust, GTMaterials.Iron, 10)
+                .outputItems(dust, GTMaterials.Uranium235, 2)
+                .outputItems(dust, GTMaterials.Thorium, 3)
+                .outputItems(dust, GTMaterials.Niobium, 2)
+                .outputItems(dust, GTMaterials.Tantalum, 3)
+                .EUt(VA[HV])
+                .duration(7_899)
+                .save(provider);
+
+        ELECTROLYZER_RECIPES.recipeBuilder(TSTModern.id("electrolyzer/titanite_decomposition"))
+                .inputItems(dust, TSTMaterials.TITANITE, 17)
+                .outputItems(dust, GTMaterials.Calcium, 2)
+                .outputItems(dust, GTMaterials.Titanium, 2)
+                .outputItems(dust, GTMaterials.Silicon, 2)
+                .outputItems(dust, GTMaterials.Thorium, 1)
+                .outputFluids(GTMaterials.Oxygen.getFluid(10_000))
+                .EUt(VA[HV])
+                .duration(1_872)
                 .save(provider);
 
         // === Vacuum Furnace Recipes ===

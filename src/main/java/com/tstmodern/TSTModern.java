@@ -9,6 +9,7 @@ import com.tstmodern.recipe.chance.TSTChanceLogics;
 import com.tstmodern.recipe.disassembler.DisassemblerRecipeIndex;
 import com.tstmodern.machine.logic.IsotopeDecayHandler;
 import com.tstmodern.registry.TSTBlocks;
+import com.tstmodern.registry.TSTCreativeModeTabs;
 import com.tstmodern.registry.TSTMaterials;
 import com.tstmodern.registry.TSTItems;
 import com.tstmodern.registry.machine.TSTMachineRegistry;
@@ -35,6 +36,7 @@ public final class TSTModern {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TSTConfig.SPEC, "tstmodern-common.toml");
         TSTBlocks.register(modBus);
         TSTItems.register(modBus);
+        TSTCreativeModeTabs.register(modBus);
         modBus.addListener(TSTMaterials::registerMaterials);
 
         // GTCEu opens its recipe-type registry and posts this generic event before freezing it.

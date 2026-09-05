@@ -15,6 +15,7 @@ import static com.gregtechceu.gtceu.api.GTValues.UV;
 import static com.gregtechceu.gtceu.api.GTValues.UXV;
 import static com.gregtechceu.gtceu.api.GTValues.VA;
 import static com.gregtechceu.gtceu.api.GTValues.ZPM;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -97,7 +98,8 @@ public final class DisassemblerRecipes {
                             // P7: GTCEu 7.4 has no legacy Super Coolant; PCB Coolant is the approved replacement.
                             fluid("pcb_coolant", 2000),
                             fluid("argon", 1000)),
-                    200, EutSpec.literal(200_000), ResearchSpec.scanner(block("molecular_casing"), 1000, LuV)),
+                    200, EutSpec.literal(200_000),
+                    ResearchSpec.station(block("molecular_casing"), 1000, LuV, 32, tool("data_orb"))),
             recipe("assembly_line/disassembler", RecipeType.ASSEMBLY_LINE, machine("disassembler", null), 1,
                     inputs(
                             input(machine("assembler", "uhv"), 64),
@@ -117,6 +119,7 @@ public final class DisassemblerRecipes {
     private DisassemblerRecipes() {}
 
     public static void register(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.setMaxIOSize(10, 1, 1, 0);
         RECIPE_SPECS.forEach(spec -> register(spec, provider));
     }
 
@@ -165,7 +168,9 @@ public final class DisassemblerRecipes {
                         fluid("soldering_alloy", solder),
                         fluid(materialFluid, materialFluidAmount),
                         fluid("lubricant", lubricant)),
-                600, EutSpec.va(eutTier), ResearchSpec.scanner(casing(predecessor), 1800, eutTier));
+                600, EutSpec.va(eutTier), tierIndex(tier) >= ZPM
+                        ? ResearchSpec.station(casing(predecessor), 1800, eutTier, 32, tool("data_orb"))
+                        : ResearchSpec.scanner(casing(predecessor), 1800, eutTier));
     }
 
     private static RecipeSpec endgameCasing(String tier, String predecessor, String frameMaterial, int frames,
@@ -191,7 +196,8 @@ public final class DisassemblerRecipes {
                         fluid("soldering_alloy", solder),
                         fluid(materialFluid, materialFluidAmount),
                         fluid("lubricant", lubricant)),
-                duration, EutSpec.va(eutTier), ResearchSpec.station(casing(predecessor), researchDuration, eutTier));
+                duration, EutSpec.va(eutTier),
+                ResearchSpec.station(casing(predecessor), researchDuration, eutTier, 32, tool("data_orb")));
     }
 
     private static RecipeSpec recipe(String id, RecipeType type, ItemRef output, int outputCount,
@@ -214,7 +220,7 @@ public final class DisassemblerRecipes {
         builder.outputItems(resolveStack(spec.output(), spec.outputCount()))
                 .duration(spec.duration())
                 .EUt(spec.eut().value());
-        applyResearch(builder, spec.research());
+        applyResearch(builder, spec.id(), spec.research());
         builder.save(provider);
     }
 
@@ -232,7 +238,7 @@ public final class DisassemblerRecipes {
         }
     }
 
-    private static void applyResearch(GTRecipeBuilder builder, ResearchSpec research) {
+    private static void applyResearch(GTRecipeBuilder builder, String recipeId, ResearchSpec research) {
         if (research.kind() == ResearchKind.NONE) {
             return;
         }
@@ -240,11 +246,13 @@ public final class DisassemblerRecipes {
         if (research.kind() == ResearchKind.SCANNER) {
             builder.scannerResearch(scan -> scan
                     .researchStack(target)
+                    .researchId(recipeId.replace('/', '_'))
                     .duration(research.durationTicks())
                     .EUt(research.eut().value()));
         } else {
             builder.stationResearch(station -> {
                 station.researchStack(target)
+                        .researchId(recipeId.replace('/', '_'))
                         .CWUt(research.cwuPerTick(), research.durationTicks())
                         .EUt(research.eut().value());
                 if (research.dataStack() != null) {

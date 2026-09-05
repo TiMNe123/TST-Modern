@@ -189,7 +189,7 @@ public final class IncompactCyclotronRecipes {
                 .duration(600)
                 .EUt(2_000_000)
                 .stationResearch(b -> b
-                        .researchStack(GTBlocks.FUSION_CASING_MK2.asStack())
+                        .researchStack(new ItemStack(TSTBlocks.VACUUM_CASING.get()))
                         .researchId("dense_cyclotron_outer_casing")
                         .dataStack(GTItems.TOOL_DATA_ORB.asStack())
                         .CWUt(32, 144_000)
