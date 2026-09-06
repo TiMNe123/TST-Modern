@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager;
 import com.tstmodern.TSTModern;
 import com.tstmodern.client.renderer.BigBroArrayPartRender;
 import com.tstmodern.client.renderer.IncompactCyclotronPartRender;
+import com.tstmodern.client.renderer.OreProcessingFactoryPartRender;
 import com.tstmodern.registry.TSTMaterials;
 
 import net.minecraft.network.chat.Component;
@@ -40,6 +41,9 @@ public final class TSTClient {
         DynamicRenderManager.register(
                 TSTModern.id("large_neutron_oscillator_parts"),
                 com.tstmodern.client.renderer.LargeNeutronOscillatorPartRender.TYPE);
+        DynamicRenderManager.register(
+                TSTModern.id("ore_processing_factory_parts"),
+                OreProcessingFactoryPartRender.TYPE);
     }
 
     private static void addNeptuniumDecayTooltip(ItemTooltipEvent event) {

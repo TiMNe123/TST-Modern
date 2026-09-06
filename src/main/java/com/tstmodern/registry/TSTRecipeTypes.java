@@ -25,6 +25,7 @@ public final class TSTRecipeTypes {
     public static GTRecipeType MASS_FABRICATOR;
     public static GTRecipeType CYCLOTRON_RECIPES;
     public static GTRecipeType NEUTRON_ACTIVATOR;
+    public static GTRecipeType ORE_PROCESSING_FACTORY;
 
     private TSTRecipeTypes() {}
 
@@ -75,6 +76,10 @@ public final class TSTRecipeTypes {
 
         NEUTRON_ACTIVATOR = register(event, "neutron_activator")
                 .setMaxIOSize(9, 9, 1, 1)
+                .setEUIO(IO.IN);
+
+        ORE_PROCESSING_FACTORY = register(event, "ore_processing_factory")
+                .setMaxIOSize(1, 9, 0, 0)
                 .setEUIO(IO.IN);
     }
 
