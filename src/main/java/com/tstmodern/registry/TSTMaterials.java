@@ -53,6 +53,7 @@ public final class TSTMaterials {
     public static Material NAQUADRIA_RICH_SOLUTION;
     public static Material LOW_QUALITY_NAQUADRIA_SULPHATE;
     public static Material NAQUADRIA_SULPHATE;
+    public static Material SUPER_COOLANT;
 
     private TSTMaterials() {}
 
@@ -189,6 +190,11 @@ public final class TSTMaterials {
         LOW_QUALITY_NAQUADRIA_SULPHATE = dust(
                 "low_quality_naquadria_sulphate", 0x737284, MaterialIconSet.METALLIC);
         NAQUADRIA_SULPHATE = dust("naquadria_sulphate", 0x1F1E33, MaterialIconSet.METALLIC);
+        SUPER_COOLANT = new Material.Builder(TSTModern.id("super_coolant"))
+                .liquid(new FluidBuilder().temperature(1))
+                .color(0x025B6F)
+                .iconSet(MaterialIconSet.FLUID)
+                .buildAndRegister();
 
         // Custom Hellish Metal
         HELLISH_METAL = new Material.Builder(TSTModern.id("hellish_metal"))

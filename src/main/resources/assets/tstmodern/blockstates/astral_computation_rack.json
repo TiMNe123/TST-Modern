@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down": {"model":"tstmodern:block/machine/astral_computation_rack","x":90},
+    "facing=east": {"model":"tstmodern:block/machine/astral_computation_rack","y":90},
+    "facing=north": {"model":"tstmodern:block/machine/astral_computation_rack"},
+    "facing=south": {"model":"tstmodern:block/machine/astral_computation_rack","y":180},
+    "facing=up": {"model":"tstmodern:block/machine/astral_computation_rack","x":270,"gtceu:z":180},
+    "facing=west": {"model":"tstmodern:block/machine/astral_computation_rack","y":270}
+  }
+}

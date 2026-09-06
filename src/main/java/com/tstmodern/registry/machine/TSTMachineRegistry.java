@@ -23,6 +23,8 @@ public final class TSTMachineRegistry {
         Objects.requireNonNull(BigBroArrayDefinition.MACHINE);
         Objects.requireNonNull(IncompactCyclotronDefinition.MACHINE);
         Objects.requireNonNull(LargeNeutronOscillatorDefinition.LARGE_NEUTRON_OSCILLATOR);
+        Objects.requireNonNull(AstralComputingArrayDefinition.ASTRAL_COMPUTATION_RACK);
+        Objects.requireNonNull(AstralComputingArrayDefinition.MACHINE);
         Objects.requireNonNull(MassFabricatorDefinition.MACHINES);
     }
 }

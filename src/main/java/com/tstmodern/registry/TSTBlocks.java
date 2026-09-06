@@ -55,6 +55,24 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> SPEEDING_PIPE_CASING = casing("speeding_pipe_casing");
     public static final RegistryObject<Block> COMPACT_FUSION_COIL_T3 = casing("compact_fusion_coil_t3");
 
+    // Astral Computing Array casings
+    public static final RegistryObject<Block> FIELD_RESTRICTION_COIL_T1 = casing("field_restriction_coil_t1");
+    public static final RegistryObject<Block> COMPACT_FUSION_COIL_T0 = casing("compact_fusion_coil_t0");
+    public static final RegistryObject<Block> SPACE_ELEVATOR_BASE_CASING = casing("space_elevator_base_casing");
+    public static final RegistryObject<Block> SPACE_ELEVATOR_SUPPORT_STRUCTURE = casing(
+            "space_elevator_support_structure");
+    public static final RegistryObject<Block> SPACE_ELEVATOR_INTERNAL_STRUCTURE = casing(
+            "space_elevator_internal_structure");
+    public static final RegistryObject<Block> COMPUTER_CASING = casing("computer_casing");
+    public static final RegistryObject<Block> COMPUTER_HEAT_VENT = casing("computer_heat_vent");
+    public static final RegistryObject<Block> ADVANCED_COMPUTER_CASING = casing("advanced_computer_casing");
+    public static final RegistryObject<Block> ELECTROMAGNETIC_COMPUTER_COIL = casing(
+            "electromagnetic_computer_coil");
+    public static final RegistryObject<Block> CONTAINMENT_CASING = casing("containment_casing");
+    public static final RegistryObject<Block> RADIATION_PROTECTION_STEEL_FRAME = casing(
+            "radiation_protection_steel_frame");
+    public static final RegistryObject<Block> ASTRAL_PYLON_CASING = casing("astral_pylon_casing");
+
     // Mega Tree Farm casings
     public static final RegistryObject<Block> STERILE_CASING = casing("sterile_casing");
     public static final RegistryObject<Block> ASEPTIC_GREENHOUSE_CASING = casing("aseptic_greenhouse_casing");
