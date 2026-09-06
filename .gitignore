@@ -40,4 +40,5 @@ PORTING_NOTES.md
 /docs/
 /.worktrees/
 /.superpowers/
+/.codegraph/
 process.md
