@@ -1,7 +1,7 @@
 {
   "itemGroup.tstmodern.main": "TST Hiện Đại",
   "block.tstmodern.mega_stone_breaker": "§6§lMáy Tổng Hợp Đá Silicon§r",
-  "block.tstmodern.advanced_iridium_casing": "Vỏ Iridium Cao Cấp",
+  "block.tstmodern.advanced_iridium_casing": "§bVỏ Iridium Cao Cấp§r",
   "block.tstmodern.black_plutonium_item_pipe_casing": "Vỏ Ống Vật Phẩm Black Plutonium",
   "block.tstmodern.vent_t2_casing": "Vỏ Lọc Cao Cấp",
   "block.tstmodern.cosmic_neutronium_frame": "Khung Cosmic Neutronium",
@@ -210,7 +210,7 @@
   "block.tstmodern.uxv_mass_fabricator": "§eMáy Tạo Vật Chất Sử Thi IV§r",
   "block.tstmodern.opv_mass_fabricator": "§9§lMáy Tạo Vật Chất Huyền Thoại§r",
   "block.tstmodern.max_mass_fabricator": "§c§lMáy Tạo Vật Chất Huyền Thoại II§r",
-  "block.tstmodern.high_power_casing": "Vỏ Khối Công Suất Cao",
+  "block.tstmodern.high_power_casing": "§cVỏ Khối Công Suất Cao§r",
   "block.tstmodern.speeding_pipe_casing": "Vỏ Khối Đường Ống Tăng Tốc",
   "block.tstmodern.compact_fusion_coil_t3": "§5Cuộn Nhiệt Hạch Cô Đặc T3§r",
   "block.tstmodern.large_neutron_oscillator": "§b§lMáy Dao Động Neutron Lớn§r",
@@ -341,5 +341,17 @@
   "tstmodern.machine.astral_computing_array.status.energy": "Năng lượng tiêu thụ: %s EU/t",
   "tstmodern.machine.astral_computing_array.status.heat": "Nhiệt rack: %s",
   "material.tstmodern.super_coolant": "Siêu chất làm mát",
-  "fluid.tstmodern.super_coolant": "Siêu chất làm mát"
+  "fluid.tstmodern.super_coolant": "Siêu chất làm mát",
+  "block.tstmodern.ore_processing_factory": "§3§lNhà Máy Xử Lý Quặng§r",
+  "recipetype.tstmodern.ore_processing_factory": "Nhà Máy Xử Lý Quặng",
+  "tstmodern.ore_processing_factory": "Nhà Máy Xử Lý Quặng",
+  "gtceu.recipe_type.tstmodern.ore_processing_factory": "Nhà Máy Xử Lý Quặng",
+  "tstmodern.machine.ore_processing_factory.tooltip.0": "§7Khối điều khiển của Nhà Máy Xử Lý Quặng Tổng Hợp TST§r",
+  "tstmodern.machine.ore_processing_factory.tooltip.1": "§3§lMáy xử lý quặng§r",
+  "tstmodern.machine.ore_processing_factory.tooltip.2": "§fKỹ thuật là nghệ thuật định hướng những nguồn năng lượng vĩ đại trong tự nhiên để phục vụ và mang lại tiện ích cho con người.§r",
+  "tstmodern.machine.ore_processing_factory.tooltip.3": "§6Xử lý§7: Quặng sẽ xếp hàng, đi vào từ lối vào rồi đi ra từ lối ra.§r",
+  "tstmodern.machine.ore_processing_factory.tooltip.4": "§bÉp xung§7: Máy này không ép xung. Thời gian xử lý luôn là §e6,4 giây§7 (mặc định).§r",
+  "tstmodern.machine.ore_processing_factory.tooltip.5": "§eSong song§7: Máy sẽ xử lý đồng thời nhiều nguyên liệu đầu vào nhất có thể, nếu nguồn điện cho phép.§r",
+  "tstmodern.machine.ore_processing_factory.tooltip.6": "§aDầu bôi trơn§7: Tiêu thụ §e3200 L§7 Dầu bôi trơn mỗi §e12,8 giây§7 (mặc định).§r",
+  "tstmodern.machine.ore_processing_factory.tooltip.7": "§dTwist Space Technology - Phiên bản Hiện đại§r"
 }

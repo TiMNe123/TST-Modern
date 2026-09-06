@@ -14,6 +14,7 @@ import com.tstmodern.data.recipe.MassFabricatorRecipes;
 import com.tstmodern.data.recipe.MegaStoneBreakerRecipes;
 import com.tstmodern.data.recipe.MegaTreeFarmRecipes;
 import com.tstmodern.data.recipe.NetherInterfaceRecipes;
+import com.tstmodern.data.recipe.OreProcessingFactoryRecipes;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 
@@ -55,6 +56,7 @@ public final class TSTModernGTAddon implements IGTAddon {
         IncompactCyclotronRecipes.register(provider);
         LargeNeutronOscillatorRecipes.register(provider);
         AstralComputingArrayRecipes.register(provider);
+        OreProcessingFactoryRecipes.register(provider);
     }
 }
 
