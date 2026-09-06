@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east,upwards_facing=east": { "model": "tstmodern:block/machine/astral_computing_array", "y": 90, "gtceu:z": 270 },
+    "facing=east,upwards_facing=north": { "model": "tstmodern:block/machine/astral_computing_array", "y": 90 },
+    "facing=east,upwards_facing=south": { "model": "tstmodern:block/machine/astral_computing_array", "y": 90, "gtceu:z": 180 },
+    "facing=east,upwards_facing=west": { "model": "tstmodern:block/machine/astral_computing_array", "y": 90, "gtceu:z": 90 },
+    "facing=north,upwards_facing=east": { "model": "tstmodern:block/machine/astral_computing_array", "gtceu:z": 270 },
+    "facing=north,upwards_facing=north": { "model": "tstmodern:block/machine/astral_computing_array" },
+    "facing=north,upwards_facing=south": { "model": "tstmodern:block/machine/astral_computing_array", "gtceu:z": 180 },
+    "facing=north,upwards_facing=west": { "model": "tstmodern:block/machine/astral_computing_array", "gtceu:z": 90 },
+    "facing=south,upwards_facing=east": { "model": "tstmodern:block/machine/astral_computing_array", "y": 180, "gtceu:z": 270 },
+    "facing=south,upwards_facing=north": { "model": "tstmodern:block/machine/astral_computing_array", "y": 180 },
+    "facing=south,upwards_facing=south": { "model": "tstmodern:block/machine/astral_computing_array", "y": 180, "gtceu:z": 180 },
+    "facing=south,upwards_facing=west": { "model": "tstmodern:block/machine/astral_computing_array", "y": 180, "gtceu:z": 90 },
+    "facing=west,upwards_facing=east": { "model": "tstmodern:block/machine/astral_computing_array", "y": 270, "gtceu:z": 270 },
+    "facing=west,upwards_facing=north": { "model": "tstmodern:block/machine/astral_computing_array", "y": 270 },
+    "facing=west,upwards_facing=south": { "model": "tstmodern:block/machine/astral_computing_array", "y": 270, "gtceu:z": 180 },
+    "facing=west,upwards_facing=west": { "model": "tstmodern:block/machine/astral_computing_array", "y": 270, "gtceu:z": 90 }
+  }
+}

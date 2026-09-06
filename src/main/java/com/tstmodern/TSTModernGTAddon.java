@@ -4,6 +4,7 @@ import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.tstmodern.data.recipe.BigBroArrayRecipes;
+import com.tstmodern.data.recipe.AstralComputingArrayRecipes;
 import com.tstmodern.data.recipe.DisassemblerRecipes;
 import com.tstmodern.data.recipe.GiantVacuumDryingFurnaceRecipes;
 import com.tstmodern.data.recipe.HyperThermalConvectorRecipes;
@@ -53,6 +54,7 @@ public final class TSTModernGTAddon implements IGTAddon {
         MassFabricatorRecipes.register(provider);
         IncompactCyclotronRecipes.register(provider);
         LargeNeutronOscillatorRecipes.register(provider);
+        AstralComputingArrayRecipes.register(provider);
     }
 }
 
