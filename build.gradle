@@ -189,6 +189,7 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     runtimeOnly fg.deobf("org.embeddedt:embeddium-${minecraft_version}:${embeddium_version}")
     runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
+    runtimeOnly fg.deobf("curse.maven:construction-wand-399558:4684054")
 
     testImplementation platform('org.junit:junit-bom:5.10.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'

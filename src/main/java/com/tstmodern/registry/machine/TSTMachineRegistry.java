@@ -26,6 +26,7 @@ public final class TSTMachineRegistry {
         Objects.requireNonNull(AstralComputingArrayDefinition.ASTRAL_COMPUTATION_RACK);
         Objects.requireNonNull(AstralComputingArrayDefinition.MACHINE);
         Objects.requireNonNull(OreProcessingFactoryDefinition.MACHINE);
+        Objects.requireNonNull(StarcoreMinerDefinition.MACHINE);
         Objects.requireNonNull(MassFabricatorDefinition.MACHINES);
     }
 }

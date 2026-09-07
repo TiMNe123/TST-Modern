@@ -26,6 +26,7 @@ public final class TSTRecipeTypes {
     public static GTRecipeType CYCLOTRON_RECIPES;
     public static GTRecipeType NEUTRON_ACTIVATOR;
     public static GTRecipeType ORE_PROCESSING_FACTORY;
+    public static GTRecipeType STARCORE_MINING;
 
     private TSTRecipeTypes() {}
 
@@ -81,6 +82,11 @@ public final class TSTRecipeTypes {
         ORE_PROCESSING_FACTORY = register(event, "ore_processing_factory")
                 .setMaxIOSize(1, 9, 0, 0)
                 .setEUIO(IO.IN);
+
+        STARCORE_MINING = register(event, "starcore_mining")
+                .setMaxIOSize(0, 24, 0, 0)
+                .setEUIO(IO.IN)
+                .addCustomRecipeLogic(new com.tstmodern.recipe.starcore.StarcoreMinerRecipeLogic());
     }
 
     static GTRecipeType configureDisassembler(GTRecipeType type) {
