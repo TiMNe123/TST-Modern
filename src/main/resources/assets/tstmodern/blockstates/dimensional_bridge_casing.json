@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tstmodern:block/dimensional_bridge_casing"
+    }
+  }
+}

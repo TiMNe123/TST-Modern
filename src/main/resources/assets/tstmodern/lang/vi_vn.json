@@ -353,5 +353,19 @@
   "tstmodern.machine.ore_processing_factory.tooltip.4": "§bÉp xung§7: Máy này không ép xung. Thời gian xử lý luôn là §e6,4 giây§7 (mặc định).§r",
   "tstmodern.machine.ore_processing_factory.tooltip.5": "§eSong song§7: Máy sẽ xử lý đồng thời nhiều nguyên liệu đầu vào nhất có thể, nếu nguồn điện cho phép.§r",
   "tstmodern.machine.ore_processing_factory.tooltip.6": "§aDầu bôi trơn§7: Tiêu thụ §e3200 L§7 Dầu bôi trơn mỗi §e12,8 giây§7 (mặc định).§r",
-  "tstmodern.machine.ore_processing_factory.tooltip.7": "§dTwist Space Technology - Phiên bản Hiện đại§r"
+  "tstmodern.machine.ore_processing_factory.tooltip.7": "§dTwist Space Technology - Phiên bản Hiện đại§r",
+  "block.tstmodern.starcore_miner": "§3§lMáy Khai Thác Lõi Sao§r",
+  "block.tstmodern.dimensional_bridge_casing": "§bVỏ Cầu Nối Chiều Không Gian§r",
+  "recipetype.tstmodern.starcore_mining": "Khai Thác Lõi Sao",
+  "tstmodern.starcore_mining": "Khai Thác Lõi Sao",
+  "gtceu.recipe_type.tstmodern.starcore_mining": "Khai Thác Lõi Sao",
+  "tstmodern.machine.starcore_miner.tooltip.0": "§7Khối điều khiển cho Máy Khai Thác Lõi Sao TST§r",
+  "tstmodern.machine.starcore_miner.tooltip.1": "§3§lMáy Khai Thác Lõi Sao§r",
+  "tstmodern.machine.starcore_miner.tooltip.2": "§f\" Ngươi có bán chúng không ? \" \" Ta e là không. \" \" Nhưng, có lẽ chúng ta có thể giao dịch ? \"§r",
+  "tstmodern.machine.starcore_miner.tooltip.3": "§6Tiến tới vực sâu, thu thập cho ngươi những của cải sâu thẳm nhất của hành tinh.§r",
+  "tstmodern.machine.starcore_miner.tooltip.4": "§bSản lượng§7: Mỗi chu kỳ sản xuất 24 loại quặng từ chiều không gian hiện tại, 131.072 mỗi loại.§r",
+  "tstmodern.machine.starcore_miner.tooltip.5": "§eNăng lượng & Thời gian§7: Mất 6.4s (128 ticks), 2.013.265.920 EU/t (MAX). Không tăng áp.§r",
+  "tstmodern.machine.starcore_miner.tooltip.6": "§aCấu trúc ống§7: Khi ở trên Y=24, cần Y của controller - 24 lát ống kết thúc tại Y=21; đá nền có thể kết thúc ống sớm hơn.§r",
+  "tstmodern.machine.starcore_miner.tooltip.7": "§5Bộ Chế Tạo Mảng Tinh Tú§7: Đặt vào ô controller để nhân mỗi chồng quặng với 2 × ceil(số lượng^1.5).§r",
+  "tstmodern.machine.starcore_miner.tooltip.8": "§dTwist Space Technology - Phiên bản Hiện đại§r"
 }

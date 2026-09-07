@@ -353,5 +353,19 @@
   "tstmodern.machine.ore_processing_factory.tooltip.4": "§bOverclock§7: This machine will not do overclock. Progress time is always §e6.4s§7 (default).§r",
   "tstmodern.machine.ore_processing_factory.tooltip.5": "§eParallel§7: It will process as many inputs as possible at once, if power allow.§r",
   "tstmodern.machine.ore_processing_factory.tooltip.6": "§aLubricant§7: Consume §e3200L§7 Lubricant every §e12.8s§7 (default).§r",
-  "tstmodern.machine.ore_processing_factory.tooltip.7": "§dTwist Space Technology - Modern Edition§r"
+  "tstmodern.machine.ore_processing_factory.tooltip.7": "§dTwist Space Technology - Modern Edition§r",
+  "block.tstmodern.starcore_miner": "§3§lStarcore Miner§r",
+  "block.tstmodern.dimensional_bridge_casing": "§bDimensional Bridge Casing§r",
+  "recipetype.tstmodern.starcore_mining": "Starcore Mining",
+  "tstmodern.starcore_mining": "Starcore Mining",
+  "gtceu.recipe_type.tstmodern.starcore_mining": "Starcore Mining",
+  "tstmodern.machine.starcore_miner.tooltip.0": "§7Controller block for the Starcore Miner TST§r",
+  "tstmodern.machine.starcore_miner.tooltip.1": "§3§lStarcore Miner§r",
+  "tstmodern.machine.starcore_miner.tooltip.2": "§f\" Do you sell them ? \" \" I'm afraid not. \" \" But, maybe we could make a deal ? \"§r",
+  "tstmodern.machine.starcore_miner.tooltip.3": "§6To the depths, to gather for you the deepest riches of the planet.§r",
+  "tstmodern.machine.starcore_miner.tooltip.4": "§bProduction§7: Each run produces 24 stacks of ore from the current dimension, 131,072 each stack.§r",
+  "tstmodern.machine.starcore_miner.tooltip.5": "§eEnergy & Time§7: Takes 6.4s (128 ticks), 2,013,265,920 EU/t (MAX). No overclock.§r",
+  "tstmodern.machine.starcore_miner.tooltip.6": "§aPipe Structure§7: Above Y=24, requires controller Y - 24 pipe slices ending at Y=21; bedrock may terminate the pipe early.§r",
+  "tstmodern.machine.starcore_miner.tooltip.7": "§5Astral Array Fabricator§7: Insert it into the controller slot to multiply every ore stack by 2 × ceil(count^1.5).§r",
+  "tstmodern.machine.starcore_miner.tooltip.8": "§dTwist Space Technology - Modern Edition§r"
 }
