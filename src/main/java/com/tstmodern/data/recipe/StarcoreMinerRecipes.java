@@ -43,7 +43,7 @@ public final class StarcoreMinerRecipes {
                 .stationResearch(b -> b
                         .researchStack(new ItemStack(TSTBlocks.COMPONENT_ASSEMBLY_LINE_CASING_UIV.get()))
                         .researchId("dimensional_bridge_casing")
-                        .dataStack(GTItems.TOOL_DATA_ORB.asStack())
+                        .dataStack(GTItems.TOOL_DATA_MODULE.asStack())
                         .CWUt(128, 2290280)
                         .EUt(VA[UIV]))
                 .save(provider);

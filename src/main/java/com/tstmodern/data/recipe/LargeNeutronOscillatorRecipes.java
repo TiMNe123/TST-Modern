@@ -94,6 +94,24 @@ public final class LargeNeutronOscillatorRecipes {
                 .EUt(491520)
                 .save(provider);
 
+        FUSION_RECIPES.recipeBuilder(TSTModern.id("fusion/potassium_lithium_to_titanium_plasma"))
+                .inputFluids(GTMaterials.Potassium.getFluid(16))
+                .inputFluids(GTMaterials.Lithium.getFluid(16))
+                .outputFluids(GTMaterials.Titanium.getFluid(FluidStorageKeys.PLASMA, 16))
+                .fusionStartEU(640_000_000L)
+                .duration(10)
+                .EUt(VA[UV])
+                .save(provider);
+
+        FUSION_RECIPES.recipeBuilder(TSTModern.id("fusion/iron_lithium_to_copper_plasma"))
+                .inputFluids(GTMaterials.Iron.getFluid(16))
+                .inputFluids(GTMaterials.Lithium.getFluid(16))
+                .outputFluids(GTMaterials.Copper.getFluid(FluidStorageKeys.PLASMA, 16))
+                .fusionStartEU(640_000_000L)
+                .duration(10)
+                .EUt(VA[UV])
+                .save(provider);
+
         FUSION_RECIPES.recipeBuilder(TSTModern.id("fusion/metastable_oganesson"))
                 .inputFluids(GTMaterials.Copper.getFluid(FluidStorageKeys.PLASMA, 576))
                 .inputFluids(GTMaterials.Oganesson.getFluid(1000))

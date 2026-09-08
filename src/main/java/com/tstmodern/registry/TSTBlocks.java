@@ -6,6 +6,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GlassBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -44,6 +45,23 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> BOROPHENE_NANOWIRE_CASING = casing("borophene_nanowire_casing");
     public static final RegistryObject<Block> NEUTRONIUM_PIPE_CASING = casing("neutronium_pipe_casing");
     public static final RegistryObject<Block> DIMENSIONAL_BRIDGE_CASING = casing("dimensional_bridge_casing");
+
+    // Mega Naquadah Reactor casings
+    public static final RegistryObject<Block> FIELD_RESTRICTION_CASING = casing("field_restriction_casing");
+    public static final RegistryObject<Block> MINING_BLACK_PLUTONIUM_CASING = casing(
+            "mining_black_plutonium_casing");
+    public static final RegistryObject<Block> PARTICLE_BEAM_GUIDANCE_PIPE_CASING = casing(
+            "particle_beam_guidance_pipe_casing");
+
+    // Naquadah Fuel Refinery casings
+    public static final RegistryObject<Block> NAQUADAH_FUEL_REFINERY_CASING = casing(
+            "naquadah_fuel_refinery_casing");
+    public static final RegistryObject<Block> FIELD_RESTRICTION_COIL_T2 = casing("field_restriction_coil_t2");
+    public static final RegistryObject<Block> FIELD_RESTRICTION_COIL_T3 = casing("field_restriction_coil_t3");
+    public static final RegistryObject<Block> FIELD_RESTRICTION_COIL_T4 = casing("field_restriction_coil_t4");
+    public static final RegistryObject<Block> FIELD_RESTRICTION_GLASS = glass("field_restriction_glass");
+    public static final RegistryObject<Block> EUROPIUM_REINFORCED_RADIATION_PROOF_CASING = casing(
+            "europium_reinforced_radiation_proof_casing");
 
     // Incompact Cyclotron casings
     public static final RegistryObject<Block> QUANTUM_FRAME = casing("quantum_frame");
@@ -200,6 +218,13 @@ public final class TSTBlocks {
     private static RegistryObject<Block> compressedCobble(int level) {
         return blockWithItem("compressed_cobblestone_" + level,
                 BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).strength(2.0F + level, 6.0F + level));
+    }
+
+    private static RegistryObject<Block> glass(String name) {
+        RegistryObject<Block> block = BLOCKS.register(name,
+                () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(8.0F, 12.0F).noOcclusion()));
+        ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        return block;
     }
 
     private static RegistryObject<Block> blockWithItem(String name, BlockBehaviour.Properties properties) {

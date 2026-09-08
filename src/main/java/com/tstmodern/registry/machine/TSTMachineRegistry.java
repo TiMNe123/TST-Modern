@@ -27,6 +27,8 @@ public final class TSTMachineRegistry {
         Objects.requireNonNull(AstralComputingArrayDefinition.MACHINE);
         Objects.requireNonNull(OreProcessingFactoryDefinition.MACHINE);
         Objects.requireNonNull(StarcoreMinerDefinition.MACHINE);
+        Objects.requireNonNull(MegaNaquadahReactorDefinition.MACHINE);
+        Objects.requireNonNull(NaquadahFuelRefineryDefinition.MACHINE);
         Objects.requireNonNull(MassFabricatorDefinition.MACHINES);
     }
 }

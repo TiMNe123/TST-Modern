@@ -27,6 +27,8 @@ public final class TSTRecipeTypes {
     public static GTRecipeType NEUTRON_ACTIVATOR;
     public static GTRecipeType ORE_PROCESSING_FACTORY;
     public static GTRecipeType STARCORE_MINING;
+    public static GTRecipeType MEGA_NAQUADAH_REACTOR_FUELS;
+    public static GTRecipeType NAQUADAH_FUEL_REFINERY;
 
     private TSTRecipeTypes() {}
 
@@ -87,6 +89,15 @@ public final class TSTRecipeTypes {
                 .setMaxIOSize(0, 24, 0, 0)
                 .setEUIO(IO.IN)
                 .addCustomRecipeLogic(new com.tstmodern.recipe.starcore.StarcoreMinerRecipeLogic());
+
+        MEGA_NAQUADAH_REACTOR_FUELS = register(event, "mega_naquadah_reactor_fuels")
+                .setMaxIOSize(0, 0, 4, 1)
+                .setEUIO(IO.OUT)
+                .addCustomRecipeLogic(new com.tstmodern.recipe.meganaquadah.MegaNaquadahReactorRecipeLogic());
+
+        NAQUADAH_FUEL_REFINERY = register(event, "naquadah_fuel_refinery")
+                .setMaxIOSize(4, 0, 2, 1)
+                .setEUIO(IO.IN);
     }
 
     static GTRecipeType configureDisassembler(GTRecipeType type) {
