@@ -45,7 +45,7 @@ public final class StarcoreMinerDefinition {
                         .setMinGlobalLimited(1).setPreviewCount(1);
                 TraceabilityPredicate energyInput = Predicates.abilities(
                         PartAbility.INPUT_ENERGY, PartAbility.SUBSTATION_INPUT_ENERGY, PartAbility.INPUT_LASER)
-                        .setMinGlobalLimited(1).setPreviewCount(1);
+                        .setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1);
                 TraceabilityPredicate otherAbilities = Predicates.abilities(
                         PartAbility.IMPORT_ITEMS, PartAbility.IMPORT_FLUIDS);
 
