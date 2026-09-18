@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "formed=false": { "model": "tstmodern:block/draconic_crucible_core" },
+    "formed=true": { "model": "tstmodern:block/draconic_crucible_core_formed" }
+  }
+}

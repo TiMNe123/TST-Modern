@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "draconicevolution:dragon_heart", "required": false },
+    "tstmodern:dragon_heart"
+  ]
+}

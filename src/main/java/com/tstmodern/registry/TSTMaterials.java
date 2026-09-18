@@ -15,6 +15,8 @@ import com.tstmodern.TSTModern;
 
 /** Custom materials and material flag extensions for Twist Space Technology Modern. */
 public final class TSTMaterials {
+    public static final MaterialIconSet INFINITY_ICON_SET =
+            new MaterialIconSet("tst_infinity", MaterialIconSet.SHINY);
     public static Material HELLISH_METAL;
     public static Material POOR_NETHER_WASTE;
     public static Material DENSE_SUPERHEATED_STEAM;
@@ -113,6 +115,9 @@ public final class TSTMaterials {
     public static Material NAQUADAH_GAS;
     public static Material LIGHT_NAQUADAH_FUEL;
     public static Material HEAVY_NAQUADAH_FUEL;
+    public static Material DRACONIUM;
+    public static Material AWAKENED_DRACONIUM;
+    public static Material INFINITY;
 
     private TSTMaterials() {}
 
@@ -135,6 +140,44 @@ public final class TSTMaterials {
         GTMaterials.BlueAlloy.addFlags(
                 MaterialFlags.GENERATE_FRAME
         );
+
+        DRACONIUM = new Material.Builder(TSTModern.id("draconium"))
+                .ingot()
+                .ore()
+                .color(0x6F32A8)
+                .iconSet(MaterialIconSet.METALLIC)
+                .buildAndRegister();
+        AWAKENED_DRACONIUM = new Material.Builder(TSTModern.id("awakened_draconium"))
+                .ingot()
+                .color(0xF06A24)
+                .iconSet(MaterialIconSet.SHINY)
+                .buildAndRegister();
+        INFINITY = new Material.Builder(TSTModern.id("infinity"))
+                .ingot()
+                .liquid(new FluidBuilder().temperature(10_800))
+                .plasma()
+                .color(0xFFFFFF)
+                .iconSet(INFINITY_ICON_SET)
+                .flags(
+                        MaterialFlags.NO_SMELTING,
+                        MaterialFlags.GENERATE_PLATE,
+                        MaterialFlags.GENERATE_DENSE,
+                        MaterialFlags.GENERATE_ROD,
+                        MaterialFlags.GENERATE_LONG_ROD,
+                        MaterialFlags.GENERATE_BOLT_SCREW,
+                        MaterialFlags.GENERATE_FRAME,
+                        MaterialFlags.GENERATE_GEAR,
+                        MaterialFlags.GENERATE_SMALL_GEAR,
+                        MaterialFlags.GENERATE_FOIL,
+                        MaterialFlags.GENERATE_FINE_WIRE,
+                        MaterialFlags.GENERATE_RING,
+                        MaterialFlags.GENERATE_SPRING,
+                        MaterialFlags.GENERATE_SPRING_SMALL,
+                        MaterialFlags.GENERATE_ROTOR,
+                        MaterialFlags.GENERATE_ROUND)
+                .fluidPipeProperties(10_000_000, 60_000, true, true, true, true)
+                .blastTemp(10_800)
+                .buildAndRegister();
 
         // Recipe forms used by the approved TST casing ports but omitted by
         // GTCEu's default material generation.

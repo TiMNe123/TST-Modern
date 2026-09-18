@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tstmodern:item/crystal_matrix_ingot"
+  }
+}

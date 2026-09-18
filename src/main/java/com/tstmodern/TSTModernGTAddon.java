@@ -18,6 +18,9 @@ import com.tstmodern.data.recipe.NetherInterfaceRecipes;
 import com.tstmodern.data.recipe.NaquadahFuelRefineryRecipes;
 import com.tstmodern.data.recipe.OreProcessingFactoryRecipes;
 import com.tstmodern.data.recipe.StarcoreMinerRecipes;
+import com.tstmodern.data.recipe.DraconicCrucibleRecipes;
+import com.tstmodern.data.recipe.GalacticArmillaryRecipes;
+import com.tstmodern.registry.TSTWorldgen;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 
@@ -63,6 +66,13 @@ public final class TSTModernGTAddon implements IGTAddon {
         StarcoreMinerRecipes.register(provider);
         MegaNaquadahReactorRecipes.register(provider);
         NaquadahFuelRefineryRecipes.register(provider);
+        DraconicCrucibleRecipes.register(provider);
+        GalacticArmillaryRecipes.register(provider);
+    }
+
+    @Override
+    public void registerOreVeins() {
+        TSTWorldgen.register();
     }
 }
 

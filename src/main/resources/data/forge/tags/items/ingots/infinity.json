@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "gtceu:infinity_ingot",
+    {
+      "id": "avaritia:infinity_ingot",
+      "required": false
+    }
+  ]
+}

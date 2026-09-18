@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "draconicevolution:awakened_draconium_nugget", "required": false },
+    "gtceu:awakened_draconium_nugget"
+  ]
+}
