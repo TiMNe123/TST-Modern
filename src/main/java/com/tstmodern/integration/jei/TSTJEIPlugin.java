@@ -13,8 +13,13 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import org.jetbrains.annotations.NotNull;
 
+import mezz.jei.api.registration.IAdvancedRegistration;
+import mezz.jei.api.runtime.IJeiRuntime;
+
 @JeiPlugin
 public final class TSTJEIPlugin implements IModPlugin {
+    private final TSTEquivalentRecipePlugin equivalentRecipePlugin = new TSTEquivalentRecipePlugin();
+
     @Override
     public @NotNull ResourceLocation getPluginUid() {
         return TSTModern.id("jei_plugin");
@@ -28,5 +33,20 @@ public final class TSTJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(
                 NaquadahFuelRefineryDefinition.MACHINE.asStack(),
                 GTRecipeJEICategory.TYPES.apply(TSTRecipeTypes.NAQUADAH_FUEL_REFINERY.getCategory()));
+    }
+
+    @Override
+    public void registerAdvanced(@NotNull IAdvancedRegistration registration) {
+        registration.addRecipeManagerPlugin(equivalentRecipePlugin);
+    }
+
+    @Override
+    public void onRuntimeAvailable(@NotNull IJeiRuntime jeiRuntime) {
+        equivalentRecipePlugin.setRuntime(jeiRuntime);
+    }
+
+    @Override
+    public void onRuntimeUnavailable() {
+        equivalentRecipePlugin.setRuntime(null);
     }
 }

@@ -7,6 +7,9 @@ import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLY_LINE_RECI
 
 import java.util.function.Consumer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.recipe.chance.logic.ChanceLogic;
@@ -15,6 +18,7 @@ import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.tstmodern.TSTModern;
+import com.tstmodern.config.TSTConfig;
 import com.tstmodern.registry.TSTBlocks;
 import com.tstmodern.registry.TSTItems;
 import com.tstmodern.registry.TSTRecipeTypes;
@@ -30,8 +34,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.fml.ModList;
 
 public final class DraconicCrucibleRecipes {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DraconicCrucibleRecipes.class);
+    private static final String DRACONIC_EVOLUTION = "draconicevolution";
+
     private static final TagKey<Item> DRACONIUM_INGOTS =
             ItemTags.create(new ResourceLocation("forge", "ingots/draconium"));
     private static final TagKey<Item> PREFERRED_ORE = preferred("draconium_ore");
@@ -45,8 +53,15 @@ public final class DraconicCrucibleRecipes {
     private DraconicCrucibleRecipes() {}
 
     public static void register(Consumer<FinishedRecipe> provider) {
-        registerProcessing(provider);
-        registerFallbackCore(provider);
+        boolean useDeOriginal = ModList.get().isLoaded(DRACONIC_EVOLUTION)
+                && TSTConfig.DRACONIC_CRUCIBLE_RECIPE_MODE.get() == TSTConfig.RecipeMode.MOD_ORIGINAL;
+
+        if (useDeOriginal) {
+            LOGGER.info("Draconic Crucible machine recipes disabled in favor of original Draconic Evolution progression");
+        } else {
+            registerProcessing(provider);
+            registerFallbackCore(provider);
+        }
         registerCore(provider);
         registerController(provider);
     }
@@ -64,9 +79,14 @@ public final class DraconicCrucibleRecipes {
                 .duration(400)
                 .EUt(VA[UHV])
                 .save(provider);
+        LOGGER.info("Registered Draconic Crucible recipe: draconic_crucible/draconium_ore");
 
+        registerCustomAwakenedRecipe(provider);
+    }
+
+    private static void registerCustomAwakenedRecipe(Consumer<FinishedRecipe> provider) {
         TSTRecipeTypes.DRACONIC_CRUCIBLE
-                .recipeBuilder(TSTModern.id("draconic_crucible/awakened_draconium"))
+                .recipeBuilder(TSTModern.id("draconic_crucible/awakened_draconium_custom"))
                 .inputItems(PREFERRED_INGOT, 4)
                 .inputItems(PREFERRED_CORE, 6)
                 .inputItems(PREFERRED_HEART)
@@ -74,6 +94,7 @@ public final class DraconicCrucibleRecipes {
                 .duration(1_000)
                 .EUt(VA[UHV])
                 .save(provider);
+        LOGGER.info("Registered Draconic Crucible recipe [CUSTOM]: draconic_crucible/awakened_draconium_custom");
     }
 
     private static void chanceOutput(com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder builder,
@@ -92,7 +113,8 @@ public final class DraconicCrucibleRecipes {
                 .define('X', Items.DIAMOND)
                 .unlockedBy("has_diamond", net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance
                         .hasItems(Items.DIAMOND))
-                .save(provider, TSTModern.id("crafting/draconium_core"));
+                .save(provider, TSTModern.id("crafting/draconium_core_custom"));
+        LOGGER.info("Registered Draconic Crucible recipe [CUSTOM]: crafting/draconium_core_custom");
     }
 
     private static void registerCore(Consumer<FinishedRecipe> provider) {
