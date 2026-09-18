@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/dragon_egg",
+  "textures": {
+    "particle": "tstmodern:block/draconic_crucible_fire_dragon_egg",
+    "all": "tstmodern:block/draconic_crucible_fire_dragon_egg",
+    "egg": "tstmodern:block/draconic_crucible_fire_dragon_egg"
+  }
+}

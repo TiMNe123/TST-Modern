@@ -2,17 +2,26 @@ package com.tstmodern.registry;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
+import com.gregtechceu.gtceu.api.gui.WidgetUtils;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeSerializer;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.tstmodern.TSTModern;
 import com.tstmodern.recipe.disassembler.DisassemblerRecipeIndex;
+import com.lowdragmc.lowdraglib.gui.texture.ProgressTexture;
+import com.lowdragmc.lowdraglib.gui.texture.ResourceTexture;
+import com.lowdragmc.lowdraglib.gui.widget.ProgressWidget;
+import com.lowdragmc.lowdraglib.gui.widget.Widget;
+import com.lowdragmc.lowdraglib.utils.Position;
+import com.lowdragmc.lowdraglib.utils.Size;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 
 /** Recipe map definitions for ported TST multiblocks. */
 public final class TSTRecipeTypes {
+    private static final ResourceTexture GALACTIC_PROGRESS = new ResourceTexture(
+            "tstmodern:textures/gui/progress/galactic_armillary.png");
     public static GTRecipeType MEGA_STONE_BREAKER;
     public static GTRecipeType VACUUM_FURNACE;
     public static GTRecipeType CHEMICAL_DEHYDRATOR;
@@ -29,6 +38,8 @@ public final class TSTRecipeTypes {
     public static GTRecipeType STARCORE_MINING;
     public static GTRecipeType MEGA_NAQUADAH_REACTOR_FUELS;
     public static GTRecipeType NAQUADAH_FUEL_REFINERY;
+    public static GTRecipeType DRACONIC_CRUCIBLE;
+    public static GTRecipeType GALACTIC_ARMILLARY;
 
     private TSTRecipeTypes() {}
 
@@ -98,6 +109,25 @@ public final class TSTRecipeTypes {
         NAQUADAH_FUEL_REFINERY = register(event, "naquadah_fuel_refinery")
                 .setMaxIOSize(4, 0, 2, 1)
                 .setEUIO(IO.IN);
+
+        DRACONIC_CRUCIBLE = register(event, "draconic_crucible")
+                .setMaxIOSize(3, 5, 0, 0)
+                .setEUIO(IO.IN);
+
+        GALACTIC_ARMILLARY = register(event, "galactic_armillary")
+                .setMaxIOSize(9, 1, 0, 0)
+                .setEUIO(IO.IN);
+        GALACTIC_ARMILLARY
+                .setProgressBar(GALACTIC_PROGRESS, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setUiBuilder((recipe, ui) -> {
+                    WidgetUtils.widgetByIdForEach(ui, "^progress$", ProgressWidget.class, progress -> {
+                        // Align the source's three branches with the 3x3 input grid.
+                        progress.setSelfPosition(new Position(49, 0));
+                        progress.setSize(new Size(98, 62));
+                    });
+                    WidgetUtils.widgetByIdForEach(ui, "^item_out_0$", Widget.class,
+                            output -> output.getParent().setSelfPosition(new Position(140, 18)));
+                });
     }
 
     static GTRecipeType configureDisassembler(GTRecipeType type) {

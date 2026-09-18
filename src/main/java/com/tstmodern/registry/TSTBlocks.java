@@ -1,7 +1,11 @@
 package com.tstmodern.registry;
 
 import com.tstmodern.TSTModern;
+import com.tstmodern.block.DraconicCrucibleCoreBlock;
 
+import com.gregtechceu.gtceu.api.block.OreBlock;
+import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
+import com.gregtechceu.gtceu.api.item.MaterialBlockItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -45,6 +49,8 @@ public final class TSTBlocks {
     public static final RegistryObject<Block> BOROPHENE_NANOWIRE_CASING = casing("borophene_nanowire_casing");
     public static final RegistryObject<Block> NEUTRONIUM_PIPE_CASING = casing("neutronium_pipe_casing");
     public static final RegistryObject<Block> DIMENSIONAL_BRIDGE_CASING = casing("dimensional_bridge_casing");
+    public static final RegistryObject<Block> DRACONIC_CRUCIBLE_CORE = draconicCrucibleCore();
+    public static final RegistryObject<Block> DRACONIUM_ORE = materialOre("draconium_ore");
 
     // Mega Naquadah Reactor casings
     public static final RegistryObject<Block> FIELD_RESTRICTION_CASING = casing("field_restriction_casing");
@@ -230,6 +236,23 @@ public final class TSTBlocks {
     private static RegistryObject<Block> blockWithItem(String name, BlockBehaviour.Properties properties) {
         RegistryObject<Block> block = BLOCKS.register(name, () -> new Block(properties));
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        return block;
+    }
+
+    private static RegistryObject<Block> materialOre(String name) {
+        RegistryObject<Block> block = BLOCKS.register(name, () -> new OreBlock(
+                BlockBehaviour.Properties.copy(Blocks.END_STONE).strength(5.0F, 9.0F),
+                TagPrefix.oreEndstone, TSTMaterials.DRACONIUM));
+        ITEMS.register(name, () -> new MaterialBlockItem(
+                block.get(), new Item.Properties(), TagPrefix.oreEndstone, TSTMaterials.DRACONIUM));
+        return block;
+    }
+
+    private static RegistryObject<Block> draconicCrucibleCore() {
+        RegistryObject<Block> block = BLOCKS.register("draconic_crucible_core", () ->
+                new DraconicCrucibleCoreBlock(BlockBehaviour.Properties.copy(Blocks.DRAGON_EGG)
+                        .strength(12.0F, 1200.0F).noOcclusion()));
+        ITEMS.register("draconic_crucible_core", () -> new BlockItem(block.get(), new Item.Properties()));
         return block;
     }
 }

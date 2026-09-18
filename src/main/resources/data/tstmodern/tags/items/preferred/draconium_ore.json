@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "draconicevolution:end_draconium_ore", "required": false },
+    "tstmodern:draconium_ore"
+  ]
+}

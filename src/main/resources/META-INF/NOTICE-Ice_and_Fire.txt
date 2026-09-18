@@ -1,0 +1,8 @@
+Ice and Fire
+https://github.com/AlexModGuy/Ice_and_Fire
+
+This distribution includes unmodified Stage 5 red Fire Dragon model poses and
+textures from commit 0526aad94119b705a86207623481b087c4d052ca.
+
+Ice and Fire is licensed under the GNU Lesser General Public License v3.0.
+The complete license text is included at META-INF/LICENSES/Ice_and_Fire-LGPL-3.0.txt.

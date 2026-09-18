@@ -8,7 +8,8 @@
   "client": [
     "client.MultiblockInfoSlotGuardMixin",
     "client.ModularUIRecipeCategoryCacheAccess",
-    "client.MegaStoneBreakerJEICacheFixMixin"
+    "client.MegaStoneBreakerJEICacheFixMixin",
+    "client.InfinityItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

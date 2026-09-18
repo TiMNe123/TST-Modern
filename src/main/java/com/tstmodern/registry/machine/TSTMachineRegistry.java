@@ -29,6 +29,8 @@ public final class TSTMachineRegistry {
         Objects.requireNonNull(StarcoreMinerDefinition.MACHINE);
         Objects.requireNonNull(MegaNaquadahReactorDefinition.MACHINE);
         Objects.requireNonNull(NaquadahFuelRefineryDefinition.MACHINE);
+        Objects.requireNonNull(DraconicCrucibleDefinition.MACHINE);
+        Objects.requireNonNull(GalacticArmillaryDefinition.MACHINE);
         Objects.requireNonNull(MassFabricatorDefinition.MACHINES);
     }
 }

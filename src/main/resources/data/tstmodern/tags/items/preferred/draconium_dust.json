@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "draconicevolution:draconium_dust", "required": false },
+    "gtceu:draconium_dust"
+  ]
+}

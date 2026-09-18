@@ -2,6 +2,10 @@ package com.tstmodern.registry;
 
 import com.tstmodern.TSTModern;
 
+import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.data.chemical.material.Material;
+import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
+import com.gregtechceu.gtceu.client.renderer.item.TagPrefixItemRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -38,6 +42,14 @@ public final class TSTItems {
     public static final RegistryObject<Item> WRAPPED_PLUTONIUM_INGOT = item("wrapped_plutonium_ingot");
     public static final RegistryObject<Item> HIGH_DENSITY_PLUTONIUM_NUGGET = item("high_density_plutonium_nugget");
     public static final RegistryObject<Item> HIGH_DENSITY_PLUTONIUM = item("high_density_plutonium");
+    public static final RegistryObject<Item> DRACONIUM_CORE =
+            materialIconItem("draconium_core", TagPrefix.gem, () -> TSTMaterials.DRACONIUM);
+    public static final RegistryObject<Item> DRAGON_HEART =
+            materialIconItem("dragon_heart", TagPrefix.gemExquisite, () -> TSTMaterials.AWAKENED_DRACONIUM);
+    public static final RegistryObject<Item> DIAMOND_LATTICE = item("diamond_lattice");
+    public static final RegistryObject<Item> CRYSTAL_MATRIX_INGOT = item("crystal_matrix_ingot");
+    public static final RegistryObject<Item> INFINITY_CATALYST_NUGGET = item("infinity_catalyst_nugget");
+    public static final RegistryObject<Item> INFINITY_CATALYST = item("infinity_catalyst");
 
 
     private TSTItems() {}
@@ -48,5 +60,17 @@ public final class TSTItems {
 
     private static RegistryObject<Item> item(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties()));
+    }
+
+    private static RegistryObject<Item> materialIconItem(
+            String name, TagPrefix iconPrefix, java.util.function.Supplier<Material> materialSupplier) {
+        return ITEMS.register(name, () -> {
+            Material material = materialSupplier.get();
+            Item item = new Item(new Item.Properties());
+            if (GTCEu.isClientSide()) {
+                TagPrefixItemRenderer.create(item, iconPrefix.materialIconType(), material.getMaterialIconSet());
+            }
+            return item;
+        });
     }
 }

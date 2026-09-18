@@ -19,6 +19,7 @@ import com.tstmodern.registry.TSTRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public final class StarcoreMinerRecipeLogic implements GTRecipeType.ICustomRecipeLogic {
     @Override
@@ -44,6 +45,13 @@ public final class StarcoreMinerRecipeLogic implements GTRecipeType.ICustomRecip
                     int weight = StarcoreMinerLogic.positiveWeightProduct(def.weight(), entry.chance());
                     rawEntries.add(new StarcoreMinerLogic.WeightedEntry<>(stack, weight));
                 }
+            }
+        }
+        if (level.dimension() == Level.END) {
+            var draconium = ForgeRegistries.ITEMS.getValue(
+                    new ResourceLocation("draconicevolution", "end_draconium_ore"));
+            if (draconium != null && draconium != net.minecraft.world.item.Items.AIR) {
+                rawEntries.add(new StarcoreMinerLogic.WeightedEntry<>(new ItemStack(draconium), 5));
             }
         }
         if (rawEntries.isEmpty()) {

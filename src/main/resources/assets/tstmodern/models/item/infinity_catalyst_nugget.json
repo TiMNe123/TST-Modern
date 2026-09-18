@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tstmodern:item/infinity_catalyst_nugget",
+    "halo": "tstmodern:misc/halo"
+  }
+}

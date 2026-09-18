@@ -6,6 +6,7 @@ public final class TSTConfig {
     public static final ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.IntValue NEPTUNIUM_238_DECAY_TICKS;
     public static final ForgeConfigSpec.IntValue MEGA_NAQUADAH_REACTOR_MAX_PARALLEL;
+    public static final ForgeConfigSpec.IntValue GALACTIC_ARMILLARY_STARTUP_SECONDS;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -15,6 +16,9 @@ public final class TSTConfig {
         MEGA_NAQUADAH_REACTOR_MAX_PARALLEL = builder
                 .comment("Maximum parallel fuel recipes for the Mega Naquadah Reactor.")
                 .defineInRange("megaNaquadahReactorMaxParallel", 1_000, 1, Integer.MAX_VALUE);
+        GALACTIC_ARMILLARY_STARTUP_SECONDS = builder
+                .comment("Galactic Armillary core warm-up time in seconds.")
+                .defineInRange("galacticArmillaryStartupSeconds", 120, 20, 3_600);
         SPEC = builder.build();
     }
 
