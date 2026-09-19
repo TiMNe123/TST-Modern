@@ -1,0 +1,383 @@
+[
+ {
+  "machine": "Giant Vacuum Drying Furnace",
+  "file": "GiantVacuumDryingFurnaceRecipes.java",
+  "line": 223,
+  "ingredients": [
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(HULL[ZPM], 2)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(ELECTRIC_FURNACE[ZPM], 4)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(ROBOT_ARM_ZPM, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(CONVEYOR_MODULE_ZPM, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(CustomTags.ZPM_CIRCUITS, 32)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(pipeLargeFluid, Iridium, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(plate, NaquadahAlloy, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(plate, UraniumRhodiumDinaquadide, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(TSTBlocks.VACUUM_CASING.get().asItem(), 4)"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(SolderingAlloy.getFluid(9_216))"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(Iridium.getFluid(4_608))"
+   }
+  ],
+  "meta": [
+   ".scannerResearch(b -> b",
+   ".researchStack(ELECTRIC_FURNACE[ZPM].asStack())",
+   ".duration(20 * 60)",
+   ".EUt(VA[LuV]))",
+   ".duration(20 * 60)",
+   ".EUt(VA[ZPM])"
+  ]
+ },
+ {
+  "machine": "Nether Interface",
+  "file": "NetherInterfaceRecipes.java",
+  "line": 60,
+  "ingredients": [
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(frameGt, Obsidian, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(FIELD_GENERATOR_LuV, 4)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(CustomTags.ZPM_CIRCUITS, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(plateDense, Netherite, 16)"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(TSTMaterials.HELLISH_METAL.getFluid(9_216))"
+   }
+  ],
+  "meta": [
+   ".duration(20 * 360)",
+   ".EUt(VA[LuV])"
+  ]
+ },
+ {
+  "machine": "Hyper Thermal Convector",
+  "file": "HyperThermalConvectorRecipes.java",
+  "line": 67,
+  "ingredients": [
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(HULL[UV], 2)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(ELECTRIC_PUMP_ZPM, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(FIELD_GENERATOR_ZPM, 8)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(CustomTags.UV_CIRCUITS, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(pipeLargeFluid, Iridium, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(plate, Neutronium, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(plate, NaquadahAlloy, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING.get().asItem(), 4)"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(SolderingAlloy.getFluid(9_216))"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(Iridium.getFluid(4_608))"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(new FluidStack(Fluids.WATER, 64_000))"
+   }
+  ],
+  "meta": [
+   ".stationResearch(b -> b",
+   ".researchStack(HULL[UV].asStack())",
+   ".CWUt(64, 128_000)",
+   ".EUt(VA[UV]))",
+   ".duration(20 * 60)",
+   ".EUt(VA[UV])"
+  ]
+ },
+ {
+  "machine": "Mega Tree Farm",
+  "file": "MegaTreeFarmRecipes.java",
+  "line": 76,
+  "ingredients": [
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(HULL[UHV], 2)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(CustomTags.UHV_CIRCUITS, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(ELECTRIC_PUMP_ZPM, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(ROBOT_ARM_ZPM, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(CONVEYOR_MODULE_ZPM, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(FIELD_GENERATOR_ZPM, 8)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(plateDense, NaquadahAlloy, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(TSTBlocks.STERILE_CASING.get().asItem(), 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(TSTBlocks.CULTIVATION_SOIL_CASING.get().asItem(), 16)"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(SolderingAlloy.getFluid(9_216))"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(DistilledWater.getFluid(64_000))"
+   }
+  ],
+  "meta": [
+   ".stationResearch(b -> b",
+   ".researchStack(HULL[UHV].asStack())",
+   ".CWUt(64, 128_000)",
+   ".EUt(VA[UHV]))",
+   ".duration(20 * 60)",
+   ".EUt(VA[UHV])"
+  ]
+ },
+ {
+  "machine": "Mega Stone Breaker",
+  "file": "MegaStoneBreakerRecipes.java",
+  "line": 170,
+  "ingredients": [
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(HULL[ZPM], 2)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(ROCK_CRUSHER[ZPM], 4)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(ROBOT_ARM_ZPM, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(ELECTRIC_PUMP_ZPM, 8)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(pipeLargeFluid, Iridium, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(plate, NaquadahAlloy, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(plate, UraniumRhodiumDinaquadide, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(TSTBlocks.COMPRESSED_COBBLESTONE_4.get().asItem(), 4)"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(SolderingAlloy.getFluid(9_216))"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(new FluidStack(Fluids.LAVA, 64_000))"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(new FluidStack(Fluids.WATER, 64_000))"
+   }
+  ],
+  "meta": [
+   ".scannerResearch(b -> b",
+   ".researchStack(ROCK_CRUSHER[ZPM].asStack())",
+   ".duration(20 * 60)",
+   ".EUt(VA[LuV]))",
+   ".duration(20 * 60)",
+   ".EUt(VA[ZPM])"
+  ]
+ },
+ {
+  "machine": "Incompact Cyclotron",
+  "file": "IncompactCyclotronRecipes.java",
+  "line": 222,
+  "ingredients": [
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTMachines.HULL[com.gregtechceu.gtceu.api.GTValues.UEV].asStack(64))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTItems.EMITTER_UEV.asStack(64))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTBlocks.FUSION_COIL.asStack(8))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTItems.QUANTUM_EYE.asStack(4))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTItems.FIELD_GENERATOR_UHV.asStack(16))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTItems.ENERGY_CLUSTER.asStack(32))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(CustomTags.UHV_CIRCUITS, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(plateDense, GTMaterials.NaquadahAlloy, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(gear, GTMaterials.NaquadahAlloy, 16)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(screw, GTMaterials.NaquadahAlloy, 64)"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(GTMaterials.NaquadahAlloy.getFluid(36_864))"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(GTMaterials.Helium.getFluid(FluidStorageKeys.LIQUID, 1_000_000))"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(GTMaterials.Tritanium.getFluid(288))"
+   }
+  ],
+  "meta": [
+   ".duration(18_000)",
+   ".EUt(8_000_000)",
+   ".stationResearch(b -> b",
+   ".researchStack(GTBlocks.FUSION_COIL.asStack())",
+   ".CWUt(64, 144_000)",
+   ".EUt(VA[UEV]))"
+  ]
+ },
+ {
+  "machine": "Big Bro Array",
+  "file": "BigBroArrayRecipes.java",
+  "line": 30,
+  "ingredients": [
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTItems.TOOL_DATA_ORB.asStack(16))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTItems.ROBOT_ARM_IV.asStack(32))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTItems.EMITTER_IV.asStack(32))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(GTItems.FIELD_GENERATOR_IV.asStack(32))"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(wireGtSingle, GTMaterials.SamariumIronArsenicOxide, 64)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(wireGtSingle, GTMaterials.SamariumIronArsenicOxide, 64)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(wireGtSingle, GTMaterials.SamariumIronArsenicOxide, 64)"
+   },
+   {
+    "kind": "inputItems",
+    "raw": ".inputItems(wireGtSingle, GTMaterials.SamariumIronArsenicOxide, 64)"
+   },
+   {
+    "kind": "inputFluids",
+    "raw": ".inputFluids(GTMaterials.Titanium.getFluid(24576))"
+   }
+  ],
+  "meta": [
+   ".duration(24000)",
+   ".EUt(6400)"
+  ]
+ }
+]

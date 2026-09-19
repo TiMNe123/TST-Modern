@@ -1,0 +1,316 @@
+{
+  "machine": "OreProcessingFactory",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 40,
+      "sourceLine": 504,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "sourceTextureNames": [
+        "BoronSilicateGlassBlock.png",
+        "ColoredBoronSilicateGlassBlock1.png",
+        "ColoredBoronSilicateGlassBlock2.png",
+        "ColoredBoronSilicateGlassBlock3.png",
+        "ColoredBoronSilicateGlassBlock4.png",
+        "ColoredBoronSilicateGlassBlock5.png",
+        "ColoredBoronSilicateGlassBlock6.png",
+        "HexaniteReinforcedBoronSilicateGlassBlock.png",
+        "HexaniteReinforcedBoronSilicateGlassBlockTransparent.png",
+        "InfinityReinforcedBoronSilicateGlassBlock.png",
+        "InfinityReinforcedBoronSilicateGlassBlockTransparent.png",
+        "IridiumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "OsmiumReinforcedBoronSilicateGlassBlock.png",
+        "RhodiumPlatedPalladiumReinforcedBoronSilicateGlassBlock.png",
+        "ThoriumYttriumGlass.png",
+        "TitaniumReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlockTransparent.png",
+        "TungstenSteelReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "EXOFOUNDRY_GLASS.png",
+        "GLASS_PH_RESISTANT.png",
+        "GLASS_QUARK_CONTAINMENT.png",
+        "GLASS_TINTED_INDUSTRIAL_BLACK.png",
+        "GLASS_TINTED_INDUSTRIAL_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_BROWN.png",
+        "GLASS_TINTED_INDUSTRIAL_CYAN.png",
+        "GLASS_TINTED_INDUSTRIAL_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_GREEN.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_LIME.png",
+        "GLASS_TINTED_INDUSTRIAL_MAGENTA.png",
+        "GLASS_TINTED_INDUSTRIAL_ORANGE.png",
+        "GLASS_TINTED_INDUSTRIAL_PINK.png",
+        "GLASS_TINTED_INDUSTRIAL_PURPLE.png",
+        "GLASS_TINTED_INDUSTRIAL_RED.png",
+        "GLASS_TINTED_INDUSTRIAL_WHITE.png",
+        "GLASS_TINTED_INDUSTRIAL_YELLOW.png",
+        "HAWKING_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW_GLOW.png",
+        "NANOCHIP_GLASS.png",
+        "OMNI_PURPOSE_INFINITY_FUSED_GLASS.png",
+        "blockQuantumGlass.png",
+        "antimatterContainmentCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 50,
+      "note": "Family động: GT5 chấp nhận nhiều loại kính; đã gom các texture kính hiện diện trong monorepo GT5."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 512,
+      "sourceLine": 505,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "4",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2,4)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TITANIUM_GEARBOX",
+      "sourceTextureNames": [
+        "MACHINE_CASING_GEARBOX_TITANIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 128,
+      "sourceLine": 506,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "6",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2,6)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.COMPUTER_CASING",
+      "sourceTextureNames": [
+        "MACHINE_CASING_PROCESSOR.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 300,
+      "sourceLine": 507,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "15",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2,15)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TUNGSTENSTEEL_PIPE",
+      "sourceTextureNames": [
+        "MACHINE_CASING_PIPE_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 165,
+      "sourceLine": 508,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings4",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings4,0)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TUNGSTENSTEEL_ROBUST",
+      "sourceTextureNames": [
+        "MACHINE_CASING_ROBUST_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 509,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings4",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings4,1)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_STAINLESS_CLEAN",
+      "sourceTextureNames": [
+        "MACHINE_CASING_CLEAN_STAINLESSSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 1144,
+      "sourceLine": 510,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "7",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8,7)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_IRIDIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 289,
+      "sourceLine": 511,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT,0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "I",
+      "option": 1,
+      "occurrences": 1,
+      "sourceLine": 512,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "7",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT,7)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_COIL_NONSIDE.png",
+        "EM_COIL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "J",
+      "option": 1,
+      "occurrences": 7,
+      "sourceLine": 513,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings4",
+        "meta": "0",
+        "type": "block",
+        "expression": "HatchElementBuilder .<TST_OreProcessingFactory>builder() .atLeast(InputHatch) .adder(TST_OreProcessingFactory::addFluidInputToMachineList) .hint(1) .casingIndex(48) .buildAndChain(GregTechAPI.sBlockCasings4,0)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TUNGSTENSTEEL_ROBUST",
+      "sourceTextureNames": [
+        "MACHINE_CASING_ROBUST_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "K",
+      "option": 1,
+      "occurrences": 8,
+      "sourceLine": 521,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "0",
+        "type": "block",
+        "expression": "HatchElementBuilder .<TST_OreProcessingFactory>builder() .atLeast(Energy.or(ExoticEnergy)) .adder(TST_OreProcessingFactory::addEnergyHatchOrExoticEnergyHatchToMachineList) .hint(2) .casingIndex(1024) .buildAndChain(sBlockCasingsTT,0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "L",
+      "option": 1,
+      "occurrences": 146,
+      "sourceLine": 529,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings4",
+        "meta": "0",
+        "type": "block",
+        "expression": "HatchElementBuilder .<TST_OreProcessingFactory>builder() .atLeast(InputBus, OutputBus) .adder(TST_OreProcessingFactory::addInputBusOrOutputBusToMachineList) .hint(3) .casingIndex(48) .buildAndChain(GregTechAPI.sBlockCasings4,0)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TUNGSTENSTEEL_ROBUST",
+      "sourceTextureNames": [
+        "MACHINE_CASING_ROBUST_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "M",
+      "option": 1,
+      "occurrences": 20,
+      "sourceLine": 537,
+      "source": {
+        "block": "Materials.TungstenSteel",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.TungstenSteel)"
+      },
+      "resolution": "direct_native",
+      "target": "Predicates.frames(GTMaterials.TungstenSteel)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/23_OreProcessingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}
+

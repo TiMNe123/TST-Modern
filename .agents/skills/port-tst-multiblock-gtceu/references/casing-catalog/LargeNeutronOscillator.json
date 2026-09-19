@@ -1,0 +1,196 @@
+{
+  "machine": "LargeNeutronOscillator",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 174,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings4",
+        "meta": "1",
+        "type": "block",
+        "expression": "HatchElementBuilder.<MM_LargeNeutronOscillator>builder() .atLeast(AllModule) .adder(MM_LargeNeutronOscillator::addModularHatchToMachineList) .hint(1) .casingIndex(((BlockCasings4) GregTechAPI.sBlockCasings4).getTextureIndex(1)) .buildAndChain(GregTechAPI.sBlockCasings4, 1)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_STAINLESS_CLEAN",
+      "sourceTextureNames": [
+        "MACHINE_CASING_CLEAN_STAINLESSSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/08_LargeNeutronOscillator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 182,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "7",
+        "type": "block",
+        "expression": "HatchElementBuilder.<MM_LargeNeutronOscillator>builder() .atLeast(Energy.or(ExoticEnergy)) .adder(MM_LargeNeutronOscillator::addNormalHatchToMachineList) .hint(2) .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(7)) .buildAndChain(GregTechAPI.sBlockCasings8, 7)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_IRIDIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/08_LargeNeutronOscillator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 190,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "10",
+        "type": "block",
+        "expression": "HatchElementBuilder.<MM_LargeNeutronOscillator>builder() .atLeast(InputHatch, OutputHatch, InputBus, OutputBus) .adder(MM_LargeNeutronOscillator::addNormalHatchToMachineList) .hint(3) .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(10)) .buildAndChain(GregTechAPI.sBlockCasings8, 10)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_RADIANT_NAQUADAH_ALLOY.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/08_LargeNeutronOscillator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 198,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/08_LargeNeutronOscillator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 199,
+      "source": {
+        "block": "Loaders.speedingPipe",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(Loaders.speedingPipe, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "speedingPipe_SIDE.png",
+        "speedingPipe_TOP.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/08_LargeNeutronOscillator",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 200,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "sourceTextureNames": [
+        "BoronSilicateGlassBlock.png",
+        "ColoredBoronSilicateGlassBlock1.png",
+        "ColoredBoronSilicateGlassBlock2.png",
+        "ColoredBoronSilicateGlassBlock3.png",
+        "ColoredBoronSilicateGlassBlock4.png",
+        "ColoredBoronSilicateGlassBlock5.png",
+        "ColoredBoronSilicateGlassBlock6.png",
+        "HexaniteReinforcedBoronSilicateGlassBlock.png",
+        "HexaniteReinforcedBoronSilicateGlassBlockTransparent.png",
+        "InfinityReinforcedBoronSilicateGlassBlock.png",
+        "InfinityReinforcedBoronSilicateGlassBlockTransparent.png",
+        "IridiumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "OsmiumReinforcedBoronSilicateGlassBlock.png",
+        "RhodiumPlatedPalladiumReinforcedBoronSilicateGlassBlock.png",
+        "ThoriumYttriumGlass.png",
+        "TitaniumReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlockTransparent.png",
+        "TungstenSteelReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "EXOFOUNDRY_GLASS.png",
+        "GLASS_PH_RESISTANT.png",
+        "GLASS_QUARK_CONTAINMENT.png",
+        "GLASS_TINTED_INDUSTRIAL_BLACK.png",
+        "GLASS_TINTED_INDUSTRIAL_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_BROWN.png",
+        "GLASS_TINTED_INDUSTRIAL_CYAN.png",
+        "GLASS_TINTED_INDUSTRIAL_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_GREEN.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_LIME.png",
+        "GLASS_TINTED_INDUSTRIAL_MAGENTA.png",
+        "GLASS_TINTED_INDUSTRIAL_ORANGE.png",
+        "GLASS_TINTED_INDUSTRIAL_PINK.png",
+        "GLASS_TINTED_INDUSTRIAL_PURPLE.png",
+        "GLASS_TINTED_INDUSTRIAL_RED.png",
+        "GLASS_TINTED_INDUSTRIAL_WHITE.png",
+        "GLASS_TINTED_INDUSTRIAL_YELLOW.png",
+        "HAWKING_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW_GLOW.png",
+        "NANOCHIP_GLASS.png",
+        "OMNI_PURPOSE_INFINITY_FUSED_GLASS.png",
+        "blockQuantumGlass.png",
+        "antimatterContainmentCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/08_LargeNeutronOscillator",
+      "projectTextureCount": 50,
+      "note": "Family động: GT5 chấp nhận nhiều loại kính; đã gom các texture kính hiện diện trong monorepo GT5."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 201,
+      "source": {
+        "block": "Materials.NaquadahAlloy",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.NaquadahAlloy)"
+      },
+      "resolution": "direct_native",
+      "target": "Predicates.frames(GTMaterials.NaquadahAlloy)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/08_LargeNeutronOscillator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}
+

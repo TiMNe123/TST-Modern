@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "machine": "DraconicCrucible",
+  "auditStatus": "AUDIT_COMPLETE",
+  "branch": "dev",
+  "sourceEvidence": {
+    "controller": {
+      "path": ".agents/skills/port-tst-multiblock-gtceu/evidence/draconic-crucible-design.md",
+      "symbol": "Draconic Crucible approved-design evidence#Structure",
+      "hash": "b8f114fcdd7e007b0f37abae88d8a5f5963f2b1f0cf37d2fc27b1e7c03868f47"
+    },
+    "inheritance": [],
+    "recipePool": {
+      "path": ".agents/skills/port-tst-multiblock-gtceu/evidence/draconic-crucible-design.md",
+      "symbol": "Draconic Crucible approved-design evidence#Processing recipes",
+      "hash": "b8f114fcdd7e007b0f37abae88d8a5f5963f2b1f0cf37d2fc27b1e7c03868f47"
+    }
+  },
+  "structure": {
+    "dimensions": [
+      61,
+      15,
+      45
+    ],
+    "sourceAxisOrder": [
+      "X left-to-right",
+      "Y bottom-to-top",
+      "Z front-to-back"
+    ],
+    "targetAxisMap": {
+      "RIGHT": "+X",
+      "DOWN": "-Y",
+      "BACK": "+Z"
+    },
+    "controller": {
+      "symbol": "~",
+      "count": 1,
+      "outwardFacing": "FRONT"
+    },
+    "symbols": [
+      {
+        "symbol": "~",
+        "occurrences": 1,
+        "source": { "registry": "tstmodern:draconic_crucible", "meta": "n/a", "evidence": "Approved design controller at (30,1,0)" },
+        "target": { "registryOrPredicate": "Predicates.controller(blocks(definition.get()))", "decision": "APPROVED_DESIGN" }
+      },
+      {
+        "symbol": "D",
+        "occurrences": 2826,
+        "source": { "registry": "tstmodern:extreme_density_casing", "meta": "n/a", "evidence": "Approved design base" },
+        "target": { "registryOrPredicate": "TSTBlocks.EXTREME_DENSITY_CASING", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "R",
+        "occurrences": 2914,
+        "source": { "registry": "tstmodern:radiant_naquadah_alloy_casing", "meta": "n/a", "evidence": "Approved design platform and flexible part surface" },
+        "target": { "registryOrPredicate": "Radiant casing or IMPORT_ITEMS/EXPORT_ITEMS/INPUT_ENERGY/SUBSTATION_INPUT_ENERGY/INPUT_LASER; total parts max 10, energy inputs min 1 max 2, item input/output min 1 each", "decision": "APPROVED_DESIGN" }
+      },
+      {
+        "symbol": "M",
+        "occurrences": 1738,
+        "source": { "registry": "tstmodern:mechanically_enhanced_obsidian", "meta": "n/a", "evidence": "Approved volcano shell" },
+        "target": { "registryOrPredicate": "TSTBlocks.MECHANICALLY_ENHANCED_OBSIDIAN", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "S",
+        "occurrences": 1728,
+        "source": { "registry": "tstmodern:stabaloy_firebox_casing", "meta": "n/a", "evidence": "Approved hot liner" },
+        "target": { "registryOrPredicate": "TSTBlocks.STABALOY_FIREBOX_CASING", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "T",
+        "occurrences": 8,
+        "source": { "registry": "tstmodern:field_restriction_coil_t1", "meta": "n/a", "evidence": "UHV-obtainable restriction ring" },
+        "target": { "registryOrPredicate": "TSTBlocks.FIELD_RESTRICTION_COIL_T1", "decision": "APPROVED_TIER_CORRECTION" }
+      },
+      {
+        "symbol": "F",
+        "occurrences": 48,
+        "source": { "registry": "tstmodern:field_restriction_casing", "meta": "n/a", "evidence": "Approved containment" },
+        "target": { "registryOrPredicate": "TSTBlocks.FIELD_RESTRICTION_CASING", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "C",
+        "occurrences": 55,
+        "source": { "registry": "tstmodern:compact_fusion_coil_t3", "meta": "n/a", "evidence": "Approved fusion core" },
+        "target": { "registryOrPredicate": "TSTBlocks.COMPACT_FUSION_COIL_T3", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "P",
+        "occurrences": 26,
+        "source": { "registry": "tstmodern:neutronium_pipe_casing", "meta": "n/a", "evidence": "Approved sloped coolant ribs and service spine" },
+        "target": { "registryOrPredicate": "TSTBlocks.NEUTRONIUM_PIPE_CASING", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "G",
+        "occurrences": 30,
+        "source": { "registry": "tstmodern:field_restriction_glass", "meta": "n/a", "evidence": "Approved thermal observation strips" },
+        "target": { "registryOrPredicate": "TSTBlocks.FIELD_RESTRICTION_GLASS", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "B",
+        "occurrences": 13,
+        "source": { "registry": "tstmodern:particle_beam_guidance_pipe_casing", "meta": "n/a", "evidence": "Approved technology-wing beam guide" },
+        "target": { "registryOrPredicate": "TSTBlocks.PARTICLE_BEAM_GUIDANCE_PIPE_CASING", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "K",
+        "occurrences": 1,
+        "source": { "registry": "tstmodern:draconic_crucible_core", "meta": "n/a", "evidence": "Approved non-teleporting Dragon Egg catalyst" },
+        "target": { "registryOrPredicate": "TSTBlocks.DRACONIC_CRUCIBLE_CORE", "decision": "APPROVED_DESIGN" }
+      },
+      {
+        "symbol": "#",
+        "occurrences": 3677,
+        "source": { "registry": "minecraft:air", "meta": "n/a", "evidence": "Approved hollow crucible volume" },
+        "target": { "registryOrPredicate": "Predicates.air()", "decision": "VERIFIED_NATIVE" }
+      }
+    ]
+  },
+  "recipes": [
+    {
+      "id": "draconic_crucible/draconium_ore",
+      "authority": "APPROVED_DEVIATION",
+      "source": "User-approved 64-ore batch recipe",
+      "recipeType": "tstmodern:draconic_crucible",
+      "duration": 400,
+      "eut": 1966080,
+      "approvalRef": "Approved recipe correction ending with 20-second duration"
+    },
+    {
+      "id": "draconic_crucible/awakened_draconium",
+      "authority": "APPROVED_DEVIATION",
+      "source": "Draconic Evolution 1.20 fusion recipe adapted to ingot forms by user approval",
+      "recipeType": "tstmodern:draconic_crucible",
+      "duration": 1000,
+      "eut": 1966080,
+      "approvalRef": "Approved ingot-form recipe with 50-second duration"
+    },
+    {
+      "id": "crafting/draconium_core",
+      "authority": "APPROVED_DEVIATION",
+      "source": "Draconic Evolution 1.20 components/draconium_core.json",
+      "recipeType": "minecraft:crafting_shaped",
+      "duration": 1,
+      "eut": 1,
+      "approvalRef": "Fallback dependency closure; non-powered schema sentinel values"
+    },
+    {
+      "id": "assembly_line/draconic_crucible_core",
+      "authority": "APPROVED_DEVIATION",
+      "source": "Approved Dragon Egg core design",
+      "recipeType": "gtceu:assembly_line",
+      "duration": 1000,
+      "eut": 1966080,
+      "approvalRef": "User approved the enlarged 61x15x45 machine contract"
+    },
+    {
+      "id": "assembly_line/draconic_crucible",
+      "authority": "APPROVED_DEVIATION",
+      "source": "Approved UHV controller design",
+      "recipeType": "gtceu:assembly_line",
+      "duration": 1200,
+      "eut": 1966080,
+      "approvalRef": "User approved the enlarged 61x15x45 machine contract"
+    }
+  ],
+  "textures": [
+    {
+      "role": "controller_and_ability_base",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked Radiant Naquadah Alloy Casing asset",
+      "resource": "tstmodern:block/casings/radiant_naquadah_alloy_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/radiant_naquadah_alloy_casing.png",
+      "sha256": "7704957ba224a4b81669e6b4421bd54a67fac38f89cb0af55eb10a433f40250b",
+      "sourceEvidence": "Existing validated machine-owned casing"
+    },
+    {
+      "role": "controller_workable_overlay",
+      "status": "VERIFIED_NATIVE",
+      "authority": "GTCEu 7.4 Fusion Reactor overlay",
+      "resource": "gtceu:block/multiblock/fusion_reactor"
+    },
+    {
+      "role": "extreme_density_base",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked casing asset",
+      "resource": "tstmodern:block/casings/extreme_density_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/extreme_density_casing.png",
+      "sha256": "0dbc5fc2465a965fc38a8330898eecb10a05cf36aa6038a4dde7ca796bc6a5ac",
+      "sourceEvidence": "Existing validated machine-owned casing"
+    },
+    {
+      "role": "obsidian_shell",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked casing asset",
+      "resource": "tstmodern:block/casings/mechanically_enhanced_obsidian",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/mechanically_enhanced_obsidian.png",
+      "sha256": "9738e17975fdd535e770e9816fa048cb63a8f156b78bd1d14be3733ccf314bdd",
+      "sourceEvidence": "Existing validated machine-owned casing"
+    },
+    {
+      "role": "firebox_liner",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked casing asset",
+      "resource": "tstmodern:block/casings/stabaloy_firebox_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/stabaloy_firebox_casing.png",
+      "sha256": "dcfb9739282e8abc91131b59a3dd607dc400b1997f8dba0ae61eae8bbae519ae",
+      "sourceEvidence": "Existing validated machine-owned casing"
+    },
+    {
+      "role": "fusion_coil",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked casing asset",
+      "resource": "tstmodern:block/casings/compact_fusion_coil_t3",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/compact_fusion_coil_t3.png",
+      "sha256": "fee82a8ab2bca30bbe7794b6d0da7ae3c5d5d5321b723d84ac93c30859e25c1f",
+      "sourceEvidence": "Existing validated machine-owned casing"
+    },
+    {
+      "role": "field_restriction_casing",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked casing asset",
+      "resource": "tstmodern:block/casings/field_restriction_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/field_restriction_casing.png",
+      "sha256": "3ce17234789e4f8350e7dfa9379f118847d4be89b8c9062d91d6633f089f69e2",
+      "sourceEvidence": "Existing validated machine-owned casing"
+    },
+    {
+      "role": "field_restriction_ring",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked UHV-obtainable T1 coil asset",
+      "resource": "tstmodern:block/casings/field_restriction_coil_t1",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/field_restriction_coil_t1.png",
+      "sha256": "d572609ff27e1949e42af76c6f2a4826e9d45681455b4bbc1c7b96aa94a16b6d",
+      "sourceEvidence": "Existing validated machine-owned casing"
+    },
+    {
+      "role": "beam_pipe",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked casing asset",
+      "resource": "tstmodern:block/casings/particle_beam_guidance_pipe_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/particle_beam_guidance_pipe_casing.png",
+      "sha256": "5358bbdf30abcc007eb450cec8b30f77d5a0342d1bf7055a00fbd203921a725b",
+      "sourceEvidence": "Existing validated machine-owned casing"
+    },
+    {
+      "role": "output_pipe",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked casing asset",
+      "resource": "tstmodern:block/casings/neutronium_pipe_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/neutronium_pipe_casing.png",
+      "sha256": "bd6c5ead3131d4ee410275b69ac2ec1a6adaca291fe79411789ee8748bc61a84",
+      "sourceEvidence": "Existing validated machine-owned casing"
+    },
+    {
+      "role": "fusion_glass",
+      "status": "VERIFIED_NATIVE",
+      "authority": "GTCEu Fusion Glass",
+      "resource": "gtceu:block/casings/fusion_glass"
+    },
+    {
+      "role": "dragon_egg_core",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire red Fire Dragon Egg item texture at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:textures/block/draconic_crucible_fire_dragon_egg.png",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/draconic_crucible_fire_dragon_egg.png",
+      "sha256": "a632070a33092bbe7db94a5f4d3a2b61b0540ef23a05ee414b45ddaf7d5b07bb",
+      "sourceEvidence": "Ice_and_Fire textures/item/dragonegg_red.png"
+    },
+    {
+      "role": "dragon_egg_formed_model",
+      "status": "APPROVED_REUSE",
+      "authority": "Same baked model and exact Ice and Fire red Fire Dragon Egg item texture as the unformed core",
+      "resource": "tstmodern:block/draconic_crucible_core",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/draconic_crucible_fire_dragon_egg.png",
+      "sha256": "a632070a33092bbe7db94a5f4d3a2b61b0540ef23a05ee414b45ddaf7d5b07bb",
+      "sourceEvidence": "User required the formed and unformed core to render identically; both use minecraft:block/dragon_egg geometry"
+    },
+    {
+      "role": "fire_dragon_ground_pose",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 ground pose at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_ground.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_ground.tbl",
+      "sha256": "4891325a2d6c76ec5cc7a912e6f9f8078cc678da108719fd787412d914b318ff",
+      "sourceEvidence": "Ice_and_Fire firedragon_ground.tbl"
+    },
+    {
+      "role": "fire_dragon_sleeping_pose",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 sleeping pose at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_sleeping.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_sleeping.tbl",
+      "sha256": "8669057246a2764650dad4cf2e39250f48bf1e685c62d1744c4d161ee47885a7",
+      "sourceEvidence": "Ice_and_Fire firedragon_sleeping.tbl"
+    },
+    {
+      "role": "fire_dragon_flight_pose_1",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 flight pose at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_flight1.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_flight1.tbl",
+      "sha256": "0d3a6b68c72ce8015654eb0e1ca41ea55bbafafe414d4ab38d0521c034ae3cf4",
+      "sourceEvidence": "Ice_and_Fire firedragon_flight1.tbl"
+    },
+    {
+      "role": "fire_dragon_flight_pose_2",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 flight pose at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_flight2.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_flight2.tbl",
+      "sha256": "4e6e7b85c553b604253a38049710bc4fdbef02cc3ae179ae5a75bbe6dcc6f5dd",
+      "sourceEvidence": "Ice_and_Fire firedragon_flight2.tbl"
+    },
+    {
+      "role": "fire_dragon_flight_pose_3",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 flight pose at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_flight3.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_flight3.tbl",
+      "sha256": "6396e7db525b1c82d71e3f3dc6f673733ca99a483e4e121bd61ce4221a7c6050",
+      "sourceEvidence": "Ice_and_Fire firedragon_flight3.tbl"
+    },
+    {
+      "role": "fire_dragon_flight_pose_4",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 flight pose at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_flight4.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_flight4.tbl",
+      "sha256": "ff8d4468dd590c46fb2c0c9688169aea4830de8ff63a902cfa510a081896fc39",
+      "sourceEvidence": "Ice_and_Fire firedragon_flight4.tbl"
+    },
+    {
+      "role": "fire_dragon_flight_pose_5",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 flight pose at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_flight5.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_flight5.tbl",
+      "sha256": "debd84f75e26a45ce230593899e91dc79be9650b4bc1d10483754444c0a04fb7",
+      "sourceEvidence": "Ice_and_Fire firedragon_flight5.tbl"
+    },
+    {
+      "role": "fire_dragon_flight_pose_6",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 flight pose at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_flight6.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_flight6.tbl",
+      "sha256": "92f9f9ff25b01d8ce4c9e5aff668881f131692c68d78272cfe0879588e5ec51a",
+      "sourceEvidence": "Ice_and_Fire firedragon_flight6.tbl"
+    },
+    {
+      "role": "fire_dragon_charge_pose",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 blast-charge pose at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_charge.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_charge.tbl",
+      "sha256": "baa521804de979942d7619e486a2b8a27c744af0797d816b32d60306eceae72b",
+      "sourceEvidence": "Ice_and_Fire firedragon_attack_blast_charge3.tbl"
+    },
+    {
+      "role": "fire_dragon_breath_pose",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire 1.20 stream-breath Tabula model at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:models/entity/draconic_crucible_fire_dragon_breath.tbl",
+      "localPath": "src/main/resources/assets/tstmodern/models/entity/draconic_crucible_fire_dragon_breath.tbl",
+      "sha256": "5c7f44e77ba3cddd5406e86bf67f33d84196f8326f3524fc12b35ec6f3e427b5",
+      "sourceEvidence": "Ice_and_Fire firedragon_attack_stream_breath.tbl"
+    },
+    {
+      "role": "fire_dragon_skin",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire Stage 5 red Fire Dragon texture",
+      "resource": "tstmodern:textures/entity/draconic_crucible_dragon.png",
+      "localPath": "src/main/resources/assets/tstmodern/textures/entity/draconic_crucible_dragon.png",
+      "sha256": "b102f889461787378d7cf29440daf5cf025d94de09169dbceffe684d60b91412",
+      "sourceEvidence": "Ice_and_Fire textures/models/firedragon/red_5.png"
+    },
+    {
+      "role": "fire_dragon_sleeping_skin",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire Stage 5 red sleeping Fire Dragon texture at commit 0526aad94119b705a86207623481b087c4d052ca",
+      "resource": "tstmodern:textures/entity/draconic_crucible_dragon_sleeping.png",
+      "localPath": "src/main/resources/assets/tstmodern/textures/entity/draconic_crucible_dragon_sleeping.png",
+      "sha256": "1f72c1d108418b08ed7db0b707a8bcd29b5eb9de5afa6b4a52df7acb507a03f1",
+      "sourceEvidence": "Ice_and_Fire textures/models/firedragon/red_5_sleeping.png"
+    },
+    {
+      "role": "fire_dragon_overlay",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire Stage 5 red Fire Dragon eye texture",
+      "resource": "tstmodern:textures/entity/draconic_crucible_dragon_glow.png",
+      "localPath": "src/main/resources/assets/tstmodern/textures/entity/draconic_crucible_dragon_glow.png",
+      "sha256": "2be77e04908d0931ae3aa05cd816152b7a717b56a93b71c62fb162dafcf998f7",
+      "sourceEvidence": "Ice_and_Fire textures/models/firedragon/red_5_eyes.png"
+    },
+    {
+      "role": "fire_dragon_breath_particle",
+      "status": "APPROVED_REUSE",
+      "authority": "Exact Ice and Fire Fire Dragon breath particle texture",
+      "resource": "tstmodern:textures/particles/draconic_crucible_dragon_flame.png",
+      "localPath": "src/main/resources/assets/tstmodern/textures/particles/draconic_crucible_dragon_flame.png",
+      "sha256": "d222603d5dda6008a40911996e34adda08ce5a919046d944db568aa85373e9d0",
+      "sourceEvidence": "Ice_and_Fire textures/particles/dragon_flame.png"
+    },
+    {
+      "role": "fallback_draconium_ore",
+      "status": "VERIFIED_NATIVE",
+      "authority": "GTCEu MaterialBlockRenderer using the native metallic ore model over Endstone",
+      "resource": "gtceu:block/material_sets/metallic/ore"
+    },
+    {
+      "role": "fallback_draconium_core",
+      "status": "VERIFIED_NATIVE",
+      "authority": "GTCEu TagPrefixItemRenderer using the native metallic gem model",
+      "resource": "gtceu:item/material_sets/metallic/gem"
+    },
+    {
+      "role": "fallback_dragon_heart",
+      "status": "VERIFIED_NATIVE",
+      "authority": "GTCEu TagPrefixItemRenderer using the native shiny exquisite-gem model",
+      "resource": "gtceu:item/material_sets/shiny/gem_exquisite"
+    }
+  ],
+  "approvedDeviations": [
+    {
+      "id": "draconium_ore_batch_processing",
+      "approvalRef": "User-approved Draconic Crucible batch recipe",
+      "decision": {
+        "recipeTier": "UHV",
+        "durationSeconds": 20,
+        "durationTicks": 400,
+        "inputs": [
+          {
+            "item": "draconium_ore",
+            "amount": 64
+          }
+        ],
+        "guaranteedOutputs": [
+          {
+            "item": "draconium_dust",
+            "amount": 64
+          }
+        ],
+        "bonusRoll": {
+          "rollsPerRecipe": 1,
+          "selection": "MUTUALLY_EXCLUSIVE",
+          "outcomes": [
+            {
+              "chancePercent": 84.5,
+              "item": "draconium_dust",
+              "amount": 16
+            },
+            {
+              "chancePercent": 10.0,
+              "item": "draconium_ore",
+              "amount": 2
+            },
+            {
+              "chancePercent": 5.0,
+              "item": "dragon_heart",
+              "amount": 1
+            },
+            {
+              "chancePercent": 0.5,
+              "item": "awakened_draconium_nugget",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "awakened_draconium_ingot_recipe",
+      "approvalRef": "User replaced Draconic Evolution block forms with ingot forms",
+      "decision": {
+        "recipeTier": "UHV",
+        "durationSeconds": 50,
+        "durationTicks": 1000,
+        "draconiumForm": "ingot",
+        "awakenedDraconiumForm": "ingot",
+        "inputs": [
+          {
+            "item": "draconium_ingot",
+            "amount": 4
+          },
+          {
+            "item": "draconium_core",
+            "amount": 6
+          },
+          {
+            "item": "dragon_heart",
+            "amount": 1
+          }
+        ],
+        "outputs": [
+          {
+            "item": "awakened_draconium_ingot",
+            "amount": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "end_only_draconium_progression",
+      "approvalRef": "User approved End-only manual mining before UIV Starcore Miner automation",
+      "decision": "Fallback ore generates only in The End; Starcore Miner gains it at UIV"
+    },
+    {
+      "id": "optional_draconic_evolution_materials",
+      "approvalRef": "User approved using Draconic Evolution materials when the mod is installed",
+      "decision": "Resolve exact draconicevolution registry items and avoid duplicate fallback worldgen"
+    },
+    {
+      "id": "approved_visual_concept",
+      "approvalRef": "User marked the volcano, Dragon Egg, and holographic dragon concept APPROVED_DESIGN",
+      "decision": "Procedural client-only dragon above a Dragon Egg core; no collision and no GeckoLib"
+    },
+    {
+      "id": "approved_final_machine_contract",
+      "approvalRef": "User approved the enlarged structure after reviewing the complete contract",
+      "decision": "Implement the exact 61x15x45 structure, T1 coil correction, End-only ore progression, construction recipes, optional-mod behavior, renderer, and localization palette recorded in the evidence"
+    },
+    {
+      "id": "approved_open_volcano_revision",
+      "approvalRef": "User approved the screenshot-review geometry correction",
+      "decision": "Use a 61x15x45 platform, continuously tapered rounded volcano bands, an exposed Dragon Egg summit, and functional casing layers"
+    },
+    {
+      "id": "approved_horizontal_fire_dragon",
+      "approvalRef": "User required a fire dragon oriented horizontally from head at the right to tail at the left",
+      "decision": "Render the exact Ice and Fire Fire Dragon model client-side with the Stage 5 red skin, rotated 90 degrees from the machine depth axis"
+    },
+    {
+      "id": "approved_stage_five_structure_scale",
+      "approvalRef": "User approved enlarging the machine for a maximum Stage 5 fire dragon",
+      "decision": "Use exact 61x15x45 bounds and preserve the user-adjusted centered right-to-left dragon orientation"
+    },
+    {
+      "id": "approved_tapered_volcano_casing_layout",
+      "approvalRef": "User approved a realistic rounded volcano from summit to base and requested functional casing placement",
+      "decision": "Use shrinking elliptical bands with an Obsidian exterior, Stabaloy thermal liner, Field Restriction crater rim, Compact Fusion Coil core, pipe ribs, and a separate technology wing"
+    },
+    {
+      "id": "approved_perched_stage_five_dragon",
+      "approvalRef": "User approved the perched-dragon design after reviewing the grounded layout specification",
+      "decision": "Use the exact Ice and Fire ground pose with local named-part corrections that raise the wing roots, arch the four-part neck while keeping the mouth above the crater, pitch the tail root down to the deck, and lengthen the five-tail-joint broad floor curve by 1.45x; anchor the dragon to the relative-right/rear volcano slope, fade the neck correction into blast charge and stream breath only while working, and render no beam while idle or paused"
+    },
+    {
+      "id": "approved_10_second_dragon_startup",
+      "approvalRef": "User approved reducing the final animation from 13 seconds to the proposed 10-second variant while retaining the locked landed/fire pose",
+      "decision": "Gate recipe input and progress behind a 200-tick sequence: wake 10, takeoff 30, one 360-degree Dragon Egg-centered orbit 100, landing 40, and charge 20 ticks. Use exact Ice and Fire flight1..flight6 poses, finish seamlessly at the unchanged existing landed/fire transform, skip startup between consecutive recipes, cancel without input/EU loss if eligibility disappears, and display Animation starting... while gated"
+    },
+    {
+      "id": "approved_sleeping_idle_and_flight_heading_fix",
+      "approvalRef": "User gameplay screenshot showed the standing ground pose hovering above the roof and the clockwise flight moving tail-first",
+      "decision": "Use the exact Ice and Fire firedragon_sleeping pose and Stage 5 sleeping texture for idle, add a local neck/tail curl that fades out during wake, suppress the eye-glow overlay, lower only the dedicated roof-relative idle anchor to the structure surface, and apply a flight-only 180-degree yaw correction while preserving the locked landed/fire transform"
+    },
+    {
+      "id": "approved_normal_overclocking",
+      "approvalRef": "User gameplay screenshot showed the UHV recipe remaining at 20 seconds when supplied at UEV and requested the expected 10-second overclock",
+      "decision": "Apply GTCEu NON_PERFECT_OVERCLOCK at the machine overclock voltage while retaining fixed parallel 1; the 1,966,080 EU/t, 20-second UHV ore batch becomes 7,864,320 EU/t and 10 seconds at UEV"
+    },
+    {
+      "id": "approved_flexible_part_placement",
+      "approvalRef": "User requested removal of hardcoded hatch and bus coordinates with limits of 10 total parts and 2 energy inputs",
+      "decision": "Allow item input buses, item output buses, normal/substation/laser energy inputs on any Radiant Naquadah Alloy Casing position; require at least one item input, one item output, and one energy input; cap energy inputs at 2 and all buses/hatches at 10"
+    },
+    {
+      "id": "approved_fire_dragon_egg_and_hatching_shake",
+      "approvalRef": "User requested the Ice and Fire Fire Dragon Egg texture and hatching shake, then required the formed core to look exactly like the unformed core and reported transparent gaps in the formed render",
+      "decision": "Use the same minecraft:block/dragon_egg baked geometry and exact red Fire Dragon Egg block texture for formed and unformed states; hide the static formed core model, render every quad from that same baked model full-bright through the opaque block atlas so transparent sprite pixels cannot open gaps, and apply Ice and Fire's speed 0.3 degree 0.3 walk/flap heat-incubation motion only while the breath stream is active"
+    }
+  ],
+  "unresolved": []
+}

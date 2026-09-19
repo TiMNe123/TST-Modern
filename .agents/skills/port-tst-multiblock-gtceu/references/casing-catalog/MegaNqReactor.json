@@ -1,0 +1,175 @@
+{
+  "machine": "MegaNqReactor",
+  "entries": [
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 4163,
+      "sourceLine": 1633,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "3",
+        "type": "block",
+        "expression": "GTStructureUtility.buildHatchAdder(TST_MegaNqReactor.class) .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 3)) .hint(1) .atLeast(ExoticDynamo.or(Dynamo), ExoticEnergy.or(Energy), InputHatch, OutputHatch, Maintenance) .buildAndChain(GregTechAPI.sBlockCasings8, 3)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_MINING_BLACKPLUTONIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/09_MegaNqReactor",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 602,
+      "sourceLine": 1640,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "sourceTextureNames": [
+        "BoronSilicateGlassBlock.png",
+        "ColoredBoronSilicateGlassBlock1.png",
+        "ColoredBoronSilicateGlassBlock2.png",
+        "ColoredBoronSilicateGlassBlock3.png",
+        "ColoredBoronSilicateGlassBlock4.png",
+        "ColoredBoronSilicateGlassBlock5.png",
+        "ColoredBoronSilicateGlassBlock6.png",
+        "HexaniteReinforcedBoronSilicateGlassBlock.png",
+        "HexaniteReinforcedBoronSilicateGlassBlockTransparent.png",
+        "InfinityReinforcedBoronSilicateGlassBlock.png",
+        "InfinityReinforcedBoronSilicateGlassBlockTransparent.png",
+        "IridiumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "OsmiumReinforcedBoronSilicateGlassBlock.png",
+        "RhodiumPlatedPalladiumReinforcedBoronSilicateGlassBlock.png",
+        "ThoriumYttriumGlass.png",
+        "TitaniumReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlockTransparent.png",
+        "TungstenSteelReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "EXOFOUNDRY_GLASS.png",
+        "GLASS_PH_RESISTANT.png",
+        "GLASS_QUARK_CONTAINMENT.png",
+        "GLASS_TINTED_INDUSTRIAL_BLACK.png",
+        "GLASS_TINTED_INDUSTRIAL_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_BROWN.png",
+        "GLASS_TINTED_INDUSTRIAL_CYAN.png",
+        "GLASS_TINTED_INDUSTRIAL_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_GREEN.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_LIME.png",
+        "GLASS_TINTED_INDUSTRIAL_MAGENTA.png",
+        "GLASS_TINTED_INDUSTRIAL_ORANGE.png",
+        "GLASS_TINTED_INDUSTRIAL_PINK.png",
+        "GLASS_TINTED_INDUSTRIAL_PURPLE.png",
+        "GLASS_TINTED_INDUSTRIAL_RED.png",
+        "GLASS_TINTED_INDUSTRIAL_WHITE.png",
+        "GLASS_TINTED_INDUSTRIAL_YELLOW.png",
+        "HAWKING_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW_GLOW.png",
+        "NANOCHIP_GLASS.png",
+        "OMNI_PURPOSE_INFINITY_FUSED_GLASS.png",
+        "blockQuantumGlass.png",
+        "antimatterContainmentCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/09_MegaNqReactor",
+      "projectTextureCount": 50,
+      "note": "Family động: GT5 chấp nhận nhiều loại kính; đã gom các texture kính hiện diện trong monorepo GT5."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 294,
+      "sourceLine": 1641,
+      "source": {
+        "block": "Loaders.MAR_Casing",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(Loaders.MAR_Casing, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MAR_Casing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/09_MegaNqReactor",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 11,
+      "sourceLine": 1642,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings1",
+        "meta": "14",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings1, 14)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_DIM_BRIDGE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/09_MegaNqReactor",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 148,
+      "sourceLine": 1643,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings9",
+        "meta": "14",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings9, 14)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "BLOCK_QUARK_PIPE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/09_MegaNqReactor",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 988,
+      "sourceLine": 1644,
+      "source": {
+        "block": "TstBlocks.MetaBlockCasing02",
+        "meta": "2",
+        "type": "block",
+        "expression": "ofBlock(TstBlocks.MetaBlockCasing02, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/09_MegaNqReactor",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}
+

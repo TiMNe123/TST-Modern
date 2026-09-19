@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "machine": "GalacticArmillary",
+  "auditStatus": "AUDIT_COMPLETE",
+  "branch": "dev",
+  "sourceEvidence": {
+    "controller": {
+      "path": ".agents/skills/port-tst-multiblock-gtceu/evidence/galactic-armillary-design.md",
+      "symbol": "Galactic Armillary approved-design evidence#Structure",
+      "hash": "9dd77cb450103272fd4623ec70908624dc91475133967d35fd2aa2f9c47ecd7b"
+    },
+    "inheritance": [],
+    "recipePool": {
+      "path": ".agents/skills/port-tst-multiblock-gtceu/evidence/galactic-armillary-design.md",
+      "symbol": "Galactic Armillary approved-design evidence#Recipe pool",
+      "hash": "9dd77cb450103272fd4623ec70908624dc91475133967d35fd2aa2f9c47ecd7b"
+    }
+  },
+  "structure": {
+    "dimensions": [41, 39, 41],
+    "sourceAxisOrder": ["X left-to-right", "Y bottom-to-top", "Z front-to-back"],
+    "targetAxisMap": { "RIGHT": "+X", "DOWN": "-Y", "BACK": "+Z" },
+    "controller": { "symbol": "~", "count": 1, "outwardFacing": "FRONT" },
+    "symbols": [
+      {
+        "symbol": "~",
+        "occurrences": 1,
+        "source": { "registry": "tstmodern:galactic_armillary", "meta": "n/a", "evidence": "Approved design controller at (20,3,20), layer four above the three-layer foundation" },
+        "target": { "registryOrPredicate": "Predicates.controller(blocks(definition.get()))", "decision": "APPROVED_DESIGN" }
+      },
+      {
+        "symbol": "D",
+        "occurrences": 5358,
+        "source": { "registry": "tstmodern:extreme_density_casing", "meta": "n/a", "evidence": "User-delegated existing black casing selected from its actual texture" },
+        "target": { "registryOrPredicate": "TSTBlocks.EXTREME_DENSITY_CASING", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "H",
+        "occurrences": 291,
+        "source": { "registry": "tstmodern:high_power_casing", "meta": "n/a", "evidence": "User-delegated existing cyan casing for platform and crown inlays" },
+        "target": { "registryOrPredicate": "TSTBlocks.HIGH_POWER_CASING", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "E",
+        "occurrences": 16,
+        "source": { "registry": "tstmodern:astral_pylon_casing or UEV+ energy input hatch", "meta": "n/a", "evidence": "User-approved 16-block perimeter of the centered 5x5 service pad at local Y=2" },
+        "target": { "registryOrPredicate": "TSTBlocks.ASTRAL_PYLON_CASING.or(Predicates.ability(INPUT_ENERGY, UEV..MAX) min 1 max 16)", "decision": "APPROVED_DESIGN" }
+      },
+      {
+        "symbol": "I",
+        "occurrences": 112,
+        "source": { "registry": "tstmodern:high_power_casing", "meta": "n/a", "evidence": "Radius-9 ring tilted +30 degrees from horizontal and stretched 1.5x on Y" },
+        "target": { "registryOrPredicate": "TSTBlocks.HIGH_POWER_CASING", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "O",
+        "occurrences": 112,
+        "source": { "registry": "tstmodern:high_power_casing", "meta": "n/a", "evidence": "Radius-9 ring tilted -30 degrees from horizontal and stretched 1.5x on Y" },
+        "target": { "registryOrPredicate": "TSTBlocks.HIGH_POWER_CASING", "decision": "APPROVED_REUSE" }
+      },
+      {
+        "symbol": "A",
+        "occurrences": 72,
+        "source": { "registry": "tstmodern:astral_pylon_casing", "meta": "n/a", "evidence": "User-delegated existing purple casing plus the two physical ring-intersection nodes" },
+        "target": { "registryOrPredicate": "TSTBlocks.ASTRAL_PYLON_CASING", "decision": "APPROVED_REUSE" }
+      }
+    ]
+  },
+  "recipes": [
+    {
+      "id": "crafting/diamond_lattice",
+      "authority": "APPROVED_DEVIATION",
+      "source": "User-approved shaped recipe",
+      "recipeType": "minecraft:crafting_shaped",
+      "duration": 1,
+      "eut": 1,
+      "approvalRef": "Four Diamond Blocks, four Emerald Blocks and one Nether Star produce one Diamond Lattice"
+    },
+    {
+      "id": "blast/crystal_matrix_ingot",
+      "authority": "APPROVED_DEVIATION",
+      "source": "User-approved EBF recipe",
+      "recipeType": "gtceu:blast_furnace",
+      "duration": 400,
+      "eut": 122880,
+      "approvalRef": "64 Diamond Lattice plus 16000 mB UU Matter produce 16 Crystal Matrix Ingots at 9001 K"
+    },
+    {
+      "id": "galactic_armillary/infinity_catalyst_nugget",
+      "authority": "APPROVED_DEVIATION",
+      "source": "User-approved energy-only recipe selected by programmed circuit configuration 1",
+      "recipeType": "tstmodern:galactic_armillary",
+      "duration": 100,
+      "eut": 7864320,
+      "approvalRef": "No material or fluid input; circuit 1 selects one Infinity Catalyst Nugget"
+    },
+    {
+      "id": "crafting/infinity_catalyst",
+      "authority": "APPROVED_DEVIATION",
+      "source": "User-approved 3x3 nugget compression",
+      "recipeType": "minecraft:crafting_shaped",
+      "duration": 1,
+      "eut": 1,
+      "approvalRef": "Nine Infinity Catalyst Nuggets produce one Infinity Catalyst"
+    },
+    {
+      "id": "galactic_armillary/infinity_ingot",
+      "authority": "APPROVED_DEVIATION",
+      "source": "User-approved Infinity synthesis recipe",
+      "recipeType": "tstmodern:galactic_armillary",
+      "duration": 200,
+      "eut": 7864320,
+      "approvalRef": "Four Infinity Catalysts, 16 Neutronium Blocks and 32 Crystal Matrix Ingots produce one Infinity Ingot"
+    }
+  ],
+  "textures": [
+    {
+      "role": "controller_item_and_block",
+      "status": "VERIFIED_NATIVE",
+      "authority": "Exact Fornax Universi controller model recipe from D:\\tmp\\GregEcore: GCYM High Temperature Smelting Casing plus Fusion Reactor overlay",
+      "resource": "gtceu:block/casings/gcym/high_temperature_smelting_casing + gtceu:block/multiblock/fusion_reactor"
+    },
+    {
+      "role": "jei_and_controller_progress",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Exact GregEcore Fornax progress texture, explicitly requested by the user",
+      "resource": "tstmodern:textures/gui/progress/galactic_armillary.png",
+      "localPath": "src/main/resources/assets/tstmodern/textures/gui/progress/galactic_armillary.png",
+      "sha256": "2a326b9d685fa09ba0c700aaaf58ad0f6d6e0d6372db6d0e2ca813ed3e63384d",
+      "sourceEvidence": "D:/tmp/GregEcore src/main/resources/assets/gregecore/textures/progress/fornax.png"
+    },
+    {
+      "role": "black_structure_and_formed_appearance",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked Extreme Density casing texture",
+      "resource": "tstmodern:block/casings/extreme_density_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/extreme_density_casing.png",
+      "sha256": "0dbc5fc2465a965fc38a8330898eecb10a05cf36aa6038a4dde7ca796bc6a5ac",
+      "sourceEvidence": "Existing validated casing; no new texture"
+    },
+    {
+      "role": "cyan_armillary_and_inlays",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Existing locked High Power casing texture",
+      "resource": "tstmodern:block/casings/high_power_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/high_power_casing.png",
+      "sha256": "25429f35526fcc0f10fe675b5508d97fd6f7d50970865254c4d9ba741f3ff57f",
+      "sourceEvidence": "Existing validated casing; no new texture"
+    },
+    {
+      "role": "purple_field_nodes_side",
+      "status": "APPROVED_MODIFIED",
+      "authority": "User-supplied animated cosmic-glass replacement for the shared Astral Pylon casing",
+      "resource": "tstmodern:block/casings/astral_pylon_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/astral_pylon_casing.png",
+      "sha256": "33b9edf769815c3f9cdd2ff6f945b072739dc78e10254cb5f90cc1d3a563bc85",
+      "sourceEvidence": "User supplied files.zip and explicitly confirmed cosmic_glass is the Astral Pylon casing replacement on 2026-09-13",
+      "approvalRef": "User-approved texture update from C:/Users/mtien/Downloads/files.zip"
+    },
+    {
+      "role": "purple_field_nodes_top_and_bottom",
+      "status": "APPROVED_MODIFIED",
+      "authority": "User-supplied animated cosmic-glass pane-top texture for the shared Astral Pylon casing",
+      "resource": "tstmodern:block/casings/astral_pylon_casing_top",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/astral_pylon_casing_top.png",
+      "sha256": "583083a4e7f526caa4ad5e435b413938065a5c96a3ab142ce6e71720cb697ef2",
+      "sourceEvidence": "User explicitly requested pane_top and replacing cube_all with a side/end model on 2026-09-13",
+      "approvalRef": "User-approved texture update from C:/Users/mtien/Downloads/files.zip"
+    },
+    {
+      "role": "diamond_lattice_item",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Exact GTNewHorizons/Avaritia source asset",
+      "resource": "tstmodern:item/diamond_lattice",
+      "localPath": "src/main/resources/assets/tstmodern/textures/item/diamond_lattice.png",
+      "sha256": "0999d05b3cc21a4e1d73756d95057187559fa23780eb7683d1e473ade2add536",
+      "sourceEvidence": "D:/tmp/Avaritia commit f02c7bfe69b4eff4c0187b4808d5cc581f22c1e9 resource_diamond_lattice.png"
+    },
+    {
+      "role": "crystal_matrix_ingot_item",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Exact GTNewHorizons/Avaritia source asset",
+      "resource": "tstmodern:item/crystal_matrix_ingot",
+      "localPath": "src/main/resources/assets/tstmodern/textures/item/crystal_matrix_ingot.png",
+      "sha256": "8a25f4ced53aa85ab059bfbe718405dd780baaf2f120d9c87b420b21bb1a5958",
+      "sourceEvidence": "D:/tmp/Avaritia commit f02c7bfe69b4eff4c0187b4808d5cc581f22c1e9 resource_crystal_matrix_ingot.png"
+    },
+    {
+      "role": "infinity_catalyst_item",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Exact animated GTNewHorizons/Avaritia source asset",
+      "resource": "tstmodern:item/infinity_catalyst",
+      "localPath": "src/main/resources/assets/tstmodern/textures/item/infinity_catalyst.png",
+      "sha256": "253766625775253c9d5775daf0b457c97ee71cec1cda58062fcff8b9ad830460",
+      "sourceEvidence": "D:/tmp/Avaritia commit f02c7bfe69b4eff4c0187b4808d5cc581f22c1e9 resource_infinity_catalyst.png plus source mcmeta"
+    },
+    {
+      "role": "infinity_ingot_item",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Exact animated GTNewHorizons/Avaritia source asset",
+      "resource": "tstmodern:item/infinity_ingot",
+      "localPath": "src/main/resources/assets/tstmodern/textures/item/infinity_ingot.png",
+      "sha256": "f0e7720e30e41629a0a40d9418115f99b470fdfd4d14e4239b8602cb3cea001a",
+      "sourceEvidence": "D:/tmp/Avaritia commit f02c7bfe69b4eff4c0187b4808d5cc581f22c1e9 resource_infinity_ingot.png plus source mcmeta"
+    },
+    {
+      "role": "infinity_catalyst_nugget_item",
+      "status": "VERIFIED_LOCAL",
+      "authority": "Exact animated GT5 Infinity nugget source asset",
+      "resource": "tstmodern:item/infinity_catalyst_nugget",
+      "localPath": "src/main/resources/assets/tstmodern/textures/item/infinity_catalyst_nugget.png",
+      "sha256": "9d7682189a502d27b67e6a81d450c3c5ecc7935bfc81f9416b1b465cde6a8e64",
+      "sourceEvidence": "D:/tmp/GT5 commit 9cd36b78c4265544d7aeaec0ebdccdfaf662c7a3 materialicons/CUSTOM/infinity/nugget.png plus source mcmeta"
+    }
+  ],
+  "approvedDeviations": [
+    {
+      "id": "approved_original_structure_prototype",
+      "approvalRef": "User approved the Galactic Armillary identity, 41x37x41 size, and structure-first/render-last approach",
+      "decision": "Register a buildable controller and exact approved structure prototype without gameplay or renderer behavior"
+    },
+    {
+      "id": "approved_existing_casing_selection",
+      "approvalRef": "User delegated selection of the best matching existing codebase casings",
+      "decision": "Use Extreme Density, High Power, and Astral Pylon for the black/cyan/purple palette; the later user revision removes Fusion Glass"
+    },
+    {
+      "id": "approved_separated_rings_controller_and_fornax_visual",
+      "approvalRef": "User requested two separated rings, no Fusion Glass, controller at Y+1 over the bottom center, and the Fornax Universi controller texture",
+      "decision": "Keep distinct I/O ring symbols, remove the four inner glass pillars and small horizontal cyan ring while preserving the four outer arches, move the controller to (20,3,20), reuse the exact native casing/overlay pair audited from D:\\tmp\\GregEcore, and assign DUMMY_RECIPES solely for the standard clickable controller UI; the initial ring planes and radii are superseded by approved_crossed_horizontal_armillary_rings"
+    },
+    {
+      "id": "approved_crossed_horizontal_armillary_rings",
+      "approvalRef": "User requested two rings crossing diagonally along the horizontal direction with a visible intersection from the front",
+      "decision": "Replace the radius-7 XY and radius-10 ZY layout with two radius-9 rings tilted symmetrically by +30 and -30 degrees from horizontal, retaining separate I/O symbols and marking their front/back physical intersections with A nodes"
+    },
+    {
+      "id": "approved_vertical_ring_expansion",
+      "approvalRef": "User requested the approved crossed rings to be expanded vertically",
+      "decision": "Stretch both crossed rings 1.5x on Y while preserving their horizontal radius, tilt symmetry, center, and front/back intersection nodes"
+    },
+    {
+      "id": "approved_formed_only_galaxy_renderer",
+      "approvalRef": "User requested that placing the controller alone must not show the galaxy renderer",
+      "decision": "Gate GalacticArmillaryGalaxyRender on machine.isFormed() and the server-synchronized stable-core state"
+    },
+    {
+      "id": "approved_reactor_inspired_ignition_cycle",
+      "approvalRef": "User approved adding the proposed Draconic Reactor-inspired core behavior to the total specification",
+      "decision": "Activation requires both the fixed core buffer and a configurable warm-up timer; galacticArmillaryStartupSeconds defaults to 120 seconds"
+    },
+    {
+      "id": "approved_continuous_hot_session",
+      "approvalRef": "User required continuous operation like the Reactor Mk machines and approved the proposed reset behavior",
+      "decision": "Do not repeat warm-up between consecutive valid recipes; a genuine structure, energy, input, output, or explicit-stop interruption hides the galaxy and requires full warm-up, while server-authoritative heat/session state persists and synchronizes across unload/restart"
+    },
+    {
+      "id": "approved_physical_satellite_shell",
+      "approvalRef": "User requested hardcoding the satellite shell into the structure for preview before implementing the remaining effects",
+      "decision": "Add a required static satellite shell centered at (20,29,20): radius-9 horizontal Extreme Density ring, four cardinal Extreme Density/High Power wings, two opposite Astral Pylon capacitors, and a three-layer 5x5 open housing preserving a 3x3 vertical core/beam cavity; defer light, beam, core, and animation"
+    },
+    {
+      "id": "approved_raised_satellite_cannon_shell",
+      "approvalRef": "User requested moving the satellite two to three blocks above the crown and shaping its lower tail as a cannon narrowing toward the core",
+      "decision": "Supersede the Y=29 shell placement: expand the structure to 41x40x41, center the satellite at (20,38,20) with its body starting at Y=37 above the Y=34 crown, and add two hollow 3x3 Extreme Density barrel rings at Y=36/35 plus a 1x1 High Power muzzle at Y=34/33 aligned to the core"
+    },
+    {
+      "id": "approved_lowered_concentric_cannon",
+      "approvalRef": "User requested lowering the satellite one block and redesigning the cannon as consecutive shrinking hollow rings ending at 3x3",
+      "decision": "Supersede the prior cannon: use a 41x39x41 structure with satellite center (20,37,20), enlarge its open housing to 7x7, then form connected hollow rounded cannon rings of 7x7 at Y=35, 5x5 at Y=34, and High Power 3x3 at Y=33; keep every center cell open for the future beam"
+    },
+    {
+      "id": "approved_triple_cannon_rings",
+      "approvalRef": "User requested adding two more rings of every cannon diameter so each stage contains three rings",
+      "decision": "Supersede the single-ring cannon stages with three hollow 7x7 rings at Y=35..33, three hollow 5x5 rings at Y=32..30, and three hollow High Power 3x3 rings at Y=29..27; retain cardinal transition connectors and leave the full center axis open for the beam"
+    },
+    {
+      "id": "approved_corner_only_final_muzzle_rings",
+      "approvalRef": "User requested removing the middle block of every side from the final two 3x3 rings",
+      "decision": "Keep the first High Power 3x3 ring at Y=29 intact, but retain only the four corner blocks at Y=28 and Y=27; keep the center axis open"
+    },
+    {
+      "id": "approved_fixed_core_charge",
+      "approvalRef": "User approved a 2,560,000,000 EU internal startup buffer and charge-time-only hatch scaling",
+      "decision": "Require both a full fixed core charge and the configurable warm-up before the first recipe; 1-16 UEV+ input hatches only change charge time, while recipes remain UEV, no-overclock and parallel 1"
+    },
+    {
+      "id": "approved_top_energy_sockets",
+      "approvalRef": "User superseded the outer sockets with the centered 5x5 service pad shown in the in-world reference",
+      "decision": "Use only the 16 Astral Pylon perimeter cells at local Y=2 as UEV+-energy sockets, with minimum 1 and maximum 16 hatches; no other Astral cell accepts energy"
+    },
+    {
+      "id": "approved_original_infinity_item_textures",
+      "approvalRef": "User rejected generated substitute textures and required exact original Infinity-related source assets",
+      "decision": "Use byte-identical Avaritia PNGs for Diamond Lattice, Crystal Matrix Ingot, Infinity Catalyst and Infinity Ingot; register fallback Infinity as a GTCEu material, using byte-identical GT5 CUSTOM/infinity PNGs only for missing forms and verified 10,000,000 K / 60,000 mB/t fluid-pipe properties; apply the approved four-second client rainbow tint to generated Infinity material items except the ingot, preserve Avaritia's original animated ingot appearance, and use a matching native sprite period for placed Infinity blocks, frames and pipes; use the byte-identical GT5 Infinity nugget texture for the internal catalyst-nugget intermediate"
+    },
+    {
+      "id": "approved_energy_only_catalyst",
+      "approvalRef": "User clarified that Infinity Catalyst Nugget uses only energy and Programmed Circuit configuration 1",
+      "decision": "Register a 100-tick UEV recipe with circuit 1 as non-consumable selector and no material/fluid inputs"
+    },
+    {
+      "id": "approved_startup_ui_and_effects",
+      "approvalRef": "User requested narrower square-segment percentage bars, the GregEcore Fornax JEI display, and a rocket moving with each controller percentage",
+      "decision": "Use GregEcore's actual 9-input/1-output JEI layout and exact Fornax progress texture, retaining the native 164x97 JEI canvas and aligning the actual 90x49 source frames to the 3x3 input grid with a 98x62 progress widget; see evidence/galactic-armillary-ui-fix.md for the 2026-09-14 source-dimension correction. During startup only, show energy and warm-up bars using 20 compact 4x4 squares, numeric percentages, and the exact Fornax rocket sprite moving with progress on the normal dark controller background; hide these widgets once processing starts. While charging render the satellite core glow, a broad layered vertical plasma beam, and an expanding target core; on completion finish expansion, render a harmless 30-tick ignition burst, then reveal the stable galaxy"
+    }
+  ],
+  "unresolved": []
+}

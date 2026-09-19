@@ -1,0 +1,391 @@
+{
+  "machine": "DSPReceiver",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 240,
+      "sourceLine": 590,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings1",
+        "meta": "14",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings1, 14)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_DIM_BRIDGE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 24,
+      "sourceLine": 591,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "8",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 8)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FUSION_CASING",
+      "sourceTextureNames": [
+        "MACHINE_CASING_CONTAINMENT_FIELD.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 959,
+      "sourceLine": 592,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "2",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_MINING_NEUTRONIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 317,
+      "sourceLine": 593,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 10)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_RADIANT_NAQUADAH_ALLOY.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 291,
+      "sourceLine": 594,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsSE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsSE, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "BaseCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 1441,
+      "sourceLine": 595,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsSE",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsSE, 1)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "SupportStructure.png",
+        "SupportStructure_Side.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 96,
+      "sourceLine": 596,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsSE",
+        "meta": "2",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsSE, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "InternalStructure.png",
+        "InternalStructure_Side.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 220,
+      "sourceLine": 597,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "I",
+      "option": 1,
+      "occurrences": 13,
+      "sourceLine": 598,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "6",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 6)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_FIELD.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "J",
+      "option": 1,
+      "occurrences": 309,
+      "sourceLine": 599,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "7",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 7)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_COIL_NONSIDE.png",
+        "EM_COIL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "K",
+      "option": 1,
+      "occurrences": 1,
+      "sourceLine": 600,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "9",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 9)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_TIMESPACE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "L",
+      "option": 1,
+      "occurrences": 128,
+      "sourceLine": 601,
+      "source": {
+        "block": "ModBlocks.blockCasings4Misc",
+        "meta": "4",
+        "type": "block",
+        "expression": "ofBlock(ModBlocks.blockCasings4Misc, 4)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_QFT_COIL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "M",
+      "option": 1,
+      "occurrences": 1785,
+      "sourceLine": 602,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsDyson",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsDyson, 1)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "ReceiverDish.png",
+        "ReceiverDish_Side.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "N",
+      "option": 1,
+      "occurrences": 2115,
+      "sourceLine": 603,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsDyson",
+        "meta": "9",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsDyson, 9)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "Floor.png",
+        "Floor_Side.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "O",
+      "option": 1,
+      "occurrences": 392,
+      "sourceLine": 604,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FUSION_GLASS",
+      "sourceTextureNames": [
+        "blockQuantumGlass.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "P",
+      "option": 1,
+      "occurrences": 8,
+      "sourceLine": 605,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsSE",
+        "meta": "0",
+        "type": "block",
+        "expression": "HatchElementBuilder.<TST_DSPReceiver>builder() .atLeast(InputBus, OutputBus) .adder(TST_DSPReceiver::addToMachineList) .casingIndex(SPACE_ELEVATOR_BASE_CASING_INDEX) .hint(1) .buildAndChain(GregTechAPI.sBlockCasingsSE, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "BaseCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "Q",
+      "option": 1,
+      "occurrences": 324,
+      "sourceLine": 614,
+      "source": {
+        "block": "Materials.NaquadahAlloy",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.NaquadahAlloy)"
+      },
+      "resolution": "direct_native",
+      "target": "Predicates.frames(GTMaterials.NaquadahAlloy)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "R",
+      "option": 1,
+      "occurrences": 4,
+      "sourceLine": 615,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofChain(ofBlock(sBlockCasingsTT, 0), ofBlock(GregTechAPI.sBlockCasings8, 10))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "R",
+      "option": 2,
+      "occurrences": 4,
+      "sourceLine": 615,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofChain(ofBlock(sBlockCasingsTT, 0), ofBlock(GregTechAPI.sBlockCasings8, 10))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_RADIANT_NAQUADAH_ALLOY.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/11_DSPReceiver",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}
+

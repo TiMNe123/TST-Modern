@@ -1,0 +1,166 @@
+{
+  "machine": "MassFabricatorGenesis",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 205,
+      "source": {
+        "block": "sBlockCasingsBA0",
+        "meta": "12",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsBA0, 12)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER_INFINITE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/17_MassFabricatorGenesis",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 206,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "9",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 9)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_TIMESPACE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/17_MassFabricatorGenesis",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 207,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 10)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_TELE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/17_MassFabricatorGenesis",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 208,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "12",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 12)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_ULTIMATE_CASING.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/17_MassFabricatorGenesis",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 209,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "13",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 13)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_ULTIMATE_FIELD_CASING.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/17_MassFabricatorGenesis",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 210,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "14",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 14)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_ULTIMATE_FIELD.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/17_MassFabricatorGenesis",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 211,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FUSION_GLASS",
+      "sourceTextureNames": [
+        "blockQuantumGlass.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/17_MassFabricatorGenesis",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 212,
+      "source": {
+        "block": "sBlockCasingsBA0",
+        "meta": "12",
+        "type": "block",
+        "expression": "HatchElementBuilder.<MM_MassFabricatorGenesis>builder() .atLeast(InputBus, OutputHatch, Energy.or(ExoticEnergy), ParallelController) .adder(MM_MassFabricatorGenesis::addToMachineList) .hint(1) .casingIndex(1024) .buildAndChain(sBlockCasingsBA0, 12)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER_INFINITE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/17_MassFabricatorGenesis",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}
+

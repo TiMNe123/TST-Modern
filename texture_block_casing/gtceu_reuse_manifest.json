@@ -1,0 +1,722 @@
+{
+  "schemaVersion": 1,
+  "approvedOn": "2026-08-21",
+  "mappingCount": 10,
+  "entryCount": 36,
+  "entries": [
+    {
+      "machine": "ArtificialStar",
+      "symbol": "K",
+      "option": 1,
+      "sourceLine": 583,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/14_ArtificialStar",
+      "files": [
+        "K_L583_O1_gtceu_fusion_glass_fusion_glass.png",
+        "K_L583_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "K_L583_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "AstralComputingArray",
+      "symbol": "M",
+      "option": 1,
+      "sourceLine": 1359,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/21_AstralComputingArray",
+      "files": [
+        "M_L1359_O1_gtceu_fusion_glass_fusion_glass.png",
+        "M_L1359_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "M_L1359_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "DSPLauncher",
+      "symbol": "I",
+      "option": 1,
+      "sourceLine": 445,
+      "source": {
+        "block": "Materials.CosmicNeutronium",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.CosmicNeutronium)"
+      },
+      "target": "Predicates.frames(GTMaterials.Neutronium)",
+      "folder": "texture_block_casing/10_DSPLauncher",
+      "files": [
+        "I_L445_O1_gtceu_neutronium_frame_frame_gt.png",
+        "I_L445_O1_gtceu_neutronium_frame_frame_gt_secondary.png"
+      ]
+    },
+    {
+      "machine": "DSPReceiver",
+      "symbol": "B",
+      "option": 1,
+      "sourceLine": 591,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "8",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 8)"
+      },
+      "target": "GTBlocks.FUSION_CASING",
+      "folder": "texture_block_casing/11_DSPReceiver",
+      "files": [
+        "B_L591_O1_gtceu_fusion_casing_fusion_casing.png",
+        "B_L591_O1_gtceu_fusion_casing_fusion_casing_ctm.png",
+        "B_L591_O1_gtceu_fusion_casing_fusion_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "DSPReceiver",
+      "symbol": "O",
+      "option": 1,
+      "sourceLine": 604,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/11_DSPReceiver",
+      "files": [
+        "O_L604_O1_gtceu_fusion_glass_fusion_glass.png",
+        "O_L604_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "O_L604_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "DeployedNanoCore",
+      "symbol": "B",
+      "option": 1,
+      "sourceLine": 230,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "8",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 8)"
+      },
+      "target": "GTBlocks.FUSION_CASING",
+      "folder": "texture_block_casing/15_DeployedNanoCore",
+      "files": [
+        "B_L230_O1_gtceu_fusion_casing_fusion_casing.png",
+        "B_L230_O1_gtceu_fusion_casing_fusion_casing_ctm.png",
+        "B_L230_O1_gtceu_fusion_casing_fusion_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "DimensionallyTranscendentMatterPlasmaForgePrototypeMK2",
+      "symbol": "E",
+      "option": 1,
+      "sourceLine": 376,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/16_DimensionallyTranscendentMatterPlasmaForgePrototypeMK2",
+      "files": [
+        "E_L376_O1_gtceu_fusion_glass_fusion_glass.png",
+        "E_L376_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "E_L376_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "Disassembler",
+      "symbol": "A",
+      "option": 1,
+      "sourceLine": 131,
+      "source": {
+        "block": "BorosilicateGlass",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "BorosilicateGlass.ofBoroGlassAnyTier()"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/05_Disassembler",
+      "files": [
+        "A_L131_O1_gtceu_fusion_glass_fusion_glass.png",
+        "A_L131_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "A_L131_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "Disassembler",
+      "symbol": "D",
+      "option": 1,
+      "sourceLine": 146,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "8",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 8)"
+      },
+      "target": "GTBlocks.FUSION_CASING",
+      "folder": "texture_block_casing/05_Disassembler",
+      "files": [
+        "D_L146_O1_gtceu_fusion_casing_fusion_casing.png",
+        "D_L146_O1_gtceu_fusion_casing_fusion_casing_ctm.png",
+        "D_L146_O1_gtceu_fusion_casing_fusion_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "Disassembler",
+      "symbol": "E",
+      "option": 1,
+      "sourceLine": 147,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "9",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 9)"
+      },
+      "target": "GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING",
+      "folder": "texture_block_casing/05_Disassembler",
+      "files": [
+        "E_L147_O1_gtceu_large_scale_assembling_large_scale_assembling_casing.png",
+        "E_L147_O1_gtceu_large_scale_assembling_large_scale_assembling_casing_ctm.png",
+        "E_L147_O1_gtceu_large_scale_assembling_large_scale_assembling_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "Disassembler",
+      "symbol": "F",
+      "option": 1,
+      "sourceLine": 148,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings9",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings9, 1)"
+      },
+      "target": "GTBlocks.FILTER_CASING",
+      "folder": "texture_block_casing/05_Disassembler",
+      "files": [
+        "F_L148_O1_gtceu_filter_casing_filter_casing.png",
+        "F_L148_O1_gtceu_filter_casing_filter_casing_ctm.png",
+        "F_L148_O1_gtceu_filter_casing_filter_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "Disassembler",
+      "symbol": "J",
+      "option": 1,
+      "sourceLine": 161,
+      "source": {
+        "block": "Materials.CosmicNeutronium",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.CosmicNeutronium)"
+      },
+      "target": "Predicates.frames(GTMaterials.Neutronium)",
+      "folder": "texture_block_casing/05_Disassembler",
+      "files": [
+        "J_L161_O1_gtceu_neutronium_frame_frame_gt.png",
+        "J_L161_O1_gtceu_neutronium_frame_frame_gt_secondary.png"
+      ]
+    },
+    {
+      "machine": "GiantVacuumDryingFurnace",
+      "symbol": "A",
+      "option": 1,
+      "sourceLine": 245,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "folder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "files": [
+        "A_L245_O1_gtceu_tempered_glass_tempered_glass.png",
+        "A_L245_O1_gtceu_tempered_glass_tempered_glass_ctm.png",
+        "A_L245_O1_gtceu_tempered_glass_tempered_glass.png.mcmeta",
+        "A_L245_O1_gtceu_fusion_glass_fusion_glass.png",
+        "A_L245_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "A_L245_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "HyperSpacetimeTransformer",
+      "symbol": "J",
+      "option": 1,
+      "sourceLine": 320,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlockAnyMeta(INSTANCE)"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/20_HyperSpacetimeTransformer",
+      "files": [
+        "J_L320_O1_gtceu_fusion_glass_fusion_glass.png",
+        "J_L320_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "J_L320_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "HyperThermalConvector",
+      "symbol": "I",
+      "option": 1,
+      "sourceLine": 159,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings9",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings9, 1)"
+      },
+      "target": "GTBlocks.FILTER_CASING",
+      "folder": "texture_block_casing/03_HyperThermalConvector",
+      "files": [
+        "I_L159_O1_gtceu_filter_casing_filter_casing.png",
+        "I_L159_O1_gtceu_filter_casing_filter_casing_ctm.png",
+        "I_L159_O1_gtceu_filter_casing_filter_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "HyperThermalConvector",
+      "symbol": "K",
+      "option": 1,
+      "sourceLine": 161,
+      "source": {
+        "block": "Materials.CosmicNeutronium",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.CosmicNeutronium)"
+      },
+      "target": "Predicates.frames(GTMaterials.Neutronium)",
+      "folder": "texture_block_casing/03_HyperThermalConvector",
+      "files": [
+        "K_L161_O1_gtceu_neutronium_frame_frame_gt.png",
+        "K_L161_O1_gtceu_neutronium_frame_frame_gt_secondary.png"
+      ]
+    },
+    {
+      "machine": "HyperThermalConvector",
+      "symbol": "L",
+      "option": 1,
+      "sourceLine": 162,
+      "source": {
+        "block": "Loaders.pressureResistantWalls",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(Loaders.pressureResistantWalls, 0)"
+      },
+      "target": "GCYMBlocks.CASING_STRESS_PROOF",
+      "folder": "texture_block_casing/03_HyperThermalConvector",
+      "files": [
+        "L_L162_O1_gtceu_stress_proof_stress_proof_casing.png",
+        "L_L162_O1_gtceu_stress_proof_stress_proof_casing_ctm.png",
+        "L_L162_O1_gtceu_stress_proof_stress_proof_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "HyperThermalConvector",
+      "symbol": "Q",
+      "option": 1,
+      "sourceLine": 167,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "8",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 8)"
+      },
+      "target": "GTBlocks.FUSION_CASING",
+      "folder": "texture_block_casing/03_HyperThermalConvector",
+      "files": [
+        "Q_L167_O1_gtceu_fusion_casing_fusion_casing.png",
+        "Q_L167_O1_gtceu_fusion_casing_fusion_casing_ctm.png",
+        "Q_L167_O1_gtceu_fusion_casing_fusion_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "IncompactCyclotron",
+      "symbol": "A",
+      "option": 1,
+      "sourceLine": 143,
+      "source": {
+        "block": "BorosilicateGlass",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "BorosilicateGlass.ofBoroGlass(10)"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/06_IncompactCyclotron",
+      "files": [
+        "A_L143_O1_gtceu_fusion_glass_fusion_glass.png",
+        "A_L143_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "A_L143_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "IncompactCyclotron",
+      "symbol": "E",
+      "option": 1,
+      "sourceLine": 149,
+      "source": {
+        "block": "BorosilicateGlass",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "buildHatchAdder(TST_IncompactCyclotron.class) .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Energy.or(ExoticEnergy)) .casingIndex(TstBlocks.MetaBlockCasing01.getTextureIndex(11)) .hint(1) .buildAndChain(BorosilicateGlass.ofBoroGlass(10))"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/06_IncompactCyclotron",
+      "files": [
+        "E_L149_O1_gtceu_fusion_glass_fusion_glass.png",
+        "E_L149_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "E_L149_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "LargeNeutronOscillator",
+      "symbol": "F",
+      "option": 1,
+      "sourceLine": 200,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "folder": "texture_block_casing/08_LargeNeutronOscillator",
+      "files": [
+        "F_L200_O1_gtceu_tempered_glass_tempered_glass.png",
+        "F_L200_O1_gtceu_tempered_glass_tempered_glass_ctm.png",
+        "F_L200_O1_gtceu_tempered_glass_tempered_glass.png.mcmeta",
+        "F_L200_O1_gtceu_fusion_glass_fusion_glass.png",
+        "F_L200_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "F_L200_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "MassFabricatorGenesis",
+      "symbol": "G",
+      "option": 1,
+      "sourceLine": 211,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/17_MassFabricatorGenesis",
+      "files": [
+        "G_L211_O1_gtceu_fusion_glass_fusion_glass.png",
+        "G_L211_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "G_L211_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "MegaNqReactor",
+      "symbol": "A",
+      "option": 1,
+      "sourceLine": 1640,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "folder": "texture_block_casing/09_MegaNqReactor",
+      "files": [
+        "A_L1640_O1_gtceu_tempered_glass_tempered_glass.png",
+        "A_L1640_O1_gtceu_tempered_glass_tempered_glass_ctm.png",
+        "A_L1640_O1_gtceu_tempered_glass_tempered_glass.png.mcmeta",
+        "A_L1640_O1_gtceu_fusion_glass_fusion_glass.png",
+        "A_L1640_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "A_L1640_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "MegaStoneBreaker",
+      "symbol": "D",
+      "option": 1,
+      "sourceLine": 236,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings9",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings9, 1)"
+      },
+      "target": "GTBlocks.FILTER_CASING",
+      "folder": "texture_block_casing/07_MegaStoneBreaker",
+      "files": [
+        "D_L236_O1_gtceu_filter_casing_filter_casing.png",
+        "D_L236_O1_gtceu_filter_casing_filter_casing_ctm.png",
+        "D_L236_O1_gtceu_filter_casing_filter_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "MegaStoneBreaker",
+      "symbol": "E",
+      "option": 1,
+      "sourceLine": 237,
+      "source": {
+        "block": "Materials.CosmicNeutronium",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.CosmicNeutronium)"
+      },
+      "target": "Predicates.frames(GTMaterials.Neutronium)",
+      "folder": "texture_block_casing/07_MegaStoneBreaker",
+      "files": [
+        "E_L237_O1_gtceu_neutronium_frame_frame_gt.png",
+        "E_L237_O1_gtceu_neutronium_frame_frame_gt_secondary.png"
+      ]
+    },
+    {
+      "machine": "MegaStoneBreaker",
+      "symbol": "I",
+      "option": 1,
+      "sourceLine": 241,
+      "source": {
+        "block": "Loaders.pressureResistantWalls",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(Loaders.pressureResistantWalls, 0)"
+      },
+      "target": "GCYMBlocks.CASING_STRESS_PROOF",
+      "folder": "texture_block_casing/07_MegaStoneBreaker",
+      "files": [
+        "I_L241_O1_gtceu_stress_proof_stress_proof_casing.png",
+        "I_L241_O1_gtceu_stress_proof_stress_proof_casing_ctm.png",
+        "I_L241_O1_gtceu_stress_proof_stress_proof_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "MegaTreeFarm",
+      "symbol": "A",
+      "option": 1,
+      "sourceLine": 404,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "folder": "texture_block_casing/04_MegaTreeFarm",
+      "files": [
+        "A_L404_O1_gtceu_tempered_glass_tempered_glass.png",
+        "A_L404_O1_gtceu_tempered_glass_tempered_glass_ctm.png",
+        "A_L404_O1_gtceu_tempered_glass_tempered_glass.png.mcmeta",
+        "A_L404_O1_gtceu_fusion_glass_fusion_glass.png",
+        "A_L404_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "A_L404_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "MegaTreeFarm",
+      "symbol": "G",
+      "option": 1,
+      "sourceLine": 411,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings9",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings9, 1)"
+      },
+      "target": "GTBlocks.FILTER_CASING",
+      "folder": "texture_block_casing/04_MegaTreeFarm",
+      "files": [
+        "G_L411_O1_gtceu_filter_casing_filter_casing.png",
+        "G_L411_O1_gtceu_filter_casing_filter_casing_ctm.png",
+        "G_L411_O1_gtceu_filter_casing_filter_casing.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "MegaTreeFarm",
+      "symbol": "O",
+      "option": 1,
+      "sourceLine": 432,
+      "source": {
+        "block": "ModBlocksHandler.PurpleLight.getLeft()",
+        "meta": "ModBlocksHandler.PurpleLight.getRight()",
+        "type": "block",
+        "expression": "ofBlock(ModBlocksHandler.PurpleLight.getLeft(), ModBlocksHandler.PurpleLight.getRight())"
+      },
+      "target": "GTBlocks.LAMPS.get(DyeColor.PURPLE)",
+      "folder": "texture_block_casing/04_MegaTreeFarm",
+      "files": [
+        "O_L432_O1_gtceu_purple_lamp_purple_on.png",
+        "O_L432_O1_gtceu_purple_lamp_purple_on_ctm.png",
+        "O_L432_O1_gtceu_purple_lamp_purple_on.png.mcmeta",
+        "O_L432_O1_gtceu_purple_lamp_purple_on_ctm.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "MeteorMiner",
+      "symbol": "A",
+      "option": 1,
+      "sourceLine": 121,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "folder": "texture_block_casing/25_MeteorMiner",
+      "files": [
+        "A_L121_O1_gtceu_tempered_glass_tempered_glass.png",
+        "A_L121_O1_gtceu_tempered_glass_tempered_glass_ctm.png",
+        "A_L121_O1_gtceu_tempered_glass_tempered_glass.png.mcmeta",
+        "A_L121_O1_gtceu_fusion_glass_fusion_glass.png",
+        "A_L121_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "A_L121_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "MiracleTop",
+      "symbol": "E",
+      "option": 1,
+      "sourceLine": 92,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/13_MiracleTop",
+      "files": [
+        "E_L92_O1_gtceu_fusion_glass_fusion_glass.png",
+        "E_L92_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "E_L92_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "OreProcessingFactory",
+      "symbol": "A",
+      "option": 1,
+      "sourceLine": 504,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "folder": "texture_block_casing/23_OreProcessingFactory",
+      "files": [
+        "A_L504_O1_gtceu_tempered_glass_tempered_glass.png",
+        "A_L504_O1_gtceu_tempered_glass_tempered_glass_ctm.png",
+        "A_L504_O1_gtceu_tempered_glass_tempered_glass.png.mcmeta",
+        "A_L504_O1_gtceu_fusion_glass_fusion_glass.png",
+        "A_L504_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "A_L504_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "OreProcessingFactory",
+      "symbol": "C",
+      "option": 1,
+      "sourceLine": 506,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "6",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2,6)"
+      },
+      "target": "GTBlocks.COMPUTER_CASING",
+      "folder": "texture_block_casing/23_OreProcessingFactory",
+      "files": [
+        "C_L506_O1_gtceu_computer_casing_back_back.png",
+        "C_L506_O1_gtceu_computer_casing_back_back_ctm.png",
+        "C_L506_O1_gtceu_computer_casing_back_back.png.mcmeta",
+        "C_L506_O1_gtceu_computer_casing_bottom_bottom.png",
+        "C_L506_O1_gtceu_computer_casing_bottom_bottom_ctm.png",
+        "C_L506_O1_gtceu_computer_casing_bottom_bottom.png.mcmeta",
+        "C_L506_O1_gtceu_computer_casing_front_front.png",
+        "C_L506_O1_gtceu_computer_casing_front_front_ctm.png",
+        "C_L506_O1_gtceu_computer_casing_front_front.png.mcmeta",
+        "C_L506_O1_gtceu_computer_casing_side_side.png",
+        "C_L506_O1_gtceu_computer_casing_side_side_ctm.png",
+        "C_L506_O1_gtceu_computer_casing_side_side.png.mcmeta",
+        "C_L506_O1_gtceu_computer_casing_top_top.png",
+        "C_L506_O1_gtceu_computer_casing_top_top_ctm.png",
+        "C_L506_O1_gtceu_computer_casing_top_top.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "StarcoreMiner",
+      "symbol": "A",
+      "option": 1,
+      "sourceLine": 146,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "folder": "texture_block_casing/24_StarcoreMiner",
+      "files": [
+        "A_L146_O1_gtceu_tempered_glass_tempered_glass.png",
+        "A_L146_O1_gtceu_tempered_glass_tempered_glass_ctm.png",
+        "A_L146_O1_gtceu_tempered_glass_tempered_glass.png.mcmeta",
+        "A_L146_O1_gtceu_fusion_glass_fusion_glass.png",
+        "A_L146_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "A_L146_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "StarcoreMiner",
+      "symbol": "K",
+      "option": 3,
+      "sourceLine": 156,
+      "source": {
+        "block": "BorosilicateGlass",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "ofChain( BorosilicateGlass.ofBoroGlassAnyTier(), ofFrame(Materials.NaquadahAlloy), ofBlock(GregTechAPI.sBlockCasings8, 10) )"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/24_StarcoreMiner",
+      "files": [
+        "K_L156_O3_gtceu_fusion_glass_fusion_glass.png",
+        "K_L156_O3_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "K_L156_O3_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    },
+    {
+      "machine": "StrangeMatterAggregator",
+      "symbol": "G",
+      "option": 1,
+      "sourceLine": 1400,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "target": "GTBlocks.FUSION_GLASS",
+      "folder": "texture_block_casing/19_StrangeMatterAggregator",
+      "files": [
+        "G_L1400_O1_gtceu_fusion_glass_fusion_glass.png",
+        "G_L1400_O1_gtceu_fusion_glass_fusion_glass_ctm.png",
+        "G_L1400_O1_gtceu_fusion_glass_fusion_glass.png.mcmeta"
+      ]
+    }
+  ]
+}

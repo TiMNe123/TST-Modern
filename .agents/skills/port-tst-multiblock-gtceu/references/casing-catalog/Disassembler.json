@@ -1,0 +1,515 @@
+{
+  "machine": "Disassembler",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 36,
+      "sourceLine": 131,
+      "source": {
+        "block": "BorosilicateGlass",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "BorosilicateGlass.ofBoroGlassAnyTier()"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FUSION_GLASS",
+      "sourceTextureNames": [
+        "BoronSilicateGlassBlock.png",
+        "ColoredBoronSilicateGlassBlock1.png",
+        "ColoredBoronSilicateGlassBlock2.png",
+        "ColoredBoronSilicateGlassBlock3.png",
+        "ColoredBoronSilicateGlassBlock4.png",
+        "ColoredBoronSilicateGlassBlock5.png",
+        "ColoredBoronSilicateGlassBlock6.png",
+        "HexaniteReinforcedBoronSilicateGlassBlock.png",
+        "HexaniteReinforcedBoronSilicateGlassBlockTransparent.png",
+        "InfinityReinforcedBoronSilicateGlassBlock.png",
+        "InfinityReinforcedBoronSilicateGlassBlockTransparent.png",
+        "IridiumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "OsmiumReinforcedBoronSilicateGlassBlock.png",
+        "RhodiumPlatedPalladiumReinforcedBoronSilicateGlassBlock.png",
+        "ThoriumYttriumGlass.png",
+        "TitaniumReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlockTransparent.png",
+        "TungstenSteelReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "EXOFOUNDRY_GLASS.png",
+        "GLASS_PH_RESISTANT.png",
+        "GLASS_QUARK_CONTAINMENT.png",
+        "GLASS_TINTED_INDUSTRIAL_BLACK.png",
+        "GLASS_TINTED_INDUSTRIAL_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_BROWN.png",
+        "GLASS_TINTED_INDUSTRIAL_CYAN.png",
+        "GLASS_TINTED_INDUSTRIAL_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_GREEN.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_LIME.png",
+        "GLASS_TINTED_INDUSTRIAL_MAGENTA.png",
+        "GLASS_TINTED_INDUSTRIAL_ORANGE.png",
+        "GLASS_TINTED_INDUSTRIAL_PINK.png",
+        "GLASS_TINTED_INDUSTRIAL_PURPLE.png",
+        "GLASS_TINTED_INDUSTRIAL_RED.png",
+        "GLASS_TINTED_INDUSTRIAL_WHITE.png",
+        "GLASS_TINTED_INDUSTRIAL_YELLOW.png",
+        "HAWKING_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW_GLOW.png",
+        "NANOCHIP_GLASS.png",
+        "OMNI_PURPOSE_INFINITY_FUSED_GLASS.png",
+        "blockQuantumGlass.png",
+        "antimatterContainmentCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 50,
+      "note": "Family động: GT5 chấp nhận nhiều loại kính; đã gom các texture kính hiện diện trong monorepo GT5."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "0",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "0.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "1",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "1.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "2",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "3",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "3.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "4",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "4.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "5",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "5.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "6",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "6.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "7",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "7.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "8",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "8.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "9",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "9.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "10",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "10.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "11",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "11.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "12",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "12.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 66,
+      "sourceLine": 132,
+      "source": {
+        "block": "Loaders.componentAssemblylineCasing",
+        "meta": "13",
+        "type": "block",
+        "expression": "withChannel( \"component\", ofBlocksTiered( (block, meta) -> block == Loaders.componentAssemblylineCasing ? meta : -1, IntStream.range(0, 14) .mapToObj(i -> Pair.of(Loaders.componentAssemblylineCasing, i)) .collect(Collectors.toList()), -2, (t, meta) -> t.tierComponentCasing = meta, t -> t.tierComponentCasing))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "13.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 4,
+      "sourceLine": 145,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "5",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 5)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TUNGSTENSTEEL_GEARBOX",
+      "sourceTextureNames": [
+        "MACHINE_CASING_GEARBOX_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 60,
+      "sourceLine": 146,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "8",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 8)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FUSION_CASING",
+      "sourceTextureNames": [
+        "MACHINE_CASING_CONTAINMENT_FIELD.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 56,
+      "sourceLine": 147,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "9",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 9)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GCYMBlocks.CASING_LARGE_SCALE_ASSEMBLING",
+      "sourceTextureNames": [
+        "MACHINE_CASING_ASSEMBLER.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 92,
+      "sourceLine": 148,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings9",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings9, 1)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FILTER_CASING",
+      "sourceTextureNames": [
+        "MACHINE_CASING_VENT_T2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 318,
+      "sourceLine": 149,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "4",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 4)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_CASING.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 4,
+      "sourceLine": 150,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "8",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 8)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_HOLLOW.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "I",
+      "option": 1,
+      "occurrences": 8,
+      "sourceLine": 151,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "4",
+        "type": "block",
+        "expression": "HatchElementBuilder .<TST_Disassembler>builder() .atLeast(InputBus, OutputBus, OutputHatch) .adder(TST_Disassembler::addToMachineList) .hint(1) .casingIndex(1028) .buildAndChain(sBlockCasingsTT, 4)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_CASING.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "J",
+      "option": 1,
+      "occurrences": 84,
+      "sourceLine": 161,
+      "source": {
+        "block": "Materials.CosmicNeutronium",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.CosmicNeutronium)"
+      },
+      "resolution": "equivalent_review",
+      "target": "Predicates.frames(GTMaterials.Neutronium)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/05_Disassembler",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}
+

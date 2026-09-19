@@ -1,0 +1,450 @@
+{
+  "schemaVersion": 1,
+  "machine": "MegaNqReactor",
+  "auditStatus": "AUDIT_COMPLETE",
+  "branch": "dev",
+  "sourceEvidence": {
+    "controller": {
+      "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/GeneratorMultis/TST_MegaNqReactor.java",
+      "symbol": "TST_MegaNqReactor",
+      "hash": "bb59109e88fcad38b0b5e4679ddd290c087ea9cffe65fe7e786f7de254ebbffe"
+    },
+    "inheritance": [
+      {
+        "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/multiMachineClasses/TST_GeneratorBase.java",
+        "symbol": "TST_GeneratorBase",
+        "hash": "4c514bf24c637d83266b9ff83ea9aa2c3bb2e88d4cb00415f28396992e2cdaca"
+      },
+      {
+        "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/multiMachineClasses/GTCM_MultiMachineBase.java",
+        "symbol": "GTCM_MultiMachineBase",
+        "hash": "9f0897e5739c09a3ff3a95675bb2e8c4326aaccaf01a657b02a82034400f8138"
+      }
+    ],
+    "recipePool": {
+      "path": "D:/tmp/GT5/src/main/java/goodgenerator/loader/FuelRecipeLoader.java",
+      "symbol": "FuelRecipeLoader.RegisterFuel",
+      "hash": "a241e0824691c387a673af58adcf0dd7d87016b1905c58b6b8a24ac2e5413be2"
+    }
+  },
+  "structure": {
+    "dimensions": [
+      31,
+      27,
+      32
+    ],
+    "sourceAxisOrder": [
+      "aisle/down",
+      "row/back",
+      "column/right"
+    ],
+    "targetAxisMap": {
+      "RIGHT": "source column character index",
+      "DOWN": "source aisle index",
+      "BACK": "source row index"
+    },
+    "controller": {
+      "symbol": "~",
+      "count": 1,
+      "outwardFacing": "FRONT opposite positive BACK; RIGHT=15 DOWN=25 BACK=1"
+    },
+    "symbols": [
+      {
+        "symbol": "~",
+        "occurrences": 1,
+        "source": {
+          "registry": "TST_MegaNqReactor controller",
+          "meta": "19081",
+          "evidence": "SHAPE_MAIN and MachineLoader.java"
+        },
+        "target": {
+          "registryOrPredicate": "MegaNqReactorDefinition.MACHINE",
+          "decision": "dedicated UIV controller"
+        }
+      },
+      {
+        "symbol": "A",
+        "occurrences": 602,
+        "source": {
+          "registry": "chainAllGlasses()",
+          "meta": "*",
+          "evidence": "TST_MegaNqReactor.java:1640"
+        },
+        "target": {
+          "registryOrPredicate": "GTBlocks.CASING_TEMPERED_GLASS or GTBlocks.FUSION_GLASS",
+          "decision": "approved catalog equivalent"
+        }
+      },
+      {
+        "symbol": "B",
+        "occurrences": 294,
+        "source": {
+          "registry": "Loaders.MAR_Casing",
+          "meta": "0",
+          "evidence": "TST_MegaNqReactor.java:1641"
+        },
+        "target": {
+          "registryOrPredicate": "TSTBlocks.FIELD_RESTRICTION_CASING",
+          "decision": "dedicated original texture"
+        }
+      },
+      {
+        "symbol": "C",
+        "occurrences": 11,
+        "source": {
+          "registry": "GregTechAPI.sBlockCasings1",
+          "meta": "14",
+          "evidence": "TST_MegaNqReactor.java:1642"
+        },
+        "target": {
+          "registryOrPredicate": "TSTBlocks.DIMENSIONAL_BRIDGE_CASING",
+          "decision": "reuse verified local block"
+        }
+      },
+      {
+        "symbol": "D",
+        "occurrences": 4163,
+        "source": {
+          "registry": "GregTechAPI.sBlockCasings8",
+          "meta": "3",
+          "evidence": "TST_MegaNqReactor.java:1633-1639"
+        },
+        "target": {
+          "registryOrPredicate": "TSTBlocks.MINING_BLACK_PLUTONIUM_CASING or approved abilities",
+          "decision": "dedicated original texture and ability base"
+        }
+      },
+      {
+        "symbol": "E",
+        "occurrences": 148,
+        "source": {
+          "registry": "GregTechAPI.sBlockCasings9",
+          "meta": "14",
+          "evidence": "TST_MegaNqReactor.java:1643"
+        },
+        "target": {
+          "registryOrPredicate": "TSTBlocks.PARTICLE_BEAM_GUIDANCE_PIPE_CASING",
+          "decision": "dedicated original texture"
+        }
+      },
+      {
+        "symbol": "F",
+        "occurrences": 988,
+        "source": {
+          "registry": "TstBlocks.MetaBlockCasing02",
+          "meta": "2",
+          "evidence": "TST_MegaNqReactor.java:1644"
+        },
+        "target": {
+          "registryOrPredicate": "TSTBlocks.IRIDIUM_REINFORCED_NEUTRONIUM_CASING",
+          "decision": "reuse verified local block"
+        }
+      }
+    ]
+  },
+  "recipes": [
+    {
+      "id": "large_chemical/super_coolant",
+      "authority": "APPROVED_DEVIATION",
+      "approvalRef": "User approved the audited Modern Super Coolant closure on 2026-09-08",
+      "source": "Local GT5 sources only contain Hot Super Coolant recovery; unavailable Callisto Ice/Ledox initial-production route is replaced by an obtainable Modern Large Chemical Reactor route",
+      "recipeType": "large_chemical_reactor",
+      "duration": 400,
+      "eut": 524288,
+      "details": {
+        "fluidInputs": ["1000mB PCB Coolant", "1000mB Helium"],
+        "outputs": ["1000mB Super Coolant"]
+      }
+    },
+    {
+      "id": "uranium_based_liquid_fuel_excited",
+      "authority": "VERIFIED_SOURCE",
+      "source": "FuelRecipeLoader index 0",
+      "recipeType": "mega_naquadah_reactor_fuels",
+      "duration": 100,
+      "eut": 12960
+    },
+    {
+      "id": "thorium_based_liquid_fuel_excited",
+      "authority": "VERIFIED_SOURCE",
+      "source": "FuelRecipeLoader index 1",
+      "recipeType": "mega_naquadah_reactor_fuels",
+      "duration": 500,
+      "eut": 2200
+    },
+    {
+      "id": "plutonium_based_liquid_fuel_excited",
+      "authority": "VERIFIED_SOURCE",
+      "source": "FuelRecipeLoader index 2",
+      "recipeType": "mega_naquadah_reactor_fuels",
+      "duration": 150,
+      "eut": 32400
+    },
+    {
+      "id": "naquadah_based_fuel_mki",
+      "authority": "VERIFIED_SOURCE",
+      "source": "FuelRecipeLoader index 3",
+      "recipeType": "mega_naquadah_reactor_fuels",
+      "duration": 60,
+      "eut": 975000
+    },
+    {
+      "id": "naquadah_based_fuel_mkii",
+      "authority": "VERIFIED_SOURCE",
+      "source": "FuelRecipeLoader index 4",
+      "recipeType": "mega_naquadah_reactor_fuels",
+      "duration": 70,
+      "eut": 2300000
+    },
+    {
+      "id": "naquadah_based_fuel_mkiii",
+      "authority": "VERIFIED_SOURCE",
+      "source": "FuelRecipeLoader index 5",
+      "recipeType": "mega_naquadah_reactor_fuels",
+      "duration": 80,
+      "eut": 9511000
+    },
+    {
+      "id": "naquadah_based_fuel_mkiv",
+      "authority": "VERIFIED_SOURCE",
+      "source": "FuelRecipeLoader index 6",
+      "recipeType": "mega_naquadah_reactor_fuels",
+      "duration": 100,
+      "eut": 88540000
+    },
+    {
+      "id": "naquadah_based_fuel_mkv",
+      "authority": "VERIFIED_SOURCE",
+      "source": "FuelRecipeLoader index 7",
+      "recipeType": "mega_naquadah_reactor_fuels",
+      "duration": 160,
+      "eut": 399576000
+    },
+    {
+      "id": "naquadah_based_fuel_mkvi",
+      "authority": "VERIFIED_SOURCE",
+      "source": "FuelRecipeLoader index 8",
+      "recipeType": "mega_naquadah_reactor_fuels",
+      "duration": 240,
+      "eut": 2077795200
+    },
+    {
+      "id": "reactor_fuel_upstream_chain",
+      "authority": "APPROVED_DEVIATION",
+      "approvalRef": "User approved the Naquadah Fuel Refinery dependency substitution table on 2026-09-08 and requested reactor fuel closure on 2026-09-08",
+      "source": "GoodGenerator RecipeLoader uranium, thorium, plutonium, MkI and MkII liquid-fuel production routes; duration/EU/t identify the representative thorium excitation step",
+      "recipeType": "mixer/fusion_reactor/chemical_reactor/large_chemical_reactor/assembler/implosion_compressor",
+      "duration": 120,
+      "eut": 4096,
+      "evidence": "D:/tmp/GT5/src/main/java/goodgenerator/loader/RecipeLoader.java lines 140-284 and 610-644; Quantium->Naquadria, Draconium->Duranium, Electrum Flux->Europium"
+    },
+    {
+      "id": "depleted_fuel_recovery_chain",
+      "authority": "VERIFIED_SOURCE",
+      "source": "GoodGenerator centrifuge recovery recipes for all nine Mega Naquadah Reactor depleted fuels; duration/EU/t identify the MkI recovery step",
+      "recipeType": "centrifuge",
+      "duration": 6000,
+      "eut": 2048,
+      "evidence": "D:/tmp/GT5/src/main/java/goodgenerator/loader/RecipeLoader.java lines 1441-1605"
+    },
+    {
+      "id": "naquadah_reactor_core",
+      "authority": "APPROVED_DEVIATION",
+      "approvalRef": "User approved spec on 2026-09-07",
+      "source": "Modern replacement for absent Large Naquadah Reactor",
+      "recipeType": "assembly_line",
+      "duration": 1200,
+      "eut": 524288
+    },
+    {
+      "id": "field_restriction_casing",
+      "authority": "APPROVED_DEVIATION",
+      "approvalRef": "User approved spec on 2026-09-07",
+      "source": "GoodGenerator LNR casing adapted to Modern",
+      "recipeType": "assembly_line",
+      "duration": 400,
+      "eut": 2048
+    },
+    {
+      "id": "mining_black_plutonium_casing",
+      "authority": "APPROVED_DEVIATION",
+      "approvalRef": "User approved spec on 2026-09-07",
+      "source": "GT5 casing adapted to Black Titanium",
+      "recipeType": "assembly_line",
+      "duration": 50,
+      "eut": 16
+    },
+    {
+      "id": "particle_beam_guidance_pipe_casing",
+      "authority": "APPROVED_DEVIATION",
+      "approvalRef": "User approved spec on 2026-09-07",
+      "source": "Dedicated Modern construction recipe",
+      "recipeType": "assembly_line",
+      "duration": 200,
+      "eut": 131072
+    },
+    {
+      "id": "mega_naquadah_reactor",
+      "authority": "APPROVED_DEVIATION",
+      "approvalRef": "User approved spec on 2026-09-07",
+      "source": "TST controller recipe with approved Modern substitutions",
+      "recipeType": "assembly_line",
+      "duration": 8000,
+      "eut": 2147483647
+    }
+  ],
+  "textures": [
+    {
+      "role": "controller front idle",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_front",
+      "localPath": "textures/10_MegaNqReactor/overlay_front.png",
+      "sha256": "4f484defbce903c3a716422c9b0e1ee0516aae962e9a2b92424d9a16297f91fc",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "controller front active",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_front_active",
+      "localPath": "textures/10_MegaNqReactor/overlay_front_active.png",
+      "sha256": "4f88056eb6d4af05892f3a407e5860b84659ef732753d54ae0bb4b9fac52e0a0",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "controller front idle emissive",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_front_emissive",
+      "localPath": "textures/10_MegaNqReactor/overlay_front_emissive.png",
+      "sha256": "232c2eac760eae604f9dd43352c0b272396b7cfaf220081b54583b6d0cbc2320",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "controller front active emissive",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_front_active_emissive",
+      "localPath": "textures/10_MegaNqReactor/overlay_front_active_emissive.png",
+      "sha256": "c7e426b2e5c553bbbf2a61fbfdbc7247dde13fb3516dc808f34fff49d1dee955",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "controller back idle",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_back",
+      "localPath": "textures/10_MegaNqReactor/overlay_back.png",
+      "sha256": "951ac9efe4c18e5930820cda99991cc8b3f5b231f53efc6a4416455b9e2a4310",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "controller back active",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_back_active",
+      "localPath": "textures/10_MegaNqReactor/overlay_back_active.png",
+      "sha256": "bce299a8a16ccdb516bbae4e125372db2eefc254e2e4ac1faa6f6d1117e5459b",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "controller side idle",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_side",
+      "localPath": "textures/10_MegaNqReactor/overlay_side.png",
+      "sha256": "6c2c11a7242f0acdc6df2c8b100a069bd65ac2a608bb872a18634cc34567395d",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "controller side active",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_side_active",
+      "localPath": "textures/10_MegaNqReactor/overlay_side_active.png",
+      "sha256": "a3267785567a899eac8e31af1020e0189ebf6993fa75cd24eafee438a76728eb",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "controller top idle",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_top",
+      "localPath": "textures/10_MegaNqReactor/overlay_top.png",
+      "sha256": "0b9316fc6bfd80c9a69c732d87a267deb7740e69c961df01d51bba2b33451204",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "controller top active",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/multiblock/mega_naquadah_reactor/overlay_top_active",
+      "localPath": "textures/10_MegaNqReactor/overlay_top_active.png",
+      "sha256": "bfaea61a35cfdac867c18c8007eae9a1526d809bddbc1e4423d198089364a92e",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "B field restriction casing",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/casings/field_restriction_casing",
+      "localPath": "texture_block_casing/09_MegaNqReactor/B_L1641_O1_Loaders.MAR_Casing_m0_1e580e9_MAR_Casing.png",
+      "sha256": "3ce17234789e4f8350e7dfa9379f118847d4be89b8c9062d91d6633f089f69e2",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "D mining black plutonium casing",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/casings/mining_black_plutonium_casing",
+      "localPath": "texture_block_casing/09_MegaNqReactor/D_L1633_O1_sBlockCasings8_m3_6addb4a_MACHINE_CASING_MINING_BLACKPLUTONIUM.png",
+      "sha256": "9216e7f915c17b0abea87b76ec089f3b08ae69b34a20dbbaa0a323c2aa1a806d",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "E particle beam guidance pipe casing",
+      "status": "VERIFIED_LOCAL",
+      "authority": "locked source library",
+      "resource": "tstmodern:block/casings/particle_beam_guidance_pipe_casing",
+      "localPath": "texture_block_casing/09_MegaNqReactor/E_L1643_O1_sBlockCasings9_m14_e2f905b_BLOCK_QUARK_PIPE.png",
+      "sha256": "5358bbdf30abcc007eb450cec8b30f77d5a0342d1bf7055a00fbd203921a725b",
+      "sourceEvidence": "texture-source-baseline.json"
+    },
+    {
+      "role": "A glass family",
+      "status": "VERIFIED_NATIVE",
+      "authority": "approved GTCEu equivalent",
+      "resource": "gtceu:block/casings/transparent/fusion_glass"
+    },
+    {
+      "role": "C dimensional bridge casing",
+      "status": "VERIFIED_LOCAL",
+      "authority": "existing exact source hash",
+      "resource": "tstmodern:block/casings/dimensional_bridge_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/dimensional_bridge_casing.png",
+      "sha256": "b1612231314dee5b6f356259211c8a34ef302a954faf47c5dc1ec40ead628226",
+      "sourceEvidence": "MegaNqReactor casing catalog"
+    },
+    {
+      "role": "F iridium reinforced neutronium casing",
+      "status": "VERIFIED_LOCAL",
+      "authority": "existing exact source hash",
+      "resource": "tstmodern:block/casings/iridium_reinforced_neutronium_casing",
+      "localPath": "src/main/resources/assets/tstmodern/textures/block/casings/iridium_reinforced_neutronium_casing.png",
+      "sha256": "faf3d8b7222074d26a6a8dd72035e10656212096fbe5ff565815a7b5cd81ff84",
+      "sourceEvidence": "MegaNqReactor casing catalog"
+    }
+  ],
+  "approvedDeviations": [
+    "User approved removing the legacy input-energy hatch requirement on 2026-09-07 because MegaNqReactor is a generator and never consumes EU.",
+    "User approved the 2026-09-07 spec: absent Large Naquadah Reactor becomes an obtainable Naquadah Reactor Core component.",
+    "User approved controller construction fluid substitutions and dense Duranium.",
+    "User approved Research Station conversion: Data Orb for new casings/components and Data Module for the UIV controller.",
+    "User approved exact missing operational fluid identities while initially deferring the absent GoodGenerator upstream fuel-refinery chain.",
+    "User requested reactor recipe closure on 2026-09-08; the already-approved refinery mappings Quantium to Naquadria, Draconium to Duranium, and Electrum Flux to Europium apply to the recovered upstream chain.",
+    "The dedicated Particle Beam Guidance Pipe Casing recipe uses an obtainable Huge Naquadah Fluid Pipe because GTCEu 7.4 has no Naquadah Alloy pipe material property; inventing pipe statistics would create an unsupported material family.",
+    "User approved on 2026-09-08 an obtainable UV Large Chemical Reactor route from PCB Coolant and Helium to Super Coolant because the stored GT5 sources only provide its recovery loop."
+  ],
+  "unresolved": []
+}

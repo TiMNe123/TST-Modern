@@ -1,0 +1,10 @@
+{
+  "generatedAt": "2026-08-20T11:53:27.432Z",
+  "sourceTST": "D:/tmp/TST",
+  "sourceGT5": "D:/tmp/GT5",
+  "machineCount": 25,
+  "rows": 408,
+  "foundRows": 397,
+  "missingRows": 11,
+  "copiedFiles": 978
+}

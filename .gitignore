@@ -31,9 +31,7 @@ desktop.ini
 run-data/
 /.agents/
 /textures/
-PORTING_NOTES.md
 /texture_block_casing/
-/.codex*/
 /outputs/
 /src/test/
 /brain/

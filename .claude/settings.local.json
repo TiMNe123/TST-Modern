@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \\(Get-Content graphify-out\\\\.graphify_python\\) graphify-out\\\\run_b0.py)",
+      "PowerShell(& \\(Get-Content graphify-out\\\\.graphify_python\\) graphify-out\\\\run_ast.py)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "claude-flow"
+  ],
+  "enableAllProjectMcpServers": true
+}

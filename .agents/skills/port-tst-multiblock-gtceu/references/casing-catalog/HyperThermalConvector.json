@@ -1,0 +1,426 @@
+{
+  "machine": "HyperThermalConvector",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 42,
+      "sourceLine": 139,
+      "source": {
+        "block": "ofBlock( getMaterialBlock(MaterialsAlloy.HS188A, BasicBlock.BlockTypes.STANDARD) != null ? getMaterialBlock(MaterialsAlloy.HS188A, BasicBlock.BlockTypes.STANDARD) : Blocks.stone, 0)",
+        "meta": "",
+        "type": "unresolved",
+        "expression": "ofBlock( getMaterialBlock(MaterialsAlloy.HS188A, BasicBlock.BlockTypes.STANDARD) != null ? getMaterialBlock(MaterialsAlloy.HS188A, BasicBlock.BlockTypes.STANDARD) : Blocks.stone, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "block1.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 42,
+      "sourceLine": 146,
+      "source": {
+        "block": "ofBlock( getMaterialBlock(MaterialsAlloy.QUANTUM, BasicBlock.BlockTypes.STANDARD) != null ? getMaterialBlock(MaterialsAlloy.QUANTUM, BasicBlock.BlockTypes.STANDARD) : Blocks.stone, 0)",
+        "meta": "",
+        "type": "unresolved",
+        "expression": "ofBlock( getMaterialBlock(MaterialsAlloy.QUANTUM, BasicBlock.BlockTypes.STANDARD) != null ? getMaterialBlock(MaterialsAlloy.QUANTUM, BasicBlock.BlockTypes.STANDARD) : Blocks.stone, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "block1.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 692,
+      "sourceLine": 153,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings10",
+        "meta": "11",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings10, 11)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EXTREME_DENSITY_CASING.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 304,
+      "sourceLine": 154,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 1)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_ALUMINIUM_FROSTPROOF",
+      "sourceTextureNames": [
+        "MACHINE_CASING_FROST_PROOF.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 314,
+      "sourceLine": 155,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings4",
+        "meta": "14",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings4, 14)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_MINING_OSMIRIDIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 60,
+      "sourceLine": 156,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings6",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings6, 10)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_TANK_10.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 763,
+      "sourceLine": 157,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "7",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 7)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_IRIDIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 348,
+      "sourceLine": 158,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 10)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_RADIANT_NAQUADAH_ALLOY.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "I",
+      "option": 1,
+      "occurrences": 18,
+      "sourceLine": 159,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings9",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings9, 1)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FILTER_CASING",
+      "sourceTextureNames": [
+        "MACHINE_CASING_VENT_T2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "J",
+      "option": 1,
+      "occurrences": 20,
+      "sourceLine": 160,
+      "source": {
+        "block": "Materials.Iridium",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.Iridium)"
+      },
+      "resolution": "direct_native",
+      "target": "Predicates.frames(GTMaterials.Iridium)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "K",
+      "option": 1,
+      "occurrences": 38,
+      "sourceLine": 161,
+      "source": {
+        "block": "Materials.CosmicNeutronium",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.CosmicNeutronium)"
+      },
+      "resolution": "equivalent_review",
+      "target": "Predicates.frames(GTMaterials.Neutronium)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "L",
+      "option": 1,
+      "occurrences": 168,
+      "sourceLine": 162,
+      "source": {
+        "block": "Loaders.pressureResistantWalls",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(Loaders.pressureResistantWalls, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "TSTBlocks.PRESSURE_RESISTANT_WALL",
+      "sourceTextureNames": [
+        "pressureResistantWalls.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Dedicated original casing approved after the GTCEu equivalent review."
+    },
+    {
+      "symbol": "M",
+      "option": 1,
+      "occurrences": 786,
+      "sourceLine": 163,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsDyson",
+        "meta": "9",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsDyson, 9)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "Floor.png",
+        "Floor_Side.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "N",
+      "option": 1,
+      "occurrences": 121,
+      "sourceLine": 164,
+      "source": {
+        "block": "TstBlocks.MetaBlockCasing02",
+        "meta": "2",
+        "type": "block",
+        "expression": "ofBlock(TstBlocks.MetaBlockCasing02, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "O",
+      "option": 1,
+      "occurrences": 126,
+      "sourceLine": 165,
+      "source": {
+        "block": "TstBlocks.MetaBlockCasing02",
+        "meta": "3",
+        "type": "block",
+        "expression": "ofBlock(TstBlocks.MetaBlockCasing02, 3)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "3.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "P",
+      "option": 1,
+      "occurrences": 480,
+      "sourceLine": 166,
+      "source": {
+        "block": "TstBlocks.MetaBlockCasing02",
+        "meta": "4",
+        "type": "block",
+        "expression": "ofBlock(TstBlocks.MetaBlockCasing02, 4)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "4.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "Q",
+      "option": 1,
+      "occurrences": 96,
+      "sourceLine": 167,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "8",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 8)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FUSION_CASING",
+      "sourceTextureNames": [
+        "MACHINE_CASING_CONTAINMENT_FIELD.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "R",
+      "option": 1,
+      "occurrences": 2,
+      "sourceLine": 168,
+      "source": {
+        "block": "TstBlocks.MetaBlockCasing02",
+        "meta": "2",
+        "type": "block",
+        "expression": "buildHatchAdder(TST_HyperThermalConvector.class).hatchClass(MTEHatchInput.class) .adder(TST_HyperThermalConvector::addHotFluidInputHatch) .hint(1) .casingIndex(TstBlocks.MetaBlockCasing02.getTextureIndex(2)) .buildAndChain(TstBlocks.MetaBlockCasing02, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "S",
+      "option": 1,
+      "occurrences": 2,
+      "sourceLine": 175,
+      "source": {
+        "block": "TstBlocks.MetaBlockCasing02",
+        "meta": "2",
+        "type": "block",
+        "expression": "buildHatchAdder(TST_HyperThermalConvector.class).hatchClass(MTEHatchOutput.class) .adder(TST_HyperThermalConvector::addColdFluidOutputHatch) .hint(2) .casingIndex(TstBlocks.MetaBlockCasing02.getTextureIndex(2)) .buildAndChain(TstBlocks.MetaBlockCasing02, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "T",
+      "option": 1,
+      "occurrences": 2,
+      "sourceLine": 182,
+      "source": {
+        "block": "TstBlocks.MetaBlockCasing02",
+        "meta": "2",
+        "type": "block",
+        "expression": "buildHatchAdder(TST_HyperThermalConvector.class).hatchClass(MTEHatchOutput.class) .adder(TST_HyperThermalConvector::addSteamOutputHatch) .hint(3) .casingIndex(TstBlocks.MetaBlockCasing02.getTextureIndex(2)) .buildAndChain(TstBlocks.MetaBlockCasing02, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "U",
+      "option": 1,
+      "occurrences": 2,
+      "sourceLine": 189,
+      "source": {
+        "block": "TstBlocks.MetaBlockCasing02",
+        "meta": "2",
+        "type": "block",
+        "expression": "buildHatchAdder(TST_HyperThermalConvector.class).hatchClass(MTEHatchInput.class) .adder(TST_HyperThermalConvector::addDistilledWaterInputHatch) .hint(4) .casingIndex(TstBlocks.MetaBlockCasing02.getTextureIndex(2)) .buildAndChain(TstBlocks.MetaBlockCasing02, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/03_HyperThermalConvector",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}

@@ -1,0 +1,447 @@
+{
+  "machine": "LargeIndustrialCokingFactory",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 10,
+      "sourceLine": 166,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "15",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 15)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TUNGSTENSTEEL_PIPE",
+      "sourceTextureNames": [
+        "MACHINE_CASING_PIPE_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 10,
+      "sourceLine": 167,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings3",
+        "meta": "15",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings3, 15)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.FIREBOX_TUNGSTENSTEEL",
+      "sourceTextureNames": [
+        "MACHINE_CASING_FIREBOX_TUNGSTENSTEEL_TOP.png",
+        "MACHINE_CASING_FIREBOX_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 304,
+      "sourceLine": 168,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings4",
+        "meta": "0",
+        "type": "block",
+        "expression": "HatchElementBuilder .<TST_LargeIndustrialCokingFactory>builder() .atLeast(InputBus, InputHatch, OutputBus, OutputHatch, Energy.or(ExoticEnergy)) .adder(TST_LargeIndustrialCokingFactory::addToMachineList) .hint(1) .casingIndex(48) .buildAndChain(GregTechAPI.sBlockCasings4, 0)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TUNGSTENSTEEL_ROBUST",
+      "sourceTextureNames": [
+        "MACHINE_CASING_ROBUST_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "0",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_CUPRONICKEL",
+      "sourceTextureNames": [
+        "MACHINE_COIL_CUPRONICKEL_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "1",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_KANTHAL",
+      "sourceTextureNames": [
+        "MACHINE_COIL_KANTHAL_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "2",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_NICHROME",
+      "sourceTextureNames": [
+        "MACHINE_COIL_NICHROME_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "3",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_TUNGSTENSTEEL_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "4",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_HSSG",
+      "sourceTextureNames": [
+        "MACHINE_COIL_HSSG_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "5",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_NAQUADAH",
+      "sourceTextureNames": [
+        "MACHINE_COIL_NAQUADAH_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "6",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_NAQUADAHALLOY_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "7",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_ELECTRUMFLUX_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "8",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_AWAKENEDDRACONIUM_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "9",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_HSSS_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "10",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_TRINIUM",
+      "sourceTextureNames": [
+        "MACHINE_COIL_TRINIUM_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "11",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_INFINITY_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "12",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_HYPOGEN_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 177,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "13",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil( TST_LargeIndustrialCokingFactory::setCoilLevel, TST_LargeIndustrialCokingFactory::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_ETERNAL_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 593,
+      "sourceLine": 184,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsNH",
+        "meta": "2",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsNH, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_ULV_SIDE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 579,
+      "sourceLine": 185,
+      "source": {
+        "block": "ModBlocks.blockCasingsMisc",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(ModBlocks.blockCasingsMisc, 1)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_STABLE_TANTALLOY61.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 32,
+      "sourceLine": 186,
+      "source": {
+        "block": "ModBlocks.blockCasingsMisc",
+        "meta": "3",
+        "type": "block",
+        "expression": "ofBlock(ModBlocks.blockCasingsMisc, 3)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_FIREBOX_STEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 275,
+      "sourceLine": 187,
+      "source": {
+        "block": "Materials.BlackSteel",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.BlackSteel)"
+      },
+      "resolution": "direct_native",
+      "target": "Predicates.frames(GTMaterials.BlackSteel)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "I",
+      "option": 1,
+      "occurrences": 243,
+      "sourceLine": 188,
+      "source": {
+        "block": "Materials.Steel",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.Steel)"
+      },
+      "resolution": "direct_native",
+      "target": "Predicates.frames(GTMaterials.Steel)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/22_LargeIndustrialCokingFactory",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}
+

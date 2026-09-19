@@ -1,0 +1,245 @@
+{
+  "machine": "MegaStoneBreaker",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 15,
+      "sourceLine": 233,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings11",
+        "meta": "7",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings11, 7)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_ITEM_PIPE_BLACK_PLUTONIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 172,
+      "sourceLine": 234,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "15",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 15)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TUNGSTENSTEEL_PIPE",
+      "sourceTextureNames": [
+        "MACHINE_CASING_PIPE_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 25,
+      "sourceLine": 235,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "7",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 7)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_IRIDIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 24,
+      "sourceLine": 236,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings9",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings9, 1)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FILTER_CASING",
+      "sourceTextureNames": [
+        "MACHINE_CASING_VENT_T2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 129,
+      "sourceLine": 237,
+      "source": {
+        "block": "Materials.CosmicNeutronium",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofFrame(Materials.CosmicNeutronium)"
+      },
+      "resolution": "equivalent_review",
+      "target": "Predicates.frames(GTMaterials.Neutronium)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 96,
+      "sourceLine": 238,
+      "source": {
+        "block": "ModBlocks.blockCasings2Misc",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(ModBlocks.blockCasings2Misc, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_STABLE_RED_STEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 396,
+      "sourceLine": 239,
+      "source": {
+        "block": "ModBlocks.blockCasings2Misc",
+        "meta": "11",
+        "type": "block",
+        "expression": "ofBlock(ModBlocks.blockCasings2Misc, 11)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_STABLE_TANTALLOY61.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 54,
+      "sourceLine": 240,
+      "source": {
+        "block": "ModBlocks.blockCasingsMisc",
+        "meta": "14",
+        "type": "block",
+        "expression": "ofBlock(ModBlocks.blockCasingsMisc, 14)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_FIREBOX_STABALLOY.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "I",
+      "option": 1,
+      "occurrences": 258,
+      "sourceLine": 241,
+      "source": {
+        "block": "Loaders.pressureResistantWalls",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(Loaders.pressureResistantWalls, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "TSTBlocks.PRESSURE_RESISTANT_WALL",
+      "sourceTextureNames": [
+        "pressureResistantWalls.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Dedicated original casing approved after the GTCEu equivalent review."
+    },
+    {
+      "symbol": "J",
+      "option": 1,
+      "occurrences": 4,
+      "sourceLine": 242,
+      "source": {
+        "block": "ModBlocks.blockCasings2Misc",
+        "meta": "0",
+        "type": "block",
+        "expression": "HatchElementBuilder.<TST_MegaStoneBreaker>builder() .atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy)) .adder(TST_MegaStoneBreaker::addToMachineList) .hint(1) .casingIndex(TAE.getIndexFromPage(1, 0)) .buildAndChain(ModBlocks.blockCasings2Misc, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_STABLE_RED_STEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "L",
+      "option": 1,
+      "occurrences": 1,
+      "sourceLine": 250,
+      "source": {
+        "block": "ModBlocks.blockCasings2Misc",
+        "meta": "0",
+        "type": "block",
+        "expression": "buildHatchAdder(TST_MegaStoneBreaker.class).hatchClass(MTEHatchInput.class) .adder(TST_MegaStoneBreaker::addLavaHatch) .casingIndex(TAE.getIndexFromPage(1, 0)) .hint(2) .buildAndChain(ModBlocks.blockCasings2Misc, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_STABLE_RED_STEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "W",
+      "option": 1,
+      "occurrences": 1,
+      "sourceLine": 257,
+      "source": {
+        "block": "ModBlocks.blockCasings2Misc",
+        "meta": "0",
+        "type": "block",
+        "expression": "buildHatchAdder(TST_MegaStoneBreaker.class).hatchClass(MTEHatchInput.class) .adder(TST_MegaStoneBreaker::addWaterHatch) .casingIndex(TAE.getIndexFromPage(1, 0)) .hint(3) .buildAndChain(ModBlocks.blockCasings2Misc, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_STABLE_RED_STEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/07_MegaStoneBreaker",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}

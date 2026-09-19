@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "machine": "IncompactCyclotron",
+  "auditStatus": "AUDIT_COMPLETE",
+  "branch": "dev",
+  "sourceEvidence": {
+    "controller": {"path":"D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/TST_IncompactCyclotron.java","symbol":"TST_IncompactCyclotron","hash":"69e4e28ab40468a4b968d96f11045d9732ac4487c7e55d35c77f199627aec161"},
+    "inheritance": [
+      {"path":"D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/multiMachineClasses/GTCM_MultiMachineBase.java","symbol":"GTCM_MultiMachineBase","hash":"9f0897e5739c09a3ff3a95675bb2e8c4326aaccaf01a657b02a82034400f8138"},
+      {"path":"D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/multiMachineClasses/processingLogics/GTCM_ProcessingLogic.java","symbol":"GTCM_ProcessingLogic","hash":"64af25ab090dc0bc63c225e01248188744e47094fddff62cf594fce166cf2070"}
+    ],
+    "recipePool": {"path":"D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/recipe/machineRecipe/original/ParticleColliderRecipePool.java","symbol":"ParticleColliderRecipePool.loadRecipes","hash":"1960c2288c9b3ef0946cd2d6bc3c92d6346c66ba75ed3149e26b4ce30726f1a7"}
+  },
+  "structure": {
+    "dimensions": [47, 7, 47],
+    "sourceAxisOrder": ["height/layer", "depth/row", "right/column"],
+    "targetAxisMap": {"RIGHT":"source column","DOWN":"source layer","BACK":"source row"},
+    "controller": {"symbol":"~","count":1,"outwardFacing":"source front; horizontal at runtime"},
+    "symbols": [
+      {"symbol":"~","occurrences":1,"source":{"registry":"TST controller","meta":"19058","evidence":"shapeMain and checkPiece offsets 23,3,40"},"target":{"registryOrPredicate":"IncompactCyclotronDefinition controller","decision":"dedicated"}},
+      {"symbol":"A","occurrences":31,"source":{"registry":"BartWorks borosilicate glass","meta":"tier 10","evidence":"TST structure element A"},"target":{"registryOrPredicate":"GTBlocks.FUSION_GLASS","decision":"catalog-approved equivalent"}},
+      {"symbol":"B","occurrences":128,"source":{"registry":"miscutils:blockFrameGtQuantum","meta":"0","evidence":"TST structure element B"},"target":{"registryOrPredicate":"TSTBlocks.QUANTUM_FRAME","decision":"dedicated original texture"}},
+      {"symbol":"C","occurrences":560,"source":{"registry":"gtnhcommunitymod:MetaBlockCasing01","meta":"12","evidence":"TST structure element C"},"target":{"registryOrPredicate":"TSTBlocks.COMPACT_CYCLOTRON_COIL","decision":"dedicated original texture"}},
+      {"symbol":"D","occurrences":1664,"source":{"registry":"gtnhcommunitymod:MetaBlockCasing01","meta":"11","evidence":"TST structure element D"},"target":{"registryOrPredicate":"TSTBlocks.DENSE_CYCLOTRON_OUTER_CASING","decision":"dedicated original texture"}},
+      {"symbol":"E","occurrences":64,"source":{"registry":"hatch-or-borosilicate-glass","meta":"tier 10","evidence":"TST structure element E"},"target":{"registryOrPredicate":"Fusion Glass or recipe I/O/energy ability","decision":"catalog-approved equivalent"}},
+      {"symbol":"F","occurrences":32,"source":{"registry":"energy-hatch-or-MetaBlockCasing01","meta":"11","evidence":"TST structure element F"},"target":{"registryOrPredicate":"Dense Cyclotron Outer Casing or energy ability","decision":"dedicated original texture"}}
+    ]
+  },
+  "recipes": [
+    {"id":"cyclotron_hydrogen_ions","authority":"APPROVED_DEVIATION","source":"GT5 Generate Hydrogen Ion Recipe","recipeType":"cyclotron","duration":400,"eut":32768,"approvalRef":"user approved 2026-09-01; charge states collapse to one item"},
+    {"id":"cyclotron_hydrogen_plasma","authority":"VERIFIED_SOURCE","source":"GT5 Generate Hydrogen Plasma Recipe","recipeType":"cyclotron","duration":2400,"eut":32768,"approvalRef":"user approved 2026-09-01"},
+    {"id":"cyclotron_protons","authority":"VERIFIED_SOURCE","source":"GT5 Generate Protons Easily","recipeType":"cyclotron","duration":400,"eut":32768,"approvalRef":"user approved 2026-09-01"},
+    {"id":"cyclotron_particle_collider","authority":"VERIFIED_SOURCE","source":"TST ParticleColliderRecipePool.loadRecipes","recipeType":"cyclotron","duration":300,"eut":524288,"approvalRef":"user approved 2026-09-01"},
+    {"id":"cyclotron_unknown_to_protons","authority":"VERIFIED_SOURCE","source":"GT++ RecipesGregTech unknown-particle proton recipe","recipeType":"cyclotron","duration":400,"eut":32768,"approvalRef":"user approved particle utility expansion 2026-09-02"},
+    {"id":"cyclotron_quantum_anomaly","authority":"VERIFIED_SOURCE","source":"GT++ RecipesGregTech Quantum Anomaly recipe","recipeType":"cyclotron","duration":500,"eut":524288,"approvalRef":"user approved particle utility expansion 2026-09-02"},
+    {"id":"cyclotron_neptunium_238","authority":"VERIFIED_SOURCE","source":"GT++ RecipesGregTech Neptunium recipe","recipeType":"cyclotron","duration":100,"eut":2048,"approvalRef":"user approved TST/GTNH Pu-238 chain 2026-09-02"},
+    {"id":"cyclotron_strange_dust","authority":"VERIFIED_SOURCE","source":"GT++ RecipesGregTech Create Strange Dust recipe","recipeType":"cyclotron","duration":18000,"eut":131072,"approvalRef":"user approved particle utility expansion 2026-09-02"},
+    {"id":"ender_pearl_fluid","authority":"APPROVED_DEVIATION","source":"Modern semantic bridge for Thermal Foundation Resonant Ender","recipeType":"extractor","duration":100,"eut":128,"approvalRef":"user approved native shared-fluid compatibility 2026-09-02"},
+    {"id":"quantum_frame","authority":"APPROVED_DEVIATION","source":"GT++ generated Quantum frame form","recipeType":"assembly line UHV","duration":600,"eut":2000000,"research":{"type":"station","researchId":"quantum_frame","dataItem":"gtceu:data_orb","cwuPerTick":32,"totalCWU":144000},"approvalRef":"user approved Modern progression and Research Station policy 2026-09-01"},
+    {"id":"dense_cyclotron_outer_casing","authority":"APPROVED_DEVIATION","source":"TST GTCMMachineRecipes Incompact Cyclotron region","recipeType":"assembly line UHV","duration":600,"eut":2000000,"research":{"type":"station","researchId":"dense_cyclotron_outer_casing","dataItem":"gtceu:data_orb","cwuPerTick":32,"totalCWU":144000},"approvalRef":"user approved semantic substitutions and Research Station policy 2026-09-01"},
+    {"id":"compact_cyclotron_coil","authority":"APPROVED_DEVIATION","source":"TST GTCMMachineRecipes Incompact Cyclotron region","recipeType":"assembly line UHV","duration":1200,"eut":2000000,"research":{"type":"station","researchId":"compact_cyclotron_coil","dataItem":"gtceu:data_orb","cwuPerTick":32,"totalCWU":288000},"approvalRef":"user approved semantic substitutions and Research Station policy 2026-09-01"},
+    {"id":"incompact_cyclotron","authority":"APPROVED_DEVIATION","source":"TST GTCMMachineRecipes Incompact Cyclotron region","recipeType":"assembly line UEV","duration":18000,"eut":8000000,"research":{"type":"station","researchId":"incompact_cyclotron","dataItem":"gtceu:data_module","cwuPerTick":64,"totalCWU":144000},"approvalRef":"user approved semantic substitutions and Research Station policy 2026-09-01"}
+  ],
+  "textures": [
+    {"role":"controller idle","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/incompact_cyclotron/overlay_front","localPath":"textures/07_IncompactCyclotron/overlay_front.png","sha256":"cb25cd1c58a246aea7d6e302b34e38e490a195aadd846f2ca8ed4de6271f3ab6","sourceEvidence":"locked texture baseline"},
+    {"role":"controller idle emissive","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/incompact_cyclotron/overlay_front_emissive","localPath":"textures/07_IncompactCyclotron/overlay_front_emissive.png","sha256":"7289ad414da325c2677f9d4ed00522e22c5cee58cf798e823bf0b838f0734f64","sourceEvidence":"locked texture baseline"},
+    {"role":"controller active","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active","localPath":"textures/07_IncompactCyclotron/overlay_front_active.png","sha256":"7499d1f93ee9f0aadd1e2d850fcfc3af8d240e45a6c81001eb56d48ae919e4d3","sourceEvidence":"locked texture baseline"},
+    {"role":"controller active emissive","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/incompact_cyclotron/overlay_front_active_emissive","localPath":"textures/07_IncompactCyclotron/overlay_front_active_emissive.png","sha256":"28cad4d7d2e6c796d4fe6f763f22ee1debd90d7f24b7ab5d4be46352e03e701f","sourceEvidence":"locked texture baseline"},
+    {"role":"quantum frame","status":"VERIFIED_LOCAL","authority":"GT5/TST source texture","resource":"tstmodern:block/casings/quantum_frame","localPath":"texture_block_casing/06_IncompactCyclotron/B_L144_O1_Objects.requireNonNull_Block.getBlockFromName_miscutils_m0_2d5001b_frameGt.png","sha256":"441634790947dba2cc1ba88bef41af8a6941eff24ecf820a5c892a2b2c40ef16","sourceEvidence":"casing catalog B"},
+    {"role":"compact cyclotron coil","status":"VERIFIED_LOCAL","authority":"TST MetaBlockCasing01:12","resource":"tstmodern:block/casings/compact_cyclotron_coil","localPath":"texture_block_casing/06_IncompactCyclotron/C_L147_O1_MetaBlockCasing01_m12_89634d8_12.png","sha256":"1bb25516ebc69026533a1a836e83f94c18bfc8e872b1c4b20ed232a7dec914c3","sourceEvidence":"casing catalog C"},
+    {"role":"dense cyclotron outer casing","status":"VERIFIED_LOCAL","authority":"TST MetaBlockCasing01:11","resource":"tstmodern:block/casings/dense_cyclotron_outer_casing","localPath":"texture_block_casing/06_IncompactCyclotron/D_L148_O1_MetaBlockCasing01_m11_e8f1ddd_11.png","sha256":"e6e8c3537a0c272a4326b28ea21a73cdfc09f33ef091e1d6fff77e9b772ad14a","sourceEvidence":"casing catalog D/F"}
+  ],
+  "approvedDeviations": [
+    "Port the exact TST machine and a minimal closed Cyclotron recipe chain, not the whole GT++ addon recipe inventory.",
+    "Collapse Hydrogen ion charge-state variants into one Hydrogen Ion item.",
+    "Keep source maxParallel 256 and add the GTCEu Parallel Control Hatch contribution.",
+    "Replace unavailable legacy construction components with approved native UHV/UEV semantic equivalents.",
+    "Use a mixed-casing renderer so E abilities inherit Fusion Glass and F energy abilities inherit Dense Cyclotron Outer Casing."
+    ,"Expand the minimal particle chain with verified GT++ Unknown Particle, Quantum Anomaly, Np-238/Pu-238, and Strange Dust recipes; use native GTCEu Ender Pearl fluid as the Resonant Ender bridge."
+  ],
+  "unresolved": []
+}

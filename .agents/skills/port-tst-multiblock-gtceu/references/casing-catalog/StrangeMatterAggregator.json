@@ -1,0 +1,406 @@
+{
+  "machine": "StrangeMatterAggregator",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 1992,
+      "sourceLine": 1394,
+      "source": {
+        "block": "sBlockCasingsBA0",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsBA0, 10)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_INNER_SPACETIME_REINFORCED_EOH_CASING.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 1702,
+      "sourceLine": 1395,
+      "source": {
+        "block": "sBlockCasingsBA0",
+        "meta": "11",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsBA0, 11)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_OUTER_SPACETIME_REINFORCED_EOH_CASING.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 1422,
+      "sourceLine": 1396,
+      "source": {
+        "block": "sBlockCasingsBA0",
+        "meta": "12",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsBA0, 12)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER_INFINITE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 164,
+      "sourceLine": 1397,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "9",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 9)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_TIMESPACE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 111,
+      "sourceLine": 1398,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 10)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_TELE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 80,
+      "sourceLine": 1399,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "14",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 14)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_ULTIMATE_FIELD.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 1632,
+      "sourceLine": 1400,
+      "source": {
+        "block": "BlockQuantumGlass.INSTANCE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(BlockQuantumGlass.INSTANCE, 0)"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FUSION_GLASS",
+      "sourceTextureNames": [
+        "blockQuantumGlass.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 8,
+      "sourceLine": 1401,
+      "source": {
+        "block": "sBlockCasingsBA0",
+        "meta": "12",
+        "type": "block",
+        "expression": "// H -> ofBlock...(gt.blockcasingsBA0, 12, ...); // modular hatches and output bus hatches HatchElementBuilder.<TST_StrangeMatterAggregator>builder() .atLeast(OutputBus, OutputHatch, SpeedController, PowerConsumptionController) .adder(TST_StrangeMatterAggregator::addToMachineList) .hint(1) .casingIndex(1024) .buildAndChain(ofBlock(sBlockCasingsBA0, 12))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER_INFINITE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "I",
+      "option": 1,
+      "occurrences": 1,
+      "sourceLine": 1410,
+      "source": {
+        "block": "sBlockCasingsBA0",
+        "meta": "12",
+        "type": "block",
+        "expression": "// I -> ofBlock...(gt.blockcasingsBA0, 12, ...); // input hatch at left which input space-time // holding consumables HatchElementBuilder.<TST_StrangeMatterAggregator>builder() .atLeast(InputHatch) .adder(TST_StrangeMatterAggregator::addSpaceTimeMaintenanceConsumablesInputHatchToMachineList) .hint(3) .casingIndex(1024) .buildAndChain(ofBlock(sBlockCasingsBA0, 12))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER_INFINITE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "J",
+      "option": 1,
+      "occurrences": 2,
+      "sourceLine": 1420,
+      "source": {
+        "block": "sBlockCasingsBA0",
+        "meta": "12",
+        "type": "block",
+        "expression": "// J -> ofBlock...(gt.blockcasingsBA0, 12, ...); // normal input at up and down hatches and buses HatchElementBuilder.<TST_StrangeMatterAggregator>builder() .atLeast(InputBus, InputHatch) .adder(TST_StrangeMatterAggregator::addToMachineList) .hint(2) .casingIndex(1024) .buildAndChain(ofBlock(sBlockCasingsBA0, 12))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER_INFINITE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "K",
+      "option": 1,
+      "occurrences": 1,
+      "sourceLine": 1429,
+      "source": {
+        "block": "sBlockCasingsBA0",
+        "meta": "12",
+        "type": "block",
+        "expression": "// K -> ofBlock...(gt.blockcasingsBA0, 12, ...); // input bus at right which input Core Element to // set machine processing tier. HatchElementBuilder.<TST_StrangeMatterAggregator>builder() .atLeast(InputBus) .adder(TST_StrangeMatterAggregator::addCoreElementInputBusToMachineList) .hint(4) .casingIndex(1024) .buildAndChain(ofBlock(sBlockCasingsBA0, 12))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_POWER_INFINITE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "X",
+      "option": 1,
+      "occurrences": 48,
+      "sourceLine": 1439,
+      "source": {
+        "block": "TstBlocks.SpaceTimeOscillator",
+        "meta": "0",
+        "type": "block",
+        "expression": "withChannel( \"oscillator\", ofBlocksTiered( TST_StrangeMatterAggregator::getSpaceTimeOscillatorTier, ImmutableList.of( Pair.of(TstBlocks.SpaceTimeOscillator, 0), Pair.of(TstBlocks.SpaceTimeOscillator, 1), Pair.of(TstBlocks.SpaceTimeOscillator, 2)), -1, (m, t) -> m.oscillatorTier = t, m -> m.oscillatorTier))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "0.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "X",
+      "option": 2,
+      "occurrences": 48,
+      "sourceLine": 1439,
+      "source": {
+        "block": "TstBlocks.SpaceTimeOscillator",
+        "meta": "1",
+        "type": "block",
+        "expression": "withChannel( \"oscillator\", ofBlocksTiered( TST_StrangeMatterAggregator::getSpaceTimeOscillatorTier, ImmutableList.of( Pair.of(TstBlocks.SpaceTimeOscillator, 0), Pair.of(TstBlocks.SpaceTimeOscillator, 1), Pair.of(TstBlocks.SpaceTimeOscillator, 2)), -1, (m, t) -> m.oscillatorTier = t, m -> m.oscillatorTier))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "1.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "X",
+      "option": 3,
+      "occurrences": 48,
+      "sourceLine": 1439,
+      "source": {
+        "block": "TstBlocks.SpaceTimeOscillator",
+        "meta": "2",
+        "type": "block",
+        "expression": "withChannel( \"oscillator\", ofBlocksTiered( TST_StrangeMatterAggregator::getSpaceTimeOscillatorTier, ImmutableList.of( Pair.of(TstBlocks.SpaceTimeOscillator, 0), Pair.of(TstBlocks.SpaceTimeOscillator, 1), Pair.of(TstBlocks.SpaceTimeOscillator, 2)), -1, (m, t) -> m.oscillatorTier = t, m -> m.oscillatorTier))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "Y",
+      "option": 1,
+      "occurrences": 48,
+      "sourceLine": 1452,
+      "source": {
+        "block": "TstBlocks.SpaceTimeConstraintor",
+        "meta": "0",
+        "type": "block",
+        "expression": "withChannel( \"constraintor\", ofBlocksTiered( TST_StrangeMatterAggregator::getSpaceTimeConstraintorTier, ImmutableList.of( Pair.of(TstBlocks.SpaceTimeConstraintor, 0), Pair.of(TstBlocks.SpaceTimeConstraintor, 1), Pair.of(TstBlocks.SpaceTimeConstraintor, 2)), -1, (m, t) -> m.constraintorTier = t, m -> m.constraintorTier))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "0.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "Y",
+      "option": 2,
+      "occurrences": 48,
+      "sourceLine": 1452,
+      "source": {
+        "block": "TstBlocks.SpaceTimeConstraintor",
+        "meta": "1",
+        "type": "block",
+        "expression": "withChannel( \"constraintor\", ofBlocksTiered( TST_StrangeMatterAggregator::getSpaceTimeConstraintorTier, ImmutableList.of( Pair.of(TstBlocks.SpaceTimeConstraintor, 0), Pair.of(TstBlocks.SpaceTimeConstraintor, 1), Pair.of(TstBlocks.SpaceTimeConstraintor, 2)), -1, (m, t) -> m.constraintorTier = t, m -> m.constraintorTier))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "1.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "Y",
+      "option": 3,
+      "occurrences": 48,
+      "sourceLine": 1452,
+      "source": {
+        "block": "TstBlocks.SpaceTimeConstraintor",
+        "meta": "2",
+        "type": "block",
+        "expression": "withChannel( \"constraintor\", ofBlocksTiered( TST_StrangeMatterAggregator::getSpaceTimeConstraintorTier, ImmutableList.of( Pair.of(TstBlocks.SpaceTimeConstraintor, 0), Pair.of(TstBlocks.SpaceTimeConstraintor, 1), Pair.of(TstBlocks.SpaceTimeConstraintor, 2)), -1, (m, t) -> m.constraintorTier = t, m -> m.constraintorTier))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "Z",
+      "option": 1,
+      "occurrences": 48,
+      "sourceLine": 1465,
+      "source": {
+        "block": "TstBlocks.SpaceTimeMerger",
+        "meta": "0",
+        "type": "block",
+        "expression": "withChannel( \"merger\", ofBlocksTiered( TST_StrangeMatterAggregator::getSpaceTimeMergerTier, ImmutableList.of( Pair.of(TstBlocks.SpaceTimeMerger, 0), Pair.of(TstBlocks.SpaceTimeMerger, 1), Pair.of(TstBlocks.SpaceTimeMerger, 2)), -1, (m, t) -> m.mergerTier = t, m -> m.mergerTier))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "0.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "Z",
+      "option": 2,
+      "occurrences": 48,
+      "sourceLine": 1465,
+      "source": {
+        "block": "TstBlocks.SpaceTimeMerger",
+        "meta": "1",
+        "type": "block",
+        "expression": "withChannel( \"merger\", ofBlocksTiered( TST_StrangeMatterAggregator::getSpaceTimeMergerTier, ImmutableList.of( Pair.of(TstBlocks.SpaceTimeMerger, 0), Pair.of(TstBlocks.SpaceTimeMerger, 1), Pair.of(TstBlocks.SpaceTimeMerger, 2)), -1, (m, t) -> m.mergerTier = t, m -> m.mergerTier))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "1.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "Z",
+      "option": 3,
+      "occurrences": 48,
+      "sourceLine": 1465,
+      "source": {
+        "block": "TstBlocks.SpaceTimeMerger",
+        "meta": "2",
+        "type": "block",
+        "expression": "withChannel( \"merger\", ofBlocksTiered( TST_StrangeMatterAggregator::getSpaceTimeMergerTier, ImmutableList.of( Pair.of(TstBlocks.SpaceTimeMerger, 0), Pair.of(TstBlocks.SpaceTimeMerger, 1), Pair.of(TstBlocks.SpaceTimeMerger, 2)), -1, (m, t) -> m.mergerTier = t, m -> m.mergerTier))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "2.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/19_StrangeMatterAggregator",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}
+

@@ -1,0 +1,516 @@
+{
+  "machine": "GiantVacuumDryingFurnace",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 78,
+      "sourceLine": 245,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "sourceTextureNames": [
+        "BoronSilicateGlassBlock.png",
+        "ColoredBoronSilicateGlassBlock1.png",
+        "ColoredBoronSilicateGlassBlock2.png",
+        "ColoredBoronSilicateGlassBlock3.png",
+        "ColoredBoronSilicateGlassBlock4.png",
+        "ColoredBoronSilicateGlassBlock5.png",
+        "ColoredBoronSilicateGlassBlock6.png",
+        "HexaniteReinforcedBoronSilicateGlassBlock.png",
+        "HexaniteReinforcedBoronSilicateGlassBlockTransparent.png",
+        "InfinityReinforcedBoronSilicateGlassBlock.png",
+        "InfinityReinforcedBoronSilicateGlassBlockTransparent.png",
+        "IridiumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "OsmiumReinforcedBoronSilicateGlassBlock.png",
+        "RhodiumPlatedPalladiumReinforcedBoronSilicateGlassBlock.png",
+        "ThoriumYttriumGlass.png",
+        "TitaniumReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlockTransparent.png",
+        "TungstenSteelReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "EXOFOUNDRY_GLASS.png",
+        "GLASS_PH_RESISTANT.png",
+        "GLASS_QUARK_CONTAINMENT.png",
+        "GLASS_TINTED_INDUSTRIAL_BLACK.png",
+        "GLASS_TINTED_INDUSTRIAL_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_BROWN.png",
+        "GLASS_TINTED_INDUSTRIAL_CYAN.png",
+        "GLASS_TINTED_INDUSTRIAL_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_GREEN.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_LIME.png",
+        "GLASS_TINTED_INDUSTRIAL_MAGENTA.png",
+        "GLASS_TINTED_INDUSTRIAL_ORANGE.png",
+        "GLASS_TINTED_INDUSTRIAL_PINK.png",
+        "GLASS_TINTED_INDUSTRIAL_PURPLE.png",
+        "GLASS_TINTED_INDUSTRIAL_RED.png",
+        "GLASS_TINTED_INDUSTRIAL_WHITE.png",
+        "GLASS_TINTED_INDUSTRIAL_YELLOW.png",
+        "HAWKING_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW_GLOW.png",
+        "NANOCHIP_GLASS.png",
+        "OMNI_PURPOSE_INFINITY_FUSED_GLASS.png",
+        "blockQuantumGlass.png",
+        "antimatterContainmentCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 50,
+      "note": "Family động: GT5 chấp nhận nhiều loại kính; đã gom các texture kính hiện diện trong monorepo GT5."
+    },
+    {
+      "symbol": "S",
+      "option": 1,
+      "occurrences": 168,
+      "sourceLine": 246,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings4",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings4, 1)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_STAINLESS_CLEAN",
+      "sourceTextureNames": [
+        "MACHINE_CASING_CLEAN_STAINLESSSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 34,
+      "sourceLine": 247,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 1)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE",
+      "sourceTextureNames": [
+        "MACHINE_CASING_PIPE_POLYTETRAFLUOROETHYLENE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "V",
+      "option": 1,
+      "occurrences": 222,
+      "sourceLine": 248,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 0)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_PTFE_INERT",
+      "sourceTextureNames": [
+        "MACHINE_CASING_CHEMICALLY_INERT.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "I",
+      "option": 1,
+      "occurrences": 102,
+      "sourceLine": 249,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "7",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 7)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_IRIDIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 60,
+      "sourceLine": 250,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 1)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_ALUMINIUM_FROSTPROOF",
+      "sourceTextureNames": [
+        "MACHINE_CASING_FROST_PROOF.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 40,
+      "sourceLine": 251,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 1)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE",
+      "sourceTextureNames": [
+        "MACHINE_CASING_PIPE_POLYTETRAFLUOROETHYLENE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "J",
+      "option": 1,
+      "occurrences": 72,
+      "sourceLine": 252,
+      "source": {
+        "block": "ModBlocks.blockCasings4Misc",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofBlock(ModBlocks.blockCasings4Misc, 10)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "VACUUM_CASING_TOP.png",
+        "VACUUM_CASING_SIDE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "0",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_CUPRONICKEL",
+      "sourceTextureNames": [
+        "MACHINE_COIL_CUPRONICKEL_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "1",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_KANTHAL",
+      "sourceTextureNames": [
+        "MACHINE_COIL_KANTHAL_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "2",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_NICHROME",
+      "sourceTextureNames": [
+        "MACHINE_COIL_NICHROME_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "3",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_TUNGSTENSTEEL_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "4",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_HSSG",
+      "sourceTextureNames": [
+        "MACHINE_COIL_HSSG_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "5",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_NAQUADAH",
+      "sourceTextureNames": [
+        "MACHINE_COIL_NAQUADAH_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "6",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_NAQUADAHALLOY_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "7",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_ELECTRUMFLUX_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "8",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_AWAKENEDDRACONIUM_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "9",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_HSSS_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "10",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.COIL_TRINIUM",
+      "sourceTextureNames": [
+        "MACHINE_COIL_TRINIUM_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "11",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_INFINITY_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "12",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_HYPOGEN_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 104,
+      "sourceLine": 254,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings5",
+        "meta": "13",
+        "type": "block",
+        "expression": "withChannel( \"coil\", ofCoil(TST_GiantVacuumDryingFurnace::setCoilLevel, TST_GiantVacuumDryingFurnace::getCoilLevel))"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_COIL_ETERNAL_BACKGROUND.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 188,
+      "sourceLine": 260,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "2",
+        "type": "block",
+        "expression": "HatchElementBuilder.<TST_GiantVacuumDryingFurnace>builder() .atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy), InputHatch, OutputBus) .adder(TST_GiantVacuumDryingFurnace::addToMachineList) .hint(1) .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(2)) .buildAndChain(GregTechAPI.sBlockCasings8, 2)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_MINING_NEUTRONIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/01_GiantVacuumDryingFurnace",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    }
+  ]
+}
+

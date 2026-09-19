@@ -1,0 +1,406 @@
+{
+  "machine": "StarcoreMiner",
+  "entries": [
+    {
+      "symbol": "A",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 146,
+      "source": {
+        "block": "chainAllGlasses()",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "chainAllGlasses()"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.CASING_TEMPERED_GLASS / FUSION_GLASS",
+      "sourceTextureNames": [
+        "BoronSilicateGlassBlock.png",
+        "ColoredBoronSilicateGlassBlock1.png",
+        "ColoredBoronSilicateGlassBlock2.png",
+        "ColoredBoronSilicateGlassBlock3.png",
+        "ColoredBoronSilicateGlassBlock4.png",
+        "ColoredBoronSilicateGlassBlock5.png",
+        "ColoredBoronSilicateGlassBlock6.png",
+        "HexaniteReinforcedBoronSilicateGlassBlock.png",
+        "HexaniteReinforcedBoronSilicateGlassBlockTransparent.png",
+        "InfinityReinforcedBoronSilicateGlassBlock.png",
+        "InfinityReinforcedBoronSilicateGlassBlockTransparent.png",
+        "IridiumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "OsmiumReinforcedBoronSilicateGlassBlock.png",
+        "RhodiumPlatedPalladiumReinforcedBoronSilicateGlassBlock.png",
+        "ThoriumYttriumGlass.png",
+        "TitaniumReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlockTransparent.png",
+        "TungstenSteelReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "EXOFOUNDRY_GLASS.png",
+        "GLASS_PH_RESISTANT.png",
+        "GLASS_QUARK_CONTAINMENT.png",
+        "GLASS_TINTED_INDUSTRIAL_BLACK.png",
+        "GLASS_TINTED_INDUSTRIAL_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_BROWN.png",
+        "GLASS_TINTED_INDUSTRIAL_CYAN.png",
+        "GLASS_TINTED_INDUSTRIAL_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_GREEN.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_LIME.png",
+        "GLASS_TINTED_INDUSTRIAL_MAGENTA.png",
+        "GLASS_TINTED_INDUSTRIAL_ORANGE.png",
+        "GLASS_TINTED_INDUSTRIAL_PINK.png",
+        "GLASS_TINTED_INDUSTRIAL_PURPLE.png",
+        "GLASS_TINTED_INDUSTRIAL_RED.png",
+        "GLASS_TINTED_INDUSTRIAL_WHITE.png",
+        "GLASS_TINTED_INDUSTRIAL_YELLOW.png",
+        "HAWKING_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW_GLOW.png",
+        "NANOCHIP_GLASS.png",
+        "OMNI_PURPOSE_INFINITY_FUSED_GLASS.png",
+        "blockQuantumGlass.png",
+        "antimatterContainmentCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 50,
+      "note": "Family động: GT5 chấp nhận nhiều loại kính; đã gom các texture kính hiện diện trong monorepo GT5."
+    },
+    {
+      "symbol": "B",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 147,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings1",
+        "meta": "11",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings1, 11)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_INVAR_HEATPROOF",
+      "sourceTextureNames": [
+        "MACHINE_HEATPROOFCASING.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "C",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 148,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings1",
+        "meta": "14",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings1, 14)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_DIM_BRIDGE.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "D",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 149,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings2",
+        "meta": "15",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings2, 15)"
+      },
+      "resolution": "direct_native",
+      "target": "GTBlocks.CASING_TUNGSTENSTEEL_PIPE",
+      "sourceTextureNames": [
+        "MACHINE_CASING_PIPE_TUNGSTENSTEEL.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "E",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 150,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "7",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 7)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_IRIDIUM.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "F",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 151,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasings8, 10)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_RADIANT_NAQUADAH_ALLOY.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "G",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 152,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsSE",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsSE, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "BaseCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "H",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 153,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsSE",
+        "meta": "1",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsSE, 1)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "SupportStructure.png",
+        "SupportStructure_Side.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "I",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 154,
+      "source": {
+        "block": "sBlockCasingsTT",
+        "meta": "8",
+        "type": "block",
+        "expression": "ofBlock(sBlockCasingsTT, 8)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "EM_HOLLOW.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "J",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 155,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsDyson",
+        "meta": "9",
+        "type": "block",
+        "expression": "ofBlock(GregTechAPI.sBlockCasingsDyson, 9)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "Floor.png",
+        "Floor_Side.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 2,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "K",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 156,
+      "source": {
+        "block": "GregTechAPI.sBlockCasings8",
+        "meta": "10",
+        "type": "block",
+        "expression": "ofChain( BorosilicateGlass.ofBoroGlassAnyTier(), ofFrame(Materials.NaquadahAlloy), ofBlock(GregTechAPI.sBlockCasings8, 10) )"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "MACHINE_CASING_RADIANT_NAQUADAH_ALLOY.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "K",
+      "option": 2,
+      "occurrences": 0,
+      "sourceLine": 156,
+      "source": {
+        "block": "Materials.NaquadahAlloy",
+        "meta": "",
+        "type": "frame",
+        "expression": "ofChain( BorosilicateGlass.ofBoroGlassAnyTier(), ofFrame(Materials.NaquadahAlloy), ofBlock(GregTechAPI.sBlockCasings8, 10) )"
+      },
+      "resolution": "direct_native",
+      "target": "Predicates.frames(GTMaterials.NaquadahAlloy)",
+      "sourceTextureNames": [
+        "frameGt.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "K",
+      "option": 3,
+      "occurrences": 0,
+      "sourceLine": 156,
+      "source": {
+        "block": "BorosilicateGlass",
+        "meta": "",
+        "type": "glass_family",
+        "expression": "ofChain( BorosilicateGlass.ofBoroGlassAnyTier(), ofFrame(Materials.NaquadahAlloy), ofBlock(GregTechAPI.sBlockCasings8, 10) )"
+      },
+      "resolution": "equivalent_review",
+      "target": "GTBlocks.FUSION_GLASS",
+      "sourceTextureNames": [
+        "BoronSilicateGlassBlock.png",
+        "ColoredBoronSilicateGlassBlock1.png",
+        "ColoredBoronSilicateGlassBlock2.png",
+        "ColoredBoronSilicateGlassBlock3.png",
+        "ColoredBoronSilicateGlassBlock4.png",
+        "ColoredBoronSilicateGlassBlock5.png",
+        "ColoredBoronSilicateGlassBlock6.png",
+        "HexaniteReinforcedBoronSilicateGlassBlock.png",
+        "HexaniteReinforcedBoronSilicateGlassBlockTransparent.png",
+        "InfinityReinforcedBoronSilicateGlassBlock.png",
+        "InfinityReinforcedBoronSilicateGlassBlockTransparent.png",
+        "IridiumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlock.png",
+        "NeutroniumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "OsmiumReinforcedBoronSilicateGlassBlock.png",
+        "RhodiumPlatedPalladiumReinforcedBoronSilicateGlassBlock.png",
+        "ThoriumYttriumGlass.png",
+        "TitaniumReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlock.png",
+        "TranscendentallyReinforcedBoronSilicateGlassBlockTransparent.png",
+        "TungstenSteelReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlock.png",
+        "UniversiumReinforcedBoronSilicateGlassBlockTransparent.png",
+        "EXOFOUNDRY_GLASS.png",
+        "GLASS_PH_RESISTANT.png",
+        "GLASS_QUARK_CONTAINMENT.png",
+        "GLASS_TINTED_INDUSTRIAL_BLACK.png",
+        "GLASS_TINTED_INDUSTRIAL_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_BROWN.png",
+        "GLASS_TINTED_INDUSTRIAL_CYAN.png",
+        "GLASS_TINTED_INDUSTRIAL_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_GREEN.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_BLUE.png",
+        "GLASS_TINTED_INDUSTRIAL_LIGHT_GRAY.png",
+        "GLASS_TINTED_INDUSTRIAL_LIME.png",
+        "GLASS_TINTED_INDUSTRIAL_MAGENTA.png",
+        "GLASS_TINTED_INDUSTRIAL_ORANGE.png",
+        "GLASS_TINTED_INDUSTRIAL_PINK.png",
+        "GLASS_TINTED_INDUSTRIAL_PURPLE.png",
+        "GLASS_TINTED_INDUSTRIAL_RED.png",
+        "GLASS_TINTED_INDUSTRIAL_WHITE.png",
+        "GLASS_TINTED_INDUSTRIAL_YELLOW.png",
+        "HAWKING_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW.png",
+        "MACHINE_CASING_FUSION_GLASS_YELLOW_GLOW.png",
+        "NANOCHIP_GLASS.png",
+        "OMNI_PURPOSE_INFINITY_FUSED_GLASS.png",
+        "blockQuantumGlass.png",
+        "antimatterContainmentCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 50,
+      "note": "Family động: GT5 chấp nhận nhiều loại kính; đã gom các texture kính hiện diện trong monorepo GT5."
+    },
+    {
+      "symbol": "L",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 163,
+      "source": {
+        "block": "GregTechAPI.sBlockCasingsSE",
+        "meta": "0",
+        "type": "block",
+        "expression": "HatchElementBuilder .<TST_StarcoreMiner>builder() .atLeast(InputBus, InputHatch, OutputBus, Energy.or(ExoticEnergy)) .adder(TST_StarcoreMiner::addToMachineList) .hint(1) .casingIndex(SPACE_ELEVATOR_BASE_CASING_INDEX) .buildAndChain(GregTechAPI.sBlockCasingsSE, 0)"
+      },
+      "resolution": "dedicated_original",
+      "target": "Register a dedicated tstmodern block",
+      "sourceTextureNames": [
+        "BaseCasing.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Texture truy ngược từ block/meta trong source."
+    },
+    {
+      "symbol": "Z",
+      "option": 1,
+      "occurrences": 0,
+      "sourceLine": 188,
+      "source": {
+        "block": "Blocks.bedrock",
+        "meta": "0",
+        "type": "block",
+        "expression": "ofBlock(Blocks.bedrock, 0)"
+      },
+      "resolution": "direct_native",
+      "target": "Blocks.BEDROCK",
+      "sourceTextureNames": [
+        "bedrock.png"
+      ],
+      "projectTextureFolder": "texture_block_casing/24_StarcoreMiner",
+      "projectTextureCount": 1,
+      "note": "Block vanilla có sẵn trong môi trường GTCEu 1.20.1. Target: Blocks.BEDROCK"
+    }
+  ]
+}
+

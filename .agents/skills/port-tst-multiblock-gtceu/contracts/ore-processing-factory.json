@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "machine": "OreProcessingFactory",
+  "auditStatus": "AUDIT_COMPLETE",
+  "branch": "dev",
+  "sourceEvidence": {
+    "controller": {
+      "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/system/OreProcess/machines/TST_OreProcessingFactory.java",
+      "symbol": "TST_OreProcessingFactory",
+      "hash": "6bffdd6822654f21ada741bb8fc62dfbd21db56338e52de304ba9f1ea16a180d"
+    },
+    "inheritance": [
+      {"path":"D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/multiMachineClasses/GTCM_MultiMachineBase.java","symbol":"GTCM_MultiMachineBase","hash":"9f0897e5739c09a3ff3a95675bb2e8c4326aaccaf01a657b02a82034400f8138"},
+      {"path":"D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/multiMachineClasses/processingLogics/GTCM_ProcessingLogic.java","symbol":"GTCM_ProcessingLogic","hash":"64af25ab090dc0bc63c225e01248188744e47094fddff62cf594fce166cf2070"}
+    ],
+    "recipePool": {
+      "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/system/OreProcess/logic/OP_NormalProcessing.java",
+      "symbol": "OP_NormalProcessing.enumOreProcessingRecipes",
+      "hash": "b3f6a53db3371bea40213e2b26a1c5e53662299325c6f2f578624d7ee9228be6"
+    },
+    "additionalAuthorities": [
+      {"path":"D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/system/OreProcess/logic/OP_Values.java","symbol":"OP_Values","hash":"1341ac303ad1e02fbf13956422049fd9003bf4ae69680bb8979cedc00156fb03"},
+      {"path":"D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/recipe/craftRecipe/machine/GTCMMachineRecipes.java","symbol":"GTCMMachineRecipes Ore Processing Factory region","hash":"204f61d57387a2c0073f8dac762aff4bff2986d151acbf7c397907dc7299a3d4"},
+      {"path":"D:/tmp/GTCEu/src/main/java/com/gregtechceu/gtceu/data/recipe/generated/OreRecipeHandler.java","symbol":"OreRecipeHandler","hash":"8470b51fe7e359382c859cccbb0884a3a8e56c18017f90c2e6ff91b2356e84e5"}
+    ]
+  },
+  "structure": {
+    "dimensions": [32, 13, 15],
+    "sourceAxisOrder": ["height/layer", "depth/row", "right/column"],
+    "targetAxisMap": {"RIGHT":"source column","DOWN":"source layer","BACK":"source row"},
+    "controller": {"symbol":"~","count":1,"outwardFacing":"source front at layer 11, row 0, column 30; horizontal at runtime"},
+    "symbols": [
+      {"symbol":"~","occurrences":1,"source":{"registry":"TST controller","meta":"19017","evidence":"shapeMain and checkPiece offsets 30,11,0"},"target":{"registryOrPredicate":"OreProcessingFactoryDefinition controller","decision":"dedicated"}},
+      {"symbol":"A","occurrences":40,"source":{"registry":"chainAllGlasses()","meta":"all","evidence":"TST structure element A"},"target":{"registryOrPredicate":"GTBlocks.CASING_TEMPERED_GLASS or GTBlocks.FUSION_GLASS","decision":"catalog-approved equivalent family"}},
+      {"symbol":"B","occurrences":512,"source":{"registry":"GregTechAPI.sBlockCasings2","meta":"4","evidence":"TST structure element B"},"target":{"registryOrPredicate":"GTBlocks.CASING_TITANIUM_GEARBOX","decision":"direct_native"}},
+      {"symbol":"C","occurrences":128,"source":{"registry":"GregTechAPI.sBlockCasings2","meta":"6","evidence":"TST structure element C"},"target":{"registryOrPredicate":"GTBlocks.COMPUTER_CASING","decision":"catalog-approved equivalent"}},
+      {"symbol":"D","occurrences":300,"source":{"registry":"GregTechAPI.sBlockCasings2","meta":"15","evidence":"TST structure element D"},"target":{"registryOrPredicate":"GTBlocks.CASING_TUNGSTENSTEEL_PIPE","decision":"direct_native"}},
+      {"symbol":"E","occurrences":165,"source":{"registry":"GregTechAPI.sBlockCasings4","meta":"0","evidence":"TST structure element E"},"target":{"registryOrPredicate":"GTBlocks.CASING_TUNGSTENSTEEL_ROBUST","decision":"direct_native"}},
+      {"symbol":"F","occurrences":104,"source":{"registry":"GregTechAPI.sBlockCasings4","meta":"1","evidence":"TST structure element F"},"target":{"registryOrPredicate":"GTBlocks.CASING_STAINLESS_CLEAN","decision":"direct_native"}},
+      {"symbol":"G","occurrences":1144,"source":{"registry":"GregTechAPI.sBlockCasings8","meta":"7","evidence":"TST structure element G; controller casing texture index 183"},"target":{"registryOrPredicate":"TSTBlocks.ADVANCED_IRIDIUM_CASING","decision":"existing shared dedicated original"}},
+      {"symbol":"H","occurrences":289,"source":{"registry":"sBlockCasingsTT","meta":"0","evidence":"TST structure element H"},"target":{"registryOrPredicate":"TSTBlocks.HIGH_POWER_CASING","decision":"existing shared dedicated original"}},
+      {"symbol":"I","occurrences":1,"source":{"registry":"sBlockCasingsTT","meta":"7","evidence":"TST structure element I"},"target":{"registryOrPredicate":"TSTBlocks.ELECTROMAGNETIC_COMPUTER_COIL","decision":"existing shared dedicated original"}},
+      {"symbol":"J","occurrences":7,"source":{"registry":"GregTechAPI.sBlockCasings4","meta":"0","evidence":"TST fixed Input Hatch positions"},"target":{"registryOrPredicate":"PartAbility.IMPORT_FLUIDS","decision":"fixed ability; at least one globally"}},
+      {"symbol":"K","occurrences":8,"source":{"registry":"sBlockCasingsTT","meta":"0","evidence":"TST Energy or Exotic Energy Hatch positions"},"target":{"registryOrPredicate":"TSTBlocks.HIGH_POWER_CASING or INPUT_ENERGY/SUBSTATION_INPUT_ENERGY/INPUT_LASER","decision":"one or more energy inputs; wireless omission pending approval"}},
+      {"symbol":"L","occurrences":146,"source":{"registry":"GregTechAPI.sBlockCasings4","meta":"0","evidence":"TST Input Bus and Output Bus positions"},"target":{"registryOrPredicate":"GTBlocks.CASING_TUNGSTENSTEEL_ROBUST or IMPORT_ITEMS/EXPORT_ITEMS","decision":"at least one item input and one item output globally"}},
+      {"symbol":"M","occurrences":20,"source":{"registry":"Materials.TungstenSteel","meta":"frameGt","evidence":"TST structure element M"},"target":{"registryOrPredicate":"Predicates.frames(GTMaterials.TungstenSteel)","decision":"direct_native"}}
+    ]
+  },
+  "recipes": [
+    {
+      "id": "ore_processing/generated_materials",
+      "authority": "APPROVED_DEVIATION",
+      "source": "TST OP_NormalProcessing generated ore/raw-ore recipes; adapted to GTCEu Material registry and TagPrefix.ORES",
+      "recipeType": "ore_processing_factory",
+      "duration": 128,
+      "eut": 30,
+      "details": {
+        "input": "one GTCEu ore or raw ore",
+        "outputs": "source 4x primary dust plus byproducts, or 8x primary dust without byproducts; gem bonuses retained; GTCEu double-drop ore prefixes double all outputs",
+        "parallel": "maximum possible by items, output capacity, and available energy; no overclock",
+        "lubricant": "3200 mB every 256 active ticks, independent of parallel; active counter persisted",
+        "passthrough": "non-matching inputs are not consumed; player can route them normally"
+      },
+      "approvalRef": "User approved the full audited specification on 2026-09-06"
+    },
+    {
+      "id": "ore_processing/unavailable_intermediates",
+      "authority": "APPROVED_DEVIATION",
+      "source": "TST OP_NormalProcessing processingLineMaterials and special Cerium/Samarium/Naquadah recipes",
+      "recipeType": "ore_processing_factory",
+      "duration": 128,
+      "eut": 30,
+      "adaptation": "Unavailable BartWorks/GoodGenerator/GT++ concentrate, metallic-powder, leach-residue, and earth intermediates become their native GTCEu material dust outputs so the machine remains an end-to-end processor instead of producing dead-end items.",
+      "approvalRef": "User approved the full audited specification on 2026-09-06"
+    },
+    {
+      "id": "assembly_line/ore_processing_factory",
+      "authority": "APPROVED_DEVIATION",
+      "source": "TST GTCMMachineRecipes Ore Processing Factory region; exact UEV tier and 1800 s duration retained",
+      "recipeType": "assembly_line",
+      "duration": 36000,
+      "eut": 7864320,
+      "details": {
+        "retained": ["64x Cosmic Neutronium Frame", "64x UIV circuits via TSTCircuitTags", "64x Neutronium rotor", "UEV motors/pumps/conveyors/robot arms", "dense Neutronium/Iridium/Stainless Steel plates", "64x High Power Casing", "molten Tungsten Steel/Neutronium/Osmiridium quantities"],
+        "substitutions": ["64x Integrated Ore Factory -> 64x GCYM Large Maceration Tower", "16x Neutronium Nanite -> 16x UEV Robot Arm", "16x Infinity Huge Pipe -> 16x Neutronium Huge Fluid Pipe", "64x 16x UEV superconducting wire -> 64x GTCEu octal Uranium Rhodium Dinaquadide wire", "512 ingots solder plasma -> 512 ingots molten Soldering Alloy"],
+        "research": "Research Station, unique ore_processing_factory id, Data Module"
+      },
+      "approvalRef": "User approved the full audited specification on 2026-09-06"
+    }
+  ],
+  "textures": [
+    {"role":"controller idle","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/ore_processing_factory/overlay_front","localPath":"textures/24_OreProcessingFactory/overlay_front.png","sha256":"24bb8dfbdaef8c2f7eb3b0f117790fffad65371785358825818ecdc811cfc19d","sourceEvidence":"locked source texture baseline"},
+    {"role":"controller idle emissive","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/ore_processing_factory/overlay_front_emissive","localPath":"textures/24_OreProcessingFactory/overlay_front_emissive.png","sha256":"e1f4e4925620ac227949f294e8e57fd249bc9a6242ed5e71ac4dacc68d15bac2","sourceEvidence":"locked source texture baseline"},
+    {"role":"controller active","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/ore_processing_factory/overlay_front_active","localPath":"textures/24_OreProcessingFactory/overlay_front_active.png","sha256":"d94a57a4ca55bd839d4ea7ebb5c417e6364a828a76d6fb5f40cb71bbea3d9c83","sourceEvidence":"locked source texture baseline"},
+    {"role":"controller active emissive","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/ore_processing_factory/overlay_front_active_emissive","localPath":"textures/24_OreProcessingFactory/overlay_front_active_emissive.png","sha256":"1ff2a23e5e8b977b87f2ff6c2019060aa765bbff7b2327b554119643e6d864cb","sourceEvidence":"locked source texture baseline"},
+    {"role":"all valid glass family","status":"VERIFIED_NATIVE","authority":"catalog-approved GTCEu equivalent family","resource":"gtceu:block/casings/transparent"},
+    {"role":"titanium gearbox","status":"VERIFIED_NATIVE","authority":"direct GTCEu mapping","resource":"gtceu:block/casings/gearbox/machine_casing_gearbox_titanium"},
+    {"role":"processor casing","status":"VERIFIED_NATIVE","authority":"catalog-approved GTCEu computer casing equivalent","resource":"gtceu:block/casings/hpca/computer_casing"},
+    {"role":"tungstensteel pipe","status":"VERIFIED_NATIVE","authority":"direct GTCEu mapping","resource":"gtceu:block/casings/pipe/machine_casing_pipe_tungstensteel"},
+    {"role":"robust tungstensteel casing","status":"VERIFIED_NATIVE","authority":"direct GTCEu mapping","resource":"gtceu:block/casings/solid/machine_casing_robust_tungstensteel"},
+    {"role":"clean stainless steel casing","status":"VERIFIED_NATIVE","authority":"direct GTCEu mapping","resource":"gtceu:block/casings/solid/machine_casing_clean_stainless_steel"},
+    {"role":"advanced iridium casing and controller base","status":"VERIFIED_LOCAL","authority":"sBlockCasings8:7; existing shared TST block","resource":"tstmodern:block/casings/advanced_iridium_casing","localPath":"texture_block_casing/23_OreProcessingFactory/G_L510_O1_sBlockCasings8_m7_8ed56bb_MACHINE_CASING_IRIDIUM.png","sha256":"0e8010bb6b3460c4632ce6149e023f3399f774703b4238110214913f278bfd03","sourceEvidence":"casing catalog G and source controller casing texture 183"},
+    {"role":"high power casing","status":"VERIFIED_LOCAL","authority":"sBlockCasingsTT:0; existing shared TST block","resource":"tstmodern:block/casings/high_power_casing","localPath":"texture_block_casing/23_OreProcessingFactory/H_L511_O1_sBlockCasingsTT_m0_1fb35fc_EM_POWER.png","sha256":"25429f35526fcc0f10fe675b5508d97fd6f7d50970865254c4d9ba741f3ff57f","sourceEvidence":"casing catalog H/K"},
+    {"role":"electromagnetic computer coil side","status":"VERIFIED_LOCAL","authority":"sBlockCasingsTT:7; existing shared TST block","resource":"tstmodern:block/casings/electromagnetic_computer_coil_side","localPath":"texture_block_casing/23_OreProcessingFactory/I_L512_O1_sBlockCasingsTT_m7_511efc7_EM_COIL.png","sha256":"2747004445c4a1e530ec5bda8a10c56664a4cb567189b890945efadaa5a57106","sourceEvidence":"casing catalog I"},
+    {"role":"electromagnetic computer coil nonside","status":"VERIFIED_LOCAL","authority":"sBlockCasingsTT:7; existing shared TST block","resource":"tstmodern:block/casings/electromagnetic_computer_coil","localPath":"texture_block_casing/23_OreProcessingFactory/I_L512_O1_sBlockCasingsTT_m7_b110c17_EM_COIL_NONSIDE.png","sha256":"6b09ca51b2e0a6ddb04d77127a97e2ace6f8346d9718a0bb4d30e8603677c8a0","sourceEvidence":"casing catalog I"},
+    {"role":"tungsten steel frame","status":"VERIFIED_NATIVE","authority":"direct GTCEu material frame predicate","resource":"gtceu:block/material_sets/metallic/frame"}
+  ],
+  "approvedDeviations": [
+    "User approved 2026-09-06: omit legacy wireless-global-EU mode because GTCEu 7.4 and installed integrations provide no equivalent account energy network; require at least one source K-position energy input.",
+    "User approved 2026-09-06: generate GTCEu ore/raw-ore recipes from the live material registry while preserving source yields, 128-tick duration, 30 EU/t, no overclock, and energy/input/output-limited maximum parallel.",
+    "User approved 2026-09-06: map unavailable GTNH ore-processing intermediates to native GTCEu dusts to preserve useful end-to-end outputs.",
+    "User approved 2026-09-06: preserve periodic 3200 mB Lubricant consumption per 256 active ticks independently of recipe parallel; do not also consume the source recipe's display-only 1 mB lubricant.",
+    "User approved 2026-09-06: non-ore items remain unconsumed rather than being automatically moved between player inventories; standard GTCEu item routing provides the safe equivalent.",
+    "User approved 2026-09-06: use the audited controller-recipe substitutions listed in recipes[2], retain UEV EU/t/tier, and use UIV TSTCircuitTags plus Data Module Research Station research.",
+    "User approved 2026-09-06: keep the dark aqua (§3) bold controller name and original TST tooltip wording; apply the established multicolor controller layout using gray (§7), dark aqua (§3), white (§f), gold (§6), aqua (§b), yellow (§e), green (§a), and magenta (§d) in both locales. Color the shared Advanced Iridium Casing aqua (§b), High Power Casing red (§c), and Electromagnetic Computer Coil magenta (§d). The footer includes Modern Edition. Omit legacy wireless and non-ore-transfer claims because their behavior was explicitly removed by approved Modern deviations."
+  ],
+  "unresolved": []
+}

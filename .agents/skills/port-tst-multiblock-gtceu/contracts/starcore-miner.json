@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "machine": "StarcoreMiner",
+  "auditStatus": "AUDIT_COMPLETE",
+  "branch": "dev",
+  "sourceEvidence": {
+    "controller": {
+      "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/TST_StarcoreMiner.java",
+      "symbol": "TST_StarcoreMiner",
+      "hash": "37b82963dba6f8c550f1c10d6531066dda5140e436cf3f60a7a4b5dde15df8ad"
+    },
+    "inheritance": [
+      {
+        "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/multiMachineClasses/GTCM_MultiMachineBase.java",
+        "symbol": "GTCM_MultiMachineBase",
+        "hash": "9f0897e5739c09a3ff3a95675bb2e8c4326aaccaf01a657b02a82034400f8138"
+      }
+    ],
+    "recipePool": {
+      "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/recipe/craftRecipe/machine/GTCMMachineRecipes.java",
+      "symbol": "GTCMMachineRecipes StarcoreMiner region",
+      "hash": "204f61d57387a2c0073f8dac762aff4bff2986d151acbf7c397907dc7299a3d4"
+    },
+    "additionalAuthorities": [
+      {
+        "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/config/Config.java",
+        "symbol": "StarcoreMiner defaults",
+        "hash": "b64f126cd79bcd467d5f387ed15f9328b89137665de523b9e0ca35d9fbca833d"
+      },
+      {
+        "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/ValueEnum.java",
+        "symbol": "StarcoreMiner runtime constants",
+        "hash": "f6af3e5f7227e4b805156825d62a3c91af37be077f9c84518faabc3205cadc7d"
+      },
+      {
+        "path": "D:/tmp/TST/src/main/java/com/Nxer/TwistSpaceTechnology/common/machine/MiscHelper.java",
+        "symbol": "ASTRAL_ARRAY_FABRICATOR",
+        "hash": "95d0ececef8351aed4b418872aa655d66a3c03a4e622ae794c3bb5031692181d"
+      },
+      {
+        "path": "D:/tmp/GT5/src/main/java/bwcrossmod/galacticgreg/VoidMinerUtility.java",
+        "symbol": "VoidMinerUtility.DropMap",
+        "hash": "94cb455cf39f46e17b36352f2100fe72336d6c3007b95f76eee5f6d9febe94f2"
+      },
+      {
+        "path": "D:/tmp/GTCEu/src/main/java/com/gregtechceu/gtceu/api/data/worldgen/GTOreDefinition.java",
+        "symbol": "GTOreDefinition",
+        "hash": "58d8e5d799f4e82e9c057e31638abf9f0089e003e10c2079822114eed2ae15b1"
+      },
+      {
+        "path": "D:/tmp/GTCEu/src/main/java/com/gregtechceu/gtceu/api/data/worldgen/generator/VeinGenerator.java",
+        "symbol": "VeinGenerator.VeinEntry",
+        "hash": "a71eab8559ec26edbf0cb9cceb9b297c2d798285e81ec3aa086bce35f6ffefe4"
+      },
+      {
+        "path": "D:/tmp/SOG/.minecraft/mods/gtmthings-1.5.4.jar",
+        "symbol": "WirelessEnergyHatchPartMachine registers PartAbility.INPUT_ENERGY",
+        "hash": "d3f6c66b1e3c86497fed5b45b455eb687f46895ac53717967046968b2a16bcda"
+      }
+    ]
+  },
+  "structure": {
+    "dimensions": [21, 26, 31],
+    "sourceAxisOrder": [
+      "pre-transpose outer becomes source depth",
+      "pre-transpose row becomes source down",
+      "pre-transpose character becomes source right"
+    ],
+    "targetAxisMap": {
+      "RIGHT": "source character/column",
+      "DOWN": "source row after transpose",
+      "BACK": "source outer array after transpose"
+    },
+    "controller": {
+      "symbol": "~",
+      "count": 1,
+      "outwardFacing": "front-center at source right 10, down 22, back 1; horizontal facing only; source rotation changes disabled"
+    },
+    "pieces": {
+      "main": {
+        "dimensions": [21, 26, 31],
+        "offset": [10, 22, 1],
+        "nonSpaceBlocks": 2491
+      },
+      "middle": {
+        "dimensions": [9, 1, 9],
+        "offset": [4, -4, -15],
+        "perPieceCounts": {"F": 48, "K": 4, "I": 1},
+        "rule": "when controller Y is above 24, validate exactly controllerY - 24 downward pieces; centers are 19 blocks behind the controller at world Y = controllerY - 4 - pieceIndex, ending at Y 21 unless bedrock terminates earlier"
+      },
+      "end": {
+        "dimensions": [1, 1, 1],
+        "offset": [0, "-4-pieceIndex", -19],
+        "symbol": "Z",
+        "rule": "optional early bedrock terminator at the middle-piece center"
+      }
+    },
+    "symbols": [
+      {"symbol":"~","occurrences":1,"source":{"registry":"TST controller","meta":"19040","evidence":"main shape and MachineLoader.java:318-326"},"target":{"registryOrPredicate":"StarcoreMinerDefinition controller","decision":"dedicated"}},
+      {"symbol":"A","occurrences":62,"source":{"registry":"chainAllGlasses()","meta":"all","evidence":"TST_StarcoreMiner.java:146"},"target":{"registryOrPredicate":"GTBlocks.CASING_TEMPERED_GLASS or GTBlocks.FUSION_GLASS","decision":"catalog-approved equivalent family"}},
+      {"symbol":"B","occurrences":80,"source":{"registry":"GregTechAPI.sBlockCasings1","meta":"11","evidence":"TST_StarcoreMiner.java:147"},"target":{"registryOrPredicate":"GTBlocks.CASING_HEAT_PROOF","decision":"direct native identity"}},
+      {"symbol":"C","occurrences":16,"source":{"registry":"GregTechAPI.sBlockCasings1","meta":"14","evidence":"TST_StarcoreMiner.java:148; MACHINE_DIM_BRIDGE"},"target":{"registryOrPredicate":"TSTBlocks.DIMENSIONAL_BRIDGE_CASING","decision":"approved dedicated exact-texture casing"}},
+      {"symbol":"D","occurrences":64,"source":{"registry":"GregTechAPI.sBlockCasings2","meta":"15","evidence":"TST_StarcoreMiner.java:149"},"target":{"registryOrPredicate":"GTBlocks.CASING_TUNGSTENSTEEL_PIPE","decision":"direct native identity"}},
+      {"symbol":"E","occurrences":624,"source":{"registry":"GregTechAPI.sBlockCasings8","meta":"7","evidence":"TST_StarcoreMiner.java:150"},"target":{"registryOrPredicate":"TSTBlocks.ADVANCED_IRIDIUM_CASING","decision":"existing shared dedicated original"}},
+      {"symbol":"F","occurrences":272,"source":{"registry":"GregTechAPI.sBlockCasings8","meta":"10","evidence":"TST_StarcoreMiner.java:151; plus 48 per middle piece"},"target":{"registryOrPredicate":"TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING","decision":"existing shared dedicated original"}},
+      {"symbol":"G","occurrences":346,"source":{"registry":"GregTechAPI.sBlockCasingsSE","meta":"0","evidence":"TST_StarcoreMiner.java:152"},"target":{"registryOrPredicate":"TSTBlocks.SPACE_ELEVATOR_BASE_CASING","decision":"existing shared dedicated original"}},
+      {"symbol":"H","occurrences":188,"source":{"registry":"GregTechAPI.sBlockCasingsSE","meta":"1","evidence":"TST_StarcoreMiner.java:153"},"target":{"registryOrPredicate":"TSTBlocks.SPACE_ELEVATOR_SUPPORT_STRUCTURE","decision":"existing shared dedicated original"}},
+      {"symbol":"I","occurrences":63,"source":{"registry":"sBlockCasingsTT","meta":"8","evidence":"TST_StarcoreMiner.java:154; plus 1 per middle piece"},"target":{"registryOrPredicate":"TSTBlocks.HOLLOW_CASING","decision":"existing shared dedicated original"}},
+      {"symbol":"J","occurrences":664,"source":{"registry":"GregTechAPI.sBlockCasingsDyson","meta":"9","evidence":"TST_StarcoreMiner.java:155"},"target":{"registryOrPredicate":"TSTBlocks.DYSON_SWARM_FLOOR","decision":"existing shared dedicated original"}},
+      {"symbol":"K","occurrences":88,"source":{"registry":"BorosilicateGlass, Materials.NaquadahAlloy frame, or sBlockCasings8","meta":"any / frameGt / 10","evidence":"TST_StarcoreMiner.java:156-162; plus 4 per middle piece"},"target":{"registryOrPredicate":"GTBlocks.FUSION_GLASS or Naquadah Alloy frame or TSTBlocks.RADIANT_NAQUADAH_ALLOY_CASING","decision":"preserved three-way predicate"}},
+      {"symbol":"L","occurrences":23,"source":{"registry":"GregTechAPI.sBlockCasingsSE or hatch","meta":"0","evidence":"TST_StarcoreMiner.java:163-172"},"target":{"registryOrPredicate":"TSTBlocks.SPACE_ELEVATOR_BASE_CASING or IMPORT_ITEMS/IMPORT_FLUIDS/EXPORT_ITEMS/INPUT_ENERGY/SUBSTATION_INPUT_ENERGY/INPUT_LASER","decision":"require one or two accepted energy inputs globally plus at least one item output; GTMThings wireless hatch is accepted through INPUT_ENERGY"}},
+      {"symbol":"Z","occurrences":1,"source":{"registry":"minecraft:bedrock","meta":"0","evidence":"TST_StarcoreMiner.java:140-145,188"},"target":{"registryOrPredicate":"minecraft:bedrock","decision":"optional middle-pipe terminator"}}
+    ]
+  },
+  "recipes": [
+    {
+      "id": "starcore_miner/runtime",
+      "authority": "APPROVED_DEVIATION",
+      "source": "TST_StarcoreMiner.checkProcessing adapted from GalacticGreg dimension maps to the live GTCEu ore-vein registry",
+      "recipeType": "starcore_mining",
+      "duration": 128,
+      "eut": 2013265920,
+      "details": {
+        "outputs": "24 independently selected ore-block stacks with replacement; 131072 items per stack",
+        "weights": "current-dimension GTOreDefinition weight multiplied by each VeinEntry chance; identical output items are coalesced by summed weight",
+        "dimension": "only definitions whose dimensionFilter contains the controller level dimension",
+        "depletion": "none",
+        "overclock": "none",
+        "voiding": "fixed void-all behavior preserves source lack of output protection",
+        "booster": "if controller slot contains future tstmodern:astral_array_fabricator, stack size becomes 131072 * 2 * ceil(itemCount^1.5)"
+      },
+      "approvalRef": "User approved live current-dimension GTCEu ore veins and reserved future Astral Array Fabricator ID on 2026-09-07"
+    },
+    {
+      "id": "assembly_line/starcore_miner",
+      "authority": "APPROVED_DEVIATION",
+      "source": "TST GTCMMachineRecipes.java:2210-2241; exact UIV tier, quantities where materials survive, and 7200-second duration retained",
+      "recipeType": "assembly_line",
+      "duration": 144000,
+      "eut": 31457280,
+      "details": {
+        "items": [
+          "64 Space Elevator Base Casings",
+          "64 EV Bedrock Ore Miners replacing Void Miner III",
+          "18 UEV Robot Arms replacing UEV Mining Drones",
+          "18 Gravi-Stars replacing Space Warpers",
+          "64 Energised Tesseracts",
+          "64 UEV Electric Motors",
+          "48 UEV Field Generators",
+          "64 UEV Sensors",
+          "64 UIV circuits",
+          "64 additional UEV circuits replacing High Energy Flow Circuits",
+          "64 High Power Casings replacing eM Power modules",
+          "64 UEV-tier superconducting wires"
+        ],
+        "fluids": [
+          "147456 mB molten Soldering Alloy replacing solder plasma",
+          "147456 mB molten Naquadria replacing Quantium",
+          "2048000 mB UU Matter",
+          "73728 mB molten Metastable Oganesson"
+        ],
+        "research": "Research Station gated from a Neutronium drill head because Infinity is absent"
+      },
+      "approvalRef": "User approved the closest available endgame substitutions on 2026-09-07"
+    },
+    {
+      "id": "assembly_line/dimensional_bridge_casing",
+      "authority": "APPROVED_DEVIATION",
+      "source": "GT5 sBlockCasings1 meta 14 has no standalone GTCEu Modern block or recipe",
+      "recipeType": "assembly_line",
+      "duration": 1200,
+      "eut": 31457280,
+      "details": {
+        "inputs": "8 UIV Component Assembly Line Casings as the registered Modern substitute for the unavailable standalone Dimensional Transcendent Casing, 8 UIV circuits, 16 Gravi-Stars, 9216 mB molten Naquadria",
+        "output": "8 Dimensional Bridge Casings",
+        "research": "Research Station gated from a UIV Component Assembly Line Casing with a Data Module; 128 CWU/t and 2290280 total CWU"
+      },
+      "approvalRef": "User approved the dedicated exact-texture casing and progression recipe, then requested all review corrections on 2026-09-07"
+    }
+  ],
+  "textures": [
+    {"role":"controller idle","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/starcore_miner/overlay_front","localPath":"textures/25_StarcoreMiner/overlay_front.png","sha256":"7315f37a3aa8b5ca988d1d75dbf148571e6eef236fbd1bc185ef432063554f48","sourceEvidence":"locked source texture baseline"},
+    {"role":"controller idle emissive","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/starcore_miner/overlay_front_emissive","localPath":"textures/25_StarcoreMiner/overlay_front_emissive.png","sha256":"530847e91fbe43ee7e2e633ace5296dac46af64b265544ff94adb6e920c3e016","sourceEvidence":"locked source texture baseline"},
+    {"role":"controller active","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/starcore_miner/overlay_front_active","localPath":"textures/25_StarcoreMiner/overlay_front_active.png","sha256":"da3588919464c976b92c3a8a054b081116e9b7954795f8d53ae14c3d636794c1","sourceEvidence":"locked source texture baseline"},
+    {"role":"controller active emissive","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/starcore_miner/overlay_front_active_emissive","localPath":"textures/25_StarcoreMiner/overlay_front_active_emissive.png","sha256":"433e1ef324cde90ce7988408e6b9ec96db9b04ec3d3787aa65a81b59845ad189","sourceEvidence":"locked source texture baseline"},
+    {"role":"controller paused","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/starcore_miner/overlay_front_paused","localPath":"textures/25_StarcoreMiner/overlay_front_paused.png","sha256":"e157b343dc9e11e68fb3c3669c551790a731663d4e81e9149317d0bb31545304","sourceEvidence":"locked source texture baseline"},
+    {"role":"controller paused emissive","status":"VERIFIED_LOCAL","authority":"locked TST/GT5 extraction","resource":"tstmodern:block/multiblock/starcore_miner/overlay_front_paused_emissive","localPath":"textures/25_StarcoreMiner/overlay_front_paused_emissive.png","sha256":"d4c0f83dd8133e5ee2a80cf7d22932ea88b271f536b357c22f2bc32f837a42de","sourceEvidence":"locked source texture baseline"},
+    {"role":"glass family A/K","status":"VERIFIED_NATIVE","authority":"catalog-approved GTCEu glass family","resource":"gtceu:block/casings/transparent/fusion_glass"},
+    {"role":"heat-proof casing B","status":"VERIFIED_NATIVE","authority":"direct GTCEu identity","resource":"gtceu:block/casings/solid/machine_casing_heatproof"},
+    {"role":"dimensional bridge casing C","status":"VERIFIED_LOCAL","authority":"exact locked GT5 casing texture","resource":"tstmodern:block/casings/dimensional_bridge_casing","localPath":"texture_block_casing/24_StarcoreMiner/C_L148_O1_sBlockCasings1_m14_4bc23a7_MACHINE_DIM_BRIDGE.png","sha256":"b1612231314dee5b6f356259211c8a34ef302a954faf47c5dc1ec40ead628226","sourceEvidence":"casing catalog symbol C"},
+    {"role":"tungstensteel pipe casing D","status":"VERIFIED_NATIVE","authority":"direct GTCEu identity","resource":"gtceu:block/casings/pipe/machine_casing_pipe_tungstensteel"},
+    {"role":"advanced iridium casing E","status":"VERIFIED_LOCAL","authority":"existing shared TST block","resource":"tstmodern:block/casings/advanced_iridium_casing","localPath":"texture_block_casing/24_StarcoreMiner/E_L150_O1_sBlockCasings8_m7_8ed56bb_MACHINE_CASING_IRIDIUM.png","sha256":"0e8010bb6b3460c4632ce6149e023f3399f774703b4238110214913f278bfd03","sourceEvidence":"casing catalog symbol E"},
+    {"role":"radiant naquadah alloy casing F/K","status":"VERIFIED_LOCAL","authority":"existing shared TST block","resource":"tstmodern:block/casings/radiant_naquadah_alloy_casing","localPath":"texture_block_casing/24_StarcoreMiner/F_L151_O1_sBlockCasings8_m10_6fab4e2_MACHINE_CASING_RADIANT_NAQUADAH_ALLOY.png","sha256":"7704957ba224a4b81669e6b4421bd54a67fac38f89cb0af55eb10a433f40250b","sourceEvidence":"casing catalog symbols F/K"},
+    {"role":"space elevator base casing G/L","status":"VERIFIED_LOCAL","authority":"existing shared TST block","resource":"tstmodern:block/casings/space_elevator_base_casing","localPath":"texture_block_casing/24_StarcoreMiner/G_L152_O1_sBlockCasingsSE_m0_ab8519a_BaseCasing.png","sha256":"5176986dfaf8895a1246723291aadb45b54540e8144792a2d9eefc78f701c607","sourceEvidence":"casing catalog symbols G/L"},
+    {"role":"space elevator support H","status":"VERIFIED_LOCAL","authority":"existing shared TST block","resource":"tstmodern:block/casings/space_elevator_support_structure","localPath":"texture_block_casing/24_StarcoreMiner/H_L153_O1_sBlockCasingsSE_m1_714b6dd_SupportStructure.png","sha256":"20c77053a46957e6a9c21789e58e5d076754141dee7be6e1fa1db121f353cb6f","sourceEvidence":"casing catalog symbol H"},
+    {"role":"hollow casing I","status":"VERIFIED_LOCAL","authority":"existing shared TST block","resource":"tstmodern:block/casings/hollow_casing","localPath":"texture_block_casing/24_StarcoreMiner/I_L154_O1_sBlockCasingsTT_m8_afb75b8_EM_HOLLOW.png","sha256":"48f81db47c1bced883af1741165429c382593a044c91898523fd12a1a5acb864","sourceEvidence":"casing catalog symbol I"},
+    {"role":"Dyson swarm floor J","status":"VERIFIED_LOCAL","authority":"existing shared TST block","resource":"tstmodern:block/casings/dyson_swarm_floor","localPath":"texture_block_casing/24_StarcoreMiner/J_L155_O1_sBlockCasingsDyson_m9_2db9794_Floor.png","sha256":"f3b945a1976e983482923ab636cfc719b2c90ce7d748331a58fabf5bb80d5ee6","sourceEvidence":"casing catalog symbol J"},
+    {"role":"Naquadah Alloy frame K","status":"VERIFIED_NATIVE","authority":"direct GTCEu frame predicate","resource":"gtceu:block/material_sets/metallic/frame"},
+    {"role":"bedrock terminator Z","status":"VERIFIED_NATIVE","authority":"direct Minecraft block","resource":"minecraft:block/bedrock"}
+  ],
+  "approvedDeviations": [
+    "User approved limiting Starcore Miner to at most two energy-input hatches on 2026-09-08, matching GTCEu multiblock voltage behavior.",
+    "User approved 2026-09-07: require at least one normal, laser, substation, or compatible INPUT_ENERGY hatch. GTMThings 1.5.4, present in D:/tmp/SOG, registers its wireless hatch as standard INPUT_ENERGY, so no compile-time integration or duplicate wireless subsystem is added.",
+    "User approved 2026-09-07: replace GalacticGreg dimension drop maps with live GTCEu ore definitions valid for the current dimension, weighted by vein weight and entry chance, with no depletion; retain 24 outputs, 131072 items each, 128 ticks, and MAX EU/t.",
+    "User approved 2026-09-07: reserve tstmodern:astral_array_fabricator for the future port; the exact 2 * ceil(count^1.5) output boost remains dormant until that item is registered.",
+    "User approved 2026-09-07: use the listed closest endgame controller-recipe substitutions while retaining UIV EU/t, 144000 ticks, UU Matter, and Metastable Oganesson.",
+    "User approved 2026-09-07: add a dedicated exact-texture Dimensional Bridge Casing and the listed Assembly Line progression recipe.",
+    "User requested review corrections on 2026-09-07: retain the already registered UIV Component Assembly Line Casing as the Modern substitute for the unavailable standalone Dimensional Transcendent Casing and add the mandatory Research Station gate; Data Module replaces the conflicting Data Orb at 128 CWU/t.",
+    "Hard-code audited source defaults rather than porting legacy enable/debug/tuning configuration: pipe target Y 24, 24 output stacks, stack size 131072, MAX 2013265920 EU/t, duration 128 ticks, and pipe validation enabled.",
+    "Use correct cumulative weighted selection instead of preserving VoidMinerUtility's merged-extra-map double-weight/currentWeight retry quirks; the legacy data source is absent and the approved GTCEu registry model has one combined pool.",
+    "Reject dynamo/output-energy and unrelated hatch substitutions accidentally accepted by the source's generic addToMachineList; only abilities relevant to mining are accepted.",
+    "Use fixed void-all output behavior to preserve source supportsVoidProtection=false semantics: the cycle runs and excess output is discarded."
+  ],
+  "unresolved": []
+}
