@@ -1,4 +1,0 @@
-interface:
-  display_name: "Port TST Multiblock to GTCEu"
-  short_description: "Port and validate TST machines faithfully in GTCEu Modern"
-  default_prompt: "Use $port-tst-multiblock-gtceu to audit, port, review, or debug one TST multiblock on dev. Complete and validate source, structure, recipe, casing, and locked-texture evidence before implementation; stop instead of inferring unresolved facts."
