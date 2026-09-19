@@ -44,3 +44,6 @@ PORTING_NOTES.md
 /.claude/
 process.md
 /libs/
+/graphify-out/
+AGENTS.md
+CLAUDE.md
